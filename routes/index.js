@@ -13,7 +13,8 @@ exports.index = function (req, res, next) {
       if (err) return next(err);
 
       res.render('index', {
-          title : 'TODO',
+          title : 'Goof TODO',
+          subhead: 'Vulnerabilities at their best',
           todos : todos
       });
     });
