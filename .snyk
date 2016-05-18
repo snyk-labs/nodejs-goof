@@ -1,0 +1,15 @@
+version: v1.4.0
+ignore:
+  'npm:hawk:20160119':
+    - tap > codecov.io > request > hawk:
+        reason: None given
+        expires: '2016-06-17T01:10:25.702Z'
+patch:
+  'npm:marked:20150520':
+    - marked:
+        patched: '2016-05-18T01:08:07.604Z'
+  'npm:request:20160119':
+    - tap > coveralls > request:
+        patched: '2016-05-18T01:08:07.604Z'
+    - tap > codecov.io > request:
+        patched: '2016-05-18T01:08:07.604Z'

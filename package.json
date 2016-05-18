@@ -1,5 +1,5 @@
 {
-  "name": "snyk-todo-list-demo-app",
+  "name": "goof",
   "version": "0.0.2",
   "description": "A vulnerable todo demo application",
   "homepage": "https://snyk.io/",
@@ -18,7 +18,7 @@
     "ejs-locals": "1.0.2",
     "errorhandler": "1.2.0",
     "express": "4.12.4",
-    "humanize-ms": "latest",
+    "humanize-ms": "1.0.1",
     "method-override": "latest",
     "mongoose": "4.2.4",
     "morgan": "latest",
