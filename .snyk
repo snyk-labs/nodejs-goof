@@ -1,0 +1,14 @@
+version: v1.5.0
+ignore: {}
+patch:
+  'npm:marked:20150520':
+    - marked:
+        patched: '2016-07-01T09:16:04.681Z'
+  'npm:minimatch:20160620':
+    - tap > nyc > istanbul > fileset > minimatch:
+        patched: '2016-07-01T09:16:04.681Z'
+  'npm:request:20160119':
+    - tap > codecov.io > request:
+        patched: '2016-07-01T09:16:04.681Z'
+    - tap > coveralls > request:
+        patched: '2016-07-01T09:16:04.681Z'
