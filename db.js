@@ -7,4 +7,9 @@ var Todo = new Schema({
 });
 
 mongoose.model('Todo', Todo);
-mongoose.connect('mongodb://localhost/express-todo');
+var mongoUri = 'mongodb://localhost/express-todo';
+if (process.env.MONGOLAB_URI) {
+	mongoUri = process.env.MONGOLAB_URI;
+}
+
+mongoose.connect(mongoUri);
