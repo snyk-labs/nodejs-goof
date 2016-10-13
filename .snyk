@@ -1,0 +1,27 @@
+version: v1.5.2
+ignore:
+  'npm:negotiator:20160616':
+    - errorhandler > accepts > negotiator:
+        reason: I don't like change
+        expires: '2016-11-12T12:53:21.537Z'
+    - express > accepts > negotiator:
+        reason: Vulns are cool
+        expires: '2016-11-12T12:53:21.537Z'
+patch:
+  'npm:hawk:20160119':
+    - tap > codecov.io > request > hawk:
+        patched: '2016-10-13T12:52:43.432Z'
+  'npm:minimatch:20160620':
+    - tap > nyc > spawn-wrap > rimraf > glob > minimatch:
+        patched: '2016-10-13T12:52:43.432Z'
+    - tap > nyc > glob > minimatch:
+        patched: '2016-10-13T12:52:43.432Z'
+    - tap > nyc > rimraf > glob > minimatch:
+        patched: '2016-10-13T12:52:43.432Z'
+    - tap > nyc > istanbul > fileset > glob > minimatch:
+        patched: '2016-10-13T12:52:43.432Z'
+    - tap > nyc > istanbul > fileset > minimatch:
+        patched: '2016-10-13T12:52:43.432Z'
+  'npm:request:20160119':
+    - tap > codecov.io > request:
+        patched: '2016-10-13T12:52:43.432Z'
