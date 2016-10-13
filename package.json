@@ -9,7 +9,8 @@
   },
   "scripts": {
     "start": "node app.js",
-    "cleanup": "mongo express-todo --eval 'db.todos.remove({});'"
+    "cleanup": "mongo express-todo --eval 'db.todos.remove({});'",
+    "test": "snyk test"
   },
   "dependencies": {
     "body-parser": "1.9.0",
@@ -28,5 +29,8 @@
     "st": "0.2.4",
     "tap": "^5.7.0",
     "marked": "0.3.5"
+  },
+  "devDependencies": {
+    "snyk": "^1.19.1"
   }
 }

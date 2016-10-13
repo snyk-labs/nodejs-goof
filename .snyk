@@ -1,0 +1,57 @@
+version: v1.5.2
+ignore:
+  'npm:negotiator:20160616':
+    - errorhandler > accepts > negotiator:
+        reason: None given
+        expires: '2016-11-12T16:24:36.834Z'
+    - express > accepts > negotiator:
+        reason: None given
+        expires: '2016-11-12T16:24:36.835Z'
+    - st > negotiator:
+        reason: None given
+        expires: '2016-11-12T16:24:36.835Z'
+  'npm:ms:20151024':
+    - humanize-ms > ms:
+        reason: None given
+        expires: '2016-11-12T16:24:36.835Z'
+  'npm:marked:20150520':
+    - marked:
+        reason: None given
+        expires: '2016-11-12T16:24:36.835Z'
+  'npm:mongoose:20160116':
+    - mongoose:
+        reason: None given
+        expires: '2016-11-12T16:24:36.835Z'
+  'npm:semver:20150403':
+    - npmconf > semver:
+        reason: None given
+        expires: '2016-11-12T16:24:36.835Z'
+  'npm:st:20140206':
+    - st:
+        reason: None given
+        expires: '2016-11-12T16:24:36.835Z'
+  'npm:hawk:20160119':
+    - tap > codecov.io > request > hawk:
+        reason: None given
+        expires: '2016-11-12T16:24:36.835Z'
+  'npm:minimatch:20160620':
+    - tap > nyc > glob > minimatch:
+        reason: None given
+        expires: '2016-11-12T16:24:36.835Z'
+    - tap > nyc > rimraf > glob > minimatch:
+        reason: None given
+        expires: '2016-11-12T16:24:36.835Z'
+    - tap > nyc > spawn-wrap > rimraf > glob > minimatch:
+        reason: None given
+        expires: '2016-11-12T16:24:36.835Z'
+    - tap > nyc > istanbul > fileset > minimatch:
+        reason: None given
+        expires: '2016-11-12T16:24:36.835Z'
+    - tap > nyc > istanbul > fileset > glob > minimatch:
+        reason: None given
+        expires: '2016-11-12T16:24:36.835Z'
+  'npm:request:20160119':
+    - tap > codecov.io > request:
+        reason: None given
+        expires: '2016-11-12T16:24:36.835Z'
+patch: {}
