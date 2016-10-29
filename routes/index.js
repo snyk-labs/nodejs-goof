@@ -4,6 +4,9 @@ var Todo     = mongoose.model('Todo');
 // TODO:
 var hms = require('humanize-ms');
 var ms = require('ms');
+var streamBuffers = require('stream-buffers');
+var readline = require('readline');
+var moment = require('moment');
 
 exports.index = function (req, res, next) {
   Todo.
@@ -20,13 +23,13 @@ exports.index = function (req, res, next) {
     });
 };
 
-exports.create = function (req, res, next) {
-  // console.log('req.body: ' + JSON.stringify(req.body));
+function parse(todo) {
+  var t = todo;
 
   var remindToken = ' in ';
-  var reminder = req.body.content.toString().indexOf(remindToken);
+  var reminder = t.toString().indexOf(remindToken);
   if (reminder > 0) {
-    var time = req.body.content.slice(reminder + remindToken.length);
+    var time = t.slice(reminder + remindToken.length);
     time = time.replace(/\n$/, '');
 
     var period = hms(time);
@@ -34,11 +37,19 @@ exports.create = function (req, res, next) {
     console.log('period: ' + period);
 
     // remove it
-    req.body.content = req.body.content.slice(0, reminder);
+    t = t.slice(0, reminder);
     if (typeof period != 'undefined') {
-      req.body.content += ' [' + ms(period) + ']';
+      t += ' [' + ms(period) + ']';
     }
   }
+
+  return t;
+}
+
+exports.create = function (req, res, next) {
+  // console.log('req.body: ' + JSON.stringify(req.body));
+
+  req.body.content = parse(req.body.content);
 
   new Todo({
       content    : req.body.content,
@@ -103,4 +114,48 @@ exports.update = function(req, res, next) {
 exports.current_user = function (req, res, next) {
 
   next();
+};
+
+function isBlank(str) {
+  return (!str || /^\s*$/.test(str));
+}
+
+exports.import = function (req, res, next) {
+  if (!req.files) {
+    res.send('No files were uploaded.');
+    return;
+  }
+
+  var importFile = req.files.importFile;
+  var data = importFile.data.toString('ascii');
+
+  var lines = data.split('\n');
+  lines.forEach(function (line) {
+    var parts = line.split(',');
+    var what = parts[0];
+    console.log('importing ' + what);
+    var when = parts[1];
+    var locale = parts[2];
+    var format = parts[3];
+    var item = what;
+    if (!isBlank(what)) {
+      if (!isBlank(when) && !isBlank(locale) && !isBlank(format)) {
+        console.log('setting locale ' + parts[1]);
+        moment.locale(locale);
+        var d = moment(when);
+        console.log('formatting ' + d);
+        item += ' ' + d.format(format);
+      }
+
+      new Todo({
+        content: item,
+        updated_at: Date.now(),
+      }).save(function (err, todo, count) {
+        if (err) return next(err);
+        console.log('added ' + todo);
+      });
+    }
+  });
+
+  res.redirect('/');
 };

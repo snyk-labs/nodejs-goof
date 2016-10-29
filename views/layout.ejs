@@ -13,9 +13,23 @@
       <div id="layout-footer"></div>
     </div>
     <div id="footer-wrap">
+
+      <center>
+        <form ref='uploadForm' 
+            id='uploadForm' 
+            action='http://localhost:3001/import' 
+            method='post' 
+            encType="multipart/form-data">
+                <input type="file" name="importFile" />
+                <input type='submit' value='Import!' />
+        </form>		
+      </center>      
+
       <div id="footer">
         <center>
           <a href="/public/about.html">about</a>
+      
+      
         </center>
       </div>
     </div>

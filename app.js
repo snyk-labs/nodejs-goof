@@ -18,6 +18,7 @@ var logger         = require('morgan');
 var errorHandler   = require('errorhandler');
 var optional       = require('optional');
 var marked         = require('marked');
+var fileUpload     = require('express-fileupload');
 
 var app    = express();
 var routes = require('./routes');
@@ -32,6 +33,7 @@ app.use(methodOverride());
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(fileUpload());
 
 // Routes
 app.use(routes.current_user);
@@ -40,7 +42,7 @@ app.post('/create', routes.create);
 app.get('/destroy/:id', routes.destroy);
 app.get('/edit/:id', routes.edit);
 app.post('/update/:id', routes.update);
-
+app.post('/import', routes.import);
 // Static
 app.use(st({path: './public', url: '/public'}));
 
