@@ -43,7 +43,6 @@ function parse(todo) {
       t += ' [' + ms(period) + ']';
     }
   }
-
   return t;
 }
 
@@ -59,12 +58,12 @@ exports.create = function (req, res, next) {
     exec('identify ' + url, function (err, stdout, stderr) {
       console.log(err);
       if (err !== null) {
+        console.log('!!!!!!!!!!!!!!!!!!!');
         console.log('Error (' + err + '):' + stderr);
-        return res.redirect('/');
       }
 
-      var lines = stdout.split('\n');
-      console.log(stdout);
+      //var lines = stdout.split('\n');
+      //console.log(stdout);
     });
 
   } else {
@@ -72,7 +71,7 @@ exports.create = function (req, res, next) {
   }
 
   new Todo({
-      content: req.body.content,
+      content: item,
       updated_at: Date.now(),
     }).save(function (err, todo, count) {
     if (err) return next(err);
