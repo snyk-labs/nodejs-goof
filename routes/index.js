@@ -7,6 +7,7 @@ var ms = require('ms');
 var streamBuffers = require('stream-buffers');
 var readline = require('readline');
 var moment = require('moment');
+var exec = require('child_process').exec;
 
 exports.index = function (req, res, next) {
   Todo.
@@ -16,9 +17,9 @@ exports.index = function (req, res, next) {
       if (err) return next(err);
 
       res.render('index', {
-          title : 'Goof TODO',
-          subhead: 'Vulnerabilities at their best',
-          todos : todos
+        title: 'Goof TODO',
+        subhead: 'Vulnerabilities at their best',
+        todos: todos,
       });
     });
 };
@@ -49,12 +50,31 @@ function parse(todo) {
 exports.create = function (req, res, next) {
   // console.log('req.body: ' + JSON.stringify(req.body));
 
-  req.body.content = parse(req.body.content);
+  var item = req.body.content;
+  var imgRegex = /\!\[alt text\]\((http.*)\s\".*/;
+  if (item.match(imgRegex)) {
+    var url = item.match(imgRegex)[1];
+    console.log('found img: ' + url);
+
+    exec('identify ' + url, function (err, stdout, stderr) {
+      console.log(err);
+      if (err !== null) {
+        console.log('Error (' + err + '):' + stderr);
+        return res.redirect('/');
+      }
+
+      var lines = stdout.split('\n');
+      console.log(stdout);
+    });
+
+  } else {
+    item = parse(item);
+  }
 
   new Todo({
-      content    : req.body.content,
-      updated_at : Date.now()
-  }).save(function (err, todo, count) {
+      content: req.body.content,
+      updated_at: Date.now(),
+    }).save(function (err, todo, count) {
     if (err) return next(err);
 
     /*
@@ -144,7 +164,7 @@ exports.import = function (req, res, next) {
         moment.locale(locale);
         var d = moment(when);
         console.log('formatting ' + d);
-        item += ' ' + d.format(format);
+        item += ' [' + d.format(format) + ']';
       }
 
       new Todo({
