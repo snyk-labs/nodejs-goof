@@ -38,6 +38,8 @@ app.use(fileUpload());
 // Routes
 app.use(routes.current_user);
 app.get('/', routes.index);
+app.get('/admin', routes.admin);
+app.post('/admin', routes.admin);
 app.post('/create', routes.create);
 app.get('/destroy/:id', routes.destroy);
 app.get('/edit/:id', routes.edit);
@@ -47,7 +49,7 @@ app.post('/import', routes.import);
 app.use(st({path: './public', url: '/public'}));
 
 // Add the option to output (sanitized!) markdown
-marked.setOptions({sanitize: true});
+marked.setOptions({ sanitize: true });
 app.locals.marked = marked;
 
 // development only

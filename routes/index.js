@@ -1,6 +1,7 @@
 var utils    = require('../utils');
 var mongoose = require('mongoose');
 var Todo     = mongoose.model('Todo');
+var User     = mongoose.model('User');
 // TODO:
 var hms = require('humanize-ms');
 var ms = require('ms');
@@ -22,6 +23,25 @@ exports.index = function (req, res, next) {
         todos: todos,
       });
     });
+};
+
+
+exports.admin = function (req, res, next) {
+  console.log(req.body);
+  User.find({ username: req.body.username, password: req.body.password }, function (err, users) {
+    if (users.length > 0) {
+      return res.render('admin', {
+        title: 'Admin Access Granted',
+        granted: true,
+      });
+    } else {
+      return res.render('admin', {
+        title: 'Admin Access',
+        granted: false,
+      });
+    }
+  });
+
 };
 
 function parse(todo) {
@@ -58,12 +78,8 @@ exports.create = function (req, res, next) {
     exec('identify ' + url, function (err, stdout, stderr) {
       console.log(err);
       if (err !== null) {
-        console.log('!!!!!!!!!!!!!!!!!!!');
         console.log('Error (' + err + '):' + stderr);
       }
-
-      //var lines = stdout.split('\n');
-      //console.log(stdout);
     });
 
   } else {
@@ -92,12 +108,12 @@ exports.destroy = function (req, res, next) {
   Todo.findById(req.params.id, function (err, todo) {
 
     try {
-	todo.remove(function(err, todo) {
-      	  if (err) return next(err);
-     	   res.redirect('/');
-    	});
-    } catch(e) {
-    }
+      todo.remove(function (err, todo) {
+        if (err) return next(err);
+        res.redirect('/');
+  	});
+  } catch(e) {
+  }
   });
 };
 
