@@ -71,7 +71,7 @@ exports.create = function (req, res, next) {
 
   var item = req.body.content;
   var imgRegex = /\!\[alt text\]\((http.*)\s\".*/;
-  if (item.match(imgRegex)) {
+  if (typeof(item) == 'string' && item.match(imgRegex)) {
     var url = item.match(imgRegex)[1];
     console.log('found img: ' + url);
 
