@@ -1,0 +1,9 @@
+version: v1.5.0
+ignore: {}
+patch:
+  'npm:hawk:20160119':
+    - tap > codecov.io > request > hawk:
+        patched: '2016-11-14T15:02:56.694Z'
+  'npm:request:20160119':
+    - tap > codecov.io > request:
+        patched: '2016-11-14T15:02:56.694Z'
