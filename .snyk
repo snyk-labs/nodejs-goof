@@ -1,0 +1,29 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.7.0
+# ignores vulnerabilities until expiry date; change duration by modifying expiry date
+ignore:
+  'npm:qs:20170213':
+    - tap > codecov.io > request > qs:
+        reason: None given
+        expires: '2017-06-20T12:38:26.430Z'
+    - tap > codecov.io > request > qs:
+        reason: None given
+        expires: '2017-06-20T12:38:26.431Z'
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:hawk:20160119':
+    - tap > codecov.io > request > hawk:
+        patched: '2017-05-21T12:38:26.652Z'
+  'npm:marked:20170112':
+    - marked:
+        patched: '2017-05-21T12:38:26.652Z'
+  'npm:ms:20170412':
+    - mongoose > ms:
+        patched: '2017-05-21T12:38:26.652Z'
+    - mongoose > mquery > debug > ms:
+        patched: '2017-05-21T12:38:26.652Z'
+    - morgan > debug > ms:
+        patched: '2017-05-21T12:38:26.652Z'
+  'npm:request:20160119':
+    - tap > codecov.io > request:
+        patched: '2017-05-21T12:38:26.652Z'
