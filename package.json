@@ -10,7 +10,9 @@
   "scripts": {
     "start": "node app.js",
     "build": "browserify -r jquery > public/js/bundle.js",
-    "cleanup": "mongo express-todo --eval 'db.todos.remove({});'"
+    "cleanup": "mongo express-todo --eval 'db.todos.remove({});'",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
     "body-parser": "1.9.0",
@@ -18,23 +20,25 @@
     "ejs": "1.0.0",
     "ejs-locals": "1.0.2",
     "errorhandler": "1.2.0",
-    "express": "4.12.4",
+    "express": "4.15.3",
     "express-fileupload": "0.0.5",
-    "humanize-ms": "1.0.1",
+    "humanize-ms": "1.2.1",
     "jquery": "^2.2.4",
     "marked": "0.3.5",
     "method-override": "latest",
     "moment": "2.15.1",
     "mongoose": "4.2.4",
     "morgan": "latest",
-    "ms": "^0.7.1",
+    "ms": "^2.0.0",
     "npmconf": "0.0.24",
     "optional": "^0.1.3",
     "st": "0.2.4",
     "stream-buffers": "^3.0.1",
-    "tap": "^5.7.0"
+    "tap": "^5.7.0",
+    "snyk": "^1.30.1"
   },
   "devDependencies": {
     "browserify": "^13.1.1"
-  }
+  },
+  "snyk": true
 }
