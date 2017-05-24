@@ -22,7 +22,7 @@
     "express-fileupload": "0.0.5",
     "humanize-ms": "1.0.1",
     "jquery": "^2.2.4",
-    "marked": "0.3.5",
+    "marked": "0.3.6",
     "method-override": "latest",
     "moment": "2.15.1",
     "mongoose": "4.2.4",
