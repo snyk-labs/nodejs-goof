@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var cfenv = require("cfenv");
 var Schema   = mongoose.Schema;
 
 var Todo = new Schema({
@@ -15,10 +16,21 @@ var User = new Schema({
 
 mongoose.model('User', User);
 
+// CloudFoundry env vars
+var mongoCFUri = cfenv.getAppEnv().getServiceURL('goof-mongo');
+console.log(JSON.stringify(cfenv.getAppEnv()));
+
+// Default Mongo URI is local
 var mongoUri = 'mongodb://localhost/express-todo';
-if (process.env.MONGOLAB_URI) {
+
+// CloudFoundry Mongo URI
+if (mongoCFUri) {
+  mongoUri = mongoCFUri;
+} else if (process.env.MONGOLAB_URI) {
+  // Generic (plus Heroku) env var support
   mongoUri = process.env.MONGOLAB_URI;
 }
+console.log("Using Mongo URI " + mongoUri);
 
 mongoose.connect(mongoUri);
 
