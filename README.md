@@ -11,6 +11,16 @@ git clone https://github.com/Snyk/snyk-demo-todo
 npm install
 npm start
 ```
+This will run Goof locally, using a local mongo on the default port and listening on port 3001 (http://localhost:3001)
+
+#### Heroku usage
+Goof requires attaching a MongoLab service to be deployed as a Heroku app. 
+That sets up the MONGOLAB_URI env var so everything after should just work. 
+
+#### CloudFoundry usage
+Goof requires attaching a MongoLab service and naming it "goof-mongo" to be deployed on CloudFoundry. 
+The code explicitly looks for credentials to that service. 
+
 ### Cleanup
 To bulk delete the current list of TODO items from the DB run:
 ```bash
@@ -38,3 +48,4 @@ snyk wizard
 
 In this application, the default `snyk wizard` answers will fix all the issues.
 When the wizard is done, restart the application and run the exploits again to confirm they are fixed.
+
