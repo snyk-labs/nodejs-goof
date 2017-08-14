@@ -11,6 +11,7 @@ git clone https://github.com/Snyk/snyk-demo-todo
 npm install
 npm start
 ```
+
 ### Cleanup
 To bulk delete the current list of TODO items from the DB run:
 ```bash
