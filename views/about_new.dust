@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+
+{@if cond="'{device}'=='Desktop'"}
+  <body style="font-size: medium">
+{:else}
+  <body style="font-size: x-large">
+{/if}
+
+  <h1 id="page-title">{title}</h1>
+
+  <p>The BESTest todo app evar</p>
+
+  <div>Device string (debug): {device}</div>
+
+  </body>
+</html>
