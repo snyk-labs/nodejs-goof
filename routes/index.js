@@ -194,3 +194,13 @@ exports.import = function (req, res, next) {
 
   res.redirect('/');
 };
+
+exports.about_new = function (req, res, next) {
+    console.log(JSON.stringify(req.query));
+    return res.render("about_new.dust",
+      {
+        title: 'Goof TODO',
+        subhead: 'Vulnerabilities at their best',
+        device: req.query.device
+      });
+};
