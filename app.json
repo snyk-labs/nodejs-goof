@@ -13,7 +13,8 @@
     }
   },
   "addons": [
-    "mongolab"
+    "mongolab",
+    "snyk"
   ],
   "buildpacks": [
     {
