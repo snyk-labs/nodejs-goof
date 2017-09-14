@@ -15,8 +15,7 @@
   "addons": [
     "mongolab",
     {
-      "plan": "snyk:test",
-      "as": "snyk-globular-52788"
+      "plan": "snyk:test"
     },
   ],
   "buildpacks": [
