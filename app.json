@@ -16,7 +16,7 @@
     "mongolab",
     {
       "plan": "snyk:test"
-    },
+    }
   ],
   "buildpacks": [
     {
