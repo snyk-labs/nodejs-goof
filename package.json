@@ -12,6 +12,9 @@
     "build": "browserify -r jquery > public/js/bundle.js",
     "cleanup": "mongo express-todo --eval 'db.todos.remove({});'"
   },
+  "engines": {
+    "node": "6.14.1"
+  },
   "dependencies": {
     "body-parser": "1.9.0",
     "cfenv": "^1.0.4",
