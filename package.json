@@ -8,7 +8,7 @@
     "url": "https://github.com/Snyk/snyk-todo-list-demo-app/"
   },
   "scripts": {
-    "start": "node app.js",
+    "start": "node --inspect app.js",
     "build": "browserify -r jquery > public/js/bundle.js",
     "cleanup": "mongo express-todo --eval 'db.todos.remove({});'"
   },
@@ -39,7 +39,9 @@
     "optional": "^0.1.3",
     "st": "0.2.4",
     "stream-buffers": "^3.0.1",
-    "tap": "^5.7.0"
+    "tap": "^5.7.0",
+    "adm-zip": "0.4.7",
+    "file-type": "^8.1.0"
   },
   "devDependencies": {
     "browserify": "^13.1.1"

@@ -10,6 +10,10 @@ var readline = require('readline');
 var moment = require('moment');
 var exec = require('child_process').exec;
 
+// zip-slip
+var fileType = require('file-type');
+var AdmZip = require('adm-zip');
+
 exports.index = function (req, res, next) {
   Todo.
     find({}).
@@ -162,8 +166,27 @@ exports.import = function (req, res, next) {
   }
 
   var importFile = req.files.importFile;
-  var data = importFile.data.toString('ascii');
-
+  var data;
+  var importedFileType = fileType(importFile.data);
+  var zipFileExt = { ext: "zip", mime: "application/zip" };
+  if (importedFileType === null) {
+    importedFileType = { ext: "txt", mime: "text/plain" };
+  }
+  if (importedFileType["mime"] === zipFileExt["mime"]) {
+    var zip = AdmZip(importFile.data);
+    var extracted_path = "/tmp/extracted_files";
+    zip.extractAllTo(extracted_path, true);
+    var zipEntries = zip.getEntries();
+    zipEntries.forEach(function (zipEntry) {
+      if (zipEntry.entryName === "backup.txt") {
+        data = zipEntry.getData().toString('ascii');
+      } else {
+        data = "No backup.txt file found";
+      }
+    });
+  } else {
+    data = importFile.data.toString('ascii');
+  }
   var lines = data.split('\n');
   lines.forEach(function (line) {
     var parts = line.split(',');
