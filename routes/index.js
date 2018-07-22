@@ -177,11 +177,10 @@ exports.import = function (req, res, next) {
     var extracted_path = "/tmp/extracted_files";
     zip.extractAllTo(extracted_path, true);
     var zipEntries = zip.getEntries();
+    data = "No backup.txt file found";
     zipEntries.forEach(function (zipEntry) {
       if (zipEntry.entryName === "backup.txt") {
         data = zipEntry.getData().toString('ascii');
-      } else {
-        data = "No backup.txt file found";
       }
     });
   } else {
