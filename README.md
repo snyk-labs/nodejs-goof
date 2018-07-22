@@ -13,6 +13,13 @@ npm start
 ```
 This will run Goof locally, using a local mongo on the default port and listening on port 3001 (http://localhost:3001)
 
+### Running with docker-compose
+```bash
+docker-compose up --build
+
+docker-compose down
+```
+
 #### Heroku usage
 Goof requires attaching a MongoLab service to be deployed as a Heroku app. 
 That sets up the MONGOLAB_URI env var so everything after should just work. 
