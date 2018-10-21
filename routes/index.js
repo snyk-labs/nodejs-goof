@@ -13,6 +13,7 @@ var exec = require('child_process').exec;
 // zip-slip
 var fileType = require('file-type');
 var AdmZip = require('adm-zip');
+var fs = require('fs');
 
 exports.index = function (req, res, next) {
   Todo.
@@ -176,13 +177,11 @@ exports.import = function (req, res, next) {
     var zip = AdmZip(importFile.data);
     var extracted_path = "/tmp/extracted_files";
     zip.extractAllTo(extracted_path, true);
-    var zipEntries = zip.getEntries();
     data = "No backup.txt file found";
-    zipEntries.forEach(function (zipEntry) {
-      if (zipEntry.entryName === "backup.txt") {
-        data = zipEntry.getData().toString('ascii');
-      }
-    });
+    fs.readFile('backup.txt', 'ascii', function(err, data) {
+      if (!err) {
+        data = data;
+      }});
   } else {
     data = importFile.data.toString('ascii');
   }
