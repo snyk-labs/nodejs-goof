@@ -1,6 +1,6 @@
 {
   "name": "goof",
-  "version": "1.0.0",
+  "version": "0.0.3",
   "description": "A vulnerable todo demo application",
   "homepage": "https://snyk.io/",
   "repository": {
@@ -32,7 +32,7 @@
     "marked": "0.3.5",
     "method-override": "latest",
     "moment": "2.15.1",
-    "mongoose": "4.2.4",
+    "mongoose": "4.13.17",
     "morgan": "latest",
     "ms": "^0.7.1",
     "npmconf": "0.0.24",
