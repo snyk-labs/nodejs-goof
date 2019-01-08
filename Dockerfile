@@ -1,6 +1,5 @@
-FROM node:8-alpine
+FROM node:6-stretch
 
-RUN mkdir /usr/src
 RUN mkdir /usr/src/goof
 RUN mkdir /tmp/extracted_files
 COPY . /usr/src/goof
