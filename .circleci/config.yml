@@ -4,7 +4,7 @@ jobs: # a collection of steps
     working_directory: ~/mern-starter # directory where steps will run
     docker: # run the steps with Docker
       - image: circleci/node # ...with this image as the primary container; this is where all `steps` will run
-      - image: mongo:3.4.4 # and this image as the secondary service container
+      - image: mongo # and this image as the secondary service container
     steps: # a collection of executable commands
       - checkout # special step to check out source code to working directory
       - run:
@@ -16,6 +16,9 @@ jobs: # a collection of steps
       - run:
           name: install-snyk
           command: npm install snyk      
-      - run: # run tests
-          name: test
-          command: snyk test
+      - run: # run npm test
+          name: test-npm
+          command: npm test
+      - run: # run snyk auth
+          name: snyk auth
+          command: snyk auth $SNYK_TOKEN
