@@ -12,10 +12,12 @@ jobs: # a collection of steps
           command: 'sudo npm install -g npm@latest'
       - run:
           name: install-snyk
-          command: sudo npm install snyk      
-      - run: # run npm test
-          name: test-npm
-          command: sudo npm test
+          command: 
+          npm install snyk   
+          snyk auth $SNYK_TOKEN
+          snyk test
+
+      
       - run: # run snyk auth
           name: snyk auth
           command: sudo snyk auth $SNYK_TOKEN
