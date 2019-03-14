@@ -9,13 +9,10 @@ jobs: # a collection of steps
       - run:
           name: update-npm
           command: 'sudo npm install -g npm@latest'
-      - restore_cache: # special step to restore the dependency cache
-          # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
-          key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: install-snyk
           command: 'sudo npm install -g snyk'     
-      - run: # run npm test
+      - run: # run snyk help
           name: snyk-help
           command: snyk --help
       - run: # run snyk auth
