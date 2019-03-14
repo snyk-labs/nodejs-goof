@@ -1,41 +1,25 @@
-# Javascript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
-version: 2
-jobs:
-  build:
-    docker:
-      # specify the version you desire here
-      - image: circleci/node:7.10
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
-
-    working_directory: ~/repo
-
-    steps:
-      - checkout
-
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
-
+version: 2 # use CircleCI 2.0
+jobs: # a collection of steps
+  build: # runs not using Workflows must have a `build` job as entry point
+    working_directory: ~/mern-starter # directory where steps will run
+    docker: # run the steps with Docker
+      - image: circleci/node:4.8.2 # ...with this image as the primary container; this is where all `steps` will run
+      - image: mongo:3.4.4 # and this image as the secondary service container
+    steps: # a collection of executable commands
+      - checkout # special step to check out source code to working directory
       - run:
           name: update-npm
           command: 'sudo npm install -g npm@latest'
-
-      - save_cache:
+      - restore_cache: # special step to restore the dependency cache
+          # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: install-npm-wee
+          command: npm install
+      - save_cache: # special step to save the dependency cache
+          key: dependency-cache-{{ checksum "package.json" }}
           paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-
-      # run tests!
-       - run: # run tests
+            - ./node_modules
+      - run: # run tests
           name: test
           command: npm test
