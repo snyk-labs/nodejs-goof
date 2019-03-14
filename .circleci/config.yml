@@ -8,20 +8,8 @@ jobs: # a collection of steps
     steps: # a collection of executable commands
       - checkout # special step to check out source code to working directory
       - run:
-          name: update-npm
           command: 'sudo npm install -g npm@latest'
-      - restore_cache: # special step to restore the dependency cache
-          # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
-          key: dependency-cache-{{ checksum "package.json" }}
-      - run:
-          name: install-snyk
           command: npm install snyk   
-      - run:
-          name: good-dir
           command: cd goof         
-      - run: # run npm test
-          name: snyk-help
           command: snyk --help
-      - run: # run snyk auth
-          name: snyk auth
           command: snyk auth $SNYK_TOKEN
