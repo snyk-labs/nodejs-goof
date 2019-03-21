@@ -18,6 +18,6 @@ jobs: # a collection of steps
       - run: # run snyk auth - authenticate snyk
           name: snyk auth
           command: snyk auth $SNYK_TOKEN
-      - run: # run snyk test - run snyk test
+      - run: # run snyk test - run snyk test to fail build
           name: snyk test
           command: snyk test
