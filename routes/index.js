@@ -15,6 +15,9 @@ var fileType = require('file-type');
 var AdmZip = require('adm-zip');
 var fs = require('fs');
 
+// prototype-pollution
+var _ = require('lodash');
+
 exports.index = function (req, res, next) {
   Todo.
     find({}).
@@ -224,4 +227,65 @@ exports.about_new = function (req, res, next) {
         subhead: 'Vulnerabilities at their best',
         device: req.query.device
       });
+};
+
+// Prototype Pollution
+
+///////////////////////////////////////////////////////////////////////////////
+// In order of simplicity we are not using any database. But you can write the
+// same logic using MongoDB.
+const users = [
+  // You know password for the user.
+  {name: 'user', password: 'pwd'},
+  // You don't know password for the admin.
+  {name: 'admin', password: Math.random().toString(32), canDelete: true},
+];
+
+let messages = [];
+let lastId = 1;
+
+function findUser(auth) {
+  return users.find((u) =>
+    u.name === auth.name &&
+    u.password === auth.password);
+}
+///////////////////////////////////////////////////////////////////////////////
+
+exports.chat = {
+  get(req, res) {
+    res.send(messages);
+  },
+  add(req, res) {
+    const user = findUser(req.body.auth || {});
+
+    if (!user) {
+      res.status(403).send({ok: false, error: 'Access denied'});
+      return;
+    }
+
+    const message = {
+      // Default message icon. Cen be overwritten by user.
+      icon: '👋',
+    };
+
+    _.merge(message, req.body.message, {
+      id: lastId++,
+      timestamp: Date.now(),
+      userName: user.name,
+    });
+
+    messages.push(message);
+    res.send({ok: true});
+  },
+  delete(req, res) {
+    const user = findUser(req.body.auth || {});
+
+    if (!user || !user.canDelete) {
+      res.status(403).send({ok: false, error: 'Access denied'});
+      return;
+    }
+
+    messages = messages.filter((m) => m.id !== req.body.messageId);
+    res.send({ok: true});
+  }
 };
