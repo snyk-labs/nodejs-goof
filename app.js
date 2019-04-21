@@ -56,6 +56,9 @@ app.get('/edit/:id', routes.edit);
 app.post('/update/:id', routes.update);
 app.post('/import', routes.import);
 app.get('/about_new', routes.about_new);
+app.get('/chat', routes.chat.get);
+app.put('/chat', routes.chat.add);
+app.delete('/chat', routes.chat.delete);
 // Static
 app.use(st({ path: './public', url: '/public' }));
 
