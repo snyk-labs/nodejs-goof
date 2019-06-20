@@ -23,10 +23,13 @@ jobs: # a collection of steps
           command: snyk auth $SNYK_TOKEN
       - run: # run snyk monitor
           name: snyk monitor
-          command: snyk monitor
+          command: snyk monitor > test.txt
       - run: # run snyk test - run snyk test
           name: snyk test & Report
           command: snyk test --json | snyk-to-html -o results.html
       - store_artifacts:
           path: results.html
           destination: results.html
+      - store_artifacts:
+          path: test.txt
+          destination: test.text
