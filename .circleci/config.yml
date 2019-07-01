@@ -17,7 +17,7 @@ jobs: # a collection of steps
           command: snyk --help
       - run: # installs json to html mapper
           name: install-snyk-to-html
-          command: 'npm install snyk-to-html -g'
+          command: 'sudo npm install -g snyk-to-html'
       - run: # run snyk auth - authenticate snyk use environment variables to add token
           name: snyk auth
           command: snyk auth $SNYK_TOKEN
