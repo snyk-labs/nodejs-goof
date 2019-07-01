@@ -20,5 +20,5 @@ jobs: # a collection of steps
           command: snyk auth $SNYK_TOKEN
       - run: # run snyk monitor - run snyk test
           name: snyk monitor
-          command: snyk monitor
+          command: snyk monitor --project-name=testUsingCircleCI
           
