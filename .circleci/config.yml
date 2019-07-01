@@ -24,4 +24,7 @@ jobs: # a collection of steps
       - run: # output to HTML
           name: snyk test to HTML
           command: snyk monitor --json | snyk-to-html -o results.html
+      - store_artifacts:
+          path: results.html
+          destination: results.html
           
