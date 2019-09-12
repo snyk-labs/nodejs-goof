@@ -1,0 +1,35 @@
+version: 2 # use CircleCI 2.0
+jobs: # a collection of steps
+  build: # runs not using Workflows must have a `build` job as entry point
+    working_directory: ~/goof # directory where steps will run
+    docker: # run the steps with Docker
+      - image: circleci/node # ...with this image as the primary container; this is where all `steps` will run
+    steps: # a collection of executable commands
+      - checkout # special step to check out source code to working directory
+      - run:
+          name: update-npm
+          command: 'sudo npm install -g npm@latest'
+      - run:
+          name: install-snyk
+          command: 'sudo npm install -g snyk'     
+      - run:
+          name: install-snyk-html-report
+          command: 'sudo npm install snyk-to-html -g'
+      - run: # run snyk help - test snyk is installed and working
+          name: snyk-help
+          command: snyk --help
+      - run: # run snyk auth - authenticate snyk
+          name: snyk auth
+          command: snyk auth $SNYK_TOKEN
+      - run: # run snyk monitor
+          name: snyk monitor
+          command: snyk monitor > test.txt
+      - run: # run snyk test - run snyk test
+          name: snyk test & Report
+          command: snyk test --json | snyk-to-html -o results.html
+      - store_artifacts:
+          path: results.html
+          destination: results.html
+      - store_artifacts:
+          path: test.txt
+          destination: test.text
