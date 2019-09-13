@@ -23,7 +23,7 @@ jobs: # a collection of steps
           command: snyk auth $SNYK_TOKEN
       - run: # run snyk monitor
           name: snyk monitor
-          command: snyk monitor --project-name=$CIRCLE_BUILD_NUM > test.txt
+          command: snyk monitor --project-name=circle-build-$CIRCLE_BUILD_NUM > test.txt
       - run: # run snyk test - run snyk test
           name: snyk test & Report
           command: snyk test --json | snyk-to-html -o results.html
