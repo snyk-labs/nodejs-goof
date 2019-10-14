@@ -1,9 +1,9 @@
 pipeline {
   agent any
   stages {
-    stage('') {
+    stage('snyk') {
       steps {
-        snykSecurity(monitorProjectOnBuild: true, organisation: 'goof', projectName: 'goof')
+        snykSecurity(monitorProjectOnBuild: true, projectName: 'goof')
       }
     }
   }
