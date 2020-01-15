@@ -2,11 +2,6 @@
  * Module dependencies.
  */
 
-const snyk = require('@snyk/nodejs-runtime-agent')
-snyk({
-  projectId: process.env.SNYK_PROJECT_ID,
-});
-
 // mongoose setup
 require('./db');
 
