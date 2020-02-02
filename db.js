@@ -35,7 +35,11 @@ if (mongoCFUri) {
 } else if (process.env.MONGOLAB_URI) {
   // Generic (plus Heroku) env var support
   mongoUri = process.env.MONGOLAB_URI;
+} else if (process.env.MONGODB_URI) {
+  // Generic (plus Heroku) env var support
+  mongoUri = process.env.MONGODB_URI;
 }
+
 console.log("Using Mongo URI " + mongoUri);
 
 mongoose.connect(mongoUri);
