@@ -49,5 +49,5 @@
     "browserify": "^13.1.1",
     "snyk": "^1.244.0"
   },
-  "licenses": "Apache-2.0"
+  "license": "Apache-2.0"
 }
