@@ -10,7 +10,8 @@
   "scripts": {
     "start": "node app.js",
     "build": "browserify -r jquery > public/js/bundle.js",
-    "cleanup": "mongo express-todo --eval 'db.todos.remove({});'"
+    "cleanup": "mongo express-todo --eval 'db.todos.remove({});'",
+    "snyk": "snyk monitor --project-name=$(git rev-parse --symbolic-full-name --abbrev-ref HEAD)"
   },
   "engines": {
     "node": "6.14.1"
