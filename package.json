@@ -37,7 +37,7 @@
     "method-override": "latest",
     "moment": "2.15.1",
     "mongoose": "4.2.4",
-    "morgan": "latest",
+    "morgan": "1.10.0",
     "ms": "^0.7.1",
     "npmconf": "0.0.24",
     "optional": "^0.1.3",
