@@ -1,36 +1,15 @@
-version: 2 # use CircleCI 2.0
-jobs: # a collection of steps
-  build: # runs not using Workflows must have a `build` job as entry point
-    working_directory: ~/goof # directory where steps will run
-    docker: # run the steps with Docker
-      - image: circleci/node # ...with this image as the primary container; this is where all `steps` will run
-    steps: # a collection of executable commands
-      - checkout # special step to check out source code to working directory
-      - run:
-          name: update-npm
-          command: 'sudo npm install -g npm@latest'
-      - run:
-          name: install-snyk
-          command: 'sudo npm install -g snyk'     
-      - run: # installs json to html mapper
-          name: install-snyk-to-html
-          command: 'sudo npm install -g snyk-to-html'
-      - run: # run snyk auth - authenticate snyk use environment variables to add token
-          name: snyk auth
-          command: snyk auth $SNYK_TOKEN
-      - run: # run snyk monitor
-          name: snyk monitor
-          command: snyk monitor
-#       - run: # output to HTML
-#           name: snyk test to HTML
-#           command: snyk test --json | snyk-to-html -o results.html
-      - run: # build image
-          name: build image
-          command: docker build -t goof_docker .
-      - run: # snyk test image
-          name: snyk test image
-          command: snyk test --docker goof_docker 
-#       - store_artifacts:
-#           path: results.html
-#           destination: results.html
-          
+version: 2.1
+orbs:
+  snyk: snyk/snyk@x.y.z
+jobs:
+  build:
+    docker:
+      - image: 'circleci/node:4.8.2'
+    steps:
+      - checkout
+      - run: npm install -q
+      - snyk/scan:
+          fail-on-issues: false
+          monitor-on-build: true
+          project: 'goof-circle'
+          token-variable: $SNYK_TOKEN
