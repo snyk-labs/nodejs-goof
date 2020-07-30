@@ -3,7 +3,8 @@
  */
 
 // mongoose setup
-require('./db');
+require('./mongoose-db');
+require('./typeorm-db')
 
 var st = require('st');
 var crypto = require('crypto');
@@ -25,6 +26,7 @@ var cons = require('consolidate');
 
 var app = express();
 var routes = require('./routes');
+var routesUsers = require('./routes/users.js')
 
 // all environments
 app.set('port', process.env.PORT || 3001);
@@ -54,6 +56,8 @@ app.get('/about_new', routes.about_new);
 app.get('/chat', routes.chat.get);
 app.put('/chat', routes.chat.add);
 app.delete('/chat', routes.chat.delete);
+app.use('/users', routesUsers)
+
 // Static
 app.use(st({ path: './public', url: '/public' }));
 
