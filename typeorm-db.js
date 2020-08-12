@@ -27,19 +27,17 @@ typeorm.createConnection({
 
   console.log('Seeding 2 users to MySQL users table: Liran (role: user), Simon (role: admin')
   const inserts = [
-    () => repo.insert({
+    repo.insert({
       name: "Liran",
-      address: "Israel",
+      address: "IL",
       role: "user"
     }),
-    () => {
-      return repo.insert({
-        name: "Simon",
-        address: "UK",
-        role: "admin"
-      })
-    }
-  ]
+    repo.insert({
+      name: "Simon",
+      address: "UK",
+      role: "admin"
+    })
+  ];
 
   return Promise.all(inserts)
 }).catch((err) => {

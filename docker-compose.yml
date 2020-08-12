@@ -17,3 +17,11 @@ services:
     image: mongo
     ports:
       - "27017:27017"
+  good-mysql:
+    container_name: goof-mysql
+    image: mysql:5
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: acme
+    ports:
+      - "3306:3306"
