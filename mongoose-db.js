@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var cfenv = require("cfenv");
-var Schema   = mongoose.Schema;
+var Schema = mongoose.Schema;
 
 var Todo = new Schema({
   content: Buffer,
@@ -22,7 +22,7 @@ console.log(JSON.stringify(cfenv.getAppEnv()));
 
 // Default Mongo URI is local
 const DOCKER = process.env.DOCKER
-if ( DOCKER === '1') {
+if (DOCKER === '1') {
   var mongoUri = 'mongodb://goof-mongo/express-todo';
 } else {
   var mongoUri = 'mongodb://localhost/express-todo';
@@ -50,9 +50,9 @@ User.find({ username: 'admin' }).exec(function (err, users) {
   if (users.length === 0) {
     console.log('no admin');
     new User({ username: 'admin', password: 'SuperSecretPassword' }).save(function (err, user, count) {
-        if (err) {
-          console.log('error saving admin user');
-        }
-      });
+      if (err) {
+        console.log('error saving admin user');
+      }
+    });
   }
 });

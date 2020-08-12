@@ -1,7 +1,7 @@
-var utils    = require('../utils');
+var utils = require('../utils');
 var mongoose = require('mongoose');
-var Todo     = mongoose.model('Todo');
-var User     = mongoose.model('User');
+var Todo = mongoose.model('Todo');
+var User = mongoose.model('User');
 // TODO:
 var hms = require('humanize-ms');
 var ms = require('ms');
@@ -79,7 +79,7 @@ exports.create = function (req, res, next) {
 
   var item = req.body.content;
   var imgRegex = /\!\[alt text\]\((http.*)\s\".*/;
-  if (typeof(item) == 'string' && item.match(imgRegex)) {
+  if (typeof (item) == 'string' && item.match(imgRegex)) {
     var url = item.match(imgRegex)[1];
     console.log('found img: ' + url);
 
@@ -95,9 +95,9 @@ exports.create = function (req, res, next) {
   }
 
   new Todo({
-      content: item,
-      updated_at: Date.now(),
-    }).save(function (err, todo, count) {
+    content: item,
+    updated_at: Date.now(),
+  }).save(function (err, todo, count) {
     if (err) return next(err);
 
     /*
@@ -119,13 +119,13 @@ exports.destroy = function (req, res, next) {
       todo.remove(function (err, todo) {
         if (err) return next(err);
         res.redirect('/');
-  	});
-  } catch(e) {
-  }
+      });
+    } catch (e) {
+    }
   });
 };
 
-exports.edit = function(req, res, next) {
+exports.edit = function (req, res, next) {
   Todo.
     find({}).
     sort('-updated_at').
@@ -133,20 +133,20 @@ exports.edit = function(req, res, next) {
       if (err) return next(err);
 
       res.render('edit', {
-        title   : 'TODO',
-        todos   : todos,
-        current : req.params.id
+        title: 'TODO',
+        todos: todos,
+        current: req.params.id
       });
     });
 };
 
-exports.update = function(req, res, next) {
+exports.update = function (req, res, next) {
   Todo.findById(req.params.id, function (err, todo) {
 
-    todo.content    = req.body.content;
+    todo.content = req.body.content;
     todo.updated_at = Date.now();
     todo.save(function (err, todo, count) {
-      if(err) return next(err);
+      if (err) return next(err);
 
       res.redirect('/');
     });
@@ -181,10 +181,11 @@ exports.import = function (req, res, next) {
     var extracted_path = "/tmp/extracted_files";
     zip.extractAllTo(extracted_path, true);
     data = "No backup.txt file found";
-    fs.readFile('backup.txt', 'ascii', function(err, data) {
+    fs.readFile('backup.txt', 'ascii', function (err, data) {
       if (!err) {
         data = data;
-      }});
+      }
+    });
   } else {
     data = importFile.data.toString('ascii');
   }
@@ -220,13 +221,13 @@ exports.import = function (req, res, next) {
 };
 
 exports.about_new = function (req, res, next) {
-    console.log(JSON.stringify(req.query));
-    return res.render("about_new.dust",
-      {
-        title: 'Goof TODO',
-        subhead: 'Vulnerabilities at their best',
-        device: req.query.device
-      });
+  console.log(JSON.stringify(req.query));
+  return res.render("about_new.dust",
+    {
+      title: 'Goof TODO',
+      subhead: 'Vulnerabilities at their best',
+      device: req.query.device
+    });
 };
 
 // Prototype Pollution
@@ -236,9 +237,9 @@ exports.about_new = function (req, res, next) {
 // same logic using MongoDB.
 const users = [
   // You know password for the user.
-  {name: 'user', password: 'pwd'},
+  { name: 'user', password: 'pwd' },
   // You don't know password for the admin.
-  {name: 'admin', password: Math.random().toString(32), canDelete: true},
+  { name: 'admin', password: Math.random().toString(32), canDelete: true },
 ];
 
 let messages = [];
@@ -259,7 +260,7 @@ exports.chat = {
     const user = findUser(req.body.auth || {});
 
     if (!user) {
-      res.status(403).send({ok: false, error: 'Access denied'});
+      res.status(403).send({ ok: false, error: 'Access denied' });
       return;
     }
 
@@ -275,17 +276,17 @@ exports.chat = {
     });
 
     messages.push(message);
-    res.send({ok: true});
+    res.send({ ok: true });
   },
   delete(req, res) {
     const user = findUser(req.body.auth || {});
 
     if (!user || !user.canDelete) {
-      res.status(403).send({ok: false, error: 'Access denied'});
+      res.status(403).send({ ok: false, error: 'Access denied' });
       return;
     }
 
     messages = messages.filter((m) => m.id !== req.body.messageId);
-    res.send({ok: true});
+    res.send({ ok: true });
   }
 };
