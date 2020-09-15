@@ -1,37 +1,11 @@
-# This is a basic workflow to help you get started with Actions
-
-name: Snyk Test Demo
-
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
-on:
-  pull_request:
-    branches:
-      - master
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+name: Example workflow using Snyk
+on: push
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: macos-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
+  security:
+    runs-on: ubuntu-latest
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-      - name: Use Node.js
-        uses: actions/setup-node@v1
-
-      # Runs a single command using the runners shell
-      - name: install dependencies
-        run: npm install
-
-      # Runs a set of commands using the runners shell
-      - name: install snyk
-        run: npm install snyk
-
-      - name: Run snyk test
-        run: snyk test
+      - uses: actions/checkout@master
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/node@master
         env:
-        SNYK_TOKEN: ${{ secrets.de7adf2d-69fd-4027-a800-db2f0be293e5 }}
+          SNYK_TOKEN: ${{ secrets.de7adf2d-69fd-4027-a800-db2f0be293e5 }}
