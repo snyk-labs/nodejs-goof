@@ -33,3 +33,5 @@ jobs:
 
       - name: Run snyk test
         run: snyk test
+        env:
+        SNYK_TOKEN: ${{ secrets.de7adf2d-69fd-4027-a800-db2f0be293e5 }}
