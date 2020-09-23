@@ -1,0 +1,28 @@
+version: 0.2
+
+env:
+  parameter-store:
+    # Requires that you have a secure string in AWS Secret Manager 
+    SNYK_TOKEN: "SnykCodeBuildToken"
+
+phases:
+  install:
+    commands:
+      - npm install -g snyk
+
+  build:
+    commands:
+      - npm install
+      - npm test  # Run your unit tests, etc
+      - snyk test
+
+#artifacts:
+#files:
+# - location
+# - location
+#name: $(date +%Y-%m-%d)
+#discard-paths: yes
+#base-directory: location
+#cache:
+#paths:
+# - paths
