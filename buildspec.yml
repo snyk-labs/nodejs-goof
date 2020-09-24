@@ -18,8 +18,9 @@ phases:
       - snyk test --json | snyk-to-html -o results.html
 
 artifacts:
-  type: S3
-  name: results.html
+  files:
+    - '**/*'
+  name: snyk-result
 #files:
 # - location
 # - location
