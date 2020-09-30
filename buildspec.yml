@@ -9,8 +9,7 @@ phases:
   install:
     commands:
       - npm install -g snyk
-      - snyk_jira-sync="https://github.com/snyk-tech-services/jira-tickets-for-new-vulns/releases/download/0.4.0/snyk-jira-sync-linux"
-      - curl -Lo ./snyk-jira-sync $snyk_jira-sync
+      - curl -Lo ./snyk-jira-sync "https://github.com/snyk-tech-services/jira-tickets-for-new-vulns/releases/download/0.4.0/snyk-jira-sync-linux"
       - chmod -R +x ./snyk_jira-sync
 
   build:
