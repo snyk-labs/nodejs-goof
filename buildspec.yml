@@ -9,13 +9,14 @@ phases:
   install:
     commands:
       - npm install -g snyk
-      - npm install -g snyk-delta
+      - snyk_jira-sync="https://github.com/snyk-tech-services/jira-tickets-for-new-vulns/releases/download/0.4.0/snyk-jira-sync-linux"
+      - curl -Lo ./snyk-jira-sync $snyk_jira-sync
 
   build:
     commands:
       - npm install
       - npm test  # Run your unit tests, etc
-      - snyk test --json --print-deps | snyk-delta --baselineOrg "$baseline-proj" --baselineProject "$baseline-org" 
+      - ./snyk-jira-sync. -orgID="$baseline-org" -projectID="$baseline-proj" -token="$SnykCodeBuildToken" -jiraProjectID=10002  
    
 
 #artifacts:
