@@ -9,12 +9,13 @@ phases:
   install:
     commands:
       - npm install -g snyk
+      - npm install -g snyk-delta
 
   build:
     commands:
       - npm install
       - npm test  # Run your unit tests, etc
-      - snyk test 
+      - snyk delta --baselineOrg "$baseline-proj" --baselineProject "$baseline-org" 
 
 #artifacts:
 #  files:
