@@ -20,22 +20,5 @@ phases:
       - snyk test --json | snyk-to-html -o results.html
       - html-pdf results.html results.pdf
       - >
-        python -c "
-        import os;
-        import requests;
-        url = 'https://slack.com/api/files.upload';
-
-        my_file = {
-          'file' : ('results.pdf', open('results.pdf', 'rb'), 'pdf')
-        };
-
-        payload = {
-          'filename':'results.pdf', 
-          'token': os.getenv('SLACK_API_TOKEN'), 
-          'channels': ['#notification-aws-codebuild']
-        };
-
-        r = requests.post(url, params=payload, files=my_file);
-
-        "
+        python -c "import os; import requests; url = 'https://slack.com/api/files.upload'; my_file = {'file' : ('results.pdf', open('results.pdf', 'rb'), 'pdf')}; payload = {'filename':'results.pdf', 'token': os.getenv('SLACK_API_TOKEN'), 'channels': ['#notification-aws-codebuild']}; r = requests.post(url, params=payload, files=my_file);"
         
