@@ -20,9 +20,7 @@ phases:
       - npm install
       - npm test  # Run your unit tests, etc
       - snyk test --json | snyk-to-html -o results.html
-      
-      - python -c "import pdfkit; 
-pdfkit.from_file('results.html', 'results.pdf')"
+      - python -c "import pdfkit; pdfkit.from_file('results.html', 'results.pdf');"
       
       
       
