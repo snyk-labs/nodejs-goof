@@ -9,21 +9,13 @@ env:
 phases:
   install:
     commands:
-      - npm install -g snyk
-      - npm install -g snyk-to-html 
-      - pip install requests pdfkit
-      - apt-get update && apt-get install wkhtmltopdf -y
-
-
+      - npm install -S -g snyk snyk-to-html html-pdf
   build:
     commands:
       - npm install
       - npm test  # Run your unit tests, etc
       - snyk test --json | snyk-to-html -o results.html
-      - python -c "import pdfkit; pdfkit.from_file('results.html', 'results.pdf');"
-      
-      
-      
+      - html-pdf results.html results.pdf
 
 #artifacts:
 #  files:
