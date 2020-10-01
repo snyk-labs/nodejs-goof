@@ -9,15 +9,14 @@ phases:
   install:
     commands:
       - npm install -g snyk
-      - curl -Lo ./snyk-jira-sync "https://github.com/snyk-tech-services/jira-tickets-for-new-vulns/releases/download/0.4.0/snyk-jira-sync-linux"
-      - chmod -R +x ./snyk-jira-sync
+      - npm install -g snyk-to-html 
+
 
   build:
     commands:
       - npm install
       - npm test  # Run your unit tests, etc
-      - ./snyk-jira-sync. -orgID="$baseline-org" -projectID="$baseline-proj" -token="$SnykCodeBuildToken" -jiraProjectID=10002  
-   
+      - snyk test --json | snyk-to-html -o results.html   
 
 #artifacts:
 #  files:
