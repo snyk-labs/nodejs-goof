@@ -10,6 +10,7 @@ phases:
     commands:
       - npm install -g snyk
       - npm install -g snyk-to-html 
+      - python --version
 
 
   build:
