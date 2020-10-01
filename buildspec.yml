@@ -12,8 +12,7 @@ phases:
       - npm install -g snyk 
       - npm install -g snyk-to-html 
       - npm install -g html-pdf
-      - npm link html-pdf
-      - npm link phantomjs-prebuilt
+      - npm link html-pdf && npm link phantomjs-prebuilt
   build:
     commands:
       - npm install
