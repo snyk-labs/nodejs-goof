@@ -9,7 +9,9 @@ env:
 phases:
   install:
     commands:
-      - npm install -S -g snyk snyk-to-html html-pdf
+      - npm install -g snyk 
+      - npm install -g snyk-to-html 
+      - npm install -g html-pdf
   build:
     commands:
       - npm install
