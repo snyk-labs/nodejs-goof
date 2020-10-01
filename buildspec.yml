@@ -12,7 +12,7 @@ phases:
       - npm install -g snyk
       - npm install -g snyk-to-html 
       - pip install requests pdfkit
-      - apt-get install wkhtmltopdf
+      - apt-get update && apt-get install wkhtmltopdf
 
 
   build:
