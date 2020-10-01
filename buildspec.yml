@@ -20,9 +20,13 @@ phases:
       - snyk test --json | snyk-to-html -o results.html
       - html-pdf results.html results.pdf
       - >
-  python -c "import requests
-  dir(requests);"
+        python -c "
+        
+        import requests
+        url = 'https://slack.com/api/files.upload'
 
+        "
+        
 
 
 #artifacts:
