@@ -1,20 +1,21 @@
+#UseCase: snyk-delta
 version: 0.2
 
 env:
   parameter-store:
     # Requires that you have a secure string in AWS Secret Manager 
     SNYK_TOKEN: "SNYK_TOKEN"
-    SNYK_ORG_ID: "SNYK_ORG_ID"
-    JIRA_PROJECT_ID: "JIRA_PROJECT_ID"
+    SNYK_ORG: "SNYK_BASELINE_ORG"
+    SNYK_PROJ: "SNYK_BASELINE_PROJ"
 
 phases:
   install:
     commands:
-      - npm install -g snyk 
-      - cd /tmp && wget https://github.com/snyk-tech-services/jira-tickets-for-new-vulns/releases/download/0.4.0/snyk-jira-sync-linux
-      - chmod -R +x snyk-jira-sync-linux && mv snyk-jira-sync-linux /codebuild/user/bin/ && cd -
+      - npm install -g snyk
+      - npm install -g snyk-delta
+
   build:
     commands:
       - npm install
       - npm test  # Run your unit tests, etc
-      - snyk-jira-sync-linux -orgID="${SNYK_ORG_ID}" -token="${SNYK_TOKEN}" -jiraProjectID="${JIRA_PROJECT_ID}" -severity=high
+      - snyk test --json --print-deps | snyk-delta --baselineOrg ${SNYK_ORG} --baselineProject "SNYK_PROJ" 
