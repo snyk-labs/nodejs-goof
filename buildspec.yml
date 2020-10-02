@@ -18,4 +18,4 @@ phases:
     commands:
       - npm install
       - npm test  # Run your unit tests, etc
-      - snyk test --json --print-deps | snyk-delta --baselineOrg ${SNYK_ORG} --baselineProject "SNYK_PROJ" 
+      - snyk test --json --print-deps | snyk-delta --baselineOrg "${SNYK_ORG}" --baselineProject "${SNYK_PROJ}"
