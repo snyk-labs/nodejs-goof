@@ -11,12 +11,15 @@ phases:
     commands:
       - npm install -g snyk 
       - npm install -g snyk-to-html
+      - apt-get update && apt-get install -y wget xfonts-75dpi
+      - cd /tmp && wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.bionic_amd64.deb
+      - dpkg -i wkhtmltox_0.12.5-1.bionic_amd64.deb || true
+      - apt -f install
   build:
     commands:
       - npm install
       - npm test  # Run your unit tests, etc
       - snyk test --json | snyk-to-html -o results.html
-      - html-pdf results.html results.pdf
+      - wkhtmltopdf results.html results.pdf
       - >
         python -c "import os; import requests; url = 'https://slack.com/api/files.upload'; my_file = {'file' : ('results.pdf', open('results.pdf', 'rb'), 'pdf')}; payload = {'filename':'results.pdf', 'token': os.getenv('SLACK_TOKEN'), 'channels': ['#notification-aws-codebuild']}; response = requests.post(url, params=payload, files=my_file); print(response.text)"
-        
