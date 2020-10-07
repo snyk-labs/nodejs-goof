@@ -1,21 +1,33 @@
-#UseCase: snyk-delta
 version: 0.2
 
 env:
   parameter-store:
     # Requires that you have a secure string in AWS Secret Manager 
     SNYK_TOKEN: "SNYK_TOKEN"
-    SNYK_ORG: "SNYK_BASELINE_ORG"
-    SNYK_PROJ: "SNYK_BASELINE_PROJ"
+    SLACK_TOKEN: "SLACK_API_TOKEN"
 
 phases:
   install:
     commands:
-      - npm install -g snyk
-      - npm install -g snyk-delta
-
+      - npm install -g snyk 
+      - npm install -g snyk-to-html
+      - apt-get update && apt-get install -y wget xfonts-75dpi
+      - cd /tmp && wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.bionic_amd64.deb
+      - dpkg -i wkhtmltox_0.12.5-1.bionic_amd64.deb || true
+      - apt-get -f install -y && cd -
   build:
     commands:
       - npm install
       - npm test  # Run your unit tests, etc
-      - snyk test --json --print-deps | snyk-delta --baselineOrg "${SNYK_ORG}" --baselineProject "${SNYK_PROJ}"
+      - snyk test --json | snyk-to-html -o results.html
+      - wkhtmltopdf results.html results.pdf
+      - script: |
+        import os
+        import requests
+        url = 'https://slack.com/api/files.upload'
+        my_file = {'file' : ('results.pdf', open('results.pdf', 'rb'), 'pdf')}
+        payload = {'filename':'results.pdf', 'token': os.getenv('SLACK_TOKEN'), 'channels': ['#notification-aws-codebuild']}
+        response = requests.post(url, params=payload, files=my_file)
+        print(response.text)"
+        
+      - python -c {{ script }}
