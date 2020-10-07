@@ -5,6 +5,15 @@ env:
     # Requires that you have a secure string in AWS Secret Manager 
     SNYK_TOKEN: "SNYK_TOKEN"
     SLACK_TOKEN: "SLACK_API_TOKEN"
+  variables:
+    script: |
+      import os
+      import requests
+      url = 'https://slack.com/api/files.upload'
+      my_file = {'file' : ('results.pdf', open('results.pdf', 'rb'), 'pdf')}
+      payload = {'filename':'results.pdf', 'token': os.getenv('SLACK_TOKEN'), 'channels': ['#notification-aws-codebuild']}
+      response = requests.post(url, params=payload, files=my_file)
+      print(response.text)
 
 phases:
   install:
@@ -21,13 +30,4 @@ phases:
       - npm test  # Run your unit tests, etc
       - snyk test --json | snyk-to-html -o results.html
       - wkhtmltopdf results.html results.pdf
-      - script: |
-        import os
-        import requests
-        url = 'https://slack.com/api/files.upload'
-        my_file = {'file' : ('results.pdf', open('results.pdf', 'rb'), 'pdf')}
-        payload = {'filename':'results.pdf', 'token': os.getenv('SLACK_TOKEN'), 'channels': ['#notification-aws-codebuild']}
-        response = requests.post(url, params=payload, files=my_file)
-        print(response.text)"
-        
       - python -c {{ script }}
