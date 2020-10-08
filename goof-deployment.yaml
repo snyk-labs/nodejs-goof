@@ -1,0 +1,28 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: goof
+spec:
+  replicas: 1
+  strategy: {}
+  selector:
+    matchLabels:
+      app: goof
+  template:
+    metadata:
+      labels:
+        app: goof
+    spec:
+      containers:
+      - image: snykschmidtty/goof-kubernetes
+        name: goof
+        ports:
+        - containerPort: 3001
+        - containerPort: 9229
+        resources: {}
+        env: 
+          - name: "DOCKER"
+            value: "1"
+      restartPolicy: Always
+    
