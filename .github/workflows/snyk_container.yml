@@ -24,16 +24,25 @@ jobs:
       uses: github/codeql-action/upload-sarif@v1
       with:
         sarif_file: snyk.sarif
-  snyk_monitor:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@master
-    - name: Run Snyk to check Docker image for vulnerabilities
+    - name: Snyk Monitor
       continue-on-error: true
       uses: snyk/actions/docker@master
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-      with:
+      with: 
         command: monitor
         image: goof-github-actions
         args: --file=Dockerfile --project-name=docker-image|goof-github-actions
+  #snyk_monitor:
+   # runs-on: ubuntu-latest
+    #steps:
+    #- uses: actions/checkout@master
+    #- name: Run Snyk to check Docker image for vulnerabilities
+      #continue-on-error: true
+      #uses: snyk/actions/docker@master
+      #env:
+        #SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      #with:
+        #command: monitor
+        #image: goof-github-actions
+        #args: --file=Dockerfile --project-name=docker-image|goof-github-actions
