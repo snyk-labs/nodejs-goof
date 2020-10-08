@@ -5,5 +5,5 @@ node_js:
 
 script:
     - npm install -g snyk
-    - snyk monitor --all-projects --remote-repo-url=goof-github-travisci
-    #- snyk monitor --project-name=goof-github-travisci
+    #- snyk monitor --all-projects --remote-repo-url=goof-github-travisci
+    - snyk monitor --project-name=goof-travisci
