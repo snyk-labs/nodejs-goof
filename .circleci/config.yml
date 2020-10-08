@@ -1,0 +1,28 @@
+  version: 2
+  jobs:
+    build:
+      working_directory: ~/goof-circleci
+      docker: 
+        - image: circleci/node # the primary container, where your job's commands are run
+      steps:
+        - checkout # check out the code in the project directory
+        - run: echo "hello world" # run the `echo` command
+        - run:
+            name: update-npm
+            command: 'sudo npm install -g snyk'
+        - run: # installs json to html mapper
+            name: install-snyk-to-html
+            command: 'sudo npm install -g snyk-to-html'
+        - run: # run snyk auth - authenticate snyk use environment variables to add token
+            name: snyk auth
+            command: snyk auth $SNYK_TOKEN
+#        - run: # output to HTML
+#            name: snyk test to HTML
+#            command: 'snyk test --json | snyk-to-html -o results.html'            
+        - run: # run snyk monitor
+            name: snyk monitor
+            #command: 'snyk monitor --all-projects --remote-repo-url=goof-github-circleci'
+            command: 'snyk monitor --project-name=goof-circleci'
+#        - store_artifacts:
+#            path: results.html
+#            destination: results.html

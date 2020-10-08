@@ -1,0 +1,48 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install
+    npm run build
+  displayName: 'npm install and build'
+
+- script: |
+    docker build -t goof-azure .
+  displayName: 'build docker image'
+
+- task: SnykSecurityScan@0
+  inputs:
+    serviceConnectionEndpoint: 'Snyk_Token'
+    testType: 'app'
+    monitorOnBuild: true
+    failOnIssues: false
+    continueOnError: true
+    debug: true
+    projectName: 'goof-azure-pipelines'
+    #additionalArguments: '--all-projects --remote-repo-url=goof-azure-pipelines'
+
+- task: SnykSecurityScan@0
+  inputs:
+    serviceConnectionEndpoint: 'Snyk_Token'
+    testType: 'container'
+    dockerImageName: 'goof-azure'
+    dockerfilePath: 'Dockerfile'
+    severityThreshold: 'high'
+    monitorOnBuild: true
+    failOnIssues: false
+    projectName: 'docker-image|goof-azure-pipelines'
+    #additionalArguments: '--remote-repo-url=goof-azure-pipelines'

@@ -1,0 +1,9 @@
+language: node_js
+
+node_js:
+- node
+
+script:
+    - npm install -g snyk
+    - snyk monitor --all-projects --remote-repo-url=goof-github-travisci
+    #- snyk monitor --project-name=goof-github-travisci
