@@ -2,17 +2,17 @@ version: 0.2
 
 env:
   parameter-store:
-    # Requires that you have a secure string in AWS Secret Manager 
+    # Secure string in AWS Secret Manager 
     SNYK_TOKEN: "SNYK_TOKEN"
+    SNYK_ORG: "SNYK_ORG"
 
 phases:
   install:
     commands:
       - npm install -g snyk 
-      - apt-get update && apt-get install jq
   build:
     commands:
       - npm install
-      - npm test  # Run your unit tests, etc
-      - NUM_VULNS=$(snyk test --json | jq  "[.vulnerabilities[] | select(.cvssScore >= 9.9)] | length"); if [ "$NUM_VULNS" != 0 ]; then exit $NUM_VULNS; fi
+      - npm test  
+      - snyk test --org="${SNYK_ORG}"
 
