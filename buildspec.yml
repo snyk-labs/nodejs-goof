@@ -14,5 +14,5 @@ phases:
     commands:
       - npm install
       - npm test  
-      - snyk test --org="${SNYK_ORG}"
+      - snyk monitor --org="${SNYK_ORG}"
 
