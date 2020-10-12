@@ -9,7 +9,7 @@ phases:
   install:
     commands:
       - npm install -g snyk 
-      - npm install -g jq
+      - apt-get update && apt-get install jq
   build:
     commands:
       - npm install
