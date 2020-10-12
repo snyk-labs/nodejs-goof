@@ -14,4 +14,4 @@ phases:
     commands:
       - npm install
       - npm test  # Run your unit tests, etc
-      - NUM_VULNS=$(snyk test --json | jq  "[.vulnerabilities[] | select(.cvssScore >= 9.5)] | length"); if [ "$NUM_VULNS" != 0 ]; then exit $NUM_VULNS; fi
+      - NUM_VULNS=$(snyk test --json | jq  "[.vulnerabilities[] | select(.exploit == "Mature")] | length"); if [ "$NUM_VULNS" != 0 ]; then exit $NUM_VULNS; fi
