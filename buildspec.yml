@@ -4,30 +4,14 @@ env:
   parameter-store:
     # Requires that you have a secure string in AWS Secret Manager 
     SNYK_TOKEN: "SNYK_TOKEN"
-    SLACK_TOKEN: "SLACK_API_TOKEN"
-  variables:
-    slack_post_script: |
-      import os
-      import requests
-      url = 'https://slack.com/api/files.upload'
-      my_file = {'file' : ('results.pdf', open('results.pdf', 'rb'), 'pdf')}
-      payload = {'filename':'results.pdf', 'token': os.getenv('SLACK_TOKEN'), 'channels': ['#notification-aws-codebuild']}
-      response = requests.post(url, params=payload, files=my_file)
-      print(response.text)
 
 phases:
   install:
     commands:
       - npm install -g snyk 
-      - npm install -g snyk-to-html
-      - apt-get update && apt-get install -y wget xfonts-75dpi
-      - cd /tmp && wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.bionic_amd64.deb
-      - dpkg -i wkhtmltox_0.12.5-1.bionic_amd64.deb || true
-      - apt-get -f install -y && cd -
+      - npm install -g jq
   build:
     commands:
       - npm install
       - npm test  # Run your unit tests, etc
-      - snyk test --json | snyk-to-html -o results.html
-      - wkhtmltopdf results.html results.pdf
-      - python -c "${slack_post_script}"
+      - NUM_VULNS=$(snyk test --json | jq  "[.vulnerabilities[] | select(.cvssScore >= 9)] | length"); if [ "$NUM_VULNS" != 0 ]; then exit $NUM_VULNS; fi
