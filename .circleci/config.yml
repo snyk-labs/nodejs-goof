@@ -21,8 +21,8 @@
 #            command: 'snyk test --json | snyk-to-html -o results.html'            
         - run: # run snyk monitor
             name: snyk monitor
-            #command: 'snyk monitor --all-projects --remote-repo-url=goof-github-circleci'
-            command: 'snyk monitor --project-name=goof-circleci'
+            # command: 'snyk monitor --all-projects --remote-repo-url=goof-github-circleci'
+            command: 'snyk monitor --project-name=goof-circleci --remote-repo-url=goof-github-circleci'
 #        - store_artifacts:
 #            path: results.html
 #            destination: results.html
