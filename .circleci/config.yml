@@ -22,7 +22,7 @@
         - run: # run snyk monitor
             name: snyk monitor
             # command: 'snyk monitor --all-projects --remote-repo-url=goof-github-circleci'
-            command: 'snyk monitor --project-name=goof-circleci --remote-repo-url=goof-github-circleci'
+            command: 'snyk monitor --project-name=goof-circleci --remote-repo-url=goof-circleci'
 #        - store_artifacts:
 #            path: results.html
 #            destination: results.html
