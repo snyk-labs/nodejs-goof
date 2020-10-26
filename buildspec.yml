@@ -15,7 +15,7 @@ phases:
       #- chmod -R +x snyk-jira-sync-linux && mv snyk-jira-sync-linux /codebuild/user/bin/ && cd -
   build:
     commands:
-      # - npm install
-      - npm test  # Run your unit tests, etc
+      - npm install
+      # - npm test  # Run your unit tests, etc
       - snyk monitor --project-name=goof-codebuild --remote-repo-url=goof-codebuild
       #- snyk-jira-sync-linux -orgID="${SNYK_ORG_ID}" -token="${SNYK_TOKEN}" -jiraProjectID="${JIRA_PROJECT_ID}" -severity=high
