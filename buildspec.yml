@@ -1,0 +1,16 @@
+version: 0.2
+
+env:
+  parameter-store:
+    # Snyk Token
+    SNYK_TOKEN: "SNYK_TOKEN"
+    
+phases:
+  install:
+    commands:
+      - npm install -g snyk
+    build:
+      commands:
+        - npm install
+        - npm test
+        - snyk monitor --project-name=goof-aws-codebuild --remote-repo-url=goof-aws-codebuild
