@@ -2,15 +2,20 @@ version: 0.2
 
 env:
   parameter-store:
-    # Snyk Token
+    # Requires that you have a secure string in AWS Secret Manager 
     SNYK_TOKEN: "SNYK_TOKEN"
-    
+    #SNYK_ORG_ID: "SNYK_ORG_ID"
+    #JIRA_PROJECT_ID: "JIRA_PROJECT_ID"
+
 phases:
   install:
     commands:
-      - npm install -g snyk
-    build:
-      commands:
-        - npm install
-        - npm test
-        - snyk monitor --project-name=goof-aws-codebuild --remote-repo-url=goof-aws-codebuild
+      - npm install -g snyk 
+      #- cd /tmp && wget https://github.com/snyk-tech-services/jira-tickets-for-new-vulns/releases/download/0.4.0/snyk-jira-sync-linux
+      #- chmod -R +x snyk-jira-sync-linux && mv snyk-jira-sync-linux /codebuild/user/bin/ && cd -
+  build:
+    commands:
+      - npm install
+      - npm test  # Run your unit tests, etc
+      - snyk monitor --project-name=goof-codebuild --remote-repo-url=goof-codebuild
+      #- snyk-jira-sync-linux -orgID="${SNYK_ORG_ID}" -token="${SNYK_TOKEN}" -jiraProjectID="${JIRA_PROJECT_ID}" -severity=high
