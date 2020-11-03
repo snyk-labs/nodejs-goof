@@ -32,7 +32,7 @@ jobs:
       with: 
         command: monitor
         image: goof-github-actions
-        args: --file=Dockerfile --project-name=docker-image|goof-github-actions
+        args: --file=Dockerfile --project-name=docker-image|goof-github-actions --app-vulns
   #snyk_monitor:
    # runs-on: ubuntu-latest
     #steps:
