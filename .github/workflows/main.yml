@@ -25,7 +25,9 @@ jobs:
         languages: ${{ matrix.language }}
     - name: Build
       run: |
-        apt-get update -qq && apt-get install -y build-essential nodejs
+        apt-get update && apt-get install -y nodejs
+        node -v
+        npm -v
         npm install
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
