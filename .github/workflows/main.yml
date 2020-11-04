@@ -25,7 +25,7 @@ jobs:
         languages: ${{ matrix.language }}
     - name: Build
       run: |
-        apt-get update && apt-get install -y nodejs
+        apt-get update && apt-get install -y nodejs build-essential
         node -v
         npm -v
         npm install
