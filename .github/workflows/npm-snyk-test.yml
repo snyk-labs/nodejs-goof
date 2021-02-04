@@ -16,6 +16,8 @@ jobs:
       - name: ls
         working-directory: ./app
         run: ls
+      - name: pwd
+        run: pwd
       - name: NPM Install
         run: npm install
       - name: Install Snyk
