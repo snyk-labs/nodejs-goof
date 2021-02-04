@@ -10,8 +10,8 @@ jobs:
       - name: NPM Install
         run: npm install
       - name: Install Snyk
-        run: npm install -g snyk
+        run: sudo npm install -g snyk
       - name: Snyk Authenticate
-        run: snyk auth
+        run: snyk auth $SNYK_TOKEN
       - name: Snyk Test
         run: snyk test
