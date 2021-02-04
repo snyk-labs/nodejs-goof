@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: NPM Install
-        run: npm instal
+        run: npm install
       - name: Install Snyk
         run: npm install -g snyk
       - name: Snyk Authenticate
