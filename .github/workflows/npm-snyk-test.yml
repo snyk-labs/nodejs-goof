@@ -12,8 +12,12 @@ jobs:
       - name: Install Snyk
         run: sudo npm install -g snyk
       - name: ECHO ENV VAR
-        run: echo ${{ secrets.SNYK_TOKEN }}
+        run: echo env.SNYK_TOKEN
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       - name: Snyk Authenticate
-        run: snyk auth $SNYK_TOKEN
+        run: snyk auth env.SNYK_TOKEN
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       - name: Snyk Test
         run: snyk test
