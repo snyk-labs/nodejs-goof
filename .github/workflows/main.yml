@@ -9,6 +9,7 @@ jobs:
     env:
       SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
     steps:
+      - uses: actions/checkout@v1
       - name: Use Node ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
