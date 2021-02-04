@@ -13,13 +13,14 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      - name: ls
+        working-directory: ./app
+        run: ls
       - name: NPM Install
         run: npm install
       - name: Install Snyk
         run: sudo npm install -g snyk
       - name: Snyk Authenticate
         run: snyk auth "$SNYK_TOKEN"
-      - name: ls
-        run: ls
       - name: Snyk Test
         run: snyk test
