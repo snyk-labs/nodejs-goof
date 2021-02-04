@@ -6,6 +6,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
     steps:
       - name: NPM Install
         run: npm install
@@ -13,11 +15,7 @@ jobs:
         run: sudo npm install -g snyk
       - name: ECHO ENV VAR
         run: echo env.SNYK_TOKEN
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       - name: Snyk Authenticate
         run: snyk auth env.SNYK_TOKEN
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       - name: Snyk Test
         run: snyk test
