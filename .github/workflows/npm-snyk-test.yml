@@ -13,11 +13,9 @@ jobs:
         run: npm install
       - name: Install Snyk
         run: sudo npm install -g snyk
-      - name: ECHO TEST
-        run: echo "Test"
-      - name: ECHO "$SNYK_TOKEN"
-        run: echo "$SNYK_TOKEN"
       - name: Snyk Authenticate
         run: snyk auth "$SNYK_TOKEN"
+      - name: ls
+        run: ls
       - name: Snyk Test
         run: snyk test
