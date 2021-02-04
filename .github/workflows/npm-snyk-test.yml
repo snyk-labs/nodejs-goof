@@ -1,0 +1,17 @@
+name: Snyk Scan Master
+on:
+  push:
+    branches: master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: NPM Install
+        run: npm instal
+      - name: Install Snyk
+        run: npm install -g snyk
+      - name: Snyk Authenticate
+        run: snyk auth
+      - name: Snyk Test
+        run: snyk test
