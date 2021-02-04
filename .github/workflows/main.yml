@@ -1,4 +1,4 @@
-name: Snyk Scan Master
+name: Snyk Scan Open Source
 on:
   push:
     branches: master
