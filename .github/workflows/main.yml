@@ -14,10 +14,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: ls
-        working-directory: ../
         run: ls
-      - name: pwd
-        run: pwd
       - name: NPM Install
         run: npm install
       - name: Install Snyk
