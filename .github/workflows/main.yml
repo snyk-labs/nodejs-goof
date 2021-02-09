@@ -1,4 +1,4 @@
-name: Snyk Container
+name: Snyk Open Source
 on: push
 jobs:
   snyk:
