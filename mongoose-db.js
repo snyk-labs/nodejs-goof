@@ -42,7 +42,22 @@ if (mongoCFUri) {
 
 console.log("Using Mongo URI " + mongoUri);
 
-mongoose.connect(mongoUri);
+var options = {
+  useUnifiedTopology: true,
+  reconnectTries: Number.MAX_VALUE,
+  reconnectInterval: 500,
+  connectTimeoutMS: 1000,
+  useNewUrlParser: true,
+  bufferTimeout: 300,
+  poolSize: 20,
+  socketTimeoutMS: 480000,
+  keepAlive: 300000,
+  useMongoClient: true
+};
+
+mongoose.connect(mongoUri, options);
+mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
+
 
 User = mongoose.model('User');
 User.find({ username: 'admin' }).exec(function (err, users) {

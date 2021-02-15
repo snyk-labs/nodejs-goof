@@ -142,14 +142,14 @@ exports.edit = function (req, res, next) {
 
 exports.update = function (req, res, next) {
   Todo.findById(req.params.id, function (err, todo) {
-
+    if (err) return res.redirect('/'); // we didn't find an object to update
     todo.content = req.body.content;
     todo.updated_at = Date.now();
     todo.save(function (err, todo, count) {
       if (err) return next(err);
-
       res.redirect('/');
     });
+
   });
 };
 
