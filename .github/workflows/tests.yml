@@ -20,10 +20,10 @@ jobs:
     name: StackHawk DAST
     runs-on: ubuntu-latest
     steps:
-      - name: Run the Goof Containers
-        run: docker-compose up -d
       - name: Clone repo
         uses: actions/checkout@v2
+      - name: Run the Goof Containers
+        run: docker-compose up -d
       - name: StackHawk Run
         uses: stackhawk/hawkscan-action@v1.1
         with:
