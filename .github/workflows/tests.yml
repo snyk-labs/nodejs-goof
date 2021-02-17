@@ -21,9 +21,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Clone repo
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
       - name: StackHawk Run
-      - uses: stackhawk/hawkscan-action@v1.1
+        uses: stackhawk/hawkscan-action@v1.1
         with:
           apiKey: ${{secrets.HAWK_API_KEY}}
           configurationFiles: stackhawk.yml, stackhawk-github.yml
