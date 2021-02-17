@@ -1,0 +1,115 @@
+# stackhawk configuration for Goof
+app:
+  # An applicationId obtained from the StackHawk platform.
+  applicationId: 0873d376-5661-4add-8777-e0d1f846ae50 #(this one is mine, you'll need your own Application ID) (required)
+  # The environment for the applicationId defined in the StackHawk platform.
+  env: Development # (required)
+  # The url of your application to scan
+  host: http://localhost:3001 # (required)
+  # api:   # The risk level of the app
+  # riskLevel: MEDIUM # (optional)
+  # The type of data sensitivity the web app maintains
+  # appDataType: PII # (optional)
+  # The names of your session tokens aka: cookie names
+#  sessionTokens: # (optional)
+#    - "csrftoken"
+#  # The name of your anti csrf parameter
+#  antiCsrfParam: authenticity_token # (optional)
+#
+  # Authentication configuration for scanning as a user.
+  # Enabling will force the scanner to scan as an
+  # authenticated user of your app.
+#  authentication:
+#    # A regex to match against http responses to determine if the scan user is
+#    # still logged in to your app
+#    loggedInIndicator: "\\QLog out\\E" # (required)
+#    # A regex to match against http responses to determine if the scan user is
+#    # logged out of your app
+#    loggedOutIndicator: "\\QLog in\\E" # (required)
+#    # Username password based authentication method.
+#    usernamePassword:
+#      # POST authentication credentials as application/x-www-form-urlencoded
+#      # Set type to JSON to POST as application/json.
+#      type: FORM
+#      # The route to POST credentials to authenticate as a user
+#      loginPath: /login # (required)
+#      # The route that serves the login form. The anti-csrf parameter
+#      # returned from a GET request will be extracted from the response.
+#      loginPagePath: /login # (optional)
+#      # The username field name in your authentication payload.
+#      usernameField: session[email] # (required)
+#      # The password field name in your authentication payload.
+#      passwordField: session[password] # (required)
+#      # The username to authenticate as when scanning
+#      scanUsername: ${SCAN_USERNAME} # (required)
+#      # The password of the scanUsername
+#      scanPassword: ${SCAN_PASSWORD} # (required)
+#      # Other request parameters that may be required by your log in payload
+#      otherParams: # (optional)
+#        - name: utf8
+#          val: "&#x2713;"
+#        - name: "session[remember_me]"
+#          val: "0"
+#    # Maintain authorized session via cookie.
+#    cookieAuthorization:
+#      # Names of cookies used to track a user's session
+#      cookieNames:
+#        - "_toy_app_session"
+#    # A path and criteria for asserting authentication is working correctly.
+#    # The path should be a protected route that can only be accessed
+#    # by an authenticated user. Before running a scan this path will be
+#    # requested to verify authenticated access is working correctly.
+#    testPath:
+#      # Match criteria against the HEADERs. Set to BODY to match against
+#      # response body instead.
+#      type: HEADER
+#      # The protected path to issue a GET request to.
+#      path: /profile
+#      # A regex to match against that will indicate a successful authorized
+#      # request. Configure fail criteria to match against a failed
+#      # authorized request. Example: fail:".*302.*Location.*/login.*"
+#      success: ".*200.*"
+#    # Externally supplied authorization token.
+#    # Use as an alternative to usernamePassword authentication
+#    external:
+#      # A token type external credential.
+#      # Set to COOKIE to supply an externally sourced cookie
+#      type: TOKEN
+#      # The value of the token passed as an environment variable at runtime.
+#      # When type=COOKIE the value format should be <cookie-name>=<cookie-value>
+#      value: ${AUTH_TOKEN}
+#    # Describe how to extract your apps authorization token.
+#    # This should only be used with tokenAuthorization
+#    tokenExtraction:
+#      # The type of extraction to use. TOKEN_PATH is the path to the token in
+#      # the JSON payload returned from usernamePassword authenticsation.
+#      # Set to HEADER if your authorization token is returned as a response header.
+#      type: TOKEN_PATH
+#      # The path to the token or name of the header.
+#      value: "auth.token"
+#    # Use token based authorization instead of cookie based.
+#    # Tokens are passed on all requests to maintain authorized access
+#    # to your application
+#    tokenAuthorization:
+#      # The way to pass the token on requests. Set to QUERY_PARAM
+#      # to pass your token as part of the query string instead of a header.
+#      type: HEADER
+#      # The name of the header or query param.
+#      value: Authorization
+#      # The token type which will be prepended to your authorization header.
+#      # ie: Authorization: Bearer <token>
+#      # Leave undefined if not applicable.
+#      tokenType: Bearer
+#  # Path to openapi 2 spec file or inline openapi 2 spec yaml
+#  api: "openapi.json" # (optional)
+#hawk:
+#  # Web crawler / spider configuration
+#  spider:
+#    # Enable the base spider for discovering your app's routes
+#    base: true # (default)
+#    # Enable the ajax spider for discovering your single page app
+#    ajax: false # (default)
+#    # Maximum time for spider to discover routes in your app
+#    maxDurationMinutes: 2 # (default)
+#  # Maximum time to wait for the scanner to start up
+#  startupTimeoutMinutes: 5 # (default)

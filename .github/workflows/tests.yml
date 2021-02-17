@@ -1,0 +1,57 @@
+name: Tests
+on:
+  push:
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Python Tests
+    container:
+      image: python:3.7-buster
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@v2
+      - name: Run the Python Tests
+        run: |
+            # This configures the test stuff
+            apt-get update -qy
+            apt-get install -y python-dev python-pip
+            pip install -r requirements.txt
+            python manage.py migrate
+            python manage.py test
+            coverage run --source='.' manage.py test
+            coverage report -m
+            coverage-badge
+
+  synk:
+    name: Snyk SCA
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/python@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high --fail-on=upgradable
+
+
+  hawkscan:
+    name: StackHawk DAST
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@v2
+      - name: StackHawk Container Pull
+        run: docker pull stackhawk/hawkscan:latest
+      - name: Run the Vuln Django Containers
+        run: docker-compose up -d
+      - name: Run HawkScan
+        env:
+          API_KEY: ${{secrets.HAWK_API_KEY}}
+        run: >
+          docker run --volume $(pwd):/hawk:rw --tty --rm
+          --network vuln_django_play_default
+          --env API_KEY="${API_KEY}"
+          --env NO_COLOR=true
+          stackhawk/hawkscan stackhawk.yml stackhawk-github.yml

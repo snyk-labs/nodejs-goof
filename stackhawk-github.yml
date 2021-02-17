@@ -1,0 +1,4 @@
+# stackhawk configuration for Goof
+app: # Override mode must be stacked with stackhawk.yml
+  env: Development # (required)
+  # The url of your application to scan
