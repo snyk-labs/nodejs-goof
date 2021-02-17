@@ -20,6 +20,8 @@ jobs:
     name: StackHawk DAST
     runs-on: ubuntu-latest
     steps:
+      - name: Run the Goof Containers
+        run: docker-compose up -d
       - name: Clone repo
         uses: actions/checkout@v2
       - name: StackHawk Run
@@ -29,8 +31,6 @@ jobs:
           configurationFiles: stackhawk.yml, stackhawk-github.yml
           network: goof_default
     #    run: docker pull stackhawk/hawkscan:latest
-    #  - name: Run the Goof Containers
-    #    run: docker-compose up -d
     #  - name: Run HawkScan
     #    env:
     #      API_KEY: ${{secrets.HAWK_API_KEY}}
