@@ -8,6 +8,8 @@ image: node:10.15.3
 pipelines:
   default:
     - step:
+        caches:
+          - node
         script: # Modify the commands below to build your repository.
           - npm install
           - pipe: snyk/snyk-scan:0.2.0
@@ -16,4 +18,4 @@ pipelines:
               LANGUAGE: "npm"
               DONT_BREAK_BUILD: "true"
               MONITOR: "true"
-              EXTRA_ARGS: "--project-name=goof-bitbucket-pipelines"
+              EXTRA_ARGS: "--project-name=goof-bitbucket-pipelines --remote-repo-url=goof-bitbucket-pipelines"
