@@ -1,13 +1,17 @@
 name: Example workflow for Node using Snyk 
 on: push
 jobs:
-  security:
+  snyk:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v2
     - name: Run Snyk to check for vulnerabilities
+      continue-on-error: true
       uses: snyk/actions/node@master
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       with:
-        args: --severity-threshold=high
+        file: .
+    - uses: github/codeql-action/upload-sarif@v1
+      with:
+        sarif_file: snyk.sarif
