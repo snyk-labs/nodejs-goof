@@ -33,6 +33,7 @@ steps:
     continueOnError: true
     debug: true
     projectName: 'goof-azure-pipelines'
+    additionalArguments: '--remote-repo-url=goof-azure-pipelines'
     #additionalArguments: '--all-projects --remote-repo-url=goof-azure-pipelines'
 
 - task: SnykSecurityScan@0
