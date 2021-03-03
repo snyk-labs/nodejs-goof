@@ -45,4 +45,5 @@ steps:
     monitorOnBuild: true
     failOnIssues: false
     projectName: 'docker-image|goof-azure-pipelines'
+    additionalArguments: '--app-vulns'
     #additionalArguments: '--remote-repo-url=goof-azure-pipelines'
