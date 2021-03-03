@@ -13,14 +13,14 @@ pipelines:
         script: # Modify the commands below to build your repository.
           - npm install
           - docker build -t snykschmidtty/goof:latest .
-          - pipe: snyk/snyk-scan:0.2.0
+          - pipe: snyk/snyk-scan:0.4.6
             variables:
               SNYK_TOKEN: $SNYK_TOKEN
               LANGUAGE: "npm"
               DONT_BREAK_BUILD: "true"
               MONITOR: "true"
               EXTRA_ARGS: "--project-name=goof-bitbucket-pipelines --remote-repo-url=goof-bitbucket-pipelines"
-          - pipe: snyk/snyk-scan:0.2.0
+          - pipe: snyk/snyk-scan:0.4.6
             variables:
               SNYK_TOKEN: $SNYK_TOKEN
               LANGUAGE: "docker"
