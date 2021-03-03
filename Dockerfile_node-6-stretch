@@ -1,4 +1,4 @@
-FROM node:14.1.0
+FROM node:6-stretch
 
 RUN apt-get install -y imagemagick
 
