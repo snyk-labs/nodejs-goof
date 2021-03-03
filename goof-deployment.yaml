@@ -15,7 +15,7 @@ spec:
         app: goof
     spec:
       containers:
-      - image: snykschmidtty/goof-kubernetes
+      - image: snykschmidtty/goof:latest
         name: goof
         ports:
         - containerPort: 3001
