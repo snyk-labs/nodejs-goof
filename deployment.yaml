@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blog
+  annotations:
+    orgs.k8s.snyk.io/v1: 9ff4ae2d-3cac-4259-97de-ea3a395f41ac
+  labels:
+    app: blog
+spec:
+  template:
+    metadata:
+      name: blog-pod
+      labels:
+        app.kubernetes.io/instance: blog
+        app.kubernetes.io/name: blog
+    spec:
+      containers:
+        - name: blog-container
+          image: purpledobie/blog:demo
+          ports:
+          - containerPort: 3000
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: blog
+      app.kubernetes.io/name: blog
