@@ -21,4 +21,4 @@ jobs:
       - name: Snyk Authenticate
         run: snyk auth "$SNYK_TOKEN"
       - name: Snyk Test
-        run: snyk code test
+        run: snyk code test --severity-threshold=high
