@@ -1,4 +1,4 @@
-name: Snyk Scan Container
+name: Snyk Scan Code
 on:
   push:
     branches: master
