@@ -23,7 +23,7 @@
     "dustjs-linkedin": "2.5.0",
     "ejs": "1.0.0",
     "ejs-locals": "1.0.2",
-    "errorhandler": "1.2.0",
+    "errorhandler": "1.5.1",
     "express": "4.12.4",
     "express-fileupload": "0.0.5",
     "file-type": "^8.1.0",
