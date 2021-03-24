@@ -34,7 +34,7 @@
     "method-override": "latest",
     "moment": "2.15.1",
     "mongodb": "^3.5.9",
-    "mongoose": "4.2.4",
+    "mongoose": "5.12.2",
     "morgan": "latest",
     "ms": "^0.7.1",
     "mysql": "^2.18.1",
