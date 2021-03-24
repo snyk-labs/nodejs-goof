@@ -3,7 +3,7 @@ name: "Snyk Test"
 on:
   push:
     branches:
-    - main
+    - master
 
 jobs:
   Pipeline-Job:
