@@ -28,6 +28,6 @@ jobs:
       run: |
          docker build .  -t goof
     # Run Snyk Container     
-    - name: Run Snyk Open Source
+    - name: Run Snyk Container
       run: |
          snyk container test --file=Dockerfile goof   

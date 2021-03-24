@@ -24,6 +24,6 @@ jobs:
          sudo npm install -g snyk
          snyk auth ${SNYK_TOKEN}
     # Run Snyk Code
-    - name: Run Snyk Open Source
+    - name: Run Snyk Code
       run: |
          snyk code test    
