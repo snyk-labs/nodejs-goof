@@ -17,13 +17,13 @@ jobs:
     # Checkout Code
     - name: Checkout Code
       uses: actions/checkout@v1
-        steps:
+
     # Install and Authenticate to Snyk
     - name: Install Snyk & Authenticate
       run: |
          npm install -g snyk
          snyk auth ${SNYK_TOKEN}
-    
+    # Run Snyk Open Source
     - name: Run Snyk Open Source
       run: |
          snyk test     
