@@ -21,7 +21,7 @@ jobs:
     # Install and Authenticate to Snyk
     - name: Install Snyk & Authenticate
       run: |
-         npm install -g snyk
+         sudo npm install -g snyk
          snyk auth ${SNYK_TOKEN}
     # Docker Build
     - name: Build Container     
