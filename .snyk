@@ -22,6 +22,24 @@ patch:
         patched: '2021-04-19T19:11:55.654Z'
     - tap > nyc > istanbul-lib-instrument > babel-template > babel-traverse > babel-types > lodash:
         patched: '2021-04-19T19:11:55.654Z'
+    - tap > nyc > istanbul-lib-instrument > babel-types > lodash:
+        patched: '2021-04-19T19:18:37.320Z'
+    - tap > nyc > istanbul-lib-instrument > babel-generator > lodash:
+        patched: '2021-04-19T19:18:37.320Z'
+    - tap > nyc > istanbul-lib-instrument > babel-traverse > lodash:
+        patched: '2021-04-19T19:18:37.320Z'
+    - tap > nyc > istanbul-lib-instrument > babel-template > lodash:
+        patched: '2021-04-19T19:18:37.320Z'
+    - tap > nyc > istanbul-lib-instrument > babel-generator > babel-types > lodash:
+        patched: '2021-04-19T19:18:37.320Z'
+    - tap > nyc > istanbul-lib-instrument > babel-traverse > babel-types > lodash:
+        patched: '2021-04-19T19:18:37.320Z'
+    - tap > nyc > istanbul-lib-instrument > babel-template > babel-types > lodash:
+        patched: '2021-04-19T19:18:37.320Z'
+    - tap > nyc > istanbul-lib-instrument > babel-template > babel-traverse > lodash:
+        patched: '2021-04-19T19:18:37.320Z'
+    - tap > nyc > istanbul-lib-instrument > babel-template > babel-traverse > babel-types > lodash:
+        patched: '2021-04-19T19:18:37.320Z'
   'npm:ms:20151024':
     - humanize-ms > ms:
         patched: '2021-04-19T19:11:55.654Z'
