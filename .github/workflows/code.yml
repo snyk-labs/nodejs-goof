@@ -1,4 +1,4 @@
-name: Snyk Scan Container
+name: Snyk Scan Code
 on:
   push:
     branches: master
@@ -21,4 +21,4 @@ jobs:
       - name: Snyk Authenticate
         run: snyk auth "$SNYK_TOKEN"
       - name: Snyk Test
-        run: snyk container test goof --file=Dockerfile --severity-threshold=high --fail-on=upgradable
+        run: snyk code test --severity-threshold=high
