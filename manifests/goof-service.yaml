@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: goof
+spec:
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3001
+    name: "http"
+  - protocol: TCP
+    port: 9229
+    targetPort: 9229
+    name: "debug"
+  selector:
+    app: goof
+    tier: frontend
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: goof-mongo
+spec:
+  ports:
+  - protocol: TCP
+    port: 27017
+    targetPort: 27017
+    name: "mongo"
+  selector:
+    app: goof
+    tier: backend
