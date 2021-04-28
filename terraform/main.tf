@@ -20,7 +20,6 @@ resource "aws_instance" "blog-host" {
 resource "aws_s3_bucket" "blog-files" {
   bucket = "blog-static.purpledobie.com"
   acl    = "public-read"
-  policy = file("policy.json")
 
   website {
     index_document = "index.html"
