@@ -1,0 +1,45 @@
+version: 2.1
+orbs:
+  ruby: circleci/ruby@0.1.2 
+  snyk: snyk/snyk@0.0.13
+
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.5-stretch-node
+    executor: ruby/default
+    steps:
+      - checkout
+      - run:
+          name: Which bundler?
+          command: bundle -v
+      - ruby/bundle-install
+      
+  security:
+    docker:
+      - image: circleci/buildpack-deps:stretch 
+    environment:
+      IMAGE_NAME: purpledobie/goof:demo
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 19.03.13
+      - run:
+          name: Build image
+          command: docker build --progress plain -t $IMAGE_NAME .
+          environment:
+            DOCKER_BUILDKIT: 1
+      - snyk/scan:
+          docker-image-name: $IMAGE_NAME
+          monitor-on-build: true
+          target-file: Dockerfile
+          fail-on-issues: false
+          severity-threshold: medium
+          additional-arguments: '--exclude-base-image-vulns'
+
+workflows:
+  version: 2
+  secure:
+    jobs:
+#      - build
+      - security
