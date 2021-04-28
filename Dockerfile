@@ -1,5 +1,4 @@
-# FROM node:6-stretch
-FROM node:fermium-buster-slim
+FROM node:10-stretch
 
 RUN mkdir /usr/src/goof
 RUN mkdir /tmp/extracted_files

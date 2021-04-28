@@ -2,7 +2,7 @@ version: "2"
 services:
   goof:
     build: .
-    container_name: goof
+    container_name: purpledobie/goof:demo
     environment:
       - DOCKER=1
     ports:
@@ -17,7 +17,7 @@ services:
     image: mongo
     ports:
       - "27017:27017"
-  good-mysql:
+  goof-mysql:
     container_name: goof-mysql
     image: mysql:5
     environment:
