@@ -20,6 +20,25 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  name: goof-image
+spec:
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 3112
+      targetPort: 3112
+      name: "http"
+    - protocol: TCP
+      port: 31337
+      targetPort: 31337
+      name: "debug"
+  selector:
+    app: goof-image
+    tier: frontend
+---
+apiVersion: v1
+kind: Service
+metadata:
   name: goof-mongo
 spec:
   ports:

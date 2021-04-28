@@ -31,6 +31,30 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: goof-image
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: goof-image
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: goof-image
+        tier: frontend
+    spec:
+      containers:
+        - name: goof-image
+          image: DOCKER_IMAGE_NAME
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3112
+            - containerPort: 31337
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
   name: goof-mongo
 spec:
   replicas: 1
