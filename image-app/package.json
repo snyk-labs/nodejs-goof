@@ -1,0 +1,20 @@
+{
+  "name": "goof-container-breaking-in",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Liran Tal",
+    "email": "liran.tal@gmail.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "~4.15.5",
+    "multer": "~1.4.2"
+  }
+}
