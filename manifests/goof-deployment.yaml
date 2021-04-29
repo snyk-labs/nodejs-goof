@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
         - name: goof
-          image: DOCKER_IMAGE_NAME
+          image: <<DOCKERID>>/goof:latest #Edit with your Docker Hub ID
+          imagePullPolicy: Always
           resources:
             requests:
               cpu: 100m
@@ -46,7 +47,7 @@ spec:
     spec:
       containers:
         - name: goof-image
-          image: DOCKER_IMAGE_NAME
+          image: <<DOCKERID>>/goof-image:latest #Edit with your Docker Hub ID
           imagePullPolicy: Always
           ports:
             - containerPort: 3112
