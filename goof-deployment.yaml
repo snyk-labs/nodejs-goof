@@ -27,7 +27,7 @@ spec:
         - env:
             - name: DOCKER
               value: "1"
-          image: purpledobie/goof:demo
+          image: goof:demo
           name: goof
           ports:
             - containerPort: 3001

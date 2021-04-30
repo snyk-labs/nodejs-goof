@@ -30,12 +30,13 @@ npm run cleanup
 ```
 
 ## Running with Kubernetes and Kustomize
-You can deploy the app as-is to a Kubernetes cluster using kubectl:
+You can deploy the app as-is to a Kubernetes cluster using kubectl. Make sure you build the goof container first - the deployment will look for `goof:demo` by default.
 ```bash
+docker build -t goof:demo .
 kubectl apply -f goof-deployment.yaml 
 ```
 
-You can also use [Kustomize](https://kustomize.io) to easily inject a Snyk token into the deployment, which will allow the Snyk Container monitor running in your cluster to automatically detect and scan the goof container and send the results back to the Snyk web UI for monitoring.
+You can also use [Kustomize](https://kustomize.io) to easily inject a Snyk token into the deployment, which will allow the Snyk Container monitor running in your cluster to automatically detect and scan the goof container and send the results back to the Snyk web UI for monitoring. You can directly add your Snyk token to the goof-deployment.yaml, but then you risk having it exposed in your source code repos. The .gitignore file for this project, on the other hand, will ignore the `snyk-token.yaml` file, so this is a better way to handle it.
 
 First, create a `snyk-token.yaml` file with the following. Substitute your Snyk API token where shown.
 ```
@@ -47,9 +48,9 @@ metadata:
   name: goof
 ```
 
-Once you have that file (and Kustomize is installed) you can run:
+Once you have that file (and Kustomize is installed) you can deploy with:
 ```bash
-kubectl apply -k goof-deployment.yaml
+kustomize build . | kubectl apply -f -
 ```
 
 ## Running with docker-compose
