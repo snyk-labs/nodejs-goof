@@ -1,0 +1,12 @@
+# kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- goof-deployment.yaml
+
+patches:
+ - path: snyk-token.yaml
+   target:
+     kind: Deployment
+     name: goof

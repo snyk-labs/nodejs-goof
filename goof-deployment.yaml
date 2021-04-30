@@ -4,7 +4,6 @@ metadata:
   annotations:
     kompose.cmd: kompose convert
     kompose.version: 1.22.0 (HEAD)
-    orgs.k8s.snyk.io/v1: 9ff4ae2d-3cac-4259-97de-ea3a395f41ac
   creationTimestamp: null
   labels:
     io.kompose.service: goof

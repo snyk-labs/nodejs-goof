@@ -1,4 +1,4 @@
-.DS_Store
+*.DS_Store
 node_modules
 *.sock
 
@@ -6,3 +6,12 @@ node_modules
 sass
 config.rb
 npm-debug.log
+
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+snyk-token.yaml
