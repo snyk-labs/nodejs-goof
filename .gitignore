@@ -14,4 +14,8 @@ npm-debug.log
 *.tfstate
 *.tfstate.*
 
+# terraform plan files
+tfplan.out
+
+# kustomize overlay file to hold the Snyk token
 snyk-token.yaml
