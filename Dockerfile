@@ -1,5 +1,7 @@
-# FROM node:6-stretch
-FROM node:14.1.0
+FROM node:10-stretch
+RUN apt-get update &&\
+    apt-get install -y git vim &&\
+    rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /usr/src/goof
 RUN mkdir /tmp/extracted_files

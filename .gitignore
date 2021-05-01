@@ -1,4 +1,4 @@
-.DS_Store
+*.DS_Store
 node_modules
 *.sock
 
@@ -6,3 +6,16 @@ node_modules
 sass
 config.rb
 npm-debug.log
+
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# terraform plan files
+tfplan.out
+
+# kustomize overlay file to hold the Snyk token
+snyk-token.yaml
