@@ -1,0 +1,17 @@
+image: node:10.15.3
+
+pipelines:
+  default:
+      - step:
+          name: Build and Test
+          caches:
+            - node
+          script:
+            - npm install
+            - pipe: snyk/snyk-scan:0.4.6
+              variables:
+                SNYK_TOKEN: $SNYK_TOKEN
+                LANGUAGE: "npm"
+                SEVERITY_THRESHOLD: "high"
+                DONT_BREAK_BUILD: "false"
+                MONITOR: "true"
