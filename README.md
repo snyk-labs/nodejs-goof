@@ -10,7 +10,7 @@ This vulnerable app includes the following capabilities to experiment with:
 * [Docker Image Scanning](#docker-image-scanning) for base images with known vulnerabilities in system libraries
 * [Runtime alerts](#runtime-alerts) for detecting an invocation of vulnerable functions in open source dependencies
 
-## Running
+## Running locally
 ```bash
 mongod &
 
@@ -18,6 +18,8 @@ git clone https://github.com/Snyk/snyk-demo-todo
 npm install
 npm start
 ```
+Note: You will need Mongo-Community and MariaDB installed and running, With MariaDB you may also need the acme database created and a db user set in typeorm-db.js
+
 This will run Goof locally, using a local mongo on the default port and listening on port 3001 (http://localhost:3001)
 
 ## Running with docker-compose
