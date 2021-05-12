@@ -26,4 +26,4 @@ jobs:
     # Run Snyk Open Source
     - name: Run Snyk Open Source
       run: |
-         snyk test     
+         snyk test --severity-threshold=high --fail-on=upgradeable   
