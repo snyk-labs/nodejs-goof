@@ -27,8 +27,8 @@ jobs:
     # Run Snyk Open Source
     - name: Run Snyk Open Source
       run: |
-         snyk test --severity-threshold=high --fail-on=upgradeable >> results.sarif
-
+         snyk test --severity-threshold=high --sarif > results.sarif
+      continue-on-error: true
     # Upload Results  
     - name: Upload SARIF file
       uses: github/codeql-action/upload-sarif@v1
