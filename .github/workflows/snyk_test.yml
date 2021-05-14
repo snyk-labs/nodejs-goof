@@ -23,7 +23,15 @@ jobs:
       run: |
          sudo npm install -g snyk
          snyk auth ${SNYK_TOKEN}
+
     # Run Snyk Open Source
     - name: Run Snyk Open Source
       run: |
-         snyk test --severity-threshold=high --fail-on=upgradeable   
+         snyk test --severity-threshold=high --fail-on=upgradeable >> results.sarif
+
+    # Upload Results  
+    - name: Upload SARIF file
+      uses: github/codeql-action/upload-sarif@v1
+      with:
+        # Path to SARIF file relative to the root of the repository
+        sarif_file: results.sarif
