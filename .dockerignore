@@ -2,3 +2,7 @@ image-app
 .*
 exploits
 manifests
+deploy*
+node_modules
+*.md
+*.yml
