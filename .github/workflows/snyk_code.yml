@@ -1,0 +1,18 @@
+name: Snyk Scan
+
+on: [push]
+
+jobs:
+  snyk_monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Run Snyk to check for vulnerabilities
+        continue-on-error: true
+        uses: snyk/actions/node@0.1.0
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command: code
+          # args: --all-projects --remote-repo-url=goof-github-actions
+          args: --project-name=goof-github-actions --remote-repo-url=goof-github-actions
