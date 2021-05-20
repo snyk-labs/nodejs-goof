@@ -2,6 +2,7 @@ version: "2"
 services:
   goof:
     build: .
+    image: adamsnyk/goof
     container_name: goof
     environment:
       - DOCKER=1
@@ -25,3 +26,7 @@ services:
       MYSQL_DATABASE: acme
     ports:
       - "3306:3306"
+# docker-compose up
+# docker-compose down
+# docker-compose build
+# docker-compose push

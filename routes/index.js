@@ -10,7 +10,12 @@ var readline = require('readline');
 var moment = require('moment');
 var exec = require('child_process').exec;
 
-// zip-slip
+// zip-slipurl = 'https://www.w3schools.com/python/demopage.php'
+myobj = {'somekey': 'somevalue'}
+
+x = requests.post(url, data = myobj)
+
+print(x.text)
 var fileType = require('file-type');
 var AdmZip = require('adm-zip');
 var fs = require('fs');
