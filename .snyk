@@ -6,5 +6,18 @@ ignore:
         reason: This has been ignored due to x
         expires: 2022-06-19T20:36:54.553Z
         created: 2021-05-24T20:08:43.326Z
+  SNYK-JS-PATHPARSE-1077067:
+    - tap > nyc > istanbul-lib-report > path-parse:
+        reason: 'Internal app, vulnerable function not in use.'
+        expires: 2022-06-19T20:36:54.553Z
+  'snyk:lic:npm:spdx-exceptions:CC-BY-3.0':
+    - tap > nyc > test-exclude > read-pkg-up > read-pkg > normalize-package-data > validate-npm-package-license > spdx-correct > spdx-expression-parse > spdx-exceptions:
+        reason: Internal facing project.
+        expires: 2022-06-23T20:58:57.586Z
+        created: 2021-05-24T20:58:57.590Z
+    - tap > nyc > test-exclude > read-pkg-up > read-pkg > normalize-package-data > validate-npm-package-license > spdx-expression-parse > spdx-exceptions:
+        reason: Internal facing project.
+        expires: 2022-06-23T20:58:57.586Z
+        created: 2021-05-24T20:58:57.590Z
 version: v1.19.0
 patch: {}
