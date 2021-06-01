@@ -1,7 +1,7 @@
 FROM node:14.1.0
 
 LABEL org.opencontainers.image.source="https://github.com/snyk-schmidtty/goof-github" \
-    io.snyk.containers.image.dockerfile="/node-14.1.0.Dockerfile
+    io.snyk.containers.image.dockerfile="/node-14.1.0.Dockerfile"
 
 RUN apt-get install -y imagemagick
 
