@@ -6,3 +6,7 @@ node_modules
 sass
 config.rb
 npm-debug.log
+
+.dccache
+.dcignore
+.idea/

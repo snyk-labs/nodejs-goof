@@ -33,24 +33,47 @@ exports.index = function (req, res, next) {
     });
 };
 
-
-exports.admin = function (req, res, next) {
-  console.log(req.body);
+exports.loginHandler = function (req, res, next) {
   User.find({ username: req.body.username, password: req.body.password }, function (err, users) {
     if (users.length > 0) {
-      return res.render('admin', {
-        title: 'Admin Access Granted',
-        granted: true,
-      });
+      const redirectPage = req.body.redirectPage
+      return adminLoginSuccess(redirectPage, res)
     } else {
-      return res.render('admin', {
-        title: 'Admin Access',
-        granted: false,
-      });
+      return res.redirect('/admin')
     }
   });
-
 };
+
+exports.login = function (req, res, next) {
+  return res.render('admin', {
+    title: 'Admin Access',
+    granted: false,
+    redirectPage: req.query.redirectPage
+  });
+};
+
+exports.admin = function (req, res, next) {
+  return res.render('admin', {
+    title: 'Admin Access Granted',
+    granted: true,
+  });
+};
+
+exports.account_details = function (req, res, next) {
+  return res.render('account_details', {
+    title: 'Account details',
+    granted: true,
+  });
+};
+
+function adminLoginSuccess(redirectPage, res) {
+  console.log({redirectPage})
+  if (redirectPage) {
+      return res.redirect(redirectPage)
+  } else {
+      return res.redirect('/admin')
+  }
+}
 
 function parse(todo) {
   var t = todo;
