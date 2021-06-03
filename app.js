@@ -45,8 +45,10 @@ app.use(fileUpload());
 // Routes
 app.use(routes.current_user);
 app.get('/', routes.index);
+app.get('/login', routes.login);
+app.post('/login', routes.loginHandler);
 app.get('/admin', routes.admin);
-app.post('/admin', routes.admin);
+app.get('/account_details', routes.account_details);
 app.post('/create', routes.create);
 app.get('/destroy/:id', routes.destroy);
 app.get('/edit/:id', routes.edit);
