@@ -42,7 +42,12 @@ npm run cleanup
 
 ## Exploiting the vulnerabilities
 
-This app uses npm dependencies holding known vulnerabilities.
+This app uses npm dependencies holding known vulnerabilities,
+as well as insecure code that introduces code-level vulnerabilities.
+
+The `exploits/` directory includes a series of steps to demonstrate each one.
+
+### Vulnerabilities in open source dependencies
 
 Here are the exploitable vulnerable packages:
 - [Mongoose - Buffer Memory Exposure](https://snyk.io/vuln/npm:mongoose:20160116) - requires a version <= Node.js 8. For the exploit demo purposes, one can update the Dockerfile `node` base image to use `FROM node:6-stretch`.
@@ -50,7 +55,31 @@ Here are the exploitable vulnerable packages:
 - [ms - ReDoS](https://snyk.io/vuln/npm:ms:20151024)
 - [marked - XSS](https://snyk.io/vuln/npm:marked:20150520)
 
-The `exploits/` directory includes a series of steps to demonstrate each one.
+### Vulnerabilities in code
+
+* Open Redirect
+* NoSQL Injection
+* Command execution
+* Cross-site Scripting (XSS)
+* Security misconfiguration exposes server information 
+* Insecure protocol (HTTP) communication 
+
+#### Open redirect
+
+The `/admin` view introduces a `redirectPage` query path, as follows in the admin view:
+
+```
+<input type="hidden" name="redirectPage" value="<%- redirectPage %>" />
+```
+
+One fault here is that the `redirectPage` is rendered as raw HTML and not properly escaped, because it uses `<%- >` instead of `<%= >`. That itself, introduces a Cross-site Scripting (XSS) vulnerability via:
+
+```
+http://localhost:3001/login?redirectPage="><script>alert(1)</script>
+```
+
+To exploit the open redirect, simply provide a URL such as `redirectPage=https://google.com` which exploits the fact that the code doesn't enforce local URLs in `index.js:72`.
+
 
 ## Docker Image Scanning
 
