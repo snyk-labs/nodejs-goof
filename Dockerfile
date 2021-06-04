@@ -2,7 +2,7 @@
 FROM node:14.1.0
 
 LABEL org.opencontainers.image.source="https://github.com/metalstormbass/goof" 
-LABEL io.snyk.containers.image.dockerfile="Dockerfile"
+LABEL io.snyk.containers.image.dockerfile="/Dockerfile"
 
 
 RUN mkdir /usr/src/goof
