@@ -1,0 +1,19 @@
+
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.14.0
+language-settings:
+ignore:
+  'npm:ms:20170412':
+    - '*':
+        reason: Testing
+  'npm:debug:20170905':
+    - '*':
+        reason: Testing
+  'npm:moment:20170905':
+    - '*':
+        reason: Test ignore for 60 days
+        expires: 2021-07-13T18:27:13.848Z
+  'snyk:lic:npm:uri-js:BSD-2-Clause':
+    - '*':
+        reason: ignoring for 14 days license
+        expires: 2021-05-29T21:38:28.368Z
