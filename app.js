@@ -55,7 +55,7 @@ app.get('/login', routes.login);
 app.post('/login', routes.loginHandler);
 app.get('/admin', routes.isLoggedIn, routes.admin);
 app.get('/account_details', routes.isLoggedIn, routes.account_details);
-app.post('/account_details', routes.save_account_details);
+app.post('/account_details', routes.isLoggedIn, routes.save_account_details);
 app.get('/logout', routes.logout);
 app.post('/create', routes.create);
 app.get('/destroy/:id', routes.destroy);
