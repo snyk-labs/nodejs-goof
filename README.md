@@ -62,6 +62,7 @@ Here are the exploitable vulnerable packages:
 * Code Injection
 * Command execution
 * Cross-site Scripting (XSS)
+* Information exposure
 * Security misconfiguration exposes server information 
 * Insecure protocol (HTTP) communication 
 
@@ -108,6 +109,31 @@ http://localhost:3001/login?redirectPage="><script>alert(1)</script>
 
 To exploit the open redirect, simply provide a URL such as `redirectPage=https://google.com` which exploits the fact that the code doesn't enforce local URLs in `index.js:72`.
 
+#### Hardcoded values - session information
+
+The application initializes a cookie-based session on `app.js:40` as follows:
+
+```js
+app.use(session({
+  secret: 'keyboard cat',
+  name: 'connect.sid',
+  cookie: { secure: true }
+}))
+```
+
+As you can see, the session `secret` used to sign the session is a hardcoded sensitive information inside the code.
+
+First attempt to fix it, can be to move it out to a config file such as:
+```js
+module.exports = {
+    cookieSecret: `keyboard cat`
+}
+```
+
+And then require the configuration file and use it to initialize the session.
+However, that still maintains the secret information inside another file, and Snyk Code will warn you about it.
+
+Another case we can discuss here in session management, is that the cookie setting is initialized with `secure: true` which means it will only be transmitted over HTTPS connections. However, there's no `httpOnly` flag set to true, which means that the default false value of it makes the cookie accessible via JavaScript. Snyk Code highlights this potential security misconfiguration so we can fix it. We can note that Snyk Code shows this as a quality information, and not as a security error.
 
 ## Docker Image Scanning
 
