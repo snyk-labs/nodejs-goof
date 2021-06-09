@@ -23,6 +23,7 @@ var fileUpload = require('express-fileupload');
 var dust = require('dustjs-linkedin');
 var dustHelpers = require('dustjs-helpers');
 var cons = require('consolidate');
+const hbs = require('hbs')
 
 var app = express();
 var routes = require('./routes');
@@ -32,6 +33,7 @@ var routesUsers = require('./routes/users.js')
 app.set('port', process.env.PORT || 3001);
 app.engine('ejs', ejsEngine);
 app.engine('dust', cons.dust);
+app.engine('hbs', hbs.__express);
 cons.dust.helpers = dustHelpers;
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -48,7 +50,8 @@ app.get('/', routes.index);
 app.get('/login', routes.login);
 app.post('/login', routes.loginHandler);
 app.get('/admin', routes.admin);
-app.get('/account_details', routes.account_details);
+app.get('/account_details', routes.get_account_details);
+app.post('/account_details', routes.save_account_details);
 app.post('/create', routes.create);
 app.get('/destroy/:id', routes.destroy);
 app.get('/edit/:id', routes.edit);

