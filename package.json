@@ -8,6 +8,7 @@
     "url": "https://github.com/Snyk/snyk-todo-list-demo-app/"
   },
   "scripts": {
+    "dev": "nodemon ./app.js",
     "start": "node app.js",
     "build": "browserify -r jquery > public/js/bundle.js",
     "cleanup": "mongo express-todo --eval 'db.todos.remove({});'",
@@ -49,6 +50,7 @@
   },
   "devDependencies": {
     "browserify": "^13.1.1",
+    "nodemon": "^2.0.7",
     "snyk": "^1.244.0"
   },
   "license": "Apache-2.0"
