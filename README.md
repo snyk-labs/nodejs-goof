@@ -62,7 +62,7 @@ Here are the exploitable vulnerable packages:
 * Code Injection
 * Command execution
 * Cross-site Scripting (XSS)
-* Information exposure
+* Information exposure via Hardcoded values in code
 * Security misconfiguration exposes server information 
 * Insecure protocol (HTTP) communication 
 
@@ -134,6 +134,8 @@ And then require the configuration file and use it to initialize the session.
 However, that still maintains the secret information inside another file, and Snyk Code will warn you about it.
 
 Another case we can discuss here in session management, is that the cookie setting is initialized with `secure: true` which means it will only be transmitted over HTTPS connections. However, there's no `httpOnly` flag set to true, which means that the default false value of it makes the cookie accessible via JavaScript. Snyk Code highlights this potential security misconfiguration so we can fix it. We can note that Snyk Code shows this as a quality information, and not as a security error.
+
+Snyk Code will also find hardcoded secrets in source code that isn't part of the application logic, such as `tests/` or `examples/` folders. We have a case of that in this application with the `tests/authentication.component.spec.js` file. In the finding, Snyk Code will tag it as `InTest`, `Tests`, or `Mock`, which help us easily triage it and indeed ignore this finding as it isn't actually a case of information exposure.
 
 ## Docker Image Scanning
 
