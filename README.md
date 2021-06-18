@@ -93,6 +93,31 @@ The `validator.rtrim()` sanitizer is also vulnerable, and we can use this to cre
 curl -X 'POST' -H 'Content-Type: application/json' --data-binary "{\"email\": \"someone@example.com\", \"country\": \"nop\", \"phone\": \"0501234123\", \"lastname\": \"nop\", \"firstname\": \"`node -e 'console.log(" ".repeat(100000) + "!")'`\"}" 'http://localhost:3001/account_details'
 ```
 
+#### NoSQL injection
+
+A POST request to `/login` will allow for authentication and signing-in to the system as an administrator user.
+It works by exposing `loginHandler` as a controller in `routes/index.js` and uses a MongoDB database and the `User.find()` query to look up the user's details (email as a username and password). One issue is that it indeed stores passwords in plaintext and not hashing them. However, there are other issues in play here.
+
+
+We can send a request with an incorrect password to see that we get a failed attempt
+```sh
+echo '{"username":"admin@snyk.io", "password":"WrongPassword"}' | http --json $GOOF_HOST/login -v
+```
+
+And another request, as denoted with the following JSON request to sign-in as the admin user works as expected:
+```sh
+echo '{"username":"admin@snyk.io", "password":"SuperSecretPassword"}' | http --json $GOOF_HOST/login -v
+```
+
+However, what if the password wasn't a string? what if it was an object? Why would an object be harmful or even considered an issue?
+Consider the following request:
+```sh
+echo '{"username": "admin@snyk.io", "password": {"$gt": ""}}' | http --json $GOOF_HOST/login -v
+```
+
+We know the username, and we pass on what seems to be an object of some sort.
+That object structure is passed as-is to the `password` property and has a specific meaning to MongoDB - it uses the `$gt` operation which stands for `greater than`. So, we in essence tell MongoDB to match that username with any record that has a password that is greater than `empty string` which is bound to hit a record. This introduces the NoSQL Injection vector.
+
 #### Open redirect
 
 The `/admin` view introduces a `redirectPage` query path, as follows in the admin view:

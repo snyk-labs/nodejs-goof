@@ -35,17 +35,34 @@ exports.index = function (req, res, next) {
 };
 
 exports.loginHandler = function (req, res, next) {
-  User.find({ username: req.body.username, password: req.body.password }, function (err, users) {
-    if (users.length > 0) {
-      const redirectPage = req.body.redirectPage
-      const session = req.session
-      const username = req.body.username
-      return adminLoginSuccess(redirectPage, session, username, res)
-    } else {
-      return res.redirect('/admin')
-    }
-  });
+  if (validator.isEmail(req.body.username)) {
+    User.find({ username: req.body.username, password: req.body.password }, function (err, users) {
+      if (users.length > 0) {
+        const redirectPage = req.body.redirectPage
+        const session = req.session
+        const username = req.body.username
+        return adminLoginSuccess(redirectPage, session, username, res)
+      } else {
+        return res.status(401).send()
+      }
+    });
+  } else {
+    return res.status(401).send()
+  }
 };
+
+function adminLoginSuccess(redirectPage, session, username, res) {
+  session.loggedIn = 1
+
+  // Log the login action for audit
+  console.log(`User logged in: ${username}`)
+
+  if (redirectPage) {
+      return res.redirect(redirectPage)
+  } else {
+      return res.redirect('/admin')
+  }
+}
 
 exports.login = function (req, res, next) {
   return res.render('admin', {
@@ -108,19 +125,6 @@ exports.logout = function (req, res, next) {
   req.session.destroy(function() { 
     return res.redirect('/')  
   })
-}
-
-function adminLoginSuccess(redirectPage, session, username, res) {
-  session.loggedIn = 1
-
-  // Log the login action for audit
-  console.log(`User logged in: ${username}`)
-
-  if (redirectPage) {
-      return res.redirect(redirectPage)
-  } else {
-      return res.redirect('/admin')
-  }
 }
 
 function parse(todo) {
