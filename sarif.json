@@ -1770,7 +1770,7 @@
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "Users/arturkotliar/snyk/goof/app.js",
+                  "uri": "app.js",
                   "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
@@ -1846,7 +1846,7 @@
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "Users/arturkotliar/snyk/goof/app.js",
+                  "uri": "app.js",
                   "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
@@ -1907,7 +1907,7 @@
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "Users/arturkotliar/snyk/goof/routes/index.js",
+                  "uri": "routes/index.js",
                   "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
@@ -2069,7 +2069,7 @@
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "Users/arturkotliar/snyk/goof/routes/index.js",
+                  "uri": "routes/index.js",
                   "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
@@ -2146,7 +2146,7 @@
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "Users/arturkotliar/snyk/goof/routes/index.js",
+                  "uri": "routes/index.js",
                   "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
@@ -2223,7 +2223,7 @@
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "Users/arturkotliar/snyk/goof/routes/index.js",
+                  "uri": "routes/index.js",
                   "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
@@ -2301,7 +2301,7 @@
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "Users/arturkotliar/snyk/goof/routes/index.js",
+                  "uri": "routes/index.js",
                   "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
@@ -2515,7 +2515,7 @@
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "Users/arturkotliar/snyk/goof/routes/index.js",
+                  "uri": "routes/index.js",
                   "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
@@ -2914,7 +2914,7 @@
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "Users/arturkotliar/snyk/goof/typeorm-db.js",
+                  "uri": "typeorm-db.js",
                   "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
@@ -2973,7 +2973,7 @@
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "Users/arturkotliar/snyk/goof/typeorm-db.js",
+                  "uri": "typeorm-db.js",
                   "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
