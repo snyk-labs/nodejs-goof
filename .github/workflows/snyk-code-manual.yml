@@ -1,5 +1,5 @@
-name: Testing security scan - using sarif
-on: [push]
+name: "snyk code manual test"
+on: [push, pull_request]
 
 jobs:
   build:
@@ -13,3 +13,4 @@ jobs:
         uses: github/codeql-action/upload-sarif@v1
         with:
           sarif_file: sarif.json
+          # sarif_file: example111.json
