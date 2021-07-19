@@ -5,9 +5,11 @@ jobs:
   build:
     name: sarif testing action
     runs-on: ubuntu-latest
+    permissions:
+      security-events: write
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Upload SARIF
         uses: github/codeql-action/upload-sarif@v1
         with:
-          sarif_file: sarif/results.sarif
+          sarif_file: sarif.json
