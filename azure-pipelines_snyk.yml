@@ -1,0 +1,32 @@
+trigger:
+  - master
+
+pool:
+  vmImage: 'Ubuntu-16.04'
+
+steps:
+  - script: |
+      npm install
+    displayName: 'npm install'
+  - script: |
+      sudo npm install -g snyk
+      # create variable in Pipelines called 'SNYK_TOKEN' and securely save your Snyk token value
+      # https://docs.microsoft.com/en-us/azure/devops/pipelines/process/variables
+      sudo snyk auth $(SNYK_TOKEN)
+    displayName: 'install snyk'
+  - script: |
+      sudo snyk test
+    displayName: 'snyk SCA'
+    continueOnError: true
+  - script: |
+      sudo snyk code test
+    displayName: 'snyk SAST'
+    continueOnError: true
+  - script: |
+      sudo snyk container test $(CONTAINER) --file=$(DOCKERFILE)
+    displayName: 'Snyk Container'
+    continueOnError: true
+  - script: |
+      sudo snyk iac test $(IAC_FILE)
+    displayName: 'Snyk IaC'
+    continueOnError: true
