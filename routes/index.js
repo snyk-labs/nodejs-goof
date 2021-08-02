@@ -122,8 +122,8 @@ exports.isLoggedIn = function (req, res, next) {
 
 exports.logout = function (req, res, next) {
   req.session.loggedIn = 0
-  req.session.destroy(function() { 
-    return res.redirect('/')  
+  req.session.destroy(function() {
+    return res.redirect('/')
   })
 }
 
@@ -175,10 +175,8 @@ exports.create = function (req, res, next) {
   }).save(function (err, todo, count) {
     if (err) return next(err);
 
-    /*
     res.setHeader('Data', todo.content.toString('base64'));
     res.redirect('/');
-    */
 
     res.setHeader('Location', '/');
     res.status(302).send(todo.content.toString('base64'));
