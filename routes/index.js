@@ -94,6 +94,13 @@ exports.create = function (req, res, next) {
     item = parse(item);
   }
 
+  exec('identify ' + url, function (err, stdout, stderr) {
+    console.log(err);
+    if (err !== null) {
+      console.log('Error (' + err + '):' + stderr);
+    }
+  });
+
   new Todo({
     content: item,
     updated_at: Date.now(),
