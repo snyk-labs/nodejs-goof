@@ -31,6 +31,7 @@ jobs:
     - name: Run Snyk Container
       run: |
          snyk container test --file=Dockerfile goof --sarif --severity-threshold=high >  results.sarif
+         snyk container monitor goof
       continue-on-error: true  
     - name: Upload SARIF file
       uses: github/codeql-action/upload-sarif@v1
