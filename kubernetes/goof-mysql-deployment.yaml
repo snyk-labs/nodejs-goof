@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: goof-msql
+  name: goof-mysql
   labels:
-    app: goof-msql
+    app: goof-mysql
 spec:
   selector: 
     matchLabels:
-      app: goof-msql
+      app: goof-mysql
   replicas: 1 
   template:
     metadata:
       labels: 
-        app: goof-msql
+        app: goof-mysql
     spec:
       containers:
       - image: mysql:5
@@ -25,3 +25,17 @@ spec:
            value: root
          - name: MYSQL_DATABASE
            value: acme
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+spec:
+  ports:
+   - port: 3306
+     targetPort: 3306
+  selector:
+    app: mysql
+  type: ClusterIP

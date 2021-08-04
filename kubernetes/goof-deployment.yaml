@@ -15,7 +15,7 @@ spec:
         app: goof
     spec:
       containers:
-      - image: mongo
+      - image: michaelbraunbass/goof
         imagePullPolicy: Always
         name: goof
         ports:
@@ -23,3 +23,18 @@ spec:
         - containerPort: 9229
         securityContext:
            allowPrivilegeEscalation: true
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: goofservice
+  labels:
+    app: goof
+spec:
+  ports:
+   - port: 3001
+     targetPort: 3001
+  selector:
+    app: goof
+  type: LoadBalancer

@@ -3,16 +3,16 @@ kind: Deployment
 metadata:
   name: goof-mongo
   labels:
-    app: goof-mongo
+    app: mongo
 spec:
   selector: 
     matchLabels:
-      app: goof-mongo
+      app: mongo
   replicas: 1 
   template:
     metadata:
       labels: 
-        app: goof-mongo
+        app: mongo
     spec:
       containers:
       - image: mongo
@@ -20,3 +20,45 @@ spec:
         name: goof-mongo
         ports:
         - containerPort: 27017
+        volumeMounts:
+          - name: storage
+            mountPath: /data/db
+      volumes:
+        - name: storage
+          persistentVolumeClaim:
+            claimName: mongo-pvc
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mongo-pv
+spec:
+  capacity:
+    storage: 256Mi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /tmp/db
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongo-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 256Mi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo
+spec:
+  selector:
+    app: mongo
+  ports:
+    - port: 27017
+      targetPort: 27017
