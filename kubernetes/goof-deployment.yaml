@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: goof
+  labels:
+    app: goof
+spec:
+  selector: 
+    matchLabels:
+      app: goof
+  replicas: 1 
+  template:
+    metadata:
+      labels: 
+        app: goof
+    spec:
+      containers:
+      - image: mongo
+        imagePullPolicy: Always
+        name: goof
+        ports:
+        - containerPort: 3001
+        - containerPort: 9229
+        securityContext:
+           allowPrivilegeEscalation: true

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: goof-msql
+  labels:
+    app: goof-msql
+spec:
+  selector: 
+    matchLabels:
+      app: goof-msql
+  replicas: 1 
+  template:
+    metadata:
+      labels: 
+        app: goof-msql
+    spec:
+      containers:
+      - image: mysql:5
+        imagePullPolicy: Always
+        name: goof-msql
+        ports:
+        - containerPort: 3306
+        env:
+         - name: MYSQL_ROOT_PASSWORD
+           value: root
+         - name: MYSQL_DATABASE
+           value: acme

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: goof-mongo
+  labels:
+    app: goof-mongo
+spec:
+  selector: 
+    matchLabels:
+      app: goof-mongo
+  replicas: 1 
+  template:
+    metadata:
+      labels: 
+        app: goof-mongo
+    spec:
+      containers:
+      - image: mongo
+        imagePullPolicy: Always
+        name: goof-mongo
+        ports:
+        - containerPort: 27017
