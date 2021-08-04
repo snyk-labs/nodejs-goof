@@ -27,9 +27,9 @@ docker-compose down
 ```
 ## Running with Kubernetes
 ```bash
-kubectl apply -f /kubernetes/goof-mongo-deployment.yaml
-kubectl apply -f /kubernetes/goof-mysql-deployment.yaml
-kubectl apply -f /kubernetes/goof-deployment.yaml
+kubectl apply -f kubernetes/goof-mongo-deployment.yaml
+kubectl apply -f kubernetes/goof-mysql-deployment.yaml
+kubectl apply -f kubernetes/goof-deployment.yaml
 ```
 
 ### Cleanup
