@@ -25,14 +25,12 @@ This will run Goof locally, using a local mongo on the default port and listenin
 docker-compose up --build
 docker-compose down
 ```
-
-### Heroku usage
-Goof requires attaching a MongoLab service to be deployed as a Heroku app. 
-That sets up the MONGOLAB_URI env var so everything after should just work. 
-
-### CloudFoundry usage
-Goof requires attaching a MongoLab service and naming it "goof-mongo" to be deployed on CloudFoundry. 
-The code explicitly looks for credentials to that service. 
+## Running with Kubernetes
+```bash
+kubectl apply -f goof-mongo-deployment.yaml
+kubectl apply -f goof-mysql-deployment.yaml
+kubectl apply -f goof-deployment.yaml
+```
 
 ### Cleanup
 To bulk delete the current list of TODO items from the DB run:
