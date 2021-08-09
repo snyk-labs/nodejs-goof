@@ -30,7 +30,7 @@ jobs:
     - name: Snyk Install
       run: |
         npm i -g snyk
-        Snyk config set api=${{ secrets.Snyk_Token }
+        Snyk config set api=${{ secrets.SNYK_TOKEN }}
         npm i -g snyk-to-html
         
     - name: Snyk monitor
