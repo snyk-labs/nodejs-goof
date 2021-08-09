@@ -28,10 +28,13 @@ jobs:
         npx webpack
         
     - name: Snyk Install
-      run: |
-        npm i -g snyk
-        Snyk config set api=${{ secrets.SNYK_TOKEN }}
-        npm i -g snyk-to-html
+      run: npm i -g snyk
+        
+    - name: Snyk Auth
+      run: Snyk config set api=${{ secrets.SNYK_TOKEN }}
+      
+    - name: Snyk to html install
+      run: npm i -g snyk-to-html
         
     - name: Snyk monitor
       run: Snyk monitor
