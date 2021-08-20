@@ -1,5 +1,8 @@
 name: Snyk Infrastructure as Code
-on: push
+on:
+  push:
+    branches:
+    - master
 jobs:
   snyk:
     runs-on: ubuntu-latest
