@@ -1,6 +1,9 @@
 name: Snyk Container Scan
 
-on: [push]
+on:
+  push:
+    branches:
+    - master
 
 jobs:
   snyk_container:
