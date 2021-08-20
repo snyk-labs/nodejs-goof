@@ -1,19 +1,44 @@
-
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
 version: v1.14.0
-language-settings:
 ignore:
-  'npm:ms:20170412':
-    - '*':
-        reason: Testing
-  'npm:debug:20170905':
-    - '*':
-        reason: Testing
-  'npm:moment:20170905':
-    - '*':
-        reason: Test ignore for 60 days
-        expires: 2021-07-13T18:27:13.848Z
-  'snyk:lic:npm:uri-js:BSD-2-Clause':
-    - '*':
-        reason: ignoring for 14 days license
-        expires: 2021-05-29T21:38:28.368Z
+  SNYK-JS-EJS-1049328:
+    - '*' :
+       reason: 'None given'
+       expires: '2021-08-24T01:15:00.635Z'
+  npm:adm-zip:20180415:
+    - '*' :
+       reason: 'None given'
+       expires: '2021-09-09T01:14:21.474Z'
+  SNYK-JS-JQUERY-567880:
+    - '*' :
+       reason: 'ignore for 90 days'
+       expires: '2021-11-08T01:14:52.610Z'
+  SNYK-JS-KINDOF-537849:
+    - '*' :
+       reason: 'Ignore for 60'
+       expires: '2021-10-09T01:15:39.331Z'
+  npm:mongoose:20160116:
+    - '*' :
+       reason: 'permanently ignored'
+       expires: 'Never'
+  SNYK-JS-ADMZIP-1065796:
+    - '*' :
+       reason: 'None given'
+       expires: '2021-08-24T01:28:12.592Z'
+  SNYK-JS-MINIMIST-559764:
+    - '*' :
+       reason: 'None given'
+       expires: 'Never'
+  SNYK-JS-PATHPARSE-1077067:
+    - '*' :
+       reason: 'None given'
+       expires: '2021-08-24T01:16:01.540Z'
+  snyk:lic:npm:goof:GPL-2.0:
+    - '*' :
+       reason: 'ignore license'
+       expires: '2021-11-08T01:16:23.477Z'
+  SNYK-JS-DUSTJSLINKEDIN-1089257:
+    - '*' :
+       reason: 'None given'
+       expires: '2021-08-24T01:16:04.758Z'
+
