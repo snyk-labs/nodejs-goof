@@ -1,18 +1,35 @@
-name: Snyk Scan
+name: "Snyk Code Scan"
 
-on: [push]
+on:
+  push:
+    branches:
+    - main
 
 jobs:
-  snyk_monitor:
+  Pipeline-Job:
+    # Configure Environment
+    name: 'Snyk Code Scan'
     runs-on: ubuntu-latest
+    env: 
+      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+       
     steps:
-      - uses: actions/checkout@master
-      - name: Run Snyk to check for vulnerabilities
-        continue-on-error: true
-        uses: snyk/actions/node@0.1.0
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          command: code
-          # args: --all-projects --remote-repo-url=goof-github-actions
-          args: --project-name=goof-github-actions --remote-repo-url=goof-github-actions
+    # Checkout Code
+    - name: Checkout Code
+      uses: actions/checkout@v1
+
+    # Install and Authenticate to Snyk
+    - name: Install Snyk & Authenticate
+      run: |
+         sudo npm install -g snyk
+         snyk auth ${SNYK_TOKEN}
+    # Run Snyk Code
+    - name: Run Snyk Code
+      run: |
+         snyk code test --sarif  > results.sarif 
+      continue-on-error: true
+    - name: Upload SARIF file
+      uses: github/codeql-action/upload-sarif@v1
+      with:
+        # Path to SARIF file relative to the root of the repository
+        sarif_file: results.sarif
