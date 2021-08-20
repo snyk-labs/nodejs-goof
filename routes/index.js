@@ -9,6 +9,7 @@ var streamBuffers = require('stream-buffers');
 var readline = require('readline');
 var moment = require('moment');
 var exec = require('child_process').exec;
+var validator = require('validator');
 
 // zip-slip
 var fileType = require('file-type');
@@ -33,24 +34,98 @@ exports.index = function (req, res, next) {
     });
 };
 
+exports.loginHandler = function (req, res, next) {
+  if (validator.isEmail(req.body.username)) {
+    User.find({ username: req.body.username, password: req.body.password }, function (err, users) {
+      if (users.length > 0) {
+        const redirectPage = req.body.redirectPage
+        const session = req.session
+        const username = req.body.username
+        return adminLoginSuccess(redirectPage, session, username, res)
+      } else {
+        return res.status(401).send()
+      }
+    });
+  } else {
+    return res.status(401).send()
+  }
+};
+
+function adminLoginSuccess(redirectPage, session, username, res) {
+  session.loggedIn = 1
+
+  // Log the login action for audit
+  console.log(`User logged in: ${username}`)
+
+  if (redirectPage) {
+      return res.redirect(redirectPage)
+  } else {
+      return res.redirect('/admin')
+  }
+}
+
+exports.login = function (req, res, next) {
+  return res.render('admin', {
+    title: 'Admin Access',
+    granted: false,
+    redirectPage: req.query.redirectPage
+  });
+};
 
 exports.admin = function (req, res, next) {
-  console.log(req.body);
-  User.find({ username: req.body.username, password: req.body.password }, function (err, users) {
-    if (users.length > 0) {
-      return res.render('admin', {
-        title: 'Admin Access Granted',
-        granted: true,
-      });
-    } else {
-      return res.render('admin', {
-        title: 'Admin Access',
-        granted: false,
-      });
-    }
+  return res.render('admin', {
+    title: 'Admin Access Granted',
+    granted: true,
   });
-
 };
+
+exports.get_account_details = function(req, res, next) {
+  // @TODO need to add a database call to get the profile from the database
+  // and provide it to the view to display
+  const profile = {}
+ 	return res.render('account.hbs', profile)
+}
+
+exports.save_account_details = function(req, res, next) {
+  // get the profile details from the JSON
+	const profile = req.body
+  // validate the input
+  if (validator.isEmail(profile.email, { allow_display_name: true })
+    // allow_display_name allows us to receive input as:
+    // Display Name <email-address>
+    // which we consider valid too
+    && validator.isMobilePhone(profile.phone, 'he-IL')
+    && validator.isAscii(profile.firstname)
+    && validator.isAscii(profile.lastname)
+    && validator.isAscii(profile.country)
+  ) {
+    // trim any extra spaces on the right of the name
+    profile.firstname = validator.rtrim(profile.firstname)
+    profile.lastname = validator.rtrim(profile.lastname)
+
+    // render the view
+    return res.render('account.hbs', profile)
+  } else {
+    // if input validation fails, we just render the view as is
+    console.log('error in form details')
+    return res.render('account.hbs')
+  }
+}
+
+exports.isLoggedIn = function (req, res, next) {
+  if (req.session.loggedIn === 1) {
+    return next()
+  } else {
+    return res.redirect('/')
+  }
+}
+
+exports.logout = function (req, res, next) {
+  req.session.loggedIn = 0
+  req.session.destroy(function() { 
+    return res.redirect('/')  
+  })
+}
 
 function parse(todo) {
   var t = todo;
