@@ -3,7 +3,7 @@ name: "Snyk Code Scan"
 on:
   push:
     branches:
-    - main
+    - master
 
 jobs:
   Pipeline-Job:
