@@ -1,6 +1,9 @@
 name: Snyk Scan
 
-on: [push]
+on:
+  push:
+    branches:
+    - master
 
 jobs:
   snyk_monitor:
@@ -9,7 +12,7 @@ jobs:
       - uses: actions/checkout@master
       - name: Run Snyk to check for vulnerabilities
         continue-on-error: true
-        uses: snyk/actions/node@0.1.0
+        uses: snyk/actions@0.3.0
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
