@@ -1,4 +1,0 @@
-registry=https://cayzhtadk.jfrog.io/artifactory/api/npm/default-npm-virtual/
-_auth = ${NPM_TOKEN}
-email = steven.schmidt@snyk.io
-always-auth = true
