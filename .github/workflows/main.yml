@@ -1,34 +1,19 @@
-name: "CodeQL"
-
-on: push
-
+name: Snyk Code (SAST) 
+on: 
+  push:
 jobs:
-  analyze:
-    name: Analyze
-    runs-on: ubuntu-latest 
-
-    strategy:
-      fail-fast: false
-      matrix:
-        language: [javascript]
-
-    # Specify the container in which actions will run
-    container:
-      image: mcr.microsoft.com/cstsectools/codeql-container
-
+  snyk:
+    runs-on: ubuntu-latest
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@v1
-      with:
-        languages: ${{ matrix.language }}
-    - name: Build
-      run: |
-        apt-get update && apt-get install -y nodejs build-essential -y
-        apt install npm -y
-        node -v
-        npm -v
-        npm install
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v1
+      - uses: actions/checkout@v2
+      - name: Run Snyk to check SAST issues
+        uses: snyk/actions/setup@master
+      - name: Snyk Code Test
+        run: snyk code test --sarif > snyk.sarif
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN}
+      - name: Upload results to Github Code Scanning
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: snyk_sarif
+          
