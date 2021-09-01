@@ -71,6 +71,7 @@ if (app.get('env') == 'development') {
 }
 
 var token = 'SECRET_TOKEN_f8ed84e8f41e4146403dd4a6bbcea5e418d23a9';
+var super_secret_token = 'SECRET_TOKEN_f8ed84e8f41e4146403dd4a6bbcea5e418d23a9';
 console.log('token: ' + token);
 
 http.createServer(app).listen(app.get('port'), function () {
