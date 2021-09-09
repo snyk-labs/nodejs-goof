@@ -1,0 +1,46 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: goof
+spec:
+  ports:
+  - name: "3001"
+    port: 3001
+    targetPort: 3001
+    nodePort: 30001 #port exposed on localhost
+  - name: "9229"
+    port: 9229
+    targetPort: 9229
+    nodePort: 30002
+  selector:
+    app: goof
+  type: LoadBalancer
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: goof
+spec:
+  replicas: 1
+  selector:
+   matchLabels:
+    app: goof
+  template:
+    metadata:
+      labels:
+        app: goof
+    spec:
+      containers:
+      - image: seanland/docker-goof
+        name: goof
+        ports:
+        - containerPort: 3001
+        - containerPort: 9229
+        resources: {}
+        env: 
+          - name: "DOCKER"
+            value: "1"
+      restartPolicy: Always
