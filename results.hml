@@ -1,0 +1,2998 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Language" content="en-us">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Snyk test report</title>
+  <meta name="description" content="55 known vulnerabilities found in 98 vulnerable dependency paths.">
+  <link rel="icon" type="image/png" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.png"
+    sizes="194x194">
+  <link rel="shortcut icon" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.ico">
+  <style type="text/css">
+  
+    body {
+      -moz-font-feature-settings: "pnum";
+      -webkit-font-feature-settings: "pnum";
+      font-variant-numeric: proportional-nums;
+      display: flex;
+      flex-direction: column;
+      font-feature-settings: "pnum";
+      font-size: 100%;
+      line-height: 1.5;
+      min-height: 100vh;
+      -webkit-text-size-adjust: 100%;
+      margin: 0;
+      padding: 0;
+      background-color: #F5F5F5;
+      font-family: 'Arial', 'Helvetica', Calibri, sans-serif;
+    }
+  
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-weight: 500;
+    }
+  
+    a,
+    a:link,
+    a:visited {
+      border-bottom: 1px solid #4b45a9;
+      text-decoration: none;
+      color: #4b45a9;
+    }
+  
+    a:hover,
+    a:focus,
+    a:active {
+      border-bottom: 2px solid #4b45a9;
+    }
+  
+    hr {
+      border: none;
+      margin: 1em 0;
+      border-top: 1px solid #c5c5c5;
+    }
+  
+    ul {
+      padding: 0 1em;
+      margin: 1em 0;
+    }
+  
+    code {
+      background-color: #EEE;
+      color: #333;
+      padding: 0.25em 0.5em;
+      border-radius: 0.25em;
+    }
+  
+    pre {
+      background-color: #333;
+      font-family: monospace;
+      padding: 0.5em 1em 0.75em;
+      border-radius: 0.25em;
+      font-size: 14px;
+    }
+  
+    pre code {
+      padding: 0;
+      background-color: transparent;
+      color: #fff;
+    }
+  
+    a code {
+      border-radius: .125rem .125rem 0 0;
+      padding-bottom: 0;
+      color: #4b45a9;
+    }
+  
+    a[href^="http://"]:after,
+    a[href^="https://"]:after {
+      background-image: linear-gradient(transparent,transparent),url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20112%20109%22%3E%3Cg%20id%3D%22Page-1%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20id%3D%22link-external%22%3E%3Cg%20id%3D%22arrow%22%3E%3Cpath%20id%3D%22Line%22%20stroke%3D%22%234B45A9%22%20stroke-width%3D%2215%22%20d%3D%22M88.5%2021l-43%2042.5%22%20stroke-linecap%3D%22square%22%2F%3E%3Cpath%20id%3D%22Triangle%22%20fill%3D%22%234B45A9%22%20d%3D%22M111.2%200v50L61%200z%22%2F%3E%3C%2Fg%3E%3Cpath%20id%3D%22square%22%20fill%3D%22%234B45A9%22%20d%3D%22M66%2015H0v94h94V44L79%2059v35H15V30h36z%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      background-repeat: no-repeat;
+      background-size: .75rem;
+      content: "";
+      display: inline-block;
+      height: .75rem;
+      margin-left: .25rem;
+      width: .75rem;
+    }
+  
+  
+  /* Layout */
+  
+    [class*=layout-container] {
+      margin: 0 auto;
+      max-width: 71.25em;
+      padding: 1.9em 1.3em;
+      position: relative;
+    }
+    .layout-container--short {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  
+    .layout-container--short:after {
+      display: block;
+      content: "";
+      clear: both;
+    }
+  
+  /* Header */
+  
+    .header {
+      padding-bottom: 1px;
+    }
+  
+    .project__header {
+      background-color: #4C4A73;
+      color: #fff;
+      margin-bottom: -1px;
+      padding-top: 1em;
+      padding-bottom: 0.25em;
+      border-bottom: 2px solid #BBB;
+    }
+  
+    .project__header__title {
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      word-break: break-all;
+      margin-bottom: .1em;
+      margin-top: 0;
+      float: left;
+    }
+  
+    .timestamp {
+      float: right;
+      clear: none;
+      margin-bottom: 0;
+    }
+  
+    .meta-counts {
+      clear: both;
+      display: block;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin: 0 0 1.5em;
+      color: #fff;
+      clear: both;
+      font-size: 1.1em;
+    }
+  
+    .meta-count {
+      display: block;
+      flex-basis: 100%;
+      margin: 0 1em 1em 0;
+      float: left;
+      padding-right: 1em;
+      border-right: 2px solid #fff;
+    }
+  
+    .meta-count:last-child {
+      border-right: 0;
+      padding-right: 0;
+      margin-right: 0;
+    }
+  
+  /* Card */
+  
+    .card {
+      background-color: #fff;
+      border: 1px solid #c5c5c5;
+      border-radius: .25rem;
+      margin: 0 0 2em 0;
+      position: relative;
+      min-height: 40px;
+      padding: 1.5em;
+    }
+  
+    .card .label {
+      background-color: #767676;
+      border: 2px solid #767676;
+      color: white;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      display: inline-block;
+      margin: 0;
+      border-radius: 0.25rem;
+    }
+  
+    .card .label__text {
+      vertical-align: text-top;
+    }
+  
+    .card .label--high {
+      background-color: #B51B72;
+      border-color: #B51B72;
+    }
+  
+    .card .label--medium {
+      background-color: #E29022;
+      border-color: #E29022;
+    }
+  
+    .card .label--low {
+      background-color: #222049;
+      border-color: #222049;
+    }
+  
+    .card .card.severity--low {
+      border-color: #222049;
+    }
+  
+    .card .card.severity--medium {
+      border-color: #E29022;
+    }
+  
+    .card .card.severity--high {
+      border-color: #B51B72;
+    }
+  
+    .card--vuln {
+      padding-top: 4em;
+      max-width: 48.75em;
+    }
+  
+    .card--vuln .label {
+      left: 0;
+      position: absolute;
+      top: 1.1em;
+      padding-left: 1.9em;
+      padding-right: 1.9em;
+      border-radius: 0 0.25rem 0.25rem 0;
+    }
+  
+    .card--vuln .card__section h2 {
+      font-size: 22px;
+      margin-bottom: 0.5em;
+    }
+  
+    .card--vuln .card__section p {
+      margin: 0 0 0.5em 0;
+    }
+  
+    .card--vuln .card__meta {
+      padding: 0 0 0 1em;
+      margin: 0;
+      font-size: 1.1em;
+    }
+  
+    .card .card__meta__paths {
+      font-size: 0.9em;
+    }
+  
+    .card--vuln .card__title {
+      font-size: 28px;
+      margin-top: 0;
+    }
+  
+    .card--vuln .card__cta p {
+      margin: 0;
+      text-align: right;
+    }
+  
+    .source-panel {
+      clear: both;
+      display: flex;
+      justify-content: flex-start;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0.5em 0;
+      width: fit-content;
+      padding: 0.5em;
+    }
+  
+  
+  
+  </style>
+</head>
+
+<body class="section-projects">
+  <main class="layout-stacked">
+
+    <div class="layout-stacked__header header">
+      <header class="project__header">
+        <div class="layout-container--short">
+            <h1 class="project__header__title">Snyk test summary</h1>
+
+          <p class="timestamp">March 9th 2020, 9:55:56 pm</p>
+          <div class="source-panel">
+            <span>Scanned the following path:</span>
+            <ul>
+              <li>/Users/eitangayor/git/goof (npm)</li>
+            </ul>
+          </div>
+
+          <div class="meta-counts">
+            <div class="meta-count"><span>55</span> <span>known vulnerabilities</span></div>
+            <div class="meta-count"><span>98 vulnerable dependency paths</span></div>
+            <div class="meta-count"><span>448</span> <span>dependencies</span></div>
+          </div><!-- .meta-counts -->
+        </div><!-- .layout-container--short -->
+      </header><!-- .project__header -->
+    </div><!-- .layout-stacked__header -->
+
+    <div class="layout-stacked__content">
+      <div class="layout-container--short" style="padding-top: 35px;">
+        <div class="cards--vuln filter--patch filter--ignore">
+          <div class="card card--vuln  disclosure--not-new severity--high" >
+              <h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>
+              <div class="card__section">
+          
+                  <div class="label label--high">
+                      <span class="label__text">high severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              acorn
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+          
+                                      goof@1.0.1, @snyk/nodejs-runtime-agent@1.43.0 and others
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>acorn</code> to version 6.4.1, 7.1.1 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><p><a href="https://github.com/acornjs/acorn/commit/793c0e569ed1158672e3a40aeed1d8518832b802">GitHub Commit</a></p>
+          </li>
+          <li><p><a href="https://github.com/acornjs/acorn/issues/929">GitHub Issue 6.x Branch</a></p>
+          </li>
+          <li><p><a href="https://www.npmjs.com/advisories/1488">NPM Security Advisory</a></p>
+          </li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/SNYK-JS-ACORN-559469">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--high" >
+              <h2 class="card__title">Denial of Service (DoS)</h2>
+              <div class="card__section">
+          
+                  <div class="label label--high">
+                      <span class="label__text">high severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              express-fileupload
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+                                  goof@1.0.1 and express-fileupload@0.0.5
+          
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>express-fileupload</code> to version 1.1.6-alpha.6 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><a href="https://github.com/richardgirges/express-fileupload/pull/171">GitHub PR</a></li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/SNYK-JS-EXPRESSFILEUPLOAD-473997">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--high" >
+              <h2 class="card__title">Prototype Pollution</h2>
+              <div class="card__section">
+          
+                  <div class="label label--high">
+                      <span class="label__text">high severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              handlebars
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+          
+                                      goof@1.0.1, tap@5.8.0 and others
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>handlebars</code> to version 4.0.14, 4.1.2 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><p><a href="https://github.com/wycats/handlebars.js/commit/7372d4e9dffc9d70c09671aa28b9392a1577fd86">GitHub Commit</a></p>
+          </li>
+          <li><p><a href="https://github.com/wycats/handlebars.js/issues/1495">GitHub Issue</a></p>
+          </li>
+          <li><p><a href="https://www.npmjs.com/advisories/755">NPM Security Advisory</a></p>
+          </li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/SNYK-JS-HANDLEBARS-173692">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--high" >
+              <h2 class="card__title">Prototype Pollution</h2>
+              <div class="card__section">
+          
+                  <div class="label label--high">
+                      <span class="label__text">high severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              handlebars
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+          
+                                      goof@1.0.1, tap@5.8.0 and others
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>handlebars</code> to version 3.0.7, 4.1.2, 4.0.14 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><p><a href="https://github.com/wycats/handlebars.js/commit/cd38583216dce3252831916323202749431c773e">GitHub Commit</a></p>
+          </li>
+          <li><p><a href="https://github.com/wycats/handlebars.js/issues/1495">GitHub Issue</a></p>
+          </li>
+          <li><p><a href="https://snyk.io/vuln/SNYK-JS-HANDLEBARS-173692">SNYK-JS-HANDLEBARS-173692</a></p>
+          </li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/SNYK-JS-HANDLEBARS-174183">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--high" >
+              <h2 class="card__title">Prototype Pollution</h2>
+              <div class="card__section">
+          
+                  <div class="label label--high">
+                      <span class="label__text">high severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              handlebars
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+          
+                                      goof@1.0.1, tap@5.8.0 and others
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>handlebars</code> to version 4.3.0, 3.8.0 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><p><a href="https://github.com/wycats/handlebars.js/commit/213c0bbe3c4bd83a534d67384e5afa0000347ff6">GitHub Commit</a></p>
+          </li>
+          <li><p><a href="https://github.com/wycats/handlebars.js/commit/7b67a29a8c926b38af265c727ff6551fbb277111">GitHub Commit</a></p>
+          </li>
+          <li><p><a href="https://github.com/wycats/handlebars.js/issues/1558">GitHub Issue</a></p>
+          </li>
+          <li><p><a href="https://www.npmjs.com/advisories/1164">Reference</a></p>
+          </li>
+          <li><p><a href="https://github.com/wycats/handlebars.js/blob/master/release-notes.md#v430---september-24th-2019">Release Notes</a></p>
+          </li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/SNYK-JS-HANDLEBARS-469063">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--high" >
+              <h2 class="card__title">Denial of Service (DoS)</h2>
+              <div class="card__section">
+          
+                  <div class="label label--high">
+                      <span class="label__text">high severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              handlebars
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+          
+                                      goof@1.0.1, tap@5.8.0 and others
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>handlebars</code> to version 4.4.5 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><p><a href="https://github.com/wycats/handlebars.js/commit/8d5530ee2c3ea9f0aee3fde310b9f36887d00b8b">GitHub Commit</a></p>
+          </li>
+          <li><p><a href="https://github.com/wycats/handlebars.js/issues/1579">GitHub Issue</a></p>
+          </li>
+          <li><p><a href="https://www.npmjs.com/advisories/1300">NPM Security Advisory</a></p>
+          </li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/SNYK-JS-HANDLEBARS-480388">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--high" >
+              <h2 class="card__title">Arbitrary Code Execution</h2>
+              <div class="card__section">
+          
+                  <div class="label label--high">
+                      <span class="label__text">high severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              handlebars
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+          
+                                      goof@1.0.1, tap@5.8.0 and others
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>handlebars</code> to version 4.5.3, 3.0.8 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><p><a href="https://www.npmjs.com/advisories/1316">NPM Security Advisory #1</a></p>
+          </li>
+          <li><p><a href="https://www.npmjs.com/advisories/1324">NPM Security Advisory #2</a></p>
+          </li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/SNYK-JS-HANDLEBARS-534478">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--high" >
+              <h2 class="card__title">Prototype Pollution</h2>
+              <div class="card__section">
+          
+                  <div class="label label--high">
+                      <span class="label__text">high severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              handlebars
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+          
+                                      goof@1.0.1, tap@5.8.0 and others
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>handlebars</code> to version 4.5.3, 3.0.8 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><p><a href="https://github.com/wycats/handlebars.js/commit/198887808780bbef9dba67a8af68ece091d5baa7">GitHub Commit</a></p>
+          </li>
+          <li><p><a href="https://www.npmjs.com/advisories/1325">NPM Security Advisory</a></p>
+          </li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/SNYK-JS-HANDLEBARS-534988">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--medium" >
+              <h2 class="card__title">Prototype Pollution</h2>
+              <div class="card__section">
+          
+                  <div class="label label--medium">
+                      <span class="label__text">medium severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              jquery
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+                                  goof@1.0.1 and jquery@2.2.4
+          
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>jquery</code> to version 3.4.0 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><p><a href="https://github.com/jquery/jquery/commit/753d591aea698e57d6db58c9f722cd0808619b1b">GitHub Commit</a></p>
+          </li>
+          <li><p><a href="https://github.com/jquery/jquery/pull/4333">GitHub PR</a></p>
+          </li>
+          <li><p><a href="https://hackerone.com/reports/454365">Hackerone Report</a></p>
+          </li>
+          <li><p><a href="https://snyk.io/blog/after-three-years-of-silence-a-new-jquery-prototype-pollution-vulnerability-emerges-once-again/">Snyk Blog</a></p>
+          </li>
+          <li><p><a href="https://github.com/DanielRuf/snyk-js-jquery-174006">Third-Party Backported Patches Repo</a></p>
+          </li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/SNYK-JS-JQUERY-174006">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--medium" >
+              <h2 class="card__title">Cross-site Scripting (XSS)</h2>
+              <div class="card__section">
+          
+                  <div class="label label--medium">
+                      <span class="label__text">medium severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              jquery
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+                                  goof@1.0.1 and jquery@2.2.4
+          
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>jquery</code> to version 1.12.2, 2.2.2, 3.0.0 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><p><a href="https://github.com/jquery/jquery/commit/f60729f3903d17917dc351f3ac87794de379b0cc">GitHub Commit</a></p>
+          </li>
+          <li><p><a href="https://github.com/jquery/jquery/pull/2588/commits/c254d308a7d3f1eac4d0b42837804cfffcba4bb2">GitHub Commit</a></p>
+          </li>
+          <li><p><a href="https://github.com/jquery/jquery/issues/2432">GitHub Issue</a></p>
+          </li>
+          <li><p><a href="https://github.com/jquery/jquery/pull/2588">GitHub PR</a></p>
+          </li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/npm:jquery:20150627">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--medium" >
+              <h2 class="card__title">Denial of Service (DoS)</h2>
+              <div class="card__section">
+          
+                  <div class="label label--medium">
+                      <span class="label__text">medium severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              js-yaml
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+          
+                                      goof@1.0.1, tap@5.8.0 and others
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>js-yaml</code> to version 3.13.0 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><p><a href="https://github.com/nodeca/js-yaml/commit/a567ef3c6e61eb319f0bfc2671d91061afb01235">GitHub Commit</a></p>
+          </li>
+          <li><p><a href="https://github.com/nodeca/js-yaml/issues/475">GitHub Issue</a></p>
+          </li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/SNYK-JS-JSYAML-173999">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--high" >
+              <h2 class="card__title">Arbitrary Code Execution</h2>
+              <div class="card__section">
+          
+                  <div class="label label--high">
+                      <span class="label__text">high severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              js-yaml
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+          
+                                      goof@1.0.1, tap@5.8.0 and others
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>js-yaml</code> to version 3.13.1 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><p><a href="https://github.com/nodeca/js-yaml/pull/480/commits/e18afbf1edcafb7add2c4c7b22abc8d6ebc2fa61">GitHub Commit</a></p>
+          </li>
+          <li><p><a href="https://github.com/nodeca/js-yaml/pull/480">GitHub PR</a></p>
+          </li>
+          <li><p><a href="https://www.npmjs.com/advisories/813">NPM Security Advisory</a></p>
+          </li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/SNYK-JS-JSYAML-174129">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--high" >
+              <h2 class="card__title">Prototype Pollution</h2>
+              <div class="card__section">
+          
+                  <div class="label label--high">
+                      <span class="label__text">high severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              lodash
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+                                  goof@1.0.1 and lodash@4.17.4
+          
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>lodash</code> to version 4.17.12 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><p><a href="https://github.com/lodash/lodash/issues/4348">GitHub Issue</a></p>
+          </li>
+          <li><p><a href="https://github.com/lodash/lodash/pull/4336">GitHub PR</a></p>
+          </li>
+          <li><p><a href="https://github.com/lodash/lodash/pull/4355">GitHub PR</a></p>
+          </li>
+          <li><p><a href="https://github.com/sailshq/lodash/pull/1">GitHub PR</a></p>
+          </li>
+          <li><p><a href="https://www.npmjs.com/advisories/1065">Node Security Advisory</a></p>
+          </li>
+          <li><p><a href="https://snyk.io/blog/snyk-research-team-discovers-severe-prototype-pollution-security-vulnerabilities-affecting-all-versions-of-lodash/">Snyk Blog</a></p>
+          </li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/SNYK-JS-LODASH-450202">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--high" >
+              <h2 class="card__title">Prototype Pollution</h2>
+              <div class="card__section">
+          
+                  <div class="label label--high">
+                      <span class="label__text">high severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              lodash
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+                                  goof@1.0.1 and lodash@4.17.4
+          
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>lodash</code> to version 4.17.11 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><p><a href="https://github.com/lodash/lodash/commit/90e6199a161b6445b01454517b40ef65ebecd2ad">GitHub Commit</a></p>
+          </li>
+          <li><p><a href="https://github.com/lodash/lodash/pull/4337">GitHub PR</a></p>
+          </li>
+          <li><p><a href="https://hackerone.com/reports/380873">HackerOne Report</a></p>
+          </li>
+          <li><p><a href="https://www.npmjs.com/advisories/1066">NPM Security Advisory</a></p>
+          </li>
+          <li><p><a href="https://www.npmjs.com/advisories/1068">NPM Security Advisory</a></p>
+          </li>
+          <li><p><a href="https://www.npmjs.com/advisories/1071">NPM Security Advisory</a></p>
+          </li>
+          <li><p><a href="https://www.npmjs.com/advisories/782">NPM Security Advisory</a></p>
+          </li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/SNYK-JS-LODASH-73638">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--medium" >
+              <h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>
+              <div class="card__section">
+          
+                  <div class="label label--medium">
+                      <span class="label__text">medium severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              lodash
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+                                  goof@1.0.1 and lodash@4.17.4
+          
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>lodash</code> to version 4.17.11 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><p><a href="https://github.com/lodash/lodash/commit/5c08f18d365b64063bfbfa686cbb97cdd6267347">GitHub Commit</a></p>
+          </li>
+          <li><p><a href="https://github.com/lodash/lodash/issues/3359">GitHub Issue</a></p>
+          </li>
+          <li><p><a href="https://github.com/lodash/lodash/pull/4450">GitHub PR</a></p>
+          </li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/SNYK-JS-LODASH-73639">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--medium" >
+              <h2 class="card__title">Prototype Pollution</h2>
+              <div class="card__section">
+          
+                  <div class="label label--medium">
+                      <span class="label__text">medium severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              lodash
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+                                  goof@1.0.1 and lodash@4.17.4
+          
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>lodash</code> to version 4.17.5 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><p><a href="https://github.com/lodash/lodash/commit/d8e069cc3410082e44eb18fcf8e7f3d08ebe1d4a">GitHub Commit</a></p>
+          </li>
+          <li><p><a href="https://github.com/lodash/lodash/pull/4337">GitHub PR</a></p>
+          </li>
+          <li><p><a href="https://hackerone.com/reports/310443">HackerOne Report</a></p>
+          </li>
+          <li><p><a href="https://www.npmjs.com/advisories/1067">NPM Security Advisory</a></p>
+          </li>
+          <li><p><a href="https://www.npmjs.com/advisories/1069">NPM Security Advisory</a></p>
+          </li>
+          <li><p><a href="https://www.npmjs.com/advisories/1070">NPM Security Advisory</a></p>
+          </li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/npm:lodash:20180130">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--medium" >
+              <h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>
+              <div class="card__section">
+          
+                  <div class="label label--medium">
+                      <span class="label__text">medium severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              marked
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+                                  goof@1.0.1 and marked@0.3.5
+          
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>marked</code> to version 0.6.2 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><p><a href="https://github.com/markedjs/marked/commit/00f1f7a23916ef27186d0904635aa3509af63d47">GitHub Commit</a></p>
+          </li>
+          <li><p><a href="https://github.com/markedjs/marked/pull/1460/commits/be27472a8169dda7875330939f8115ab677cdc07">GitHub Commit</a></p>
+          </li>
+          <li><p><a href="https://github.com/markedjs/marked/pull/1460">GitHub PR</a></p>
+          </li>
+          <li><p><a href="https://www.npmjs.com/advisories/812">NPM Security Advisory</a></p>
+          </li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/SNYK-JS-MARKED-174116">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--medium" >
+              <h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>
+              <div class="card__section">
+          
+                  <div class="label label--medium">
+                      <span class="label__text">medium severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              marked
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+                                  goof@1.0.1 and marked@0.3.5
+          
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>marked</code> to version 0.4.0 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><p><a href="https://github.com/markedjs/marked/commit/09afabf69c6d0c919c03443f47bdfe476566105d">GitHub Commit</a></p>
+          </li>
+          <li><p><a href="https://github.com/markedjs/marked/pull/1224">GitHub PR</a></p>
+          </li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/SNYK-JS-MARKED-451540">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--high" >
+              <h2 class="card__title">Content &amp; Code Injection (XSS)</h2>
+              <div class="card__section">
+          
+                  <div class="label label--high">
+                      <span class="label__text">high severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              marked
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+                                  goof@1.0.1 and marked@0.3.5
+          
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>marked</code> to version 0.3.6 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><p><a href="https://github.com/chjj/marked/pull/592/commits/2cff85979be8e7a026a9aca35542c470cf5da523">GitHub Commit</a></p>
+          </li>
+          <li><p><a href="https://github.com/chjj/marked/pull/592">GitHub PR</a></p>
+          </li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/npm:marked:20150520">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--high" >
+              <h2 class="card__title">Cross-site Scripting (XSS) via Data URIs</h2>
+              <div class="card__section">
+          
+                  <div class="label label--high">
+                      <span class="label__text">high severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              marked
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+                                  goof@1.0.1 and marked@0.3.5
+          
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>marked</code> to version 0.3.7 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><a href="https://github.com/chjj/marked/commit/cd2f6f5b7091154c5526e79b5f3bfb4d15995a51">GitHub Commit</a></li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/npm:marked:20170112">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--high" >
+              <h2 class="card__title">Cross-site Scripting (XSS)</h2>
+              <div class="card__section">
+          
+                  <div class="label label--high">
+                      <span class="label__text">high severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              marked
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+                                  goof@1.0.1 and marked@0.3.5
+          
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>marked</code> to version 0.3.9 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><p><a href="https://github.com/markedjs/marked/pull/976/commits/6d1901ff71abb83aa32ca9a5ce47471382ea42a9">GitHub Commit</a></p>
+          </li>
+          <li><p><a href="https://github.com/chjj/marked/issues/925">GitHub Issue</a></p>
+          </li>
+          <li><p><a href="https://github.com/chjj/marked/pull/958">GitHub PR</a></p>
+          </li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/npm:marked:20170815">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--medium" >
+              <h2 class="card__title">Cross-site Scripting (XSS)</h2>
+              <div class="card__section">
+          
+                  <div class="label label--medium">
+                      <span class="label__text">medium severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              marked
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+                                  goof@1.0.1 and marked@0.3.5
+          
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>marked</code> to version 0.3.9 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><p><a href="https://github.com/markedjs/marked/pull/976/commits/cb72584c5d9d32ebfdbb99e35fb9b81af2b79686">GitHub Commit</a></p>
+          </li>
+          <li><p><a href="https://github.com/chjj/marked/issues/926">GitHub Issue</a></p>
+          </li>
+          <li><p><a href="https://github.com/chjj/marked/pull/958">GitHub PR</a></p>
+          </li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/npm:marked:20170815-1">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--high" >
+              <h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>
+              <div class="card__section">
+          
+                  <div class="label label--high">
+                      <span class="label__text">high severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              marked
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+                                  goof@1.0.1 and marked@0.3.5
+          
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>marked</code> to version 0.3.9 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><p><a href="https://github.com/chjj/marked/issues/937">GitHub Issue</a></p>
+          </li>
+          <li><p><a href="https://github.com/chjj/marked/pull/958">GitHub PR</a></p>
+          </li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/npm:marked:20170907">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--high" >
+              <h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>
+              <div class="card__section">
+          
+                  <div class="label label--high">
+                      <span class="label__text">high severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              marked
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+                                  goof@1.0.1 and marked@0.3.5
+          
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>marked</code> to version 0.3.18 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><p><a href="https://github.com/markedjs/marked/pull/1083/commits/b15e42b67cec9ded8505e9d68bb8741ad7a9590d">GitHub Commit</a></p>
+          </li>
+          <li><p><a href="https://github.com/markedjs/marked/pull/1083">GitHub PR</a></p>
+          </li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/npm:marked:20180225">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--high" >
+              <h2 class="card__title">Denial of Service (DoS)</h2>
+              <div class="card__section">
+          
+                  <div class="label label--high">
+                      <span class="label__text">high severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              mongodb
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+          
+                                      goof@1.0.1, mongoose@4.2.4 and others
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>mongodb</code> to version 3.1.13 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><a href="https://www.npmjs.com/advisories/1203">NPM Security Advisory</a></li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/SNYK-JS-MONGODB-473855">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--medium" >
+              <h2 class="card__title">Information Exposure</h2>
+              <div class="card__section">
+          
+                  <div class="label label--medium">
+                      <span class="label__text">medium severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              mongoose
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+                                  goof@1.0.1 and mongoose@4.2.4
+          
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>mongoose</code> to version 5.7.5 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><p><a href="https://github.com/Automattic/mongoose/commit/f3eca5b94d822225c04e96cbeed9f095afb3c31c">GitHub Commit</a></p>
+          </li>
+          <li><p><a href="https://github.com/Automattic/mongoose/issues/8222">GitHub Issue</a></p>
+          </li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/SNYK-JS-MONGOOSE-472486">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--medium" >
+              <h2 class="card__title">Remote Memory Exposure</h2>
+              <div class="card__section">
+          
+                  <div class="label label--medium">
+                      <span class="label__text">medium severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              mongoose
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+                                  goof@1.0.1 and mongoose@4.2.4
+          
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>mongoose</code> to version &gt;= 3.8.39 or &gt;= 4.3.6.</p>
+          <p>If a direct dependency update is not possible, use <a href="https://snyk.io/docs/using-snyk#wizard"><code>snyk wizard</code></a> to patch this vulnerability.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><a href="https://github.com/Automattic/mongoose/issues/3764">GitHub Issue</a></li>
+          <li><a href="https://github.com/ChALkeR/notes/blob/master/Lets-fix-Buffer-API.md#previous-materials">Blog: Node Buffer API fix</a></li>
+          <li><a href="https://github.com/ChALkeR/notes/blob/master/Buffer-knows-everything.md">Blog: Information about Buffer</a></li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/npm:mongoose:20160116">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--high" >
+              <h2 class="card__title">Arbitrary File Write via Archive Extraction (Zip Slip)</h2>
+              <div class="card__section">
+          
+                  <div class="label label--high">
+                      <span class="label__text">high severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              adm-zip
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+                                  goof@1.0.1 and adm-zip@0.4.7
+          
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>adm-zip</code> to version 0.4.11 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><p><a href="https://github.com/cthackers/adm-zip/commit/d01fa8c80c3a5fcf5ce1eda82d96600c62910d3f">GitHub Commit</a></p>
+          </li>
+          <li><p><a href="https://github.com/cthackers/adm-zip/pull/212/commits/6f4dfeb9a2166e93207443879988f97d88a37cde">GitHub Commit</a></p>
+          </li>
+          <li><p><a href="https://hackerone.com/reports/362118">Hackerone Report</a></p>
+          </li>
+          <li><p><a href="https://github.com/snyk/zip-slip-vulnerability">Zip Slip Advisory</a></p>
+          </li>
+          <li><p><a href="https://snyk.io/research/zip-slip-vulnerability">Zip Slip Advisory</a></p>
+          </li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/npm:adm-zip:20180415">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--medium" >
+              <h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>
+              <div class="card__section">
+          
+                  <div class="label label--medium">
+                      <span class="label__text">medium severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              brace-expansion
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+          
+                                      goof@1.0.1, tap@5.8.0 and others
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>brace-expansion</code> to version 1.1.7 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><a href="https://github.com/juliangruber/brace-expansion/pull/35">GitHub PR</a></li>
+          <li><a href="https://github.com/juliangruber/brace-expansion/issues/33">GitHub Issue</a></li>
+          <li><a href="https://github.com/juliangruber/brace-expansion/pull/35/commits/b13381281cead487cbdbfd6a69fb097ea5e456c3">GitHub Commit</a></li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/npm:brace-expansion:20170302">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--low" >
+              <h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>
+              <div class="card__section">
+          
+                  <div class="label label--low">
+                      <span class="label__text">low severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              braces
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+          
+                                      goof@1.0.1, tap@5.8.0 and others
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>braces</code> to version 2.3.1 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><a href="https://github.com/micromatch/braces/commit/abdafb0cae1e0c00f184abbadc692f4eaa98f451">GitHub Commit</a></li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/npm:braces:20180219">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--low" >
+              <h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>
+              <div class="card__section">
+          
+                  <div class="label label--low">
+                      <span class="label__text">low severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              debug
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+          
+                                      goof@1.0.1, express@4.12.4 and others
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>debug</code> to version 2.6.9, 3.1.0 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><a href="https://github.com/visionmedia/debug/issues/501">GitHub Issue</a></li>
+          <li><a href="https://github.com/visionmedia/debug/pull/504">GitHub PR</a></li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/npm:debug:20170905">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--high" >
+              <h2 class="card__title">Code Injection</h2>
+              <div class="card__section">
+          
+                  <div class="label label--high">
+                      <span class="label__text">high severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              dustjs-linkedin
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+                                  goof@1.0.1 and dustjs-linkedin@2.5.0
+          
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>dustjs-linkedin</code> to version 2.6.0 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><p><a href="https://artsploit.blogspot.co.il/2016/08/pprce2.html">Artsploit Blog</a></p>
+          </li>
+          <li><p><a href="https://github.com/linkedin/dustjs/pull/534/commits/884be3bb3a34a843e6fb411100088e9b02326bd4">GitHub Commit</a></p>
+          </li>
+          <li><p><a href="https://github.com/linkedin/dustjs/issues/741">GitHub Issue</a></p>
+          </li>
+          <li><p><a href="https://github.com/linkedin/dustjs/pull/534">GitHub PR</a></p>
+          </li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/npm:dustjs-linkedin:20160819">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--high" >
+              <h2 class="card__title">Arbitrary Code Execution</h2>
+              <div class="card__section">
+          
+                  <div class="label label--high">
+                      <span class="label__text">high severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              ejs
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+                                  goof@1.0.1 and ejs@1.0.0
+          
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>The vulnerability can be resolved by either using the GitHub integration to <a href="https://snyk.io/org/projects">generate a pull-request</a> from your dashboard or by running <code>snyk wizard</code> from the command-line interface.
+          Otherwise, Upgrade <code>ejs</code> to version <code>2.5.3</code> or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><a href="https://snyk.io/blog/fixing-ejs-rce-vuln">Snyk Blog</a></li>
+          <li><a href="https://github.com/mde/ejs/commit/3d447c5a335844b25faec04b1132dbc721f9c8f6">Fix commit</a></li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/npm:ejs:20161128">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--medium" >
+              <h2 class="card__title">Cross-site Scripting (XSS)</h2>
+              <div class="card__section">
+          
+                  <div class="label label--medium">
+                      <span class="label__text">medium severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              ejs
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+                                  goof@1.0.1 and ejs@1.0.0
+          
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>The vulnerability can be resolved by either using the GitHub integration to <a href="https://snyk.io/org/projects">generate a pull-request</a> from your dashboard or by running <code>snyk wizard</code> from the command-line interface.
+          Otherwise, Upgrade <code>ejs</code> to version <code>2.5.5</code> or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><a href="https://snyk.io/blog/fixing-ejs-rce-vuln">Snyk Blog</a></li>
+          <li><a href="https://github.com/mde/ejs/commit/49264e0037e313a0a3e033450b5c184112516d8f">Fix commit</a></li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/npm:ejs:20161130">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--medium" >
+              <h2 class="card__title">Denial of Service (DoS)</h2>
+              <div class="card__section">
+          
+                  <div class="label label--medium">
+                      <span class="label__text">medium severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              ejs
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+                                  goof@1.0.1 and ejs@1.0.0
+          
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>The vulnerability can be resolved by either using the GitHub integration to <a href="https://snyk.io/org/projects">generate a pull-request</a> from your dashboard or by running <code>snyk wizard</code> from the command-line interface.
+          Otherwise, Upgrade <code>ejs</code> to version <code>2.5.5</code> or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><a href="https://snyk.io/blog/fixing-ejs-rce-vuln">Snyk Blog</a></li>
+          <li><a href="https://github.com/mde/ejs/commit/49264e0037e313a0a3e033450b5c184112516d8f">Fix commit</a></li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/npm:ejs:20161130-1">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--high" >
+              <h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>
+              <div class="card__section">
+          
+                  <div class="label label--high">
+                      <span class="label__text">high severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              fresh
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+          
+                                      goof@1.0.1, express@4.12.4 and others
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>fresh</code> to version 0.5.2 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><a href="https://github.com/jshttp/fresh/commit/21a0f0c2a5f447e0d40bc16be0c23fa98a7b46ec">GitHub Commit</a></li>
+          <li><a href="https://github.com/jshttp/fresh/issues/24">GitHub Issue</a></li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/npm:fresh:20170908">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--low" >
+              <h2 class="card__title">Regular Expression Denial of Service (DoS)</h2>
+              <div class="card__section">
+          
+                  <div class="label label--low">
+                      <span class="label__text">low severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              hawk
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+          
+                                      goof@1.0.1, tap@5.8.0 and others
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p> Fixed in: 3.1.3, 4.1.1</p>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/npm:hawk:20160119">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--medium" >
+              <h2 class="card__title">Prototype Pollution</h2>
+              <div class="card__section">
+          
+                  <div class="label label--medium">
+                      <span class="label__text">medium severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              hoek
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+          
+                                      goof@1.0.1, tap@5.8.0 and others
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>hoek</code> to version 4.2.1, 5.0.3 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><p><a href="https://github.com/hapijs/hoek/commit/32ed5c9413321fbc37da5ca81a7cbab693786dee">GitHub Commit</a></p>
+          </li>
+          <li><p><a href="https://github.com/hapijs/hoek/commit/5aed1a8c4a3d55722d1c799f2368857bf418d6df">GitHub Commit</a></p>
+          </li>
+          <li><p><a href="https://github.com/hapijs/hoek/issues/230">GitHub Issue</a></p>
+          </li>
+          <li><p><a href="https://github.com/hapijs/hoek/pull/227">GitHub PR</a></p>
+          </li>
+          <li><p><a href="https://hackerone.com/reports/310439">HackerOne Report</a></p>
+          </li>
+          <li><p><a href="http://npmjs.com/advisories/566">NPM Security Advisory</a></p>
+          </li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/npm:hoek:20180212">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--medium" >
+              <h2 class="card__title">Timing Attack</h2>
+              <div class="card__section">
+          
+                  <div class="label label--medium">
+                      <span class="label__text">medium severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              http-signature
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+          
+                                      goof@1.0.1, tap@5.8.0 and others
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>http-signature</code> to version 1.0.0 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><a href="https://github.com/joyent/node-http-signature/pull/36">Github PR</a></li>
+          <li><a href="https://github.com/joyent/node-http-signature/commit/78ab1da232f31f695f5c362d863593a143aa8b56">Github Commit</a></li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/npm:http-signature:20150122">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--low" >
+              <h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>
+              <div class="card__section">
+          
+                  <div class="label label--low">
+                      <span class="label__text">low severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              mime
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+          
+                                      goof@1.0.1, express@4.12.4 and others
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>mime</code> to version 1.4.1, 2.0.3 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><p><a href="https://github.com/broofa/node-mime/commit/1df903fdeb9ae7eaa048795b8d580ce2c98f40b0">GitHub Commit</a></p>
+          </li>
+          <li><p><a href="https://github.com/broofa/node-mime/commit/855d0c4b8b22e4a80b9401a81f2872058eae274d">GitHub Commit</a></p>
+          </li>
+          <li><p><a href="https://github.com/broofa/node-mime/issues/167">GitHub Issue</a></p>
+          </li>
+          <li><p><a href="https://www.npmjs.com/advisories/535">NPM Security Advisory</a></p>
+          </li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/npm:mime:20170907">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--high" >
+              <h2 class="card__title">Regular Expression Denial of Service (DoS)</h2>
+              <div class="card__section">
+          
+                  <div class="label label--high">
+                      <span class="label__text">high severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              minimatch
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+          
+                                      goof@1.0.1, tap@5.8.0 and others
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>minimatch</code> to version 3.0.2 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><a href="https://github.com/isaacs/minimatch/commit/6944abf9e0694bd22fd9dad293faa40c2bc8a955">GitHub Commit</a></li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/npm:minimatch:20160620">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--medium" >
+              <h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>
+              <div class="card__section">
+          
+                  <div class="label label--medium">
+                      <span class="label__text">medium severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              moment
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+                                  goof@1.0.1 and moment@2.15.1
+          
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p> Fixed in: 2.15.2</p>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/npm:moment:20161019">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--low" >
+              <h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>
+              <div class="card__section">
+          
+                  <div class="label label--low">
+                      <span class="label__text">low severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              moment
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+                                  goof@1.0.1 and moment@2.15.1
+          
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>moment</code> to version 2.19.3 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><p><a href="https://github.com/moment/moment/issues/4163">GitHub Issue</a></p>
+          </li>
+          <li><p><a href="https://github.com/moment/moment/pull/4326">GitHub PR</a></p>
+          </li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/npm:moment:20170905">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--medium" >
+              <h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>
+              <div class="card__section">
+          
+                  <div class="label label--medium">
+                      <span class="label__text">medium severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              ms
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+          
+                                      goof@1.0.1, humanize-ms@1.0.1 and others
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>ms</code> to version 0.7.1 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><p><a href="https://www.openwall.com/lists/oss-security/2016/04/20/11">OSS security Advisory</a></p>
+          </li>
+          <li><p><a href="https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS">OWASP - ReDoS</a></p>
+          </li>
+          <li><p><a href="https://www.securityfocus.com/bid/96389">Security Focus</a></p>
+          </li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/npm:ms:20151024">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--low" >
+              <h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>
+              <div class="card__section">
+          
+                  <div class="label label--low">
+                      <span class="label__text">low severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              ms
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+          
+                                      goof@1.0.1, mongoose@4.2.4 and others
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>ms</code> to version 2.0.0 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><a href="https://github.com/zeit/ms/pull/89">GitHub PR</a></li>
+          <li><a href="https://github.com/zeit/ms/pull/89/commits/305f2ddcd4eff7cc7c518aca6bb2b2d2daad8fef">GitHub Commit</a></li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/npm:ms:20170412">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--high" >
+              <h2 class="card__title">Regular Expression Denial of Service (DoS)</h2>
+              <div class="card__section">
+          
+                  <div class="label label--high">
+                      <span class="label__text">high severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              negotiator
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+          
+                                      goof@1.0.1, errorhandler@1.2.0 and others
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>negotiator</code> to version 0.6.1 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><p><a href="https://github.com/jshttp/negotiator/commit/26a05ec15cf7d1fa56000d66ebe9c9a1a62cb75c">GitHub Commit</a></p>
+          </li>
+          <li><p><a href="https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS">OSWAP Advisory</a></p>
+          </li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/npm:negotiator:20160616">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--high" >
+              <h2 class="card__title">Uninitialized Memory Exposure</h2>
+              <div class="card__section">
+          
+                  <div class="label label--high">
+                      <span class="label__text">high severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              npmconf
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+                                  goof@1.0.1 and npmconf@0.0.24
+          
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>npmconf</code> to version 2.1.3 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><a href="https://hackerone.com/reports/320269">HAckerOne Report</a></li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/npm:npmconf:20180512">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--high" >
+              <h2 class="card__title">Prototype Override Protection Bypass</h2>
+              <div class="card__section">
+          
+                  <div class="label label--high">
+                      <span class="label__text">high severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              qs
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+          
+                                      goof@1.0.1, body-parser@1.9.0 and others
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>qs</code> to version 6.0.4, 6.1.2, 6.2.3, 6.3.2 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><p><a href="https://github.com/ljharb/qs/commit/beade029171b8cef9cee0d03ebe577e2dd84976d">GitHub Commit</a></p>
+          </li>
+          <li><p><a href="https://github.com/ljharb/qs/issues/200">GitHub Issue</a></p>
+          </li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/npm:qs:20170213">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--medium" >
+              <h2 class="card__title">Remote Memory Exposure</h2>
+              <div class="card__section">
+          
+                  <div class="label label--medium">
+                      <span class="label__text">medium severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              request
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+          
+                                      goof@1.0.1, tap@5.8.0 and others
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>request</code> to version 2.68.0 or higher.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><p><a href="https://github.com/ChALkeR/notes/blob/master/Buffer-knows-everything.md">Blog: Information about Buffer</a></p>
+          </li>
+          <li><p><a href="https://github.com/ChALkeR/notes/blob/master/Lets-fix-Buffer-API.md#previous-materials">Blog: Node Buffer API fix</a></p>
+          </li>
+          <li><p><a href="https://github.com/request/request/pull/2018/commits/3d31d4526fa4d4e4f59b89cabe194fb671063cdb">GitHub Commit</a></p>
+          </li>
+          <li><p><a href="https://github.com/request/request/pull/2018">GitHub PR</a></p>
+          </li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/npm:request:20160119">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--medium" >
+              <h2 class="card__title">Regular Expression Denial of Service (ReDoS)</h2>
+              <div class="card__section">
+          
+                  <div class="label label--medium">
+                      <span class="label__text">medium severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              semver
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+          
+                                      goof@1.0.1, npmconf@0.0.24 and others
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Update to a version 4.3.2 or greater. From the issue description [2]: &quot;Package version can no longer be more than 256 characters long. This prevents a situation in which parsing the version number can use exponentially more time and memory to parse, leading to a potential denial of service.&quot;</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><a href="https://github.com/npm/npm/releases/tag/v2.7.5">GitHub Release</a></li>
+          </ul>
+          <h2 id="remediation-1">Remediation</h2>
+          <p>Upgrade <code>semver</code> to version 4.3.2 or higher.</p>
+          <h2 id="references-1">References</h2>
+          <ul>
+          <li><a href="https://github.com/npm/npm/releases/tag/v2.7.5">GitHub Release</a></li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/npm:semver:20150403">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--medium" >
+              <h2 class="card__title">Directory Traversal</h2>
+              <div class="card__section">
+          
+                  <div class="label label--medium">
+                      <span class="label__text">medium severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              st
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+                                  goof@1.0.1 and st@0.2.4
+          
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade to version 0.2.5 or greater.</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><a href="https://github.com/isaacs/st#security-status">https://github.com/isaacs/st#security-status</a></li>
+          <li><a href="http://blog.npmjs.org/post/80277229932/newly-paranoid-maintainers">http://blog.npmjs.org/post/80277229932/newly-paranoid-maintainers</a></li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/npm:st:20140206">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--medium" >
+              <h2 class="card__title">Open Redirect</h2>
+              <div class="card__section">
+          
+                  <div class="label label--medium">
+                      <span class="label__text">medium severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              st
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+                                  goof@1.0.1 and st@0.2.4
+          
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p> Fixed in: 1.2.2</p>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/npm:st:20171013">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--medium" >
+              <h2 class="card__title">Uninitialized Memory Exposure</h2>
+              <div class="card__section">
+          
+                  <div class="label label--medium">
+                      <span class="label__text">medium severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Vulnerable module:
+          
+                              tunnel-agent
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+          
+                                      goof@1.0.1, tap@5.8.0 and others
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>Upgrade <code>tunnel-agent</code> to version 0.6.0 or higher.
+          <strong>Note</strong> This is vulnerable only for Node &lt;=4</p>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><a href="https://github.com/request/tunnel-agent/commit/9ca95ec7219daface8a6fc2674000653de0922c0">GitHub Commit</a></li>
+          <li><a href="https://gist.github.com/ChALkeR/fd6b2c445834244e7d440a043f9d2ff4">PoC by ChALkeR</a></li>
+          </ul>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/npm:tunnel-agent:20170305">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--high" >
+              <h2 class="card__title">GPL-2.0 license</h2>
+              <div class="card__section">
+          
+                  <div class="label label--high">
+                      <span class="label__text">high severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Module:
+          
+                              goof
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+                                  <a href="/test//goof@1.0.1">
+                                      goof@1.0.1
+                                  </a>
+          
+          
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>There is no remediation at the moment</p>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/snyk:lic:npm:goof:GPL-2.0">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+          <div class="card card--vuln  disclosure--not-new severity--medium" >
+              <h2 class="card__title">MPL-2.0 license</h2>
+              <div class="card__section">
+          
+                  <div class="label label--medium">
+                      <span class="label__text">medium severity</span>
+                  </div>
+          
+                  <hr/>
+          
+                  <ul class="card__meta">
+                      <li class="card__meta__item">
+                          Package Manager: npm
+                      </li>
+                      <li class="card__meta__item">
+                              Module:
+          
+                              symbol
+                      </li>
+          
+                      <li class="card__meta__item">Introduced through:
+          
+          
+                                      goof@1.0.1, tap@5.8.0 and others
+                      </li>
+                  </ul>
+          
+                  <hr/>
+          
+          
+              </div><!-- .card__section -->
+          
+                <h2 id="remediation">Remediation</h2>
+          <p>There is no remediation at the moment</p>
+          
+          
+              <div class="cta card__cta">
+                  <p><a href="https://snyk.io/vuln/snyk:lic:npm:symbol:MPL-2.0">More about this vulnerability</a></p>
+              </div>
+          
+          </div><!-- .card -->
+        </div><!-- cards -->
+      </div>
+    </div><!-- .layout-container -->
+
+  </main><!-- .layout-stacked__content -->
+</body>
+
+</html>
