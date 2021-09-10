@@ -103,7 +103,7 @@ exports.create = function (req, res, next) {
     */
 
     res.setHeader('Location', '/');
-    res.status(302).send(xxx);
+    res.status(302).send(xxxxxx);
 
     // res.redirect('/#' + todo.content.toString('base64'));
   });
