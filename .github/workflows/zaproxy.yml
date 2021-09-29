@@ -1,3 +1,4 @@
+#zap scan
 on: [push]
 
 jobs:
