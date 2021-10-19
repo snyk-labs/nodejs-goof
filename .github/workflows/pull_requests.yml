@@ -1,13 +1,17 @@
-name: Snyk Scan Open Source
+name: Snyk CI
+
 on:
-  push:
-    branches: master
+  pull_request:
+    branches: [master]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     env:
       SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+    strategy:
+      matrix:
+        node: ['16']
     steps:
       - uses: actions/checkout@v1
       - name: Use Node ${{ matrix.node-version }}
@@ -21,8 +25,4 @@ jobs:
       - name: Snyk Authenticate
         run: snyk auth "$SNYK_TOKEN"
       - name: Snyk Test
-        run: snyk test --severity-threshold=high --fail-on=upgradable
-      - name: Deploy to EC2
-        run: echo deploy
-      - name: Snyk Monitor
-        run: snyk monitor
+        run: snyk test --file=Pipfile --severity-threshold=high --fail-on=upgradable
