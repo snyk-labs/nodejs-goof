@@ -8,8 +8,8 @@ ignore:
         expires: 2021-07-15T22:13:48.722Z
         created: 2021-06-15T22:13:48.724Z
 patch: {}
-exclude:
-  code:
-    - routes/*
-  global:
-    - routes/*
+#exclude:
+#  code:
+#    - routes/*
+#  global:
+#    - routes/*
