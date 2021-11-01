@@ -19,7 +19,6 @@ jobs:
         steps:
             - checkout
             - run: npm install
-            - run: npm test
             - snyk/scan:
                 fail-on-issues: true
                 monitor-on-build: false
@@ -31,7 +30,6 @@ jobs:
         steps:
             - checkout
             - run: npm install
-            - run: npm test
             - run: npx tsc
 
     # publish-github-release:
