@@ -9,10 +9,6 @@ jobs:
             - checkout
             - run: npm install
             - run: npx tsc
-    build-test-monitor:
-        docker:
-            - image: circleci/node:latest
-        steps:
             - snyk/scan:
                 fail-on-issues: true
                 monitor-on-build: true
@@ -23,4 +19,3 @@ workflows:
     build_and_test:
         jobs:
         - build
-        - build-test-monitor
