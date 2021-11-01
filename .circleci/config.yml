@@ -13,7 +13,7 @@ jobs:
                 fail-on-issues: true
                 monitor-on-build: true
                 token-variable: SNYK_TOKEN
-    build-test:
+    build:
         docker:
             - image: circleci/node:latest
         steps:
@@ -55,46 +55,3 @@ jobs:
     #             cd -
     #             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} ${VERSION} dist/binaries
 workflows:
-    version: 2.1
-    nightly:
-        triggers:
-          - schedule:
-              cron: "0 0 * * *"
-              filters:
-                branches:
-                  only:
-                    - master
-        jobs:
-            - build-test-monitor:
-                context: SNYK
-
-    build-test-monitor:
-        jobs:
-            - build-test-monitor:
-                context: SNYK
-                filters:
-                    branches:
-                        only:
-                            - master
-            # - publish-github-release:
-            #     context: SNYK
-            #     requires:
-            #         - build-test-monitor
-            #     filters:
-            #         branches:
-            #           only:
-            #             - master
-    build-test:
-        jobs:
-            - build-test:
-                context: SNYK
-                filters:
-                    branches:
-                        ignore:
-                        - master
-                        - /pull\/[0-9]+/
-            - build-test-from-fork:
-                filters:
-                    branches:
-                        only:
-                        - /pull\/[0-9]+/
