@@ -19,3 +19,15 @@ workflows:
           version: '16.10'
           # If you are using yarn, change the line below from "npm" to "yarn"
           pkg-manager: npm
+    
+     build-test:
+        docker:
+            - image: circleci/node:latest
+        steps:
+            - checkout
+            - run: npm install
+            - run: npm test
+            - snyk/scan:
+                fail-on-issues: true
+                monitor-on-build: false
+                token-variable: SNYK_TOKEN
