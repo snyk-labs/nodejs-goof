@@ -13,3 +13,4 @@ jobs:
                 fail-on-issues: true
                 monitor-on-build: true
                 token-variable: SNYK_TOKEN
+                
