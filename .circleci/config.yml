@@ -20,7 +20,7 @@ jobs:
             - checkout
             - run: npm install
             - run: npx tsc
-    snyk-test:
+    build-test:
         docker:
             - image: circleci/node:latest
         steps:
