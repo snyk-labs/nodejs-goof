@@ -19,37 +19,16 @@ jobs:
         steps:
             - checkout
             - run: npm install
+            - run: npx tsc
+    snyk-test:
+        docker:
+            - image: circleci/node:latest
+        steps:
+            - checkout
             - snyk/scan:
                 fail-on-issues: true
                 monitor-on-build: false
                 token-variable: SNYK_TOKEN
             - run: npx tsc
-    build-test-from-fork:
-        docker:
-            - image: circleci/node:latest
-        steps:
-            - checkout
-            - run: npm install
-            - run: npx tsc
 
-    # publish-github-release:
-    #     docker:
-    #       - image: gcr.io/snyk-technical-services/cicd-github
-    #         auth:
-    #           username: _json_key
-    #           password: $GCLOUD_GCR_SNYK_TS_READER
-    #     steps:
-    #       - checkout
-    #       - attach_workspace:
-    #           at: .
-    #       - run:
-    #           name: "Publish Release on GitHub"
-    #           command: |    
-    #             # VERSIONJUMP=$(git log --oneline -1 --pretty=%B | cat | grep -E 'minor|major|patch' | awk -F ':' '{print $1}')   
-    #             # VERSION=$(/workdir/nextver.sh "$VERSIONJUMP")
-    #             VERSION=$(cat /root/project/dist/package.json | grep version | awk {'print $2'} | sed 's/"//g' | sed 's/,//g')
-    #             cd /root/project/dist/binaries
-    #             sha256sum snyk-delta-linux > snyk-delta-linux.sha256 && sha256sum snyk-delta-macos > snyk-delta-macos.sha256 && sha256sum snyk-delta-win.exe > snyk-delta-win.exe.sha256
-    #             cd -
-    #             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} ${VERSION} dist/binaries
 workflows:
