@@ -12,7 +12,6 @@
     "start": "node app.js",
     "build": "browserify -r jquery > public/js/bundle.js",
     "cleanup": "mongo express-todo --eval 'db.todos.remove({});'",
-    "test": "snyk test"
   },
   "dependencies": {
     "adm-zip": "0.4.7",
