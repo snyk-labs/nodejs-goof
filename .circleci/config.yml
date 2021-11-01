@@ -2,17 +2,6 @@ version: 2.1
 orbs:
     snyk: snyk/snyk@0.0.8
 jobs:
-    build-test-monitor:
-        docker:
-            - image: circleci/node:latest
-        steps:
-            - checkout
-            - run: npm install
-            - run: npm test
-            - snyk/scan:
-                fail-on-issues: true
-                monitor-on-build: true
-                token-variable: SNYK_TOKEN
     build:
         docker:
             - image: circleci/node:latest
@@ -20,15 +9,13 @@ jobs:
             - checkout
             - run: npm install
             - run: npx tsc
-    build-test:
+    build-test-monitor:
         docker:
             - image: circleci/node:latest
         steps:
-            - checkout
             - snyk/scan:
                 fail-on-issues: true
-                monitor-on-build: false
+                monitor-on-build: true
                 token-variable: SNYK_TOKEN
-            - run: npx tsc
 
 workflows:
