@@ -1,0 +1,27 @@
+on:
+  pull_request:
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Snyk to check Kubernetes manifest file for issues
+        uses: snyk/actions/iac@master
+        continue-on-error: true
+        json: true
+        serif: false
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          file: goof-deployment.yaml
+      - name: Parse results
+        id: snyk_results
+        uses: b4den/snyk-to-markdown-action@master
+        with:
+          file-name: snyk.json
+      - name: Comment PR
+        uses: b4den/comment-pr-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          message: "${{ steps.snyk_results.outputs.vuln_text }}"
