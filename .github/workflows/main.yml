@@ -1,0 +1,12 @@
+### This workflow now has no secrets and a read-only token
+name: Dependabot Workflow
+on:
+  pull_request
+
+jobs:
+  dependabot:
+    runs-on: ubuntu-latest
+    # Always check the actor is Dependabot to prevent your workflow from failing on non-Dependabot PRs
+    if: ${{ github.actor == 'dependabot[bot]' }}
+    steps:
+      - uses: actions/checkout@v2
