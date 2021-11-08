@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: goof
+  labels:
+    app: goof
+spec:
+  selector:
+    matchLabels:
+      app: goof
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: goof
+    spec:
+      containers:
+        - image: jeremiahgrady/goof
+          imagePullPolicy: Always
+          name: goof
+          ports:
+            - containerPort: 3001
+            - containerPort: 9229
+          securityContext:
+            allowPrivilegeEscalation: true
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: goofservice
+  labels:
+    app: goof
+spec:
+  ports:
+    - port: 3001
+      targetPort: 3001
+  selector:
+    app: goof
+  type: LoadBalancer

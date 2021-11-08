@@ -1,0 +1,24 @@
+name: Snyk Scan Open Source
+on:
+  push:
+    branches: master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: NPM Install
+        run: npm install
+      - name: Install Snyk
+        run: sudo npm install -g snyk
+      - name: Snyk Authenticate
+        run: snyk auth "$SNYK_TOKEN"
+      - name: Snyk Test
+        run: snyk test --severity-threshold=high --fail-on=upgradable || true

@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: mk
+  name: jdeployment
+  labels:
+    app: mkjs
+    tier: frontend
+spec:
+  selector:
+    matchLabels:
+      app: mkjs
+      tier: frontend
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: mkjs
+        tier: frontend
+    spec:
+      containers:
+        - image: michaelbraunbass/mk:latest
+          imagePullPolicy: Always
+          name: mkjscontainer
+          ports:
+            - containerPort: 55555
+              name: mkjsport
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: mk
+  name: mk-service
+  labels:
+    app: mkjs
+spec:
+  ports:
+    - port: 8082
+      targetPort: 55555
+  selector:
+    app: mkjs
+    tier: frontend
+  type: LoadBalancer
