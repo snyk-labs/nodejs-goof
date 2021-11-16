@@ -33,7 +33,6 @@
     "st": "0.2.4",
     "stream-buffers": "^3.0.1",
     "tap": "^5.7.0",
-    "tinymce": "=4.8.5",
     "lodash": "=4.17.10"
   },
   "devDependencies": {
