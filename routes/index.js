@@ -88,7 +88,6 @@ exports.create = function (req, res, next) {
     var url = item.match(imgRegex)[1];
     console.log('found img: ' + url);
 
-    // snyk ignore CommandInjection: <please specify a reason of ignoring this>
     exec('identify ' + url, function (err, stdout, stderr) {
       console.log(err);
       if (err !== null) {
