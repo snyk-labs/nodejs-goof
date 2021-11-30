@@ -41,6 +41,7 @@
     "ms": "^0.7.1",
     "npmconf": "0.0.24",
     "optional": "^0.1.3",
+    "snyk-delta": "^1.4.12",
     "st": "0.2.4",
     "stream-buffers": "^3.0.1",
     "tap": "^10.3.3"
