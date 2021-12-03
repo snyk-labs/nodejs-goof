@@ -1,0 +1,6 @@
+└─ goof@1.0.1
+   ├─ licenses: Apache-2.0
+   ├─ repository: https://github.com/Snyk/snyk-todo-list-demo-app
+   ├─ path: /Users/curtisjones/Documents/Projects/goof
+   └─ licenseFile: /Users/curtisjones/Documents/Projects/goof/LICENSE
+
