@@ -1,1 +1,10 @@
 version: '2.1'
+jobs:
+  build:
+    docker:
+      - image: 'cimg/node:lts'
+    steps:
+      - checkout
+      - run: npm ci
+
+workflows: null
