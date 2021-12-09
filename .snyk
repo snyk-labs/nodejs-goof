@@ -1,26 +1,4 @@
 version: v1.14.0
 exclude:
     code:
-      - .mvn/**
-      - .git/**
-      - **/src/test/**
-      - .classpath
-      - .project
-      - .settings/**
-      - nbactions.xml
-      - **/*.iml
-      - **/.ipr
-      - **/.iws
-      - **/.idea
-      - **/.DS_Store
-      - **/.orig
-      - **/*.versionsBackup
-      - **/.*.log
-      - **/target/**
-      - settings/**
-      - classpath/**
-      - project/**
-      - platform-model/card/**
-      - platform-integration-test/card/**
-      - platform-be/card/**
-      - platform-fe/card/**
+        - **/src/test/**
