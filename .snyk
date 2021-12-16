@@ -1,0 +1,173 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.22.1
+# ignores vulnerabilities until expiry date; change duration by modifying expiry date
+ignore:
+  SNYK-JS-EJS-1049328:
+    - ejs-locals > ejs:
+        reason: None given
+        expires: '2022-01-15T20:29:42.457Z'
+  'npm:ejs:20161128':
+    - ejs-locals > ejs:
+        reason: None given
+        expires: '2022-01-15T20:29:42.457Z'
+  'npm:ejs:20161130':
+    - ejs-locals > ejs:
+        reason: None given
+        expires: '2022-01-15T20:29:42.457Z'
+  'npm:ejs:20161130-1':
+    - ejs-locals > ejs:
+        reason: None given
+        expires: '2022-01-15T20:29:42.457Z'
+  SNYK-JS-HBS-1566555:
+    - hbs:
+        reason: None given
+        expires: '2022-01-15T20:29:42.457Z'
+  SNYK-JS-HOSTEDGITINFO-1088355:
+    - tap > nyc > test-exclude > read-pkg-up > read-pkg > normalize-package-data > hosted-git-info:
+        reason: None given
+        expires: '2022-01-15T20:29:42.457Z'
+  SNYK-JS-MINIMIST-559764:
+    - hbs > handlebars > optimist > minimist:
+        reason: None given
+        expires: '2022-01-15T20:29:42.457Z'
+    - tap > nyc > caching-transform > mkdirp > minimist:
+        reason: None given
+        expires: '2022-01-15T20:29:42.457Z'
+    - tap > nyc > istanbul-reports > handlebars > optimist > minimist:
+        reason: None given
+        expires: '2022-01-15T20:29:42.457Z'
+  SNYK-JS-SETVALUE-1540541:
+    - tap > nyc > micromatch > snapdragon > base > cache-base > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.457Z'
+    - tap > nyc > micromatch > braces > snapdragon > base > cache-base > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.457Z'
+    - tap > nyc > micromatch > extglob > snapdragon > base > cache-base > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.457Z'
+    - tap > nyc > micromatch > nanomatch > snapdragon > base > cache-base > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.458Z'
+    - tap > nyc > test-exclude > micromatch > snapdragon > base > cache-base > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.458Z'
+    - tap > nyc > test-exclude > micromatch > braces > snapdragon > base > cache-base > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.458Z'
+    - tap > nyc > micromatch > extglob > expand-brackets > snapdragon > base > cache-base > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.458Z'
+    - tap > nyc > test-exclude > micromatch > extglob > snapdragon > base > cache-base > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.458Z'
+    - tap > nyc > test-exclude > micromatch > nanomatch > snapdragon > base > cache-base > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.458Z'
+    - tap > nyc > test-exclude > micromatch > extglob > expand-brackets > snapdragon > base > cache-base > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.458Z'
+    - tap > nyc > micromatch > snapdragon > base > cache-base > union-value > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.458Z'
+    - tap > nyc > micromatch > braces > snapdragon > base > cache-base > union-value > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.458Z'
+    - tap > nyc > micromatch > extglob > snapdragon > base > cache-base > union-value > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.458Z'
+    - tap > nyc > micromatch > nanomatch > snapdragon > base > cache-base > union-value > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.458Z'
+    - tap > nyc > test-exclude > micromatch > snapdragon > base > cache-base > union-value > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.458Z'
+    - tap > nyc > test-exclude > micromatch > braces > snapdragon > base > cache-base > union-value > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.459Z'
+    - tap > nyc > micromatch > extglob > expand-brackets > snapdragon > base > cache-base > union-value > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.459Z'
+    - tap > nyc > test-exclude > micromatch > extglob > snapdragon > base > cache-base > union-value > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.459Z'
+    - tap > nyc > test-exclude > micromatch > nanomatch > snapdragon > base > cache-base > union-value > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.459Z'
+    - tap > nyc > test-exclude > micromatch > extglob > expand-brackets > snapdragon > base > cache-base > union-value > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.459Z'
+  SNYK-JS-SETVALUE-450213:
+    - tap > nyc > micromatch > snapdragon > base > cache-base > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.457Z'
+    - tap > nyc > micromatch > braces > snapdragon > base > cache-base > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.457Z'
+    - tap > nyc > micromatch > extglob > snapdragon > base > cache-base > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.458Z'
+    - tap > nyc > micromatch > nanomatch > snapdragon > base > cache-base > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.458Z'
+    - tap > nyc > test-exclude > micromatch > snapdragon > base > cache-base > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.458Z'
+    - tap > nyc > test-exclude > micromatch > braces > snapdragon > base > cache-base > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.458Z'
+    - tap > nyc > micromatch > extglob > expand-brackets > snapdragon > base > cache-base > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.458Z'
+    - tap > nyc > test-exclude > micromatch > extglob > snapdragon > base > cache-base > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.458Z'
+    - tap > nyc > test-exclude > micromatch > nanomatch > snapdragon > base > cache-base > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.458Z'
+    - tap > nyc > test-exclude > micromatch > extglob > expand-brackets > snapdragon > base > cache-base > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.458Z'
+    - tap > nyc > micromatch > snapdragon > base > cache-base > union-value > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.458Z'
+    - tap > nyc > micromatch > braces > snapdragon > base > cache-base > union-value > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.458Z'
+    - tap > nyc > micromatch > extglob > snapdragon > base > cache-base > union-value > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.458Z'
+    - tap > nyc > micromatch > nanomatch > snapdragon > base > cache-base > union-value > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.458Z'
+    - tap > nyc > test-exclude > micromatch > snapdragon > base > cache-base > union-value > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.459Z'
+    - tap > nyc > test-exclude > micromatch > braces > snapdragon > base > cache-base > union-value > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.459Z'
+    - tap > nyc > micromatch > extglob > expand-brackets > snapdragon > base > cache-base > union-value > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.459Z'
+    - tap > nyc > test-exclude > micromatch > extglob > snapdragon > base > cache-base > union-value > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.459Z'
+    - tap > nyc > test-exclude > micromatch > nanomatch > snapdragon > base > cache-base > union-value > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.459Z'
+    - tap > nyc > test-exclude > micromatch > extglob > expand-brackets > snapdragon > base > cache-base > union-value > set-value:
+        reason: None given
+        expires: '2022-01-15T20:29:42.459Z'
+  SNYK-JS-DUSTJSLINKEDIN-1089257:
+    - dustjs-linkedin:
+        reason: None given
+        expires: '2022-01-15T20:59:31.218Z'
+  'npm:dustjs-linkedin:20160819':
+    - dustjs-linkedin:
+        reason: None given
+        expires: '2022-01-15T20:59:31.218Z'
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:ms:20151024':
+    - humanize-ms > ms:
+        patched: '2021-12-16T20:29:08.752Z'
