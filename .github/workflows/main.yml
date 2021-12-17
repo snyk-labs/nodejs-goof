@@ -19,7 +19,7 @@ jobs:
         args: --file=Dockerfile
 
     - name: Add Secure Code Warrior contextual training to SARIF
-      uses: SecureCodeWarrior/github-action-add-sarif-contextual-training@v1
+      uses: SecureCodeWarrior/github-action-add-sarif-contextual-training@v1.0.7
       with:
         inputSarifFile: snyk.sarif
         outputSarifFile: snyk.processed.sarif
