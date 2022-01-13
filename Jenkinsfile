@@ -36,7 +36,7 @@ pipeline {
 
       stage('Snyk Test') {
               steps {
-                sh 'echo "***RUNNING SNYK OPEN SOURCE AND CODE TEST***"'
+                sh 'echo "***RUNNING SNYK TEST***"'
                 sh 'snyk test || true'
                 sh 'snyk code test || true'
                     }

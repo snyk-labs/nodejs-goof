@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="zip-slip">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/exploits/zip-slip/my_backup.zip!/" />
+      <root url="jar://$PROJECT_DIR$/exploits/zip-slip/malicious_backup.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
