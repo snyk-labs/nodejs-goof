@@ -6,7 +6,7 @@ pipeline {
             }
 
             environment {
-                    SNYK_TOKEN = credentials('da12766a-46b6-4186-8ba1-83eb1aae653c')
+                    SNYK_TOKEN = da12766a-46b6-4186-8ba1-83eb1aae653c
                 }
 
     stages {
