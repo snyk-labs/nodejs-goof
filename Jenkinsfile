@@ -38,7 +38,7 @@ pipeline {
               steps {
                 sh 'echo "***RUNNING SNYK TEST***"'
                 sh 'snyk test || true'
-                sh 'snyk code test || true'
+                sh 'snyk code test'
                     }
                 }
      }
