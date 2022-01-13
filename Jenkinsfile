@@ -25,18 +25,21 @@ pipeline {
             }
         }
 
-        stage('Snyk Test') {
-          steps {
-            sh 'echo "***RUNNING SNYK TEST***"'
-            sh 'snyk test || true'
-                }
-            }
 
         stage('Snyk Monitor') {
           steps {
             sh 'echo "***RUNNING SNYK TEST***"'
-            sh 'snyk monitor --org=0e87a59b-680e-44ad-a33e-9999d62d8469 --severity-threshold=high'
+            sh 'snyk monitor --org=fdf3b63a-9a4e-43d8-bae3-85212f002bea --project-name=JenkinsGoof'
                 }
             }
+
+
+      stage('Snyk Test') {
+              steps {
+                sh 'echo "***RUNNING SNYK OPEN SOURCE AND CODE TEST***"'
+                sh 'snyk test || true'
+                sh 'snyk code test || true'
+                    }
+                }
      }
     }
