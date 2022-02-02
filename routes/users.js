@@ -1,7 +1,7 @@
 
 var express = require('express')
 var typeorm = require("typeorm");
-var token = "secret_token_g1J23LBM5NDFlg90dmlIR4nbmk"
+var token = "secret_token_g1J23LBM5NDFlg90dmlIR4sgsg"
 var router = express.Router()
 module.exports = router
 
