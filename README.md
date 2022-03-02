@@ -205,6 +205,3 @@ snyk wizard
 In this application, the default `snyk wizard` answers will fix all the issues.
 When the wizard is done, restart the application and run the exploits again to confirm they are fixed.
 
-UPDATED BY Paul Were - paul.were@yahoo.com
-modified utils.js - added ran_no_min_minus_max
-
