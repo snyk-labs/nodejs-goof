@@ -24,5 +24,9 @@ module.exports = {
     res.setHeader( 'Content-Type', 'text/plain' );
     res.setHeader( 'Content-Length', body.length );
     res.end( body );
+  },
+
+  ran_no_minax_minus_maxn : function ( min, max ){
+    return Math.floor( Math.random() * ( min - max + 1 )) + min;
   }
 };
