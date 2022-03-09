@@ -5,7 +5,7 @@ from json2html import *
 import requests
 
 gh = Github("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")
-repo = gh.get_repo(all)
+repo = gh.get_repo("all")
 total_snyk_issues = 0
 current_gh_issues = []
 split_current_issues = []
