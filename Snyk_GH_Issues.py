@@ -4,8 +4,8 @@ import json
 from json2html import *
 import requests
 
-gh = Github("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")
-repo = gh.get_repo("TSRobworld/goof")
+gh = Github("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")
+repo = gh.get_repo(all)
 total_snyk_issues = 0
 current_gh_issues = []
 split_current_issues = []
