@@ -4,7 +4,7 @@ import json
 from json2html import *
 import requests
 
-gh = Github("Your GitHub Auth Token")
+gh = Github("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")
 repo = gh.get_repo("Repo to monitor - username/repo_name")
 total_snyk_issues = 0
 current_gh_issues = []
@@ -50,7 +50,7 @@ values = """
 
 headers = {
     'Content-Type': 'application/json; charset=utf-8',
-    'Authorization': 'Your Snyk Auth'
+    'Authorization': 'da12766a-46b6-4186-8ba1-83eb1aae653c'
 }
 
 new_issues_url = 'https://snyk.io/api/v1/reporting/issues/?from=' + str(yesterday_date) + '&to=' + str(today)
