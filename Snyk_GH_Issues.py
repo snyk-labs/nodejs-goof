@@ -4,7 +4,7 @@ import json
 from json2html import *
 import requests
 
-gh = Github("roberthicksiii@gmail.com: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")
+gh = Github("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s")
 repo = gh.get_repo("https://github.com/TSRobworld/goof")
 total_snyk_issues = 0
 current_gh_issues = []
