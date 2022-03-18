@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v2
       - run: rm -rf .git
       - run: git config --global user.email "dylan.havelock@snyk.io"
-      - run: git config --global user.email "dylansnyk"
+      - run: git config --global user.name "dylansnyk"
       - run: git init
       - run: git remote add origin https://x-access-token:${{ secrets.PAT_GITHUB }}@github.com:dylansnyk/nodejs-goof-no-history.git
       - run: git add .
