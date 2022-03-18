@@ -7,19 +7,11 @@ jobs:
   shallow-push:
     runs-on: ubuntu-latest
     steps: 
-      - name: Make directory for current repo
-        run: |
-          mkdir current
-          mkdir no-history
-          ls -l
-        shell: bash
       - uses: actions/checkout@v2
-        with:
-          path: current
-      - name: Test
-        run: |
-          pwd
-          ls -l
-        shell: bash
-      
-
+      - run: rm -rf .git
+      - run: git init
+      - run: git remote add origin git@github.com:dylansnyk/nodejs-goof-no-history.git
+      - run: git add .
+      - run: git commit -m "force commit $GITHUB_SHA" 
+      - run: git branch -M main
+      - run: git push -f -u origin main
