@@ -1,0 +1,23 @@
+name: shallow push for snyk
+on: 
+  push:
+    branches:
+      - master
+jobs:
+  shallow-push:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Make directory for current repo
+        run: |
+          mkdir current
+          mkdir no-history
+          cd current
+        shell: bash
+      - uses: actions/checkout@v2
+      - name: Test
+        run: |
+          pwd
+          ls -l
+        shell: bash
+      
+
