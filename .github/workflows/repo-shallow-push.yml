@@ -13,7 +13,6 @@ jobs:
           mkdir no-history
         shell: bash
       - uses: actions/checkout@v2
-        path: current
       - name: Test
         run: |
           pwd
