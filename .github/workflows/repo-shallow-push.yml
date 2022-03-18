@@ -12,7 +12,7 @@ jobs:
       - run: git config --global user.email "dylan.havelock@snyk.io"
       - run: git config --global user.name "dylansnyk"
       - run: git init
-      - run: git remote add origin https://x-access-token:${{ secrets.PAT_GITHUB }}@github.com:dylansnyk/nodejs-goof-no-history.git
+      - run: git remote add origin https://x-access-token:${{ secrets.PAT_GITHUB }}@github.com/dylansnyk/nodejs-goof-no-history.git
       - run: git add .
       - run: git commit -m "force commit $GITHUB_SHA" 
       - run: git branch -M main
