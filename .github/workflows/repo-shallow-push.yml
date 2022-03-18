@@ -11,9 +11,9 @@ jobs:
         run: |
           mkdir current
           mkdir no-history
-          cd current
         shell: bash
       - uses: actions/checkout@v2
+        path: current
       - name: Test
         run: |
           pwd
