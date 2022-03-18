@@ -14,7 +14,8 @@ jobs:
           ls -l
         shell: bash
       - uses: actions/checkout@v2
-        path: current
+        with:
+          path: current
       - name: Test
         run: |
           pwd
