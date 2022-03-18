@@ -11,8 +11,10 @@ jobs:
         run: |
           mkdir current
           mkdir no-history
+          ls -l
         shell: bash
       - uses: actions/checkout@v2
+        path: current
       - name: Test
         run: |
           pwd
