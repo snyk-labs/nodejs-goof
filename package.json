@@ -28,7 +28,7 @@
     "express-fileupload": "1.1.10",
     "file-type": "^8.1.0",
     "humanize-ms": "1.0.1",
-    "jquery": "^2.2.4",
+    "jquery": "^3.4.0",
     "lodash": "4.17.4",
     "marked": "0.3.18",
     "method-override": "latest",
