@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
 exclude:
   code:
-    - ./tests/**
-    - ./test.spec.js
+    - tests/**
+    - test.spec.js
