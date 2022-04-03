@@ -8,6 +8,12 @@ jobs:
     steps:
       - checkout
       - run: npm ci
-      - snyk/scan
+      - snyk/scan:
+          fail-on-issues: false
+          monitor-on-build: true
+          project: '${CIRCLE_PROJECT_REPONAME}/${CIRCLE_BRANCH}-app'
+          severity-threshold: high
+          token-variable: SNYK_TOKEN
 workflows: null
+
 
