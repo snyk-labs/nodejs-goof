@@ -1,6 +1,6 @@
 version: '2.1'
 orbs:
-  snyk: snyk/snyk@x.y.z
+  snyk: snyk/snyk@1.1.2
 jobs:
   build:
     docker:
@@ -9,7 +9,7 @@ jobs:
       - checkout
       - run: npm ci
       - snyk/scan:
-          fail-on-issues: false
+          fail-on-issues: true
           monitor-on-build: true
           project: '${CIRCLE_PROJECT_REPONAME}/${CIRCLE_BRANCH}-app'
           severity-threshold: high
