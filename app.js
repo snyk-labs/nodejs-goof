@@ -83,6 +83,10 @@ if (app.get('env') == 'development') {
 var token = 'SECRET_TOKEN_f8ed84e8f41e4146403dd4a6bbcea5e418d23a9';
 console.log('token: ' + token);
 
+var token2 = 'BOOM_SECRET_f8ed84e8f41e4146403dd4a6bbcea5e418d23a9';
+console.log('token: ' + token2);
+
+
 http.createServer(app).listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'));
 });
