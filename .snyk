@@ -2,7 +2,7 @@
 version: v1.25.0
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
-  0dc621dd-6d69-4410-b8ca-be6878ceea45:
+  7b9c1f5e-257d-4d17-a8ea-30d8793fc700:
     - '*':
         reason: some reason
         expires: 2022-05-28T14:46:39.506Z
