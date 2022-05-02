@@ -40,14 +40,16 @@ pipeline {
         }
 
         stage('Publish Snyk Code Report') {
-            publishHTML(target: [
-                allowMissing: false,
-                alwaysLinkToLastBuild: false,
-                keepAll: true,
-                reportDir: '.',
-                reportFiles: 'results.html',
-                reportName: "Snyk Code Report"
-            ])
+            steps {
+                publishHTML(target: [
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: false,
+                    keepAll: true,
+                    reportDir: '.',
+                    reportFiles: 'results.html',
+                    reportName: "Snyk Code Report"
+                ])
+            }
         }
     }
 }
