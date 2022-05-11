@@ -1,0 +1,42 @@
+name: "PR Tests"
+on: 
+  pull_request:
+  workflow_dispatch:
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: snyk/actions/setup@master
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "3.9"
+          architecture: "x64"
+      - name: Snyk test
+        run: snyk test --org=cse-snyk-labs --file=poetry.lock --package-manager=poetry --severity-threshold=critical --project-lifecycle=development
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+  #pytest:
+  #  runs-on: ubuntu-latest
+  #  needs: security
+  #  steps:
+  #    - name: Checkout code
+  #      uses: actions/checkout@v2
+#
+  #    - name: Set up Python 3.9
+  #      uses: actions/setup-python@v2
+  #      with:
+  #        python-version: 3.9
+#
+  #    - name: Install Poetry
+  #      run: curl -sSL https://install.python-poetry.org | python3 -
+#
+  #    - name: Install dependencies
+  #      run: $HOME/.local/bin/poetry install -v
+  #      env:
+  #        POETRY_VIRTUALENVS_IN_PROJECT: true
+#
+  #    - name: Run pytest
+  #      run: |
+  #        source .venv/bin/activate
+  #        $HOME/.local/bin/poetry run pytest

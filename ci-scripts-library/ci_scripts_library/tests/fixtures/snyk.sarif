@@ -1,0 +1,56 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Snyk Open Source",
+          "rules": [
+            {
+              "id": "SNYK-GOLANG-GITHUBCOMGINGONICGIN-1041736",
+              "shortDescription": {
+                "text": "High severity - HTTP Response Splitting vulnerability in github.com/gin-gonic/gin"
+              },
+              "fullDescription": {
+                "text": "(CVE-2020-28483) github.com/gin-gonic/gin@1.7.4"
+              },
+              "help": {
+                "text": "",
+                "markdown": "* Package Manager: gomodules\n* Vulnerable module: github.com/gin-gonic/gin\n* Introduced through: github.com/Contrast-Security-OSS/go-test-bench@0.0.0 and github.com/gin-gonic/gin@1.7.4\n### Detailed paths\n* _Introduced through_: github.com/Contrast-Security-OSS/go-test-bench@0.0.0 › github.com/gin-gonic/gin@1.7.4\n* _Introduced through_: github.com/Contrast-Security-OSS/go-test-bench@0.0.0 › github.com/gin-contrib/multitemplate@#8a2f6dd269a0 › github.com/gin-gonic/gin@1.7.4\n# Overview\n[github.com/gin-gonic/gin](https://github.com/gin-gonic/gin) is a package that implements a HTTP web framework called gin.\n\nAffected versions of this package are vulnerable to HTTP Response Splitting. When `gin` is exposed directly to the internet, a client's IP can be spoofed by setting the `X-Forwarded-For` header.\n# Remediation\nUpgrade `github.com/gin-gonic/gin` to version 1.7.7 or higher.\n# References\n- [GitHub Issue](https://github.com/gin-gonic/gin/issues/2862)\n- [GitHub Release](https://github.com/gin-gonic/gin/releases/tag/v1.7.7)\n"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "CWE-113",
+                  "gomodules"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "SNYK-GOLANG-GITHUBCOMGINGONICGIN-1041736",
+          "level": "error",
+          "message": {
+            "text": "This file introduces a vulnerable github.com/gin-gonic/gin package with a high severity vulnerability."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "go.mod"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+name: "Test and Build"
+# if something in core/* is changed, regenerate all binaries
+# if something in another folder is changed, regenerate only that binary
+on: [push, pull_request]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Install Poetry
+        run: curl -sSL https://install.python-poetry.org | python3 -
+
+      - name: Install dependencies
+        run: $HOME/.local/bin/poetry install -v
+        env:
+          POETRY_VIRTUALENVS_IN_PROJECT: true
+      - name: Snyk setup
+      - uses: snyk/actions/setup@master
+      - name: Snyk test
+        run: snyk test --org=ie-playground --file=poetry.lock --package-manager=poetry --severity-threshold=critical --project-lifecycle=development
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+  

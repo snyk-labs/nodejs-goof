@@ -1,0 +1,46 @@
+name: "release"
+# if something in core/* is changed, regenerate all binaries
+# if something in another folder is changed, regenerate only that binary
+on:
+  push:
+    branches:
+      - chore/workflow-for-release-executables
+  workflow_dispatch:
+  
+jobs:
+  build-test-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Install Poetry
+        run: curl -sSL https://install.python-poetry.org | python3 -
+
+      - name: Install dependencies
+        run: $HOME/.local/bin/poetry install -v
+        env:
+          POETRY_VIRTUALENVS_IN_PROJECT: true
+      - name: Snyk setup
+        uses: snyk/actions/setup@master
+      - name: Snyk monitor
+        run: snyk monitor --org=ie-playground --file=poetry.lock --package-manager=poetry --project-lifecycle=development --tags=app=ci-scripts-library
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      - name: generate binary - linux
+<<<<<<< HEAD
+        run: .venv/bin/pyinstaller ci_scripts_library/snyk_sarif_to_gh_issues/cli.py --name snyk_sarif_to_gh_issues_linux --onefile --clean --windowed --hidden-import=_cffi_backend
+=======
+        run: .venv/bin/pyinstaller ci_scripts_library/snyk_sarif_to_gh_issues/cli.py --onefile --clean --windowed --hidden-import=_cffi_backend
+>>>>>>> 95c20fa... Update build-test-release.yml
+      - name: upload binary
+        uses: actions/upload-artifact@v2
+        with:
+          name: name-of-artifact
+          path: ${{ github.workspace }}/dist/snyk_sarif_to_gh_issues_linux
+
