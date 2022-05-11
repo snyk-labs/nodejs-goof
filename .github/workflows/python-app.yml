@@ -1,0 +1,36 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: Python application
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+permissions:
+  contents: read
+
+env:
+    REMOTE_REPO_URL: ${{ secrets.REMOTE_REPO_URL }},
+    SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }},
+    GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.9.5"
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Create and delete GitHub issues based off of Snyk projects
+      run: python3 /ci-scripts-library/ci_scripts_library/snyk_scm_issues_to_gh_issues/cli.py sync_issues
