@@ -2,7 +2,7 @@ pipeline {
     agent any
         tools
             {
-            nodejs 'NodeJS 11.0.0'
+            nodejs 'NodeJS 18.1.0'
             }
 
             environment {
@@ -10,11 +10,12 @@ pipeline {
                 }
 
     stages {
-        stage('Install Snyk') {
+        stage('Install Snyk and Snyk Filter') {
               steps {
                 sh 'node -v'
                 sh 'npm prune'
                 sh 'npm install -g snyk'
+                sh 'npm install -g snyk-filter'
               }
             }
 
@@ -37,7 +38,8 @@ pipeline {
       stage('Snyk Test') {
               steps {
                 sh 'echo "***RUNNING SNYK TEST***"'
-                sh 'snyk test || true'
+                sh 'snyk test --json-file-output=vuln.json || true'
+                sh 'snyk-filter -i vuln.json -f example-licenses-only.yml'
                 sh 'snyk code test'
                     }
                 }
