@@ -3,7 +3,7 @@
  */
 
 // mongoose setup
-require('./mongoose-db'); //database
+require('./mongoose-db');
 require('./typeorm-db')
 
 var st = require('st');
