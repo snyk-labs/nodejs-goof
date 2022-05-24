@@ -20,6 +20,9 @@ jobs: # a collection of steps
       - run: # run snyk auth - authenticate snyk use environment variables to add token
           name: snyk auth
           command: snyk auth $SNYK_TOKEN
-      - run: # run snyk test - run snyk test
+      - run: # run npm i -g snyk-delta
+          name: install snyk-delta
+          command: 'sudo npm install -g snyk-delta'
+      - run: # run snyk delta - run snyk test and pipe snyk delta
           name: snyk delta
-          command: snyk delta
+          command: snyk test --json --print-deps | snyk-delta
