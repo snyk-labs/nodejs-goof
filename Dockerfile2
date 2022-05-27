@@ -1,0 +1,7 @@
+FROM node:latest
+WORKDIR /usr/src/app
+COPY package*.json /app
+RUN npm ci
+COPY . .
+CMD ["npm","start"]
+
