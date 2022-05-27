@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "adm-zip": "0.4.7",
-    "ajv": "^5.5.2",
+    "ajv": "^4.11.6",
     "body-parser": "1.9.0",
     "cfenv": "^1.0.4",
     "consolidate": "0.14.5",
