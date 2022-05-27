@@ -8,7 +8,10 @@ pipeline {
     stages {
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                sh '''
+                    apt install nodejs npm
+                    npm install
+                '''
             }
         }
 
