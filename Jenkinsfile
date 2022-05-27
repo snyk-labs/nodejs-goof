@@ -8,12 +8,7 @@ pipeline {
     stages {
         stage('Install Dependencies') {
             steps {
-                sh '''
-                    curl -sL https://deb.nodesource.com/setup_10.x | bash -
-                    apt-get -y install nodejs
-                    apt-get -y install npm
-                    npm install
-                '''
+                sh 'npm install'
             }
         }
 
