@@ -149,6 +149,16 @@ function parse(todo) {
   return t;
 }
 
+exports.addNewXSS = () => (req, res) => {
+  Todo.findAll({
+    where: {
+      id: JSON.parse(req.params.id)
+    }
+  }).then((todo) => {
+    return res.send(todo)
+  })
+}
+
 exports.create = function (req, res, next) {
   // console.log('req.body: ' + JSON.stringify(req.body));
 
