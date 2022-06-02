@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-goof
+  labels:
+    app: nodejs-goof
+spec:
+  selector:
+    matchLabels:
+      app: nodejs-goof
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: nodejs-goof
+    spec:
+      containers:
+      - name: nodejs-goof
+        image: troysnyk/nodejs-goof
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 3000
+        securityContext:
+          privileged: true
