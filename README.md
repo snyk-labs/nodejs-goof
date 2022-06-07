@@ -1,5 +1,5 @@
 # Goof - Snyk's vulnerable demo app
-[![Known Vulnerabilities](https://snyk.io/test/github/snyk/goof/badge.svg?style=flat-square)](https://snyk.io/test/github/snyk/goof)
+[![Known Vulnerabilities](https://snyk.io/test/github/noelmom/nodejs-goof/badge.svg?style=flat-square)](https://snyk.io/test/github/noelmom/nodejs-goof)
 
 A vulnerable Node.js demo application, based on the [Dreamers Lab tutorial](http://dreamerslab.com/blog/en/write-a-todo-list-with-express-and-mongodb/).
 
@@ -14,7 +14,7 @@ This vulnerable app includes the following capabilities to experiment with:
 ```bash
 mongod &
 
-git clone https://github.com/snyk-labs/nodejs-goof
+git clone https://github.com/noelmom/nodejs-goof
 npm install
 npm start
 ```
