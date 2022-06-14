@@ -3,10 +3,17 @@ var EntitySchema = typeorm.EntitySchema;
 
 const Users = require("./entity/Users")
 
+// Default MySQL URI is local
+const DOCKER = process.env.DOCKER
+if (DOCKER === '1') {
+  var dbHost = "goof-mysql";
+} else {
+  var dbHost = "localhost";
+}
 typeorm.createConnection({
   name: "mysql",
   type: "mysql",
-  host: "localhost",
+  host: dbHost,
   port: 3306,
   username: "root",
   password: "root",
