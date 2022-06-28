@@ -11,13 +11,13 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: --sarif-file-output=snyk.sarif
+          args: --json-file-output=snyk.json
           
 
       - name: install snyk-to-html
         run: |
           npm install snyk-to-html -g
-          cat snyk.sarif | snyk-to-html -o result.html
+          cat snyk.json | snyk-to-html -o result.html
           mkdir downloads
           pwd
           ls -al
