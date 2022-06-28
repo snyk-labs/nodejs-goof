@@ -19,6 +19,8 @@ jobs:
           npm install snyk-to-html -g
           cat snyk.sarif | snyk-to-html -o result.html
           mkdir downloads
+          pwd
+          ls -al
           cp -v /home/runner/work/rhicksiii91/goof/*.html /home/runner/work/rhicksiii91/goof/downloads
       - name: Run Snyk test 
         uses: actions/upload-artifact@v2
