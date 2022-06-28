@@ -1,0 +1,23 @@
+name: Example workflow using Snyk
+on: push
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      - name: install snyk-to-html
+        run: |
+          npm install snyk-to-html -g
+          snyk test --json | snyk-to-html -o result.html
+          mkdir downloads
+          cp -v /home/runner/work/rhicksiii91/goof/*.html /home/runner/work/rhicksiii91/goof/downloads
+      - name: Run Snyk test 
+        uses: actions/upload-artifact@v2
+        with:
+          name: results
+          path: downloads
