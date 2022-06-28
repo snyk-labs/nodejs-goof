@@ -21,7 +21,7 @@ jobs:
           mkdir downloads
           pwd
           ls -al
-          cp -v /home/runner/work/rhicksiii91/goof/*.html /home/runner/work/rhicksiii91/goof/downloads
+          cp -v /home/runner/work/goof/goof/*.html /home/runner/work/goof/goof/downloads
       - name: Run Snyk test 
         uses: actions/upload-artifact@v2
         with:
