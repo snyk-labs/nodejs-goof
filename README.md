@@ -14,7 +14,7 @@ This vulnerable app includes the following capabilities to experiment with:
 ```bash
 mongod &
 
-git clone https://github.com/snyk/goof.git
+git clone https://github.com/snyk-labs/nodejs-goof
 npm install
 npm start
 ```
