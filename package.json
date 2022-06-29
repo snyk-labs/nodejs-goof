@@ -1,6 +1,6 @@
 {
   "name": "goof",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A vulnerable todo demo application",
   "homepage": "https://snyk.io/",
   "repository": {
@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "adm-zip": "0.4.7",
-    "body-parser": "1.9.0",
+    "body-parser": "1.8.0",
     "cfenv": "^1.0.4",
     "consolidate": "0.14.5",
     "dustjs-helpers": "1.5.0",
