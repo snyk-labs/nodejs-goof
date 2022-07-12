@@ -27,7 +27,7 @@ exports.index = function (req, res, next) {
       if (err) return next(err);
 
       res.render('index', {
-        title: 'Goof TODO',
+        title: 'Patch TODO List',
         subhead: 'Vulnerabilities at their best',
         todos: todos,
       });
@@ -299,7 +299,7 @@ exports.about_new = function (req, res, next) {
   console.log(JSON.stringify(req.query));
   return res.render("about_new.dust",
     {
-      title: 'Goof TODO',
+      title: 'Patch TODO List',
       subhead: 'Vulnerabilities at their best',
       device: req.query.device
     });
