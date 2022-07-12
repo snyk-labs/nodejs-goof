@@ -193,7 +193,7 @@ To run the Node.js app with runtime monitoring:
 SNYK_PROJECT_ID=<PROJECT_ID> npm start
 ```
 
-** The app will continue to work normally even if not provided a project id
+** The app will continue to work normally even if it's not provided a project id
 
 ## Fixing the issues
 To find these flaws in this application (and in your own apps), run:
