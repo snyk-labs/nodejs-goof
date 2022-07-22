@@ -2,7 +2,7 @@
  * Module dependencies.
  */
 
-// Test comment
+//
 
 // mongoose setup
 require('./mongoose-db');
