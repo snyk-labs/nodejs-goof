@@ -11,6 +11,7 @@ jobs:
         continue-on-error: true
         env:
            SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+           SNYK_API: ${{ secrets.SNYK_API }}
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v1
         with:
