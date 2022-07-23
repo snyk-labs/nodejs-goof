@@ -27,7 +27,7 @@
     "express": "4.12.4",
     "express-fileupload": "0.0.5",
     "express-session": "^1.17.2",
-    "file-type": "^8.1.0",
+    "file-type": "^16.5.4",
     "hbs": "^4.0.4",
     "humanize-ms": "1.0.1",
     "jquery": "^2.2.4",
