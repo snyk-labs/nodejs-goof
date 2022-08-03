@@ -10,7 +10,7 @@ This vulnerable app includes the following capabilities to experiment with:
 * [Docker Image Scanning](#docker-image-scanning) for base images with known vulnerabilities in system libraries
 * [Runtime alerts](#runtime-alerts) for detecting an invocation of vulnerable functions in open source dependencies
 
-## Running
+## Running -
 ```bash
 mongod &
 
