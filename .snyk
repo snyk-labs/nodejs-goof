@@ -1,24 +1,20 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.22.0
-ignore: {}
+version: v1.25.0
+# ignores vulnerabilities until expiry date; change duration by modifying expiry date
+ignore:
+  SNYK-JS-HANDLEBARS-534988:
+    - '*':
+        reason: None Given
+        expires: 2022-09-16T11:27:24.726Z
+        created: 2022-08-17T11:27:24.731Z
 # patches apply the minimum changes required to fix a vulnerability
 patch:
-  SNYK-JS-LODASH-567746:
-    - tap > nyc > istanbul-lib-instrument > babel-types > lodash:
-        patched: '2021-08-12T16:57:03.160Z'
-    - tap > nyc > istanbul-lib-instrument > babel-generator > lodash:
-        patched: '2021-08-12T16:57:03.160Z'
-    - tap > nyc > istanbul-lib-instrument > babel-traverse > lodash:
-        patched: '2021-08-12T16:57:03.160Z'
-    - tap > nyc > istanbul-lib-instrument > babel-template > lodash:
-        patched: '2021-08-12T16:57:03.160Z'
-    - tap > nyc > istanbul-lib-instrument > babel-generator > babel-types > lodash:
-        patched: '2021-08-12T16:57:03.160Z'
-    - tap > nyc > istanbul-lib-instrument > babel-traverse > babel-types > lodash:
-        patched: '2021-08-12T16:57:03.160Z'
-    - tap > nyc > istanbul-lib-instrument > babel-template > babel-types > lodash:
-        patched: '2021-08-12T16:57:03.160Z'
-    - tap > nyc > istanbul-lib-instrument > babel-template > babel-traverse > lodash:
-        patched: '2021-08-12T16:57:03.160Z'
-    - tap > nyc > istanbul-lib-instrument > babel-template > babel-traverse > babel-types > lodash:
-        patched: '2021-08-12T16:57:03.160Z'
+  'npm:negotiator:20160616':
+    - errorhandler > accepts > negotiator:
+        patched: '2021-10-28T13:42:53.770Z'
+  'npm:ms:20170412':
+    - ms:
+        patched: '2021-10-28T13:42:53.770Z'
+  'npm:ms:20151024':
+    - humanize-ms > ms:
+        patched: '2021-10-28T13:42:53.770Z'
