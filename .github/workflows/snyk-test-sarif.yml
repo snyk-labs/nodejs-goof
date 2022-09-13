@@ -1,17 +1,18 @@
-name: "snyk test"
-on: [push, pull_request]
+name: Example workflow for Node using Snyk
+on: push
 jobs:
-  build:
+  security:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: snyk/actions/setup@master
-      - name: Snyk Test
-        run: snyk test --sarif-file-output=snyk-sarif1.json
-        continue-on-error: true
+      - uses: actions/checkout@master
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/node@master
+        continue-on-error: true # To make sure that SARIF upload gets called
         env:
-           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-      - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@v1
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          sarif_file: snyk-sarif1.json
+          args: --sarif-file-output=snyk.sarif
+      - name: Upload result to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: snyk.sarif
