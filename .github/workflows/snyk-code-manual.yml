@@ -11,10 +11,9 @@ jobs:
       - uses: actions/checkout@v2
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/setup@master
+        run: snyk code test --sarif-file-output=results.sarif
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          run: snyk code test --sarif-file-output=results.sarif
       - name: Upload SARIF
         uses: github/codeql-action/upload-sarif@v1
         with:
