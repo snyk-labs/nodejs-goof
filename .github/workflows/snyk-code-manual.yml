@@ -9,8 +9,9 @@ jobs:
       security-events: write
     steps:
       - uses: actions/checkout@v2
-      - name: Run Snyk to check for vulnerabilities
+      - name: Setup Snyk
         uses: snyk/actions/setup@master
+      - name: Run Snyk to check for vulnerabilities
         run: snyk code test --sarif-file-output=results.sarif
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
