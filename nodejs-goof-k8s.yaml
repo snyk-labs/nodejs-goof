@@ -161,7 +161,7 @@ items:
             io.kompose.service: goof-mongo
         spec:
           containers:
-            - image: mongo
+            - image: mongo:5.0.13
               name: goof-mongo
               ports:
                 - containerPort: 27017
