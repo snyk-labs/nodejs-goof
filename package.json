@@ -15,6 +15,7 @@
     "test": "snyk test"
   },
   "dependencies": {
+    "image-type": "4.1.0", 
     "adm-zip": "0.4.7",
     "body-parser": "1.9.0",
     "cfenv": "^1.0.4",
