@@ -1,0 +1,45 @@
+ignore:
+  SNYK-JS-KERBEROS-568900:
+    - mongoose@4.2.4:
+        reason: transitive ignore
+        expires: '2100-01-01'
+  SNYK-JS-MONGODB-473855:
+    - mongoose@4.2.4:
+        reason: transitive ignore
+        expires: '2100-01-01'
+  SNYK-JS-MONGOOSE-1086688:
+    - mongoose@4.2.4:
+        reason: transitive ignore
+        expires: '2100-01-01'
+  SNYK-JS-MONGOOSE-2961688:
+    - mongoose@4.2.4:
+        reason: transitive ignore
+        expires: '2100-01-01'
+  SNYK-JS-MONGOOSE-472486:
+    - mongoose@4.2.4:
+        reason: transitive ignore
+        expires: '2100-01-01'
+  npm:mongoose:20160116:
+    - mongoose@4.2.4:
+        reason: transitive ignore
+        expires: '2100-01-01'
+  SNYK-JS-MPATH-1577289:
+    - mongoose@4.2.4:
+        reason: transitive ignore
+        expires: '2100-01-01'
+  SNYK-JS-MQUERY-1050858:
+    - mongoose@4.2.4:
+        reason: transitive ignore
+        expires: '2100-01-01'
+  SNYK-JS-MQUERY-1089718:
+    - mongoose@4.2.4:
+        reason: transitive ignore
+        expires: '2100-01-01'
+  npm:debug:20170905:
+    - mongoose@4.2.4:
+        reason: transitive ignore
+        expires: '2100-01-01'
+  npm:ms:20170412:
+    - mongoose@4.2.4:
+        reason: transitive ignore
+        expires: '2100-01-01'
