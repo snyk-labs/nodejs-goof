@@ -9,20 +9,14 @@
   </head>
   <body>
     <div id="layout">
-      <%- body %>
+      {{{body}}}
       <div id="layout-footer"></div>
     </div>
     <div id="footer-wrap">
 
-        <form ref='uploadForm' 
-            id='uploadForm' 
-            action='/import' 
-            method='post' 
-            encType="multipart/form-data">
-                <input type="file" name="importFile" />
-                <input type='submit' value='Import!' />
-        </form>		
-        <button><a href="/public/about.html">About</a></button>  
+      <div id="footer">
+          <a href="/public/about.html">about</a>
+      </div>
     </div>
   </body>
 </html>
