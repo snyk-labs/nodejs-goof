@@ -29,6 +29,7 @@
     "express-fileupload": "0.0.5",
     "express-session": "^1.17.2",
     "file-type": "^8.1.0",
+    "forecast": "0.2.1",
     "hbs": "^4.0.4",
     "humanize-ms": "1.0.1",
     "jquery": "^2.2.4",
