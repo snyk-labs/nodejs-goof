@@ -1,0 +1,12 @@
+policies:
+	- if: ['ServerSideWeb', 'EnvVariableSource']
+    not: ['ClientSideWeb']
+    then: ignore
+  - if: ['Sqli', 'DatabaseSource']
+    then: low-priority
+  - if: ['ClientSideWeb', 'HttpResponseSource', 'Logging']
+    then: ignore
+# One can use the feature to turn off rules as well.
+  - if: ['HardcodedCredentials']
+    then: ignore
+    reason: "Too many FPs"
