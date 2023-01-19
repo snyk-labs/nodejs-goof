@@ -14,12 +14,11 @@ services:
       - goof-mongo
   goof-mongo:
     container_name: goof-mongo
-    image: mongo
+    image: mongo:3
     ports:
       - "27017:27017"
   good-mysql:
     container_name: goof-mysql
-    platform: linux/x86_64
     image: mysql:5
     environment:
       MYSQL_ROOT_PASSWORD: root
