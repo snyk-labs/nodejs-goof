@@ -271,6 +271,19 @@ exports.import = function (req, res, next) {
   res.redirect('/');
 };
 
+exports.destroy = function (req, res, next) {
+  Todo.findById(req.params.id, function (err, todo) {
+
+    try {
+      todo.remove(function (err, todo) {
+        if (err) return next(err);
+        res.redirect('/');
+      });
+    } catch (e) {
+    }
+  });
+};
+
 exports.about_new = function (req, res, next) {
   console.log(JSON.stringify(req.query));
   return res.render("about_new.dust",
