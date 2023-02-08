@@ -1,0 +1,10 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.25.0
+ignore: {}
+patch: {}
+exclude:
+  global:
+    - '/Users/aaronpynos/git/goof/routes/index.js'
+        reason: Ignore Reason Here
+        expires: 2031-01-20T00:00:00.000Z
+        created: 2023-02-08T18:09:35.083Z
