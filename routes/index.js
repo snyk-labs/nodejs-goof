@@ -100,6 +100,14 @@ exports.login = function (req, res, next) {
 app.use('/login', loginLimiter);
 
 
+const rateLimit = require("express-rate-limit");
+
+// Limit requests to 100 requests per 15 minutes (900 seconds) for the admin endpoint
+const adminLimiter = rateLimit({
+  windowMs: 900000,
+  max: 100,
+});
+
 exports.admin = function (req, res, next) {
   return res.render('admin', {
     title: 'Admin Access Granted',
@@ -107,12 +115,28 @@ exports.admin = function (req, res, next) {
   });
 };
 
+// Apply the rate limiter to the admin endpoint
+app.use('/admin', adminLimiter);
+
+
+const rateLimit = require("express-rate-limit");
+
+// Limit requests to 100 requests per 15 minutes (900 seconds) for the account details endpoint
+const accountDetailsLimiter = rateLimit({
+  windowMs: 900000,
+  max: 100,
+});
+
 exports.get_account_details = function(req, res, next) {
   // @TODO need to add a database call to get the profile from the database
   // and provide it to the view to display
   const profile = {}
  	return res.render('account.hbs', profile)
 }
+
+// Apply the rate limiter to the account details endpoint
+app.use('/account/details', accountDetailsLimiter);
+
 
 exports.save_account_details = function(req, res, next) {
   // get the profile details from the JSON
