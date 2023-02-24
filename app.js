@@ -39,11 +39,14 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(methodOverride());
+const session = require('express-session');
+const app = express();
+// set SESSION_SECRET variable in deployment env to avoid leaks
 app.use(session({
-  secret: 'keyboard cat',
+  secret: process.env.SESSION_SECRET,
   name: 'connect.sid',
   cookie: { path: '/' }
-}))
+}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(fileUpload());
