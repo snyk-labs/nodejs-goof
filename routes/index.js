@@ -34,22 +34,38 @@ exports.index = function (req, res, next) {
     });
 };
 
+const { validationResult } = require('express-validator');
+
 exports.loginHandler = function (req, res, next) {
-  if (validator.isEmail(req.body.username)) {
-    User.find({ username: req.body.username, password: req.body.password }, function (err, users) {
-      if (users.length > 0) {
-        const redirectPage = req.body.redirectPage
-        const session = req.session
-        const username = req.body.username
-        return adminLoginSuccess(redirectPage, session, username, res)
-      } else {
-        return res.status(401).send()
-      }
-    });
-  } else {
-    return res.status(401).send()
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
   }
+
+  const sanitizedUsername = req.sanitize('username').trim().escape();
+  const sanitizedPassword = req.sanitize('password').trim().escape();
+  User.findOne({ username: sanitizedUsername }, function (err, user) {
+    if (err) {
+      return res.status(500).send();
+    }
+    if (!user) {
+      return res.status(401).send();
+    }
+    user.comparePassword(sanitizedPassword, function (err, isMatch) {
+      if (err) {
+        return res.status(500).send();
+      }
+      if (!isMatch) {
+        return res.status(401).send();
+      }
+      const redirectPage = req.sanitize('redirectPage').trim().escape();
+      const session = req.session;
+      const username = sanitizedUsername;
+      return adminLoginSuccess(redirectPage, session, username, res);
+    });
+  });
 };
+
 
 function adminLoginSuccess(redirectPage, session, username, res) {
   session.loggedIn = 1
@@ -64,6 +80,14 @@ function adminLoginSuccess(redirectPage, session, username, res) {
   }
 }
 
+const rateLimit = require("express-rate-limit");
+
+// Limit requests to 100 requests per 15 minutes (900 seconds) for the login endpoint
+const loginLimiter = rateLimit({
+  windowMs: 900000,
+  max: 100,
+});
+
 exports.login = function (req, res, next) {
   return res.render('admin', {
     title: 'Admin Access',
@@ -72,6 +96,18 @@ exports.login = function (req, res, next) {
   });
 };
 
+// Apply the rate limiter to the login endpoint
+app.use('/login', loginLimiter);
+
+
+const rateLimit = require("express-rate-limit");
+
+// Limit requests to 100 requests per 15 minutes (900 seconds) for the admin endpoint
+const adminLimiter = rateLimit({
+  windowMs: 900000,
+  max: 100,
+});
+
 exports.admin = function (req, res, next) {
   return res.render('admin', {
     title: 'Admin Access Granted',
@@ -79,12 +115,28 @@ exports.admin = function (req, res, next) {
   });
 };
 
+// Apply the rate limiter to the admin endpoint
+app.use('/admin', adminLimiter);
+
+
+const rateLimit = require("express-rate-limit");
+
+// Limit requests to 100 requests per 15 minutes (900 seconds) for the account details endpoint
+const accountDetailsLimiter = rateLimit({
+  windowMs: 900000,
+  max: 100,
+});
+
 exports.get_account_details = function(req, res, next) {
   // @TODO need to add a database call to get the profile from the database
   // and provide it to the view to display
   const profile = {}
  	return res.render('account.hbs', profile)
 }
+
+// Apply the rate limiter to the account details endpoint
+app.use('/account/details', accountDetailsLimiter);
+
 
 exports.save_account_details = function(req, res, next) {
   // get the profile details from the JSON
@@ -188,17 +240,23 @@ exports.create = function (req, res, next) {
 };
 
 exports.destroy = function (req, res, next) {
-  Todo.findById(req.params.id, function (err, todo) {
+  const validId = req.params.id.match(/^[0-9a-fA-F]{24}$/) ? req.params.id : null;
 
-    try {
-      todo.remove(function (err, todo) {
-        if (err) return next(err);
-        res.redirect('/');
-      });
-    } catch (e) {
-    }
+  if (!validId) {
+    return res.status(400).send('Invalid ID');
+  }
+
+  const validFields = {
+    _id: validId
+  };
+
+  Todo.findOneAndRemove(validFields, function (err, todo) {
+    if (err) return next(err);
+    res.redirect('/');
   });
 };
+
+
 
 exports.edit = function (req, res, next) {
   Todo.
@@ -216,17 +274,33 @@ exports.edit = function (req, res, next) {
 };
 
 exports.update = function (req, res, next) {
-  Todo.findById(req.params.id, function (err, todo) {
+  const validId = req.params.id.match(/^[0-9a-fA-F]{24}$/) ? req.params.id : null;
 
-    todo.content = req.body.content;
-    todo.updated_at = Date.now();
-    todo.save(function (err, todo, count) {
+  if (!validId) {
+    return res.status(400).send('Invalid ID');
+  }
+
+  exports.update = function (req, res, next) {
+    const validId = req.params.id.match(/^[0-9a-fA-F]{24}$/) ? req.params.id : null;
+  
+    if (!validId) {
+      return res.status(400).send('Invalid ID');
+    }
+  
+    Todo.findById(validId, function (err, todo) {
       if (err) return next(err);
-
-      res.redirect('/');
+  
+      todo.content = req.body.content;
+      todo.updated_at = Date.now();
+      todo.save(function (err, todo, count) {
+        if (err) return next(err);
+  
+        res.redirect('/');
+      });
     });
-  });
-};
+  };
+  
+
 
 // ** express turns the cookie key to lowercase **
 exports.current_user = function (req, res, next) {
@@ -364,4 +438,5 @@ exports.chat = {
     messages = messages.filter((m) => m.id !== req.body.messageId);
     res.send({ ok: true });
   }
+}
 };

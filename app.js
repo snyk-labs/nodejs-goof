@@ -39,11 +39,14 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(methodOverride());
+const session = require('express-session');
+const app = express();
+// set SESSION_SECRET variable in deployment env to avoid leaks
 app.use(session({
-  secret: 'keyboard cat',
+  secret: process.env.SESSION_SECRET,
   name: 'connect.sid',
   cookie: { path: '/' }
-}))
+}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(fileUpload());
@@ -80,8 +83,9 @@ if (app.get('env') == 'development') {
   app.use(errorHandler());
 }
 
-var token = 'SECRET_TOKEN_f8ed84e8f41e4146403dd4a6bbcea5e418d23a9';
-console.log('token: ' + token);
+// use SECRET_TOKEN variable in deployment env 
+const TOKEN = process.env.SECRET_TOKEN;
+console.log('token: ' + TOKEN);
 
 http.createServer(app).listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'));
