@@ -80,6 +80,14 @@ function adminLoginSuccess(redirectPage, session, username, res) {
   }
 }
 
+const rateLimit = require("express-rate-limit");
+
+// Limit requests to 100 requests per 15 minutes (900 seconds) for the login endpoint
+const loginLimiter = rateLimit({
+  windowMs: 900000,
+  max: 100,
+});
+
 exports.login = function (req, res, next) {
   return res.render('admin', {
     title: 'Admin Access',
@@ -87,6 +95,10 @@ exports.login = function (req, res, next) {
     redirectPage: req.query.redirectPage
   });
 };
+
+// Apply the rate limiter to the login endpoint
+app.use('/login', loginLimiter);
+
 
 exports.admin = function (req, res, next) {
   return res.render('admin', {
