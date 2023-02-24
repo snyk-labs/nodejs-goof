@@ -34,22 +34,38 @@ exports.index = function (req, res, next) {
     });
 };
 
+const { validationResult } = require('express-validator');
+
 exports.loginHandler = function (req, res, next) {
-  if (validator.isEmail(req.body.username)) {
-    User.find({ username: req.body.username, password: req.body.password }, function (err, users) {
-      if (users.length > 0) {
-        const redirectPage = req.body.redirectPage
-        const session = req.session
-        const username = req.body.username
-        return adminLoginSuccess(redirectPage, session, username, res)
-      } else {
-        return res.status(401).send()
-      }
-    });
-  } else {
-    return res.status(401).send()
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
   }
+
+  const sanitizedUsername = req.sanitize('username').trim().escape();
+  const sanitizedPassword = req.sanitize('password').trim().escape();
+  User.findOne({ username: sanitizedUsername }, function (err, user) {
+    if (err) {
+      return res.status(500).send();
+    }
+    if (!user) {
+      return res.status(401).send();
+    }
+    user.comparePassword(sanitizedPassword, function (err, isMatch) {
+      if (err) {
+        return res.status(500).send();
+      }
+      if (!isMatch) {
+        return res.status(401).send();
+      }
+      const redirectPage = req.sanitize('redirectPage').trim().escape();
+      const session = req.session;
+      const username = sanitizedUsername;
+      return adminLoginSuccess(redirectPage, session, username, res);
+    });
+  });
 };
+
 
 function adminLoginSuccess(redirectPage, session, username, res) {
   session.loggedIn = 1
