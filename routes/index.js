@@ -240,8 +240,14 @@ exports.create = function (req, res, next) {
 };
 
 exports.destroy = function (req, res, next) {
+  const validId = req.params.id.match(/^[0-9a-fA-F]{24}$/) ? req.params.id : null;
+
+  if (!validId) {
+    return res.status(400).send('Invalid ID');
+  }
+
   const validFields = {
-    _id: req.params.id
+    _id: validId
   };
 
   Todo.findOneAndRemove(validFields, function (err, todo) {
@@ -249,6 +255,7 @@ exports.destroy = function (req, res, next) {
     res.redirect('/');
   });
 };
+
 
 
 exports.edit = function (req, res, next) {
@@ -273,18 +280,26 @@ exports.update = function (req, res, next) {
     return res.status(400).send('Invalid ID');
   }
 
-  Todo.findById(validId, function (err, todo) {
-    if (err) return next(err);
-
-    todo.content = req.body.content;
-    todo.updated_at = Date.now();
-    todo.save(function (err, todo, count) {
+  exports.update = function (req, res, next) {
+    const validId = req.params.id.match(/^[0-9a-fA-F]{24}$/) ? req.params.id : null;
+  
+    if (!validId) {
+      return res.status(400).send('Invalid ID');
+    }
+  
+    Todo.findById(validId, function (err, todo) {
       if (err) return next(err);
-
-      res.redirect('/');
+  
+      todo.content = req.body.content;
+      todo.updated_at = Date.now();
+      todo.save(function (err, todo, count) {
+        if (err) return next(err);
+  
+        res.redirect('/');
+      });
     });
-  });
-};
+  };
+  
 
 
 // ** express turns the cookie key to lowercase **
