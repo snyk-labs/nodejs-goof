@@ -17,6 +17,7 @@ jobs:
      - uses: actions/checkout@master
      #install dependencies
      - run: npm i
+     - run: npm install
      - run: npm i -g snyk-delta
      #authenticate with your snyk token
      - run: snyk auth ${{ secrets.SNYK_TOKEN }}
