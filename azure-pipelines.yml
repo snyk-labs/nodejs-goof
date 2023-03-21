@@ -55,31 +55,3 @@ steps:
       exit $RESULT
     continueOnError: true
     displayName: 'snyk iac'
-  - task: PublishHtmlReport@1
-    condition: succeededOrFailed()
-    inputs:
-      reportDir: $(Build.ArtifactStagingDirectory)/results-code.html
-      tabName: 'Snyk Code'
-
-  - task: PublishHtmlReport@1
-    condition: succeededOrFailed()
-    inputs:
-      reportDir: $(Build.ArtifactStagingDirectory)/results-open-source.html
-      tabName: 'Snyk Open Source'
-
-  - task: PublishHtmlReport@1
-    condition: succeededOrFailed()
-    inputs:
-      reportDir: $(Build.ArtifactStagingDirectory)/results-container.html
-      tabName: 'Snyk Container'
-
-  - task: PublishHtmlReport@1
-    condition: succeededOrFailed()
-    inputs:
-      reportDir: $(Build.ArtifactStagingDirectory)/results-iac.html
-      tabName: 'Snyk IaC'
-
-  - task: PublishBuildArtifacts@1
-    inputs:
-      pathToPublish: '$(Build.ArtifactStagingDirectory)'
-      artifactName: Snyk Reports
