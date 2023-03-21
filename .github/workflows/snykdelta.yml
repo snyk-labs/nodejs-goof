@@ -21,6 +21,6 @@ jobs:
      #authenticate with your snyk token
      - run: snyk auth ${{ secrets.SNYK_TOKEN }}
      #run a snyk delta test only failing of there are new criticial issues, Not if the project hasn't been monitored
-     - run: snyk test --json --print-deps --severity-threshold=critical | snyk-delta --baselineOrg b45d5931-673b-4992-8ebd-7b9b9b29c63b --baselineProject a396575a-b644-4fdc-bb42-970920544701 --setPassIfNoBaseline true -d
+     - run: snyk test -d
      #if the previous scan doesn't come back with an error code then monitor the project
      - run: snyk monitor
