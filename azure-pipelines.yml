@@ -7,7 +7,7 @@
 #   https://marketplace.visualstudio.com/items?itemName=JakubRumpca.azure-pipelines-html-report
 
 # NOTE: Change this to a different pool to run the scripts.
-pool: sebsnyk.pool 
+pool: vmImage: ubuntu-latest
 
 steps:
   - checkout: self
