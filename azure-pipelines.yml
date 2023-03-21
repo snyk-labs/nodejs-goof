@@ -1,0 +1,85 @@
+# Runs 4 Snyk Products (Code, Open Source, Container, IaC)
+# Outputs the results to the pipeline
+
+# Prerequisites:
+# - Set a SNYK_TOKEN in the pipelines secrets
+# - Install the HTML viewer extension
+#   https://marketplace.visualstudio.com/items?itemName=JakubRumpca.azure-pipelines-html-report
+
+# NOTE: Change this to a different pool to run the scripts.
+pool: sebsnyk.pool 
+
+steps:
+  - checkout: self
+
+  # .. your instructions on building the app or preparing the repository
+
+  # install & prepare snyk
+  - script: |
+      npm install -g snyk snyk-delta
+      # This OPTIONAL step will configure the Snyk CLI to connect to the EU instance of Snyk.
+      # snyk config set use-base64-encoding=true
+      # snyk config set endpoint='https://app.eu.snyk.io/api'
+      snyk auth $(21417a2b-8896-4c2e-8c0c-8b3e6ac3b0f6)
+      # explicitly allow scripts to continue if errors occur
+      set +e
+    displayName: 'snyk install & auth'
+  # snyk code
+  - script: |
+      snyk code test --json --print-deps --severity-threshold=critical | snyk-delta --setPassIfNoBaseline true
+      RESULT=$?
+      exit $RESULT
+    continueOnError: true
+    displayName: 'snyk code'
+  # snyk open source
+  - script: |
+      snyk test --all-projects --json --severity-threshold=critical
+      RESULT=$?
+      exit $RESULT
+    continueOnError: true
+    displayName: 'snyk open source'
+  # snyk container
+  # NOTE: Change the image name
+  - script: |
+      snyk container test sebsnyk/juice-shop --file=Dockerfile --json-file-output=results.json
+      RESULT=$?
+      snyk-to-html -o $(Build.ArtifactStagingDirectory)/results-container.html < results.json
+      exit $RESULT
+    continueOnError: true
+    displayName: 'snyk container'
+  # snyk iac
+  - script: |
+      snyk iac test --json-file-output=results.json
+      RESULT=$?
+      snyk-to-html -o $(Build.ArtifactStagingDirectory)/results-iac.html < results.json
+      exit $RESULT
+    continueOnError: true
+    displayName: 'snyk iac'
+  - task: PublishHtmlReport@1
+    condition: succeededOrFailed()
+    inputs:
+      reportDir: $(Build.ArtifactStagingDirectory)/results-code.html
+      tabName: 'Snyk Code'
+
+  - task: PublishHtmlReport@1
+    condition: succeededOrFailed()
+    inputs:
+      reportDir: $(Build.ArtifactStagingDirectory)/results-open-source.html
+      tabName: 'Snyk Open Source'
+
+  - task: PublishHtmlReport@1
+    condition: succeededOrFailed()
+    inputs:
+      reportDir: $(Build.ArtifactStagingDirectory)/results-container.html
+      tabName: 'Snyk Container'
+
+  - task: PublishHtmlReport@1
+    condition: succeededOrFailed()
+    inputs:
+      reportDir: $(Build.ArtifactStagingDirectory)/results-iac.html
+      tabName: 'Snyk IaC'
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathToPublish: '$(Build.ArtifactStagingDirectory)'
+      artifactName: Snyk Reports
