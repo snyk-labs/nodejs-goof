@@ -68,6 +68,8 @@ app.put('/chat', routes.chat.add);
 app.delete('/chat', routes.chat.delete);
 app.use('/users', routesUsers)
 
+const SECRET = 'password123';
+
 // Static
 app.use(st({ path: './public', url: '/public' }));
 
