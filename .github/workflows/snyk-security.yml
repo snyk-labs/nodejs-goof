@@ -53,6 +53,10 @@ jobs:
 
         # Runs Snyk Code (SAST) analysis and uploads result into GitHub.
         # Use || true to not fail the pipeline
+        
+      - name: Snyk Auth
+        run: snyk auth ${{ secrets.SNYK_TOKEN }}
+        
       - name: Snyk Code test
         run: snyk code test --sarif --sarif-file-output=snyk-code.sarif || true
 
