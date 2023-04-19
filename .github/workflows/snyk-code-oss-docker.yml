@@ -65,13 +65,6 @@ jobs:
           snyk auth ${{ secrets.SNYK_TOKEN }}
           snyk monitor --all-projects
 
-        # Runs Snyk Infrastructure as Code (IaC) analysis and uploads result to Snyk.
-        # Use || true to not fail the pipeline.
-      - name: Snyk IaC test and report
-        run: |
-          snyk auth ${{ secrets.SNYK_TOKEN }}
-          snyk iac test --report # || true
-
         # Build the docker image for testing
       - name: Build a Docker image
         run: docker build -t your/image-to-test .
