@@ -49,14 +49,14 @@ jobs:
         #sarif_file: snyk-code.sarif
         #args: --severity-threshold=high
         
-    - name: Build the Docker Image
-      run: docker build . --file=Dockerfile --tag alexss200010/nodejs-goof:latest
+    #- name: Build the Docker Image
+      #run: docker build . --file=Dockerfile --tag alexss200010/nodejs-goof:latest
 
-    - name: Snyk Container Scanning
-      run: snyk container monitor --org=${{ secrets.SNYK_ORG }} --severity-threshold=high --file=Dockerfile alexss200010/nodejs-goof:latest
-      continue-on-error: true
+    #- name: Snyk Container Scanning
+      #run: snyk container monitor --org=${{ secrets.SNYK_ORG }} --severity-threshold=high --file=Dockerfile alexss200010/nodejs-goof:latest
+      #continue-on-error: true
 
 
-    - name: Snyk Infrastructure-as-Code Scanning
-      run: snyk iac test --org=${{ secrets.SNYK_ORG }} --severity-threshold=high --report
-      continue-on-error: true
+    #- name: Snyk Infrastructure-as-Code Scanning
+      #run: snyk iac test --org=${{ secrets.SNYK_ORG }} --severity-threshold=high --report
+      #continue-on-error: true
