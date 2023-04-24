@@ -55,7 +55,7 @@ jobs:
       run: docker build . --file=Dockerfile --tag alexss200010/nodejs-goof:latest
 
     - name: Snyk Container Scanning
-      run: snyk container monitor --org=${{ secrets.SNYK_ORG }} --file=Dockerfile #--sarif-file-output=snyk-container.sarif alexss200010/nodejs-goof:latest 
+      run: snyk container monitor --org=${{ secrets.SNYK_ORG }} --file=Dockerfile alexss200010/nodejs-goof:latest 
       continue-on-error: true
     #- name: Upload results to GitHub Container Scanning
       #uses: github/codeql-action/upload-sarif@v2
