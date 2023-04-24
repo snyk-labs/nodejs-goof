@@ -1,0 +1,882 @@
+---
+AWSTemplateFormatVersion: 2010-09-09
+
+# A CloudFormation template to deploy an additional service to Fargate. This requires an existing
+# cluster deployed by fargate.cfn.yml.
+
+Description: Fargate Service
+
+
+Parameters:
+
+  NetworkStackName:
+    Type: String
+    Description: Name of an active Startup Kit CloudFormation stack that contains networking resources
+    MinLength: 1
+    MaxLength: 255
+    AllowedPattern: "^[a-zA-Z][-a-zA-Z0-9]*$"
+
+  DatabaseStackName:
+    Type: String
+    Description: Name of an optional active Startup Kit CloudFormation stack that contains database resources
+    Default: ""
+
+  FargateStackName:
+    Type: String
+    Description: Name of an active Startup Kit CloudFormation stack that contains Fargate resources
+    MinLength: 1
+    MaxLength: 255
+    AllowedPattern: "^[a-zA-Z][-a-zA-Z0-9]*$"
+
+  EnvironmentName:
+    Type: String
+    Description: Environment name - dev or prod
+    Default: dev
+    AllowedValues:
+      - dev
+      - prod
+    ConstraintDescription: Specify either dev or prod
+
+  RegisterServiceWithAlb:
+    Default: true
+    Type: String
+    Description: Set to false to disable registering with the ALB (e.g., backend services without a web interface)
+    ConstraintDescription: Only true or false are allowed
+    AllowedValues:
+      - true
+      - false
+
+  AppProtocol:
+    Type: String
+    Description: The application server protocol
+    Default: HTTP
+    AllowedValues:
+      - HTTP
+      - HTTPS
+    ConstraintDescription: Specify either HTTTP or HTTPS
+
+  ServiceUrlPath:
+    Type: String
+    Description: The optional URL path for the service (e.g., /test). Either an URL path or hostname is required if you register with an ALB
+    Default: ""
+
+  HostedZoneName:
+    Type: String
+    Description: The Amazon Route 53 Hosted Zone Name for the optional load balancer alias record for the service - do not include a period at the end
+    Default: ""
+    AllowedPattern: "(^$|^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\\.)+[A-Za-z]{2,6}$)" # Allow for a blank or a domain name
+    ConstraintDescription: Please enter a valid Route 53 Hosted Zone Name
+
+  ServiceHostname:
+    Type: String
+    Description: The optional URL path for the service (e.g., foo.bar.com). Either an URL path or hostname is required if you register with an ALB
+    Default: ""
+
+  ServiceLBListenerPriority:
+    Type: Number
+    Description: The service load balancer listener priority - must be unique for each service if ALB is enabled
+    Default: 2
+    MinValue: 2
+    MaxValue: 50000
+    ConstraintDescription: Number must be between 1 and 50,000
+
+  HealthCheckPath:
+    Type: String
+    Description: The path for the Application Load Balancer health check
+    Default: /
+    MinLength: 1
+    MaxLength: 255
+    ConstraintDescription: Value must be between 1 and 255 characters
+
+  GitSourceRepo:
+    Type: String
+    Description: CodeCommit or GitHub source repository - must contain a Dockerfile in the base
+
+  GitBranch:
+    Type: String
+    Default: master
+    Description: CodeCommit or GitHub git repository branch - change triggers a new build
+
+  GitHubToken:
+    Type: String
+    NoEcho: true
+    Description: "GitHub API token - leave blank if using CodeCommit - see: https://github.com/blog/1509-personal-api-tokens"
+
+  GitHubUser:
+    Type: String
+    Description: GitHub username or organization - leave blank if using CodeCommit
+
+  CodeBuildDockerImage:
+    Type: String
+    Default: aws/codebuild/docker:17.09.0
+
+  SeedDockerImage:
+    Type: String
+    Default: registry.hub.docker.com/library/nginx:1.13
+    Description: Initial image before CodePipeline is executed. Existing application images in ECR should override this parameter
+
+  ContainerCpu:
+    Type: Number
+    Description: "Amount of CPU for the container - options available: https://aws.amazon.com/fargate/pricing/"
+    Default: 256
+    MinValue: 256
+    MaxValue: 4096
+    ConstraintDescription: "Value must be between 256 and 4096 - see: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_size"
+
+  ContainerMemory:
+    Type: Number
+    Description: "Amount of memory for the container - options available: https://aws.amazon.com/fargate/pricing/"
+    Default: 512
+    MinValue: 512
+    MaxValue: 30720
+    ConstraintDescription: "Value must be between 512 and 30720 - see: https://aws.amazon.com/fargate/pricing/"
+
+  # CPU alarm parameters
+  CpuAlarmEvaluationPeriods:
+    Description: The number of periods over which data is compared to the specified threshold
+    Type: Number
+    Default: 2
+    MinValue: 2
+
+  CpuScaleOutThreshold:
+    Type: Number
+    Description: Average CPU value to trigger auto scaling out
+    Default: 50
+    MinValue: 0
+    MaxValue: 100
+    ConstraintDescription: Value must be between 0 and 100
+
+  CpuScaleInThreshold:
+    Type: Number
+    Description: Average CPU value to trigger auto scaling in
+    Default: 25
+    MinValue: 0
+    MaxValue: 100
+    ConstraintDescription: Value must be between 0 and 100
+
+  # Auto scaling container counts
+  TaskMinContainerCount:
+    Type: Number
+    Description: Minimum number of containers to run for the service
+    Default: 1
+    MinValue: 1
+    ConstraintDescription: Value must be at least one
+
+  TaskMaxContainerCount:
+    Type: Number
+    Description: Maximum number of containers to run for the service when auto scaling out
+    Default: 2
+    MinValue: 1
+    ConstraintDescription: Value must be at least one
+
+  ContainerLogRetentionInDays:
+    Type: Number
+    Default: 7
+
+  MaxTaggedContainerImagesToRetain:
+    Type: Number
+    Description: The number of tagged container images to retain before expiring
+    MinValue: 1
+    MaxValue: 100
+    ConstraintDescription: Value must be between 1 and 100
+    Default: 20
+
+  DaysToRetainUntaggedContainerImages:
+    Type: Number
+    Description: The number days to retain untagged container images before expiring
+    MinValue: 1
+    MaxValue: 100
+    ConstraintDescription: Value must be between 1 and 100
+    Default: 7
+
+
+Conditions:
+
+  IsDbStackSet: !Not [ !Equals [ !Ref DatabaseStackName, "" ] ]
+
+  IsGitHub: !And
+    - !Not [ !Equals [ !Ref GitHubToken, "" ] ]
+    - !Not [ !Equals [ !Ref GitHubUser, "" ] ]
+
+  IsCodeCommit: !Not [ Condition: IsGitHub ]
+
+  AddServiceToAlb: !Equals [ !Ref RegisterServiceWithAlb, true ]
+
+  CreateRoute53Record: !And
+    - !Not [ !Equals [ !Ref ServiceHostname, "" ] ]
+    - !Not [ !Equals [ !Ref HostedZoneName, "" ] ]
+    - Condition: AddServiceToAlb
+
+  IsUrlPathRouting: !And
+    - !Not [ !Equals [ !Ref ServiceUrlPath, "" ] ]
+    - Condition: AddServiceToAlb
+
+  DoNotAddServiceToAlb: !Equals [ !Ref RegisterServiceWithAlb, false ]
+
+
+Resources:
+
+  CodePipelineArtifactBucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Delete
+
+  CodeBuildServiceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      Path: /
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: codebuild.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: root
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Resource: "*"
+                Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                  - ecr:GetAuthorizationToken
+              - Resource: "*"
+                Effect: Allow
+                Action:
+                  - ec2:CreateNetworkInterface
+                  - ec2:DescribeDhcpOptions
+                  - ec2:DescribeNetworkInterfaces
+                  - ec2:DeleteNetworkInterface
+                  - ec2:DescribeSubnets
+                  - ec2:DescribeSecurityGroups
+                  - ec2:DescribeVpcs
+                  - ec2:CreateNetworkInterfacePermission
+              - Resource: !Sub arn:aws:s3:::${CodePipelineArtifactBucket}/*
+                Effect: Allow
+                Action:
+                  - s3:GetObject
+                  - s3:PutObject
+                  - s3:GetObjectVersion
+              - Resource: !GetAtt EcrDockerRepository.Arn
+                Effect: Allow
+                Action:
+                  - ecr:GetDownloadUrlForLayer
+                  - ecr:BatchGetImage
+                  - ecr:BatchCheckLayerAvailability
+                  - ecr:PutImage
+                  - ecr:InitiateLayerUpload
+                  - ecr:UploadLayerPart
+                  - ecr:CompleteLayerUpload
+
+  # By default, the build specification is defined in this template, but you can also add buildspec.yml
+  # files in your repos to allow for customization.
+  # See:
+  # https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html
+  # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-source.html
+  CodeBuildProject:
+    Type: AWS::CodeBuild::Project
+    Properties:
+      Artifacts:
+        Type: CODEPIPELINE
+      Source:
+        Type: CODEPIPELINE
+        BuildSpec: !Sub
+          - |
+            ---
+            version: 0.2
+            phases:
+              install:
+                commands:
+                  - apt-get update && apt-get -y install python-pip && pip install --upgrade python && pip install --upgrade awscli
+              pre_build:
+                  commands:
+                  - printenv
+                  - TAG="$REPOSITORY_NAME.$REPOSITORY_BRANCH.$ENVIRONMENT_NAME.$(date +%Y-%m-%d.%H.%M.%S).$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | head -c 8)"
+                  - echo $TAG
+                  - $(aws ecr get-login --no-include-email)
+              build:
+                commands:
+                  - docker build --tag $REPOSITORY_URI:$TAG .
+              post_build:
+                commands:
+                  - docker push $REPOSITORY_URI:$TAG
+                  - printf '[{"name":"${ServiceName}","imageUri":"%s"}]' $REPOSITORY_URI:$TAG > build.json
+            artifacts:
+              files: build.json
+          - ServiceName: !Ref GitSourceRepo
+      Environment:
+        ComputeType: BUILD_GENERAL1_SMALL
+        Type: LINUX_CONTAINER
+        Image: !Ref CodeBuildDockerImage
+        EnvironmentVariables:
+          - Name: REPOSITORY_URI
+            Value: !Sub ${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/${EcrDockerRepository}
+          - Name: ENVIRONMENT_NAME
+            Value: !Ref EnvironmentName
+          - Name: REPOSITORY_NAME
+            Value: !Ref GitSourceRepo
+          - Name: REPOSITORY_BRANCH
+            Value: !Ref GitBranch
+      Name: !Ref AWS::StackName
+      ServiceRole: !Ref CodeBuildServiceRole
+      VpcConfig:
+        VpcId:
+          Fn::ImportValue: !Sub ${NetworkStackName}-VpcID
+        Subnets:
+          - Fn::ImportValue: !Sub ${NetworkStackName}-PrivateSubnet1ID
+          - Fn::ImportValue: !Sub ${NetworkStackName}-PrivateSubnet2ID
+        SecurityGroupIds:
+          - Fn::ImportValue: !Sub ${NetworkStackName}-AppSecurityGroupID
+
+  CodePipelineServiceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      Path: /
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: codepipeline.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: codepipeline-access
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Resource: "*"
+                Effect: Allow
+                Action:
+                  - ecs:List*
+                  - ecs:Describe*
+                  - ecs:RegisterTaskDefinition
+                  - ecs:UpdateService
+                  - codebuild:StartBuild
+                  - codebuild:BatchGetBuilds
+                  - codecommit:GetBranch
+                  - codecommit:GetCommit
+                  - codecommit:UploadArchive
+                  - codecommit:GetUploadArchiveStatus
+                  - codecommit:CancelUploadArchive
+                  - iam:PassRole
+              - Resource: !Sub arn:aws:s3:::${CodePipelineArtifactBucket}/*
+                Effect: Allow
+                Action:
+                  - s3:PutObject
+                  - s3:GetObject
+                  - s3:GetObjectVersion
+                  - s3:GetBucketVersioning
+    DependsOn:
+      - CodePipelineArtifactBucket
+
+  # This CodePipeline is used for CodeCommit repos. It triggers on a commit to the Git branch passed,
+  # builds the Docker image and then deploys the container in the Fargate Cluster. CodePipeline can support N stages.
+  # For example, you may want to add a stage to test your build and/or container.
+  CodePipelineCodeCommit:
+    Type: AWS::CodePipeline::Pipeline
+    Condition: IsCodeCommit
+    Properties:
+      RoleArn: !GetAtt CodePipelineServiceRole.Arn
+      ArtifactStore:
+        Type: S3
+        Location: !Ref CodePipelineArtifactBucket
+      Stages:
+        - Name: Source
+          Actions:
+            - Name: App
+              ActionTypeId:
+                Category: Source
+                Owner: AWS
+                Version: 1
+                Provider: CodeCommit
+              Configuration:
+                RepositoryName: !Ref GitSourceRepo
+                BranchName: !Ref GitBranch
+              OutputArtifacts:
+                - Name: App
+              RunOrder: 1
+        - Name: Build
+          Actions:
+            - Name: Build
+              ActionTypeId:
+                Category: Build
+                Owner: AWS
+                Version: 1
+                Provider: CodeBuild
+              Configuration:
+                ProjectName: !Ref CodeBuildProject
+              InputArtifacts:
+                - Name: App
+              OutputArtifacts:
+                - Name: BuildOutput
+              RunOrder: 1
+        - Name: Deploy
+          Actions:
+            - Name: Deploy
+              ActionTypeId:
+                Category: Deploy
+                Owner: AWS
+                Version: 1
+                Provider: ECS
+              Configuration:
+                ClusterName:
+                  Fn::ImportValue: !Sub ${FargateStackName}-FargateEcsClusterName
+                ServiceName: !If [ AddServiceToAlb, !GetAtt ServiceWithAlb.Name, !GetAtt ServiceWithoutAlb.Name ]
+                FileName: build.json
+              InputArtifacts:
+                - Name: BuildOutput
+              RunOrder: 1
+    DependsOn:
+      - CodePipelineArtifactBucket
+
+  # This CodePipeline triggers on a commit to the Git branch passed, builds the Docker image
+  # and then deploys the container in the Fargate Cluster. CodePipeline can support N stages. For
+  # example, you may want to add a stage to test your build and/or container.
+  CodePipelineGitHub:
+    Type: AWS::CodePipeline::Pipeline
+    Condition: IsGitHub
+    Properties:
+      RoleArn: !GetAtt CodePipelineServiceRole.Arn
+      ArtifactStore:
+        Type: S3
+        Location: !Ref CodePipelineArtifactBucket
+      Stages:
+        - Name: Source
+          Actions:
+            - Name: App
+              ActionTypeId:
+                Category: Source
+                Owner: ThirdParty
+                Version: 1
+                Provider: GitHub
+              Configuration:
+                Owner: !Ref GitHubUser
+                Repo: !Ref GitSourceRepo
+                Branch: !Ref GitBranch
+                OAuthToken: !Ref GitHubToken
+              OutputArtifacts:
+                - Name: App
+              RunOrder: 1
+        - Name: Build
+          Actions:
+            - Name: Build
+              ActionTypeId:
+                Category: Build
+                Owner: AWS
+                Version: 1
+                Provider: CodeBuild
+              Configuration:
+                ProjectName: !Ref CodeBuildProject
+              InputArtifacts:
+                - Name: App
+              OutputArtifacts:
+                - Name: BuildOutput
+              RunOrder: 1
+        - Name: Deploy
+          Actions:
+            - Name: Deploy
+              ActionTypeId:
+                Category: Deploy
+                Owner: AWS
+                Version: 1
+                Provider: ECS
+              Configuration:
+                ClusterName:
+                  Fn::ImportValue: !Sub ${FargateStackName}-FargateEcsClusterName
+                ServiceName: !If [ AddServiceToAlb, !GetAtt ServiceWithAlb.Name, !GetAtt ServiceWithoutAlb.Name ]
+                FileName: build.json
+              InputArtifacts:
+                - Name: BuildOutput
+              RunOrder: 1
+    DependsOn:
+      - CodePipelineArtifactBucket
+      - CodeBuildProject
+      - CodePipelineServiceRole
+
+  # Simple Amazon ECR Lifecycle Policies to try and reduce storage costs
+  # See: https://docs.aws.amazon.com/AmazonECR/latest/userguide/LifecyclePolicies.html
+  EcrDockerRepository:
+    Type: AWS::ECR::Repository
+    Properties:
+      LifecyclePolicy:
+        LifecyclePolicyText: !Sub
+          - |
+            {
+              "rules": [
+                {
+                  "rulePriority": 1,
+                  "description": "Only keep untagged images for ${DaysToRetainUntaggedContainerImages} days",
+                  "selection": {
+                    "tagStatus": "untagged",
+                    "countType": "sinceImagePushed",
+                    "countUnit": "days",
+                    "countNumber": ${DaysToRetainUntaggedContainerImages}
+                  },
+                  "action": { "type": "expire" }
+                },
+                {
+                  "rulePriority": 2,
+                  "description": "Keep only ${MaxTaggedContainerImagesToRetain} tagged images, expire all others",
+                  "selection": {
+                    "tagStatus": "tagged",
+                    "tagPrefixList": [ "${EnvironmentName}" ],
+                    "countType": "imageCountMoreThan",
+                    "countNumber": ${MaxTaggedContainerImagesToRetain}
+                  },
+                  "action": { "type": "expire" }
+                }
+              ]
+            }
+          - DaysToRetainUntaggedContainerImages: !Ref DaysToRetainUntaggedContainerImages
+            MaxTaggedContainerImagesToRetain: !Ref MaxTaggedContainerImagesToRetain
+            EnvironmentName: !Ref EnvironmentName
+
+    # The namespace in Amazon CloudWatch Logs - see https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogsConcepts.html
+  LogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /fargate/${AWS::StackName}/${GitSourceRepo}/${GitBranch}/${EnvironmentName}
+      RetentionInDays: !Ref ContainerLogRetentionInDays
+
+  TaskRole:
+    Type: AWS::IAM::Role
+    Properties:
+      Path: /
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ecs-tasks.amazonaws.com
+            Action: sts:AssumeRole
+
+  TaskExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      Path: /
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ecs-tasks.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy
+
+  TaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      Family: !Ref AWS::StackName
+      RequiresCompatibilities:
+        - FARGATE
+      Cpu: !Ref ContainerCpu
+      Memory: !Ref ContainerMemory
+      NetworkMode: awsvpc
+      TaskRoleArn: !GetAtt TaskRole.Arn
+      ExecutionRoleArn: !GetAtt TaskExecutionRole.Arn
+      ContainerDefinitions:
+        - Name: !Ref GitSourceRepo
+          Image: !Ref SeedDockerImage
+          Essential: true
+          PortMappings:
+            - ContainerPort:
+                Fn::ImportValue: !Sub ${NetworkStackName}-AppIngressPort
+
+          # Environment variables can be customized by adding parameters/values below. Secrets
+          # should be stored in AWS Systems Manager Parameter Store.
+          # See: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-paramstore.html
+          Environment:
+            - Name: ENVIRONMENT_NAME
+              Value: !Ref EnvironmentName
+            - Name: DATABASE_ENDPOINT
+              Value: !If [ IsDbStackSet, "Fn::ImportValue": !Sub "${DatabaseStackName}-DatabaseURL", "" ]
+            - Name: DATABASE_USER
+              Value: !If [ IsDbStackSet, "Fn::ImportValue": !Sub "${DatabaseStackName}-DatabaseUser", "" ]
+            - Name: LOAD_BALANCER_DNS
+              Value:
+                Fn::ImportValue: !Sub ${FargateStackName}-ApplicationLoadBalancerDnsName
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-region: !Ref AWS::Region
+              awslogs-group: !Ref LogGroup
+              awslogs-stream-prefix: !Ref GitSourceRepo
+    DependsOn:
+      - LogGroup
+      - TaskExecutionRole
+
+  ServiceWithoutAlb:
+    Type: AWS::ECS::Service
+    Condition: DoNotAddServiceToAlb
+    Properties:
+      Cluster:
+        Fn::ImportValue: !Sub ${FargateStackName}-FargateEcsClusterName
+      ServiceName: !Ref AWS::StackName
+      DesiredCount: !Ref TaskMinContainerCount
+      LaunchType: FARGATE
+      TaskDefinition: !Ref TaskDefinition
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          AssignPublicIp: DISABLED
+          Subnets:
+            - Fn::ImportValue: !Sub ${NetworkStackName}-PrivateSubnet1ID
+            - Fn::ImportValue: !Sub ${NetworkStackName}-PrivateSubnet2ID
+    DependsOn:
+      - TaskDefinition
+
+  ServiceWithAlb:
+    Type: AWS::ECS::Service
+    Condition: AddServiceToAlb
+    Properties:
+      Cluster:
+        Fn::ImportValue: !Sub ${FargateStackName}-FargateEcsClusterName
+      ServiceName: !Ref AWS::StackName
+      DesiredCount: !Ref TaskMinContainerCount
+      LaunchType: FARGATE
+      TaskDefinition: !Ref TaskDefinition
+      LoadBalancers:
+        - ContainerName: !Ref GitSourceRepo
+          ContainerPort:
+            Fn::ImportValue: !Sub ${NetworkStackName}-AppIngressPort
+          TargetGroupArn: !Ref TargetGroup
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          AssignPublicIp: DISABLED
+          SecurityGroups:
+            - Fn::ImportValue: !Sub ${NetworkStackName}-AppSecurityGroupID
+          Subnets:
+            - Fn::ImportValue: !Sub ${NetworkStackName}-PrivateSubnet1ID
+            - Fn::ImportValue: !Sub ${NetworkStackName}-PrivateSubnet2ID
+    DependsOn:
+      - TaskDefinition
+
+  AutoScalingRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: application-autoscaling.amazonaws.com
+            Action: sts:AssumeRole
+      Path: /
+      Policies:
+        - PolicyName: service-autoscaling
+          PolicyDocument:
+            Statement:
+              - Effect: Allow
+                Action:
+                  - application-autoscaling:*
+                  - cloudwatch:DescribeAlarms
+                  - cloudwatch:PutMetricAlarm
+                  - ecs:DescribeServices
+                  - ecs:UpdateService
+                Resource: '*'
+
+  ScalingTarget:
+    Type: AWS::ApplicationAutoScaling::ScalableTarget
+    Properties:
+      MinCapacity: !Ref TaskMinContainerCount
+      MaxCapacity: !Ref TaskMaxContainerCount
+      ResourceId: !Sub
+        - service/${EcsClusterName}/${ServiceName}
+        - EcsClusterName:
+            Fn::ImportValue: !Sub ${FargateStackName}-FargateEcsClusterName
+          ServiceName: !If [ AddServiceToAlb, !GetAtt ServiceWithAlb.Name, !GetAtt ServiceWithoutAlb.Name ]
+      RoleARN: !GetAtt AutoScalingRole.Arn
+      ScalableDimension: ecs:service:DesiredCount
+      ServiceNamespace: ecs
+    DependsOn:
+      - AutoScalingRole
+
+  ScaleOutPolicy:
+    Type: AWS::ApplicationAutoScaling::ScalingPolicy
+    Properties:
+      PolicyName: ScaleOutPolicy
+      PolicyType: StepScaling
+      ScalingTargetId: !Ref ScalingTarget
+      StepScalingPolicyConfiguration:
+        AdjustmentType: ChangeInCapacity
+        Cooldown: 60
+        MetricAggregationType: Average
+        StepAdjustments:
+          - ScalingAdjustment: 1
+            MetricIntervalLowerBound: 0
+    DependsOn: ScalingTarget
+
+  ScaleInPolicy:
+    Type: AWS::ApplicationAutoScaling::ScalingPolicy
+    Properties:
+      PolicyName: ScaleInPolicy
+      PolicyType: StepScaling
+      ScalingTargetId: !Ref ScalingTarget
+      StepScalingPolicyConfiguration:
+        AdjustmentType: ChangeInCapacity
+        Cooldown: 60
+        MetricAggregationType: Average
+        StepAdjustments:
+          - ScalingAdjustment: -1
+            MetricIntervalUpperBound: 0
+    DependsOn: ScalingTarget
+
+  ScaleOutAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      EvaluationPeriods: !Ref CpuAlarmEvaluationPeriods
+      Statistic: Average
+      TreatMissingData: notBreaching
+      Threshold: !Ref CpuScaleOutThreshold
+      AlarmDescription: Alarm to add capacity if CPU is high
+      Period: 60
+      AlarmActions:
+        - !Ref ScaleOutPolicy
+      Namespace: AWS/ECS
+      Dimensions:
+        - Name: ClusterName
+          Value:
+            Fn::ImportValue: !Sub ${FargateStackName}-FargateEcsClusterName
+        - Name: ServiceName
+          Value: !If [ AddServiceToAlb, !GetAtt ServiceWithAlb.Name, !GetAtt ServiceWithoutAlb.Name ]
+      ComparisonOperator: GreaterThanThreshold
+      MetricName: CPUUtilization
+    DependsOn:
+      - ScaleOutPolicy
+
+  ScaleInAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      EvaluationPeriods: !Ref CpuAlarmEvaluationPeriods
+      Statistic: Average
+      TreatMissingData: notBreaching
+      Threshold: !Ref CpuScaleInThreshold
+      AlarmDescription: Alarm to reduce capacity if container CPU is low
+      Period: 300
+      AlarmActions:
+        - !Ref ScaleInPolicy
+      Namespace: AWS/ECS
+      Dimensions:
+        - Name: ClusterName
+          Value:
+            Fn::ImportValue: !Sub ${FargateStackName}-FargateEcsClusterName
+        - Name: ServiceName
+          Value: !If [ AddServiceToAlb, !GetAtt ServiceWithAlb.Name, !GetAtt ServiceWithoutAlb.Name ]
+      ComparisonOperator: LessThanThreshold
+      MetricName: CPUUtilization
+    DependsOn:
+      - ScaleInPolicy
+
+  ServiceRoute53Record:
+    Type: AWS::Route53::RecordSet
+    Condition: CreateRoute53Record
+    Properties:
+      Name: !Ref ServiceHostname
+      HostedZoneName: !Sub ${HostedZoneName}.
+      Type: A
+      AliasTarget:
+        HostedZoneId:
+          Fn::ImportValue: !Sub ${FargateStackName}-ApplicationLoadBalancerCanonicalHostedZoneId
+        DNSName:
+          Fn::ImportValue: !Sub ${FargateStackName}-ApplicationLoadBalancerBaseDnsName
+
+  # The health checks can be further tuned if your requirements differ
+  TargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Condition: AddServiceToAlb
+    Properties:
+      VpcId:
+        Fn::ImportValue: !Sub ${NetworkStackName}-VpcID
+      Port:
+        Fn::ImportValue: !Sub ${NetworkStackName}-AppIngressPort
+      Protocol: !Ref AppProtocol
+      Matcher:
+        HttpCode: 200
+      HealthCheckIntervalSeconds: 10
+      HealthCheckPath: !Ref HealthCheckPath
+      HealthCheckProtocol: !Ref AppProtocol
+      HealthCheckTimeoutSeconds: 5
+      HealthyThresholdCount: 2
+      TargetGroupAttributes:
+        - Key: deregistration_delay.timeout_seconds
+          Value: 300
+      TargetType: ip
+      Tags:
+        - Key: Repository
+          Value: !Ref GitSourceRepo
+        - Key: Branch
+          Value: !Ref GitBranch
+        - Key: Stack
+          Value: !Ref AWS::StackName
+        - Key: Environment
+          Value: !Ref EnvironmentName
+
+  ListenerRule:
+    Type: AWS::ElasticLoadBalancingV2::ListenerRule
+    Condition: AddServiceToAlb
+    Properties:
+      ListenerArn:
+        Fn::ImportValue: !Sub ${FargateStackName}-ApplicationLoadBalancerListenerArn
+      Priority: !Ref ServiceLBListenerPriority
+      Conditions:
+        - Field: !If [ IsUrlPathRouting, path-pattern, host-header ]
+          Values:
+            - !If [ IsUrlPathRouting, !Ref ServiceUrlPath, !Ref ServiceHostname ]
+      Actions:
+        - TargetGroupArn: !Ref TargetGroup
+          Type: forward
+    DependsOn:
+      - TargetGroup
+
+Outputs:
+
+  Name:
+    Description: Fargate Service Stack Name
+    Value: !Ref AWS::StackName
+    Export:
+      Name: !Sub ${AWS::StackName}-Name
+
+  EnvironmentName:
+    Description: Environment Name
+    Value: !Ref EnvironmentName
+    Export:
+      Name: !Sub ${AWS::StackName}-EnvironmentName
+
+  EcrDockerRepositoryName:
+    Value: !Ref EcrDockerRepository
+    Export:
+      Name: !Sub ${AWS::StackName}-EcrDockerRepositoryName
+
+  EcrDockerRepositoryArn:
+    Value: !Sub arn:aws:ecr:${AWS::Region}:${AWS::AccountId}:repository/${EcrDockerRepository}
+    Export:
+      Name: !Sub ${AWS::StackName}-EcrDockerRepositoryArn
+
+  EcrDockerRepositoryUri:
+    Value: !Sub ${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/${EcrDockerRepository}
+    Export:
+      Name: !Sub ${AWS::StackName}-EcrDockerRepositoryUri
+
+  ServiceArn:
+    Value: !If [ AddServiceToAlb, !Ref ServiceWithAlb, !Ref ServiceWithoutAlb ]
+    Export:
+      Name: !Sub ${AWS::StackName}-ServiceArn
+
+  ServiceName:
+    Value: !If [ AddServiceToAlb, !GetAtt ServiceWithAlb.Name, !GetAtt ServiceWithoutAlb.Name ]
+    Export:
+      Name: !Sub ${AWS::StackName}-ServiceName
+
+  CodePipelineArtifactBucketName:
+    Value: !Ref CodePipelineArtifactBucket
+    Export:
+      Name: !Sub ${AWS::StackName}-CodePipelineArtifactBucket
+
+  CodePipelineArtifactBucketArn:
+    Value: !GetAtt CodePipelineArtifactBucket.Arn
+    Export:
+      Name: !Sub ${AWS::StackName}-CodePipelineArtifactBucketArn
+
+

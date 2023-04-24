@@ -1,0 +1,657 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09T00:00:00.000Z",
+  "Description": "VPC",
+  "Parameters": {
+    "AvailabilityZone1": {
+      "Description": "The first availability zone in the region",
+      "Type": "AWS::EC2::AvailabilityZone::Name",
+      "ConstraintDescription": "Must be a valid availability zone"
+    },
+    "AvailabilityZone2": {
+      "Description": "The second availability zone in the region",
+      "Type": "AWS::EC2::AvailabilityZone::Name",
+      "ConstraintDescription": "Must be a valid availability zone"
+    },
+    "SSHFrom": {
+      "Description": "Limit SSH access to bastion hosts to a CIDR IP block",
+      "Type": "String",
+      "MinLength": 9,
+      "MaxLength": 18,
+      "Default": "0.0.0.0/0"
+    },
+    "ELBIngressPort": {
+      "Description": "The ELB ingress port used by security groups",
+      "Type": "Number",
+      "MinValue": 0,
+      "MaxValue": 65535,
+      "ConstraintDescription": "TCP ports must be between 0 - 65535",
+      "Default": 80
+    },
+    "AppIngressPort": {
+      "Description": "The application ingress port used by security groups",
+      "Type": "Number",
+      "MinValue": 0,
+      "MaxValue": 65535,
+      "ConstraintDescription": "TCP ports must be between 0 - 65535",
+      "Default": 80
+    },
+    "SingleNatGateway": {
+      "Description": "Set to true to only install one NAT gateway",
+      "Type": "String",
+      "ConstraintDescription": "Value must be true or false",
+      "Default": true,
+      "AllowedValues": [
+          true,
+          false
+      ]
+    }
+  },
+  "Metadata": {
+    "AWS::CloudFormation::Interface": {
+      "ParameterGroups": [
+        {
+          "Label": {
+            "default": "Region Availability Zones"
+          },
+          "Parameters": [
+              "AvailabilityZone1",
+              "AvailabilityZone2"
+          ]
+        },
+        {
+          "Label": {
+            "default": "Ingress Ports"
+          },
+          "Parameters": [
+              "ELBIngressPort",
+              "AppIngressPort"
+          ]
+        }
+      ],
+      "ParameterLabels": {
+        "AvailabilityZone1": {
+          "default": "Availability Zone 1"
+        },
+        "AvailabilityZone2": {
+          "default": "Availability Zone 2"
+        },
+        "ELBIngressPort": {
+          "default": "Load Balancer Port"
+        },
+        "AppIngressPort": {
+          "default": "Application Port"
+        }
+      }
+    }
+  },
+  "Conditions": {
+    "CreateSingleNatGateway": null,
+    "CreateMultipleNatGateways": null
+  },
+  "Mappings": {
+    "CIDRMap": {
+      "VPC": {
+        "CIDR": "10.50.0.0/16"
+      },
+      "Public1": {
+        "CIDR": "10.50.0.0/24"
+      },
+      "Public2": {
+        "CIDR": "10.50.1.0/24"
+      },
+      "Private1": {
+        "CIDR": "10.50.64.0/19"
+      },
+      "Private2": {
+        "CIDR": "10.50.96.0/19"
+      }
+    }
+  },
+  "Resources": {
+    "VPC": {
+      "Type": "AWS::EC2::VPC",
+      "Properties": {
+        "CidrBlock": null,
+        "EnableDnsSupport": true,
+        "EnableDnsHostnames": true,
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": null
+          }
+        ]
+      }
+    },
+    "PublicSubnet1": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": null,
+        "CidrBlock": null,
+        "AvailabilityZone": null,
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": null
+          }
+        ]
+      }
+    },
+    "PublicSubnet2": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": null,
+        "CidrBlock": null,
+        "AvailabilityZone": null,
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": null
+          }
+        ]
+      }
+    },
+    "PrivateSubnet1": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": null,
+        "CidrBlock": null,
+        "AvailabilityZone": null,
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": null
+          }
+        ]
+      }
+    },
+    "PrivateSubnet2": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": null,
+        "CidrBlock": null,
+        "AvailabilityZone": null,
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": null
+          }
+        ]
+      }
+    },
+    "InternetGateway": {
+      "Type": "AWS::EC2::InternetGateway",
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": null
+          }
+        ]
+      }
+    },
+    "VPCGatewayAttachment": {
+      "Type": "AWS::EC2::VPCGatewayAttachment",
+      "Properties": {
+        "VpcId": null,
+        "InternetGatewayId": null
+      }
+    },
+    "PublicRouteTable": {
+      "Type": "AWS::EC2::RouteTable",
+      "Properties": {
+        "VpcId": null,
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": null
+          }
+        ]
+      }
+    },
+    "PublicRoute": {
+      "Type": "AWS::EC2::Route",
+      "DependsOn": "VPCGatewayAttachment",
+      "Properties": {
+        "RouteTableId": null,
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": null
+      }
+    },
+    "PublicSubnetRouteTableAssociation1": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "SubnetId": null,
+        "RouteTableId": null
+      }
+    },
+    "PublicSubnetRouteTableAssociation2": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "SubnetId": null,
+        "RouteTableId": null
+      }
+    },
+    "PublicSubnetNetworkAclAssociation1": {
+      "Type": "AWS::EC2::SubnetNetworkAclAssociation",
+      "Properties": {
+        "SubnetId": null,
+        "NetworkAclId": null
+      }
+    },
+    "PublicSubnetNetworkAclAssociation2": {
+      "Type": "AWS::EC2::SubnetNetworkAclAssociation",
+      "Properties": {
+        "SubnetId": null,
+        "NetworkAclId": null
+      }
+    },
+    "ELBSecurityGroup": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "Enable HTTP/HTTPs ingress",
+        "VpcId": null,
+        "SecurityGroupIngress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "IpProtocol": "tcp",
+            "ToPort": null,
+            "FromPort": null
+          }
+        ],
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": null
+          }
+        ]
+      }
+    },
+    "ELBSecurityGroupToAppEgress": {
+      "Type": "AWS::EC2::SecurityGroupEgress",
+      "Properties": {
+        "GroupId": null,
+        "IpProtocol": "tcp",
+        "ToPort": null,
+        "FromPort": null,
+        "DestinationSecurityGroupId": null
+      }
+    },
+    "AppSecurityGroup": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "Enable access from ELB to app",
+        "VpcId": null,
+        "SecurityGroupIngress": [
+          {
+            "SourceSecurityGroupId": null,
+            "IpProtocol": "tcp",
+            "ToPort": null,
+            "FromPort": null
+          },
+          {
+            "SourceSecurityGroupId": null,
+            "IpProtocol": "tcp",
+            "ToPort": 22,
+            "FromPort": 22
+          }
+        ],
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": null
+          }
+        ]
+      }
+    },
+    "AppSecurityGroupFromELBIngress": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "GroupId": null,
+        "IpProtocol": "tcp",
+        "ToPort": null,
+        "FromPort": null,
+        "SourceSecurityGroupId": null
+      }
+    },
+    "AppSecurityGroupFromBastionIngress": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "GroupId": null,
+        "IpProtocol": "tcp",
+        "ToPort": 22,
+        "FromPort": 22,
+        "SourceSecurityGroupId": null
+      }
+    },
+    "BastionSecurityGroup": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "Enable access to the bastion host",
+        "VpcId": null,
+        "SecurityGroupIngress": [
+          {
+            "CidrIp": null,
+            "IpProtocol": "tcp",
+            "ToPort": 22,
+            "FromPort": 22
+          }
+        ],
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "IpProtocol": "tcp",
+            "ToPort": 80,
+            "FromPort": 80
+          },
+          {
+            "CidrIp": "0.0.0.0/0",
+            "IpProtocol": "tcp",
+            "ToPort": 443,
+            "FromPort": 443
+          },
+          {
+            "CidrIp": "0.0.0.0/0",
+            "IpProtocol": "udp",
+            "ToPort": 123,
+            "FromPort": 123
+          }
+        ],
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": null
+          }
+        ]
+      }
+    },
+    "BastionSecurityGroupToAppEgress": {
+      "Type": "AWS::EC2::SecurityGroupEgress",
+      "Properties": {
+        "GroupId": null,
+        "IpProtocol": "tcp",
+        "ToPort": 22,
+        "FromPort": 22,
+        "DestinationSecurityGroupId": null
+      }
+    },
+    "BastionSecurityGroupToPostgreSqlDbEgress": {
+      "Type": "AWS::EC2::SecurityGroupEgress",
+      "Properties": {
+        "GroupId": null,
+        "IpProtocol": "tcp",
+        "ToPort": 5432,
+        "FromPort": 5432,
+        "DestinationSecurityGroupId": null
+      }
+    },
+    "BastionSecurityGroupToPostgreMySqlDbEgress": {
+      "Type": "AWS::EC2::SecurityGroupEgress",
+      "Properties": {
+        "GroupId": null,
+        "IpProtocol": "tcp",
+        "ToPort": 3306,
+        "FromPort": 3306,
+        "DestinationSecurityGroupId": null
+      }
+    },
+    "DbSecurityGroup": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "Enable access to the RDS DB",
+        "VpcId": null,
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "IpProtocol": "tcp",
+            "ToPort": 3306,
+            "FromPort": 3306
+          },
+          {
+            "CidrIp": "0.0.0.0/0",
+            "IpProtocol": "tcp",
+            "ToPort": 5432,
+            "FromPort": 5432
+          }
+        ],
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": null
+          }
+        ]
+      }
+    },
+    "DbSecurityGroupFromBastionPostgreSqlIngress": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "GroupId": null,
+        "IpProtocol": "tcp",
+        "ToPort": 5432,
+        "FromPort": 5432,
+        "SourceSecurityGroupId": null
+      }
+    },
+    "DbSecurityGroupFromBastionMySqlIngress": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "GroupId": null,
+        "IpProtocol": "tcp",
+        "ToPort": 3306,
+        "FromPort": 3306,
+        "SourceSecurityGroupId": null
+      }
+    },
+    "DbSecurityGroupFromAppPostgreSqlIngress": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "GroupId": null,
+        "IpProtocol": "tcp",
+        "ToPort": 5432,
+        "FromPort": 5432,
+        "SourceSecurityGroupId": null
+      }
+    },
+    "DbSecurityGroupFromAppMySqlIngress": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "GroupId": null,
+        "IpProtocol": "tcp",
+        "ToPort": 3306,
+        "FromPort": 3306,
+        "SourceSecurityGroupId": null
+      }
+    },
+    "NatGateway1": {
+      "DependsOn": "VPCGatewayAttachment",
+      "Type": "AWS::EC2::NatGateway",
+      "Properties": {
+        "AllocationId": null,
+        "SubnetId": null
+      }
+    },
+    "NatGateway2": {
+      "DependsOn": "VPCGatewayAttachment",
+      "Condition": "CreateMultipleNatGateways",
+      "Type": "AWS::EC2::NatGateway",
+      "Properties": {
+        "AllocationId": null,
+        "SubnetId": null
+      }
+    },
+    "NatEIP1": {
+      "DependsOn": "VPCGatewayAttachment",
+      "Type": "AWS::EC2::EIP",
+      "Properties": {
+        "Domain": "vpc"
+      }
+    },
+    "NatEIP2": {
+      "DependsOn": "VPCGatewayAttachment",
+      "Condition": "CreateMultipleNatGateways",
+      "Type": "AWS::EC2::EIP",
+      "Properties": {
+        "Domain": "vpc"
+      }
+    },
+    "NatRouteTable1": {
+      "Type": "AWS::EC2::RouteTable",
+      "Properties": {
+        "VpcId": null,
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": null
+          }
+        ]
+      }
+    },
+    "NatRouteTable2": {
+      "Type": "AWS::EC2::RouteTable",
+      "Condition": "CreateMultipleNatGateways",
+      "Properties": {
+        "VpcId": null,
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": null
+          }
+        ]
+      }
+    },
+    "NatRoute1": {
+      "Type": "AWS::EC2::Route",
+      "DependsOn": "VPCGatewayAttachment",
+      "Properties": {
+        "RouteTableId": null,
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "NatGatewayId": null
+      }
+    },
+    "NatRoute2": {
+      "Type": "AWS::EC2::Route",
+      "DependsOn": "VPCGatewayAttachment",
+      "Condition": "CreateMultipleNatGateways",
+      "Properties": {
+        "RouteTableId": null,
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "NatGatewayId": null
+      }
+    },
+    "PrivateSubnetRouteTableAssociation1": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "SubnetId": null,
+        "RouteTableId": null
+      }
+    },
+    "PrivateSubnetRouteTableAssociationSingleNatGateway": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Condition": "CreateSingleNatGateway",
+      "Properties": {
+        "SubnetId": null,
+        "RouteTableId": null
+      }
+    },
+    "PrivateSubnetRouteTableAssociation2": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Condition": "CreateMultipleNatGateways",
+      "Properties": {
+        "SubnetId": null,
+        "RouteTableId": null
+      }
+    }
+  },
+  "Outputs": {
+    "Name": {
+      "Description": "VPC Stack Name",
+      "Value": null,
+      "Export": {
+        "Name": null
+      }
+    },
+    "VPCId": {
+      "Description": "VPC ID",
+      "Value": null,
+      "Export": {
+        "Name": null
+      }
+    },
+    "VpcCidr": {
+      "Description": "Vpc cidr block",
+      "Value": null,
+      "Export": {
+        "Name": null
+      }
+    },
+    "PublicSubnet1": {
+      "Description": "Public subnet 1 ID",
+      "Value": null,
+      "Export": {
+        "Name": null
+      }
+    },
+    "PublicSubnet2": {
+      "Description": "Public subnet 2 ID",
+      "Value": null,
+      "Export": {
+        "Name": null
+      }
+    },
+    "PrivateSubnet1": {
+      "Description": "Private subnet 1 ID",
+      "Value": null,
+      "Export": {
+        "Name": null
+      }
+    },
+    "PrivateSubnet2": {
+      "Description": "Private subnet 2 ID",
+      "Value": null,
+      "Export": {
+        "Name": null
+      }
+    },
+    "ELBSecurityGroup": {
+      "Description": "Security group ID for Internet-facing ELB",
+      "Value": null,
+      "Export": {
+        "Name": null
+      }
+    },
+    "AppSecurityGroup": {
+      "Description": "Security group ID for app behind ELB",
+      "Value": null,
+      "Export": {
+        "Name": null
+      }
+    },
+    "BastionSecurityGroup": {
+      "Description": "Security group ID for bastion host",
+      "Value": null,
+      "Export": {
+        "Name": null
+      }
+    },
+    "DatabaseSecurityGroup": {
+      "Description": "Security group ID for RDS database",
+      "Value": null,
+      "Export": {
+        "Name": null
+      }
+    },
+    "ELBIngressPort": {
+      "Description": "ELB ingress port",
+      "Value": null,
+      "Export": {
+        "Name": null
+      }
+    },
+    "AppIngressPort": {
+      "Description": "App ingress port",
+      "Value": null,
+      "Export": {
+        "Name": null
+      }
+    }
+  }
+}

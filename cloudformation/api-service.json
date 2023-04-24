@@ -1,0 +1,364 @@
+{
+  "AWSTemplateFormatVersion" : "2010-09-09",
+
+  "Description" : "Example internal API server stack",
+
+  "Parameters" : {
+    "KeyName" : {
+      "Description" : "Name of an existing EC2 KeyPair to enable SSH access to the instances",
+      "Type" : "String",
+      "MinLength": "1",
+      "MaxLength": "64",
+      "AllowedPattern" : "[-_ a-zA-Z0-9]*",
+      "ConstraintDescription" : "can contain only alphanumeric characters, spaces, dashes and underscores."
+    },
+
+    "VpcId" : {
+      "Type" : "String",
+      "Description" : "VpcId of the vpc where we are launching the api server"
+    },
+
+    "InternalSshSecurityGroupId" : {
+      "Type" : "String",
+      "Description" : "Security group to allow internal ssh access"
+    },
+
+    "PrivateSubnets" : {
+      "Description" : "The private subnets where the api-server instances live",
+      "Type" : "CommaDelimitedList"
+    },
+
+    "ApiServerLoadBalancer" : {
+      "Description" : "The load balancer for the api server",
+      "Type" : "String"
+    },
+
+    "ApiServerLoadBalancerSecurityGroup" : {
+      "Description" : "The load balancer's security group for the api server",
+      "Type" : "String"
+    },
+
+    "AZs" : {
+      "Description" : "The AZs where the api-server instances live",
+      "Type" : "CommaDelimitedList"
+    },
+
+    "DesiredCapacity": {
+      "Default" : "1",
+      "Type": "Number",
+      "MinValue": "1",
+      "MaxValue": "1",
+      "Description" : "Desired capacity for api-server autoscaling group"
+    },
+
+    "InstanceType" : {
+      "Description" : "Instance type",
+      "Type" : "String",
+      "Default" : "c3.large",
+      "AllowedValues" : [ "m1.small","m1.medium","m1.large", "c1.medium", "c3.large", "c1.xlarge"],
+      "ConstraintDescription" : "must be a valid and allowed EC2 instance type."
+    },
+
+    "ApiServerVersion" : {
+      "Type" : "String",
+      "Description" : "Version of api-server to deploy"
+    },
+
+    "Environment" : {
+      "Type" : "String",
+      "Description" : "Environment the api-server runs in"
+    }
+  },
+
+  "Mappings" : {
+    "AWSInstanceType2Arch" : {
+      "t1.micro"    : { "Arch" : "64" },
+      "m1.small"    : { "Arch" : "64" },
+      "m1.medium"   : { "Arch" : "64" },
+      "m1.large"    : { "Arch" : "64" },
+      "c1.medium"   : { "Arch" : "64" },
+      "c3.large"    : { "Arch" : "64" },
+      "c1.xlarge"   : { "Arch" : "64" }
+    },
+
+    "AWSRegionArch2AMI" : {
+      "us-east-1"      : { "64" : "ami-0568456c" },
+      "us-west-2"      : { "64" : "ami-927613a2" },
+      "us-west-1"      : { "64" : "ami-c08dbc85" }
+    }
+  },
+
+  "Resources" : {
+    "ApiServerGroup" : {
+      "Type" : "AWS::AutoScaling::AutoScalingGroup",
+      "Properties" : {
+        "AvailabilityZones" : { "Ref" : "AZs" },
+        "VPCZoneIdentifier" : { "Ref" : "PrivateSubnets" },
+        "LaunchConfigurationName" : { "Ref" : "LaunchConfig" },
+        "MinSize" : "1",
+        "MaxSize" : "1",
+        "DesiredCapacity" : { "Ref" : "DesiredCapacity" },
+        "LoadBalancerNames" : [ { "Ref" : "ApiServerLoadBalancer" } ]
+      }
+    },
+
+    "DeploymentInstanceProfile": {
+      "Type": "AWS::IAM::InstanceProfile",
+      "Properties": {
+        "Path": "/",
+        "Roles": [ "aws-deployment" ]
+      }
+    },
+
+    "LaunchConfig" : {
+      "Type" : "AWS::AutoScaling::LaunchConfiguration",
+      "Metadata" : {
+        "AWS::CloudFormation::Init" : {
+          "configSets" : {
+            "bootstrap" : ["machine","application"]
+          },
+          "machine" : {
+            "packages": {
+              "apt" : {
+                "build-essential" : [],
+                "wget"            : [],
+                "ssl-cert"        : [],
+                "git"             : [],
+                "rsyslog-gnutls"  : [],
+                "newrelic-sysmond": []
+              }
+            },
+            "commands" : {
+              "a-restart-rsyslog" : {
+                "command" : "service rsyslog restart"
+              },
+              "b-set-newrelic-license" : {
+                "command" : "nrsysmond-config --set license_key=TODO: NewRelic your license key here"
+              },
+              "c-start-newrelic" : {
+                "command" : "/etc/init.d/newrelic-sysmond start"
+              },
+              "d-install-node" : {
+                "command" : "tar --strip-components 1 -xzf /tmp/node-v0.10.24-linux-x64.tar.gz",
+                "cwd" : "/usr/local"
+              }
+            },
+            "files" : {
+              "/etc/rsyslog.d/30-logentries.conf" : {
+                "content" : { "Fn::Join" : ["", [
+                  "$ModLoad imfile   # Load the imfile input module\n",
+                  "$ModLoad imklog   # for reading kernel log messages\n",
+                  "$ModLoad imuxsock # for reading local syslog messages\n",
+
+                  "$FileOwner syslog\n",
+                  "$FileGroup adm\n",
+                  "$FileCreateMode 0640\n",
+                  "$DirCreateMode 0755\n",
+                  "$Umask 0022\n",
+                  "$PrivDropToUser syslog\n",
+                  "$PrivDropToGroup adm\n",
+
+                  "$InputFileName /var/log/api-server.log\n",
+                  "$InputFileTag api-server:\n",
+                  "$InputFileStateFile api-server\n",
+                  "$InputFileSeverity info\n",
+                  "$InputRunFileMonitor\n",
+
+                  "$InputFileName /var/log/redis/redis-server.log\n",
+                  "$InputFileTag redis:\n",
+                  "$InputFileStateFile redis\n",
+                  "$InputFileSeverity info\n",
+                  "$InputRunFileMonitor\n",
+
+                  "$InputFileName /var/log/cloud-init.log\n",
+                  "$InputFileTag cloud-init:\n",
+                  "$InputFileStateFile cloud-init\n",
+                  "$InputFileSeverity info\n",
+                  "$InputRunFileMonitor\n",
+
+                  "$InputFileName /var/log/cfn-init.log\n",
+                  "$InputFileTag cfn-init:\n",
+                  "$InputFileStateFile cfn-init\n",
+                  "$InputFileSeverity info\n",
+                  "$InputRunFileMonitor\n",
+
+                  "$InputFileName /var/log/auth.log\n",
+                  "$InputFileTag auth:\n",
+                  "$InputFileStateFile state-auth\n",
+                  "$InputFileSeverity info\n",
+                  "$InputRunFileMonitor\n",
+
+                  "$InputFilePollInterval 1\n",
+
+                  "$DefaultNetstreamDriverCAFile /etc/syslog.logentries.crt\n",
+                  "$ActionSendStreamDriver gtls\n",
+                  "$ActionSendStreamDriverMode 1\n",
+                  "$ActionSendStreamDriverAuthMode x509/name\n",
+                  "$ActionSendStreamDriverPermittedPeer *.logentries.com\n",
+
+                  { "Fn::Join" : ["", ["$template LogentriesFormat,\"TODO: Your LogEntries key here ", { "Ref" : "Environment" }, " ", { "Ref" : "ApiServerVersion" }, " ", " %HOSTNAME% %syslogtag%%msg%\\n\"\n" ]] },
+
+                  "*.* @@api.logentries.com:20000;LogentriesFormat\n",
+                  "\n"
+                ]]},
+                "mode" : "000644",
+                "owner" : "root",
+                "group" : "root"
+              },
+              "/etc/syslog.logentries.crt" : {
+                "source"        : "https://d1l8gt88d35w5z.cloudfront.net/static/1386759272/data/certs/_.logentries.com.crt",
+                "mode"          : "000644",
+                "owner"         : "root",
+                "group"         : "root"
+              },
+              "/tmp/node-v0.10.24-linux-x64.tar.gz" : {
+                "source"        : "http://nodejs.org/dist/v0.10.24/node-v0.10.24-linux-x64.tar.gz",
+                "mode"          : "000644",
+                "owner"         : "root",
+                "group"         : "root"
+              }
+            }
+          },
+          "application" : {
+            "packages" : {
+              "apt" : {
+                "redis-server"    : ["2:2.8.*"]
+              }
+            },
+            "sources" : {
+              "/var/your-site" : {"Fn::Join" : ["", ["https://your-site-deployments.s3.amazonaws.com/api-server/api-server-", { "Ref" : "ApiServerVersion" }, ".tar.gz"]] }
+            },
+            "commands" : {
+              "a-correct-redis-log-permissions" : {
+                "command" : "chmod 664 /var/log/redis/redis-server.log"
+              },
+              "b-start-api-server" : {
+                "command" : "start api-server"
+              }
+            },
+            "files" : {
+              "/etc/init/api-server.conf" : {
+                "content" : { "Fn::Join" : ["", [
+                  "#!upstart\n",
+
+                  "description \"api-server\"\n",
+                  "author      \"Dylan Lingelbach\"\n",
+
+                  "start on (local-filesystems and net-device-up IFACE=eth0)\n",
+                  "stop on shutdown\n",
+
+                  "respawn\n",
+                  "# respawn limit 10 60\n",
+
+                  "env PORT=80\n",
+                  { "Fn::Join" : ["", ["env NODE_ENV=", { "Ref" : "Environment" }, "\n"]] },
+                  "env NODE_STORE=redis\n",
+                  "env AWS_ACCESS_KEY_ID=TODO: Add your AWS access key or use IAM\n",
+                  "env AWS_SECRET_ACCESS_KEY=TODO: Add your AWS access key or use IAM\n",
+                  { "Fn::Join" : ["", ["env AWS_REGION=", { "Ref" : "AWS::Region" }, "\n"]]},
+                  { "Fn::Join" : ["", ["env AWS_DEFAULT_REGION=", { "Ref" : "AWS::Region" }, "\n"]]},
+
+                  "export PORT\n",
+                  "export NODE_ENV\n",
+                  "export NODE_STORE\n",
+                  "export AWS_ACCESS_KEY_ID\n",
+                  "export AWS_SECRET_ACCESS_KEY\n",
+                  "export AWS_REGION\n",
+                  "export AWS_DEFAULT_REGION\n",
+
+                  { "Fn::Join" : ["",  ["chdir /var/your-site/api-server-", { "Ref" : "ApiServerVersion" }, "\n"]]},
+
+                  "script\n",
+                  { "Fn::Join" : ["",  ["  exec node /var/your-site/api-server-", { "Ref" : "ApiServerVersion" }, "/server.js >> /var/log/api-server.log 2>&1\n"]]},
+                  "end script\n"
+                ]]},
+                "mode" : "000644",
+                "owner" : "root",
+                "group" : "root"
+              }
+            }
+          }
+        },
+
+        "AWS::CloudFormation::Authentication" : {
+          "S3AccessCreds" : {
+            "type" : "S3",
+            "roleName" : "aws-deployment",
+            "buckets" : [ "your-site-deployments" ]
+          }
+        }
+      },
+      "Properties" : {
+        "ImageId" : { "Fn::FindInMap" : [ "AWSRegionArch2AMI", { "Ref" : "AWS::Region" },
+          { "Fn::FindInMap" : [ "AWSInstanceType2Arch", { "Ref" : "InstanceType" },
+            "Arch" ] } ] },
+        "KeyName"  : { "Ref" : "KeyName" },
+        "SecurityGroups" : [ { "Ref" : "InstanceSecurityGroup" }, { "Ref" : "InternalSshSecurityGroupId" } ],
+        "InstanceType" : { "Ref" : "InstanceType" },
+        "IamInstanceProfile" : { "Ref" : "DeploymentInstanceProfile" },
+        "UserData" : { "Fn::Base64" : { "Fn::Join" : ["", [
+          "#!/bin/bash\n",
+          "# Add additional apt sources\n",
+          "add-apt-repository -y ppa:chris-lea/redis-server\n",
+          "echo deb http://apt.newrelic.com/debian/ newrelic non-free >> /etc/apt/sources.list.d/newrelic.list\n",
+          "wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add -\n",
+
+          "# Bootstrap Amazon's cfn-init tools\n",
+          "apt-get update\n",
+          "apt-get -y install python-setuptools\n",
+          "wget -P /tmp https://s3.amazonaws.com/cloudformation-examples/aws-cfn-bootstrap-latest.tar.gz","\n",
+          "mkdir -p /tmp/aws-cfn-bootstrap-latest","\n",
+          "tar xvfz /tmp/aws-cfn-bootstrap-latest.tar.gz --strip-components=1 -C /tmp/aws-cfn-bootstrap-latest","\n",
+          "easy_install /tmp/aws-cfn-bootstrap-latest/","\n",
+
+          "function error_exit\n",
+          "{\n",
+          "  /usr/local/bin/cfn-signal -e 1 -r \"$1\" '", { "Ref" : "WaitHandle" }, "'\n",
+          "  exit 1\n",
+          "}\n",
+
+          "/usr/local/bin/cfn-init -s ", { "Ref" : "AWS::StackId" }, " -r LaunchConfig -c bootstrap ",
+          "         --region ", { "Ref" : "AWS::Region" }, " || error_exit 'Failed to initialize CloudFormation init scripts'\n",
+
+          "/usr/local/bin/cfn-signal -e $? '", { "Ref" : "WaitHandle" }, "'\n" ]]}
+        }
+      }
+    },
+
+    "WaitHandle" : {
+      "Type" : "AWS::CloudFormation::WaitConditionHandle"
+    },
+
+    "WaitCondition" : {
+      "Type" : "AWS::CloudFormation::WaitCondition",
+      "DependsOn" : "ApiServerGroup",
+      "Properties" : {
+        "Handle"  : { "Ref" : "WaitHandle" },
+        "Count"   : { "Ref" : "DesiredCapacity" },
+        "Timeout" : "600"
+      }
+    },
+
+
+    "InstanceSecurityGroup" : {
+      "Type" : "AWS::EC2::SecurityGroup",
+      "Properties" : {
+        "GroupDescription" : "Enable HTTP access on the configured port",
+        "VpcId" : { "Ref" : "VpcId" },
+        "SecurityGroupIngress" : [ {
+          "IpProtocol" : "tcp",
+          "FromPort" : "80",
+          "ToPort" : "80",
+          "SourceSecurityGroupId" : { "Ref" : "ApiServerLoadBalancerSecurityGroup" }
+        } ]
+      }
+    }
+  },
+
+  "Outputs" : {
+    "AutoScalingGroup" : {
+      "Description": "internal api-server's auto scaling group",
+      "Value": { "Ref" : "ApiServerGroup" }
+    }
+  }
+}

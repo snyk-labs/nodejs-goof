@@ -1,0 +1,340 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+# Bastion stack creation prerequisite:  first create an EC2 key pair and a VPC stack.
+# For details about how to connect to a Linux instance in a private subnet via the
+# bastion, see the following AWS blog post:
+# https://aws.amazon.com/blogs/security/securely-connect-to-linux-instances-running-in-a-private-amazon-vpc/
+
+Description: Bastion
+
+
+Parameters:
+
+  NetworkStackName:
+    Description: Active CloudFormation stack containing VPC resources
+    Type: String
+    MinLength: 1
+    MaxLength: 255
+    AllowedPattern: "^[a-zA-Z][-a-zA-Z0-9]*$"
+
+  KeyName:
+    Description: EC2 key pair name for bastion host SSH access
+    Type: AWS::EC2::KeyPair::KeyName
+
+  LogRetentionInDays:
+    Description: Number of days you would like your CloudWatch Logs to be retained
+    Type: Number
+    Default: 90
+
+  # For more information on the google-authenticator PAM module, see: https://github.com/google/google-authenticator-libpam
+  MFA:
+    Description: Set to true to install MFA using the google-authenticator PAM module on your bastion host
+    Type: String
+    ConstraintDescription: Value must be true or false
+    Default: false
+    AllowedValues:
+      - true
+      - false
+
+Mappings:
+
+  # Amazon Linux AMI - https://aws.amazon.com/amazon-linux-ami/
+  # Note: This has not been tested with Amazon Linux 2
+  AMIMap:
+
+    us-east-1:
+      AMI: ami-0ff8a91507f77f867
+    us-west-1:
+      AMI: ami-0bdb828fd58c52235
+    ap-northeast-3:
+      AMI: ami-0d98120a9fb693f07
+    ap-northeast-2:
+      AMI: ami-0a10b2721688ce9d2
+    ap-northeast-1:
+      AMI: ami-06cd52961ce9f0d85
+    sa-east-1:
+      AMI: ami-07b14488da8ea02a0
+    ap-southeast-1:
+      AMI: ami-08569b978cc4dfa10
+    ca-central-1:
+      AMI: ami-0b18956f
+    ap-southeast-2:
+      AMI: ami-09b42976632b27e9b
+    us-west-2:
+      AMI: ami-a0cfeed8
+    us-east-2:
+      AMI: ami-0b59bfac6be064b78
+    ap-south-1:
+      AMI: ami-0912f71e06545ad88
+    eu-central-1:
+      AMI: ami-0233214e13e500f77
+    eu-west-1:
+      AMI: ami-047bb4163c506cd98
+    eu-west-2:
+      AMI: ami-f976839e
+    eu-west-3:
+      AMI: ami-0ebc281c20e89ba4b
+
+
+Resources:
+
+  LogRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ec2.amazonaws.com
+            Action: sts:AssumeRole
+      Path: /
+      Policies:
+        - PolicyName: CloudWatchLogs
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - logs:DescribeLogStreams
+                  - logs:PutLogEvents
+                Resource: !GetAtt BastionSecureLogGroup.Arn
+    DependsOn: BastionSecureLogGroup
+
+  BastionInstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Path: /
+      Roles:
+        - !Ref LogRole
+
+  BastionHost:
+    Type: AWS::EC2::Instance
+    Metadata:
+      AWS::CloudFormation::Init:
+        config:
+          packages:
+            yum:
+              awslogs: []
+              google-authenticator: []
+
+          files:
+            "/etc/cfn/cfn-hup.conf":
+              mode: "000444"
+              owner: root
+              group: root
+              content: !Sub |
+                [main]
+                stack=${AWS::StackId}
+                region=${AWS::Region}
+
+            "/etc/cfn/hooks.d/cfn-auto-reloader.conf":
+              mode: "000444"
+              owner: root
+              group: root
+              content: !Sub |
+                [cfn-auto-reloader-hook]
+                triggers=post.update
+                path=Resources.BastionHost.Metadata.AWS::CloudFormation::Init
+                action=/opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource BastionHost --region ${AWS::Region}
+
+            "/etc/awslogs/awslogs.conf":
+              mode: "000444"
+              owner: root
+              group: root
+              content: !Sub |
+                [general]
+                use_gzip_http_content_encoding = true
+                state_file = /var/lib/awslogs/agent-state
+                [/var/log/secure]
+                file = /var/log/secure
+                log_group_name = ${BastionSecureLogGroup}
+                log_stream_name = log
+                datetime_format = %b %d %H:%M:%S
+
+            "/etc/awslogs/awscli.conf":
+              mode: "000444"
+              owner: root
+              group: root
+              content: !Sub |
+                [plugins]
+                cwlogs = cwlogs
+                [default]
+                region = ${AWS::Region}
+
+            "/etc/profile.d/init_google_authenticator.sh":
+              owner: root
+              group: root
+              content: !Sub |
+                #!/bin/bash -xe
+                if [ "${MFA}" == "true" ] && [ ! -e ~/.google_authenticator ]  &&  [ $USER != "root" ]; then
+                  echo -e "Initializing google-authenticator\n"
+                  google-authenticator --time-based --disallow-reuse --force --rate-limit=3 --rate-time=30 --window-size=3
+                  echo -e "Save the generated emergency scratch codes and use secret key or scan the QR code to register your device for multi-factor authentication.\n"
+                  echo -e "Login again using your ssh key pair and the generated one-time password on your registered device.\n"
+                  logout
+                fi
+
+            "/usr/local/sbin/configure_mfa.sh":
+              mode: "000550"
+              owner: root
+              group: root
+              content: !Sub |
+                #!/bin/bash -xe
+                if [ "${MFA}" == "true" ]; then
+                  echo "auth       required     pam_google_authenticator.so nullok" >> /etc/pam.d/sshd
+                  sed -e '/auth       substack     password-auth/ s/^#*/#/' -i /etc/pam.d/sshd
+                  sed -e '/ChallengeResponseAuthentication no/ s/^#*/#/' -i /etc/ssh/sshd_config
+                  sed -e '/#ChallengeResponseAuthentication yes/s/^#//' -i /etc/ssh/sshd_config
+                  echo >> /etc/ssh/sshd_config
+                  echo "AuthenticationMethods publickey,keyboard-interactive" >> /etc/ssh/sshd_config
+                  service sshd restart
+                fi
+                rm -f /usr/local/sbin/configure_mfa.sh
+
+          commands:
+            configure-mfa:
+              command: /usr/local/sbin/configure_mfa.sh
+
+          services:
+            sysvinit:
+              cfn-hup:
+                enabled: true
+                ensureRunning: true
+                files:
+                  - /etc/cfn/cfn-hup.conf
+                  - /etc/cfn/hooks.d/cfn-auto-reloader.conf
+              awslogs:
+                enabled: true
+                ensureRunning: true
+                files: /etc/awslogs/awslogs.conf
+
+    Properties:
+      InstanceType: t2.micro
+      KeyName: !Ref KeyName
+      NetworkInterfaces:
+        - NetworkInterfaceId: !Ref BastionNetworkInterface
+          DeviceIndex: 0
+      ImageId: !FindInMap [ AMIMap, !Ref "AWS::Region", AMI ]
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash -xe
+          yum update -y
+          /opt/aws/bin/cfn-init -v -s ${AWS::StackId} --resource BastionHost --region ${AWS::Region}
+          /opt/aws/bin/cfn-signal -e $? --stack ${AWS::StackId} --resource BastionHost --region ${AWS::Region}
+      IamInstanceProfile: !Ref BastionInstanceProfile
+      Tags:
+        - Key: Name
+          Value: startup-kit-bastion
+    DependsOn: BastionEipAssociation
+    CreationPolicy:
+      ResourceSignal:
+        Count: 1
+        Timeout: PT5M
+
+  BastionEip:
+    Type: AWS::EC2::EIP
+    Properties:
+      Domain: vpc
+
+  BastionEipAssociation:
+    Type: AWS::EC2::EIPAssociation
+    Properties:
+      AllocationId: !GetAtt BastionEip.AllocationId
+      NetworkInterfaceId: !Ref BastionNetworkInterface
+    DependsOn:
+      - BastionEip
+      - BastionNetworkInterface
+
+  BastionNetworkInterface:
+    Type: AWS::EC2::NetworkInterface
+    Properties:
+      SubnetId:
+        Fn::ImportValue: !Sub "${NetworkStackName}-PublicSubnet1ID"
+      GroupSet:
+        - Fn::ImportValue: !Sub "${NetworkStackName}-BastionGroupID"
+      SourceDestCheck: true
+      Tags:
+        - Key: Name
+          Value: startup-kit-bastion
+
+  BastionSecureLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      RetentionInDays: !Ref LogRetentionInDays
+
+  BastionSecureLogGroupStream:
+    Type: AWS::Logs::LogStream
+    Properties:
+      LogGroupName: !Ref BastionSecureLogGroup
+      LogStreamName: log
+
+  # When a user tries to SSH with invalid username the activity is logged in the SSH log file
+  SshInvalidUserMetricFilter:
+    Type: AWS::Logs::MetricFilter
+    Properties:
+      LogGroupName: !Ref BastionSecureLogGroup
+      FilterPattern: "[Mon, day, timestamp, ip, id, status = Invalid, ...]"
+      MetricTransformations:
+        - MetricValue: 1
+          MetricNamespace: SSH
+          MetricName: sshInvalidUser
+
+  SshInvalidhUserAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: SSH connections attempted with invalid username is greater than 3 over 1 minutes
+      MetricName: sshInvalidUser
+      Namespace: SSH
+      Statistic: Sum
+      Period: 60
+      EvaluationPeriods: 1
+      Threshold: 3
+      ComparisonOperator: GreaterThanThreshold
+      TreatMissingData: notBreaching
+
+  # When a user uses a bad private key pair or username
+  SshClosedConnectionMetricFilter:
+    Type: AWS::Logs::MetricFilter
+    Properties:
+      LogGroupName: !Ref BastionSecureLogGroup
+      FilterPattern: "[Mon, day, timestamp, ip, id, msg1= Connection, msg2 = closed, ...]"
+      MetricTransformations:
+        - MetricValue: 1
+          MetricNamespace: SSH
+          MetricName: sshClosedConnection
+
+  SshClosedConnectionAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: SSH connections closed due to invalid SSH key or username is greater than 5 in 5 minutes
+      MetricName: sshClosedConnection
+      Namespace: SSH
+      Statistic: Sum
+      Period: 300
+      EvaluationPeriods: 1
+      Threshold: 5
+      ComparisonOperator: GreaterThanThreshold
+      TreatMissingData: notBreaching
+
+Outputs:
+
+  Name:
+    Description: Bastion Stack Name
+    Value: !Ref AWS::StackName
+    Export:
+      Name: !Sub ${AWS::StackName}-Name
+
+  BastionEip:
+    Description: EIP for bastion host
+    Value: !Ref BastionEip
+    Export:
+      Name: !Sub "${AWS::StackName}-BastionEIP"
+
+  BastionEipAllocationId:
+    Description: EIP allocation id for bastion host
+    Value: !GetAtt BastionEip.AllocationId
+    Export:
+      Name: !Sub "${AWS::StackName}-BastionEIP-AllocationId"
+
+
