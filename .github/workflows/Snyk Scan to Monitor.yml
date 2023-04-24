@@ -8,7 +8,7 @@ name: Prebuilt repo + Snyk Security Scanning (OS, Code, Docker, IaC)
 # Prerequisites:
 # - Set a SNYK_TOKEN and a SNYK_ORG in the pipelines secrets
 
-on: [push, pull_request]
+on: push
 #permissions:
   #id-token: write # This is required for requesting the JWT
   #contents: write  # This is required for actions/checkout
