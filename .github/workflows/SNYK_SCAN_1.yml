@@ -51,8 +51,8 @@ jobs:
       with:
         sarif_file: snyk-code.sarif
 
-    #- name: Build the Docker Image
-    #  run: docker build . --file Dockerfile 
+    - name: Build the Docker Image
+      run: docker build . --file=Dockerfile 
 
     - name: Snyk Container Scanning
       run: snyk container test --org=${{ secrets.SNYK_ORG }} --file=Dockerfile --sarif-file-output=snyk-container.sarif 
