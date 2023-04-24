@@ -63,7 +63,7 @@ jobs:
         #sarif_file: snyk-container.sarif
 
     - name: Snyk Infrastructure-as-Code Scanning
-      run: snyk iac capture /cloudformation/*.* --org=${{ secrets.SNYK_ORG }} #--sarif-file-output=snyk-iac.sarif
+      run: snyk iac test --org=${{ secrets.SNYK_ORG }} #--sarif-file-output=snyk-iac.sarif
       continue-on-error: true
     #- name: Upload results to GitHub IaC Scanning
       #uses: github/codeql-action/upload-sarif@v2
