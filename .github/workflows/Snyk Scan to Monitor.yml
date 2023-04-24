@@ -93,7 +93,7 @@ jobs:
       continue-on-error: true
     #- name: Upload results to GitHub Open Source Scanning
       #uses: github/codeql-action/upload-sarif@v2
-    with:
+      with:
         #sarif_file: snyk-oss.sarif
         args: --severity-threshold=high
 
@@ -119,7 +119,7 @@ jobs:
         args: --severity-threshold=high
 
     - name: Snyk Infrastructure-as-Code Scanning
-      run: snyk iac test --org=${{ secrets.SNYK_ORG }} --severity-threshold=high --report #--sarif-file-output=snyk-iac.sarif
+      run: snyk iac test --org=${{ secrets.SNYK_ORG }} --report #--sarif-file-output=snyk-iac.sarif
       continue-on-error: true
     #- name: Upload results to GitHub IaC Scanning
       #uses: github/codeql-action/upload-sarif@v2
@@ -131,7 +131,7 @@ jobs:
       run: docker build . --file=Dockerfile --tag alexss200010/nodejs-goof:latest
 
     - name: Snyk Container Scanning
-      run: snyk container monitor --org=${{ secrets.SNYK_ORG }} --file=Dockerfile alexss200010/nodejs-goof:latest --severity-threshold=high 
+      run: snyk container monitor --org=${{ secrets.SNYK_ORG }} --file=Dockerfile alexss200010/nodejs-goof:latest 
       continue-on-error: true
     #- name: Upload results to GitHub Container Scanning
       #uses: github/codeql-action/upload-sarif@v2
@@ -140,7 +140,7 @@ jobs:
         args: --severity-threshold=high
 
     - name: Snyk Infrastructure-as-Code Scanning
-      run: snyk iac test --org=${{ secrets.SNYK_ORG }} --severity-threshold=high --report #--sarif-file-output=snyk-iac.sarif
+      run: snyk iac test --org=${{ secrets.SNYK_ORG }} --report #--sarif-file-output=snyk-iac.sarif
       continue-on-error: true
     #- name: Upload results to GitHub IaC Scanning
       #uses: github/codeql-action/upload-sarif@v2
