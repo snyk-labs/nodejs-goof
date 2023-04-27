@@ -21,18 +21,18 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Use Node.js for installing Snyk 
+    - name: Use Node.js for installing Snyk
       uses: actions/setup-node@v2
       with:
         node-version: 18.4
 
     # Install & prepare Snyk
     - run: npm install --location=global snyk
-    
+
     #  This OPTIONAL step will configure the Snyk CLI to connect to the EU instance of Snyk
     #- run: snyk config set use-base64-encoding=true
     #- run: snyk config set endpoint='https://app.eu.snyk.io/api'
-      
+
     - run: snyk auth ${{ secrets.SNYK_TOKEN }}
 
     - name: Snyk Open Source Scanning
@@ -48,7 +48,7 @@ jobs:
       #with:
         #sarif_file: snyk-code.sarif
         #args: --severity-threshold=high
-        
+
     - name: Build the Docker Image
       run: docker build . --file=Dockerfile --tag alexss200010/nodejs-goof:latest
 
