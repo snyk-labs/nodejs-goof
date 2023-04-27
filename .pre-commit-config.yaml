@@ -10,11 +10,6 @@ repos:
     -   id: check-added-large-files
     -   id: detect-private-key
 
--   repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.22.0
-    hooks:
-    -   id: check-github-workflows
-
 -   repo: local
     hooks:
     -   id: trufflehog
@@ -25,3 +20,8 @@ repos:
         # entry: bash -c 'docker run --rm -v "$(pwd):/workdir" -i --rm trufflesecurity/trufflehog:latest git file:///workdir --since-commit HEAD --only-verified --fail'
         language: system
         stages: ["commit", "push"]
+
+-   repo: https://github.com/mpalmer/action-validator
+    rev: v0.5.1
+    hooks:
+    -  id: action-validator
