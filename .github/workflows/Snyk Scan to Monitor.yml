@@ -9,17 +9,17 @@ name: Prebuilt repo + Snyk Security Scanning (OS, Code, Docker, IaC)
 # - Set a SNYK_TOKEN and a SNYK_ORG in the pipelines secrets
 
 on: [push, pull_request]
-permissions:
-  id-token: write # This is required for requesting the JWT
-  contents: write  # This is required for actions/checkout
-  security-events: write
+#permissions:
+  #id-token: write # This is required for requesting the JWT
+  #contents: write  # This is required for actions/checkout
+  #security-events: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@master
 
     - name: Use Node.js for installing Snyk 
       uses: actions/setup-node@v2
@@ -36,36 +36,44 @@ jobs:
     - run: snyk auth ${{ secrets.SNYK_TOKEN }}
 
     - name: Snyk Open Source Scanning
-      run: snyk test --org=${{ secrets.SNYK_ORG }} --all-projects --sarif-file-output=snyk-oss.sarif
-      continue-on-error: true
-    - name: Upload results to GitHub Open Source Scanning
-      uses: github/codeql-action/upload-sarif@v2
+    - uses: snyk/actions/node@master
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      #run: snyk monitor --org=${{ secrets.SNYK_ORG }} --all-projects #--sarif-file-output=snyk-oss.sarif
+      #continue-on-error: true
+    #- name: Upload results to GitHub Open Source Scanning
+      #uses: github/codeql-action/upload-sarif@v2
       with:
-        sarif_file: snyk-oss.sarif
+        #sarif_file: snyk-oss.sarif
+        args: --severity-threshold=high
 
-    - name: Snyk Code Scanning
-      run: snyk code test --org=${{ secrets.SNYK_ORG }} --sarif-file-output=snyk-code.sarif
-      continue-on-error: true
-    - name: Upload results to GitHub Code Scanning
-      uses: github/codeql-action/upload-sarif@v2
-      with:
-        sarif_file: snyk-code.sarif
 
+    #- name: Snyk Code Scanning
+      #run: snyk code test --org=${{ secrets.SNYK_ORG }} --severity-threshold=high --sarif-file-output=snyk-code.sarif
+      #continue-on-error: true
+    #- name: Upload results to GitHub Code Scanning
+      #uses: github/codeql-action/upload-sarif@v2
+      #with:
+        #sarif_file: snyk-code.sarif
+        #args: --severity-threshold=high
+        
     - name: Build the Docker Image
       run: docker build . --file=Dockerfile --tag alexss200010/nodejs-goof:latest
 
     - name: Snyk Container Scanning
-      run: snyk container test --org=${{ secrets.SNYK_ORG }} --file=Dockerfile --sarif-file-output=snyk-container.sarif alexss200010/nodejs-goof:latest 
+      run: snyk container monitor --org=${{ secrets.SNYK_ORG }} --file=Dockerfile alexss200010/nodejs-goof:latest --severity-threshold=high 
       continue-on-error: true
-    - name: Upload results to GitHub Container Scanning
-      uses: github/codeql-action/upload-sarif@v2
+    #- name: Upload results to GitHub Container Scanning
+      #uses: github/codeql-action/upload-sarif@v2
       with:
-        sarif_file: snyk-container.sarif
+        #sarif_file: snyk-container.sarif
+        args: --severity-threshold=high
 
     - name: Snyk Infrastructure-as-Code Scanning
-      run: snyk iac test --org=${{ secrets.SNYK_ORG }} --sarif-file-output=snyk-iac.sarif
+      run: snyk iac test --org=${{ secrets.SNYK_ORG }} --report #--sarif-file-output=snyk-iac.sarif
       continue-on-error: true
-    - name: Upload results to GitHub IaC Scanning
-      uses: github/codeql-action/upload-sarif@v2
+    #- name: Upload results to GitHub IaC Scanning
+      #uses: github/codeql-action/upload-sarif@v2
       with:
-        sarif_file: snyk-iac.sarif
+        #sarif_file: snyk-iac.sarif
+        args: --severity-threshold=high
