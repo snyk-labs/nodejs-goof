@@ -17,7 +17,8 @@ services:
     image: mongo:3
     ports:
       - "27017:27017"
-  good-mysql:
+  goof-mysql:
+    platform: linux/x86_64
     container_name: goof-mysql
     image: mysql:5
     environment:
