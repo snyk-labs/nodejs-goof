@@ -45,7 +45,7 @@ The code explicitly looks for credentials to that service.
 ### Cleanup
 To bulk delete the current list of TODO items from the DB run:
 ```bash
-npm run cleanup
+npm run cleanup.
 ```
 
 ## Exploiting the vulnerabilities
