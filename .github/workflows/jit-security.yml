@@ -25,7 +25,7 @@ jobs:
 
   secret-detection:
     if: fromJSON(github.event.inputs.client_payload).payload.workflow_job_name == 'secret-detection'
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-16
     steps:
     - name: gitleaks
       uses: jitsecurity-controls/jit-github-action@v2.2
