@@ -226,3 +226,20 @@ jobs:
         dispatch_type: workflow
         context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
         runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
+
+  static-code-analysis-swift:
+    if: fromJSON(github.event.inputs.client_payload).payload.workflow_job_name == 'static-code-analysis-swift'
+    runs-on: ubuntu-20.04
+    steps:
+    - name: semgrep
+      uses: jitsecurity-controls/jit-github-action@v2.2
+      with:
+        docker_user: jit-bot
+        docker_password: ${{fromJSON(github.event.inputs.client_payload).payload.container_registry_token}}
+        
+        security_control: ghcr.io/jitsecurity-controls/control-semgrep-alpine:latest
+        security_control_args: --json --config=/semgrep-swift-config.yml --metrics=off --severity=ERROR \${WORK_DIR:-.}
+        
+        dispatch_type: workflow
+        context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
+        runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
