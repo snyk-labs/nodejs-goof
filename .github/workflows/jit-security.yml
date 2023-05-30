@@ -9,6 +9,7 @@ jobs:
   enrich:
     if: fromJSON(github.event.inputs.client_payload).payload.workflow_job_name == 'enrich'
     runs-on: ubuntu-20.04
+    timeout-minutes: 20
     steps:
     - name: enrichment
       uses: jitsecurity-controls/jit-github-action@v2.2
@@ -26,6 +27,7 @@ jobs:
   remediation-pr:
     if: fromJSON(github.event.inputs.client_payload).payload.workflow_job_name == 'remediation-pr'
     runs-on: ubuntu-20.04
+    timeout-minutes: 20
     steps:
     - name: remediation-pr
       uses: jitsecurity-controls/jit-github-action@v2.2
@@ -43,6 +45,7 @@ jobs:
   secret-detection:
     if: fromJSON(github.event.inputs.client_payload).payload.workflow_job_name == 'secret-detection'
     runs-on: ubuntu-20.04
+    timeout-minutes: 20
     steps:
     - name: gitleaks
       uses: jitsecurity-controls/jit-github-action@v2.2
@@ -60,6 +63,7 @@ jobs:
   software-component-analysis:
     if: fromJSON(github.event.inputs.client_payload).payload.workflow_job_name == 'software-component-analysis'
     runs-on: ubuntu-20.04
+    timeout-minutes: 20
     steps:
     - name: osv-scanner
       uses: jitsecurity-controls/jit-github-action@v2.2
@@ -77,6 +81,7 @@ jobs:
   software-component-analysis-go:
     if: fromJSON(github.event.inputs.client_payload).payload.workflow_job_name == 'software-component-analysis-go'
     runs-on: ubuntu-20.04
+    timeout-minutes: 20
     steps:
     - name: nancy
       uses: jitsecurity-controls/jit-github-action@v2.2
@@ -94,6 +99,7 @@ jobs:
   software-component-analysis-js:
     if: fromJSON(github.event.inputs.client_payload).payload.workflow_job_name == 'software-component-analysis-js'
     runs-on: ubuntu-20.04
+    timeout-minutes: 20
     steps:
     - name: npm-audit
       uses: jitsecurity-controls/jit-github-action@v2.2
@@ -111,6 +117,7 @@ jobs:
   static-code-analysis-csharp:
     if: fromJSON(github.event.inputs.client_payload).payload.workflow_job_name == 'static-code-analysis-csharp'
     runs-on: ubuntu-20.04
+    timeout-minutes: 20
     steps:
     - name: semgrep
       uses: jitsecurity-controls/jit-github-action@v2.2
@@ -128,6 +135,7 @@ jobs:
   static-code-analysis-go:
     if: fromJSON(github.event.inputs.client_payload).payload.workflow_job_name == 'static-code-analysis-go'
     runs-on: ubuntu-20.04
+    timeout-minutes: 20
     steps:
     - name: gosec
       uses: jitsecurity-controls/jit-github-action@v2.2
@@ -145,6 +153,7 @@ jobs:
   static-code-analysis-java:
     if: fromJSON(github.event.inputs.client_payload).payload.workflow_job_name == 'static-code-analysis-java'
     runs-on: ubuntu-20.04
+    timeout-minutes: 20
     steps:
     - name: semgrep
       uses: jitsecurity-controls/jit-github-action@v2.2
@@ -162,6 +171,7 @@ jobs:
   static-code-analysis-js:
     if: fromJSON(github.event.inputs.client_payload).payload.workflow_job_name == 'static-code-analysis-js'
     runs-on: ubuntu-20.04
+    timeout-minutes: 20
     steps:
     - name: semgrep
       uses: jitsecurity-controls/jit-github-action@v2.2
@@ -179,6 +189,7 @@ jobs:
   static-code-analysis-kotlin:
     if: fromJSON(github.event.inputs.client_payload).payload.workflow_job_name == 'static-code-analysis-kotlin'
     runs-on: ubuntu-20.04
+    timeout-minutes: 20
     steps:
     - name: semgrep
       uses: jitsecurity-controls/jit-github-action@v2.2
@@ -196,6 +207,7 @@ jobs:
   static-code-analysis-python-semgrep:
     if: fromJSON(github.event.inputs.client_payload).payload.workflow_job_name == 'static-code-analysis-python-semgrep'
     runs-on: ubuntu-20.04
+    timeout-minutes: 20
     steps:
     - name: semgrep
       uses: jitsecurity-controls/jit-github-action@v2.2
@@ -213,6 +225,7 @@ jobs:
   static-code-analysis-scala:
     if: fromJSON(github.event.inputs.client_payload).payload.workflow_job_name == 'static-code-analysis-scala'
     runs-on: ubuntu-20.04
+    timeout-minutes: 20
     steps:
     - name: semgrep
       uses: jitsecurity-controls/jit-github-action@v2.2
@@ -230,6 +243,7 @@ jobs:
   static-code-analysis-swift:
     if: fromJSON(github.event.inputs.client_payload).payload.workflow_job_name == 'static-code-analysis-swift'
     runs-on: ubuntu-20.04
+    timeout-minutes: 20
     steps:
     - name: semgrep
       uses: jitsecurity-controls/jit-github-action@v2.2
