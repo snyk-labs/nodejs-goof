@@ -28,7 +28,7 @@ spec:
           env:
             - name: DOCKER
               value: "1"
----
+---              
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -53,6 +53,34 @@ spec:
             - containerPort: 3112
             - containerPort: 31337
 ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: goof-mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: goof
+      tier: backend-mysql
+  template:
+    metadata:
+      labels:
+        app: goof
+        tier: backend-mysql
+    spec:
+      containers:
+      - name: goof-mysql
+        image: mysql:5
+        #image: biarms/mysql:5  #this works for arm but is old
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            value: root
+          - name: MYSQL_DATABASE
+            value: acme
+        ports:
+          - containerPort: 3306
+---        
 apiVersion: apps/v1
 kind: Deployment
 metadata:
