@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: goof
-          image: <<DOCKERID>>/goof:latest #Edit with your Docker Hub ID
+          image: <<REPO>>/goof:latest #Edit with your container registry repo
           imagePullPolicy: Always
           resources:
             requests:
@@ -47,7 +47,7 @@ spec:
     spec:
       containers:
         - name: goof-image
-          image: <<DOCKERID>>/goof-image:latest #Edit with your Docker Hub ID
+          image: <<REPO>>/goof-image:latest #Edit with your container registry repo
           imagePullPolicy: Always
           ports:
             - containerPort: 3112
