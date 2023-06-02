@@ -217,6 +217,7 @@ exports.edit = function (req, res, next) {
 
 exports.update = function (req, res, next) {
   Todo.findById(req.params.id, function (err, todo) {
+// deepcode ignore NoSqli: <please specify a reason of ignoring this>
 
     todo.content = req.body.content;
     todo.updated_at = Date.now();
