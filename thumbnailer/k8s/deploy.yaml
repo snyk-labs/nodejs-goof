@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: thumbnailer
+  name: thumbnailer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: thumbnailer
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: thumbnailer
+    spec:
+      containers:
+      - image: poc:latest
+        imagePullPolicy: Never
+        name: poc

@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <title>Images</title>
+    </head>
+    <body>
+        <h1>Images</h1>
+        <ul>
+            {% for image in images %}
+                <li><img src="{{ 'uploads/' + image }}" style="max-width: 300px; padding: 20px;"/></li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
