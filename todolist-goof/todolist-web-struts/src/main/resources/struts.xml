@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+    <package name="todo" namespace="/todo" extends="struts-default">
+
+        <interceptors>
+            <interceptor name="loginInterceptor" class="io.github.benas.todolist.web.interceptor.LoginInterceptor"/>
+        </interceptors>
+
+        <global-results>
+            <result name="error">/WEB-INF/views/error.jsp</result>
+            <result name="login">/WEB-INF/views/user/login.jsp</result>
+        </global-results>
+
+        <action name="new" class="io.github.benas.todolist.web.action.todo.TodoAction" method="create">
+            <interceptor-ref name="loginInterceptor"/>
+            <interceptor-ref name="defaultStack"/>
+            <result>/WEB-INF/views/todo/create.jsp</result>
+        </action>
+
+        <action name="new.do" class="io.github.benas.todolist.web.action.todo.TodoAction" method="doCreate">
+            <interceptor-ref name="loginInterceptor"/>
+            <interceptor-ref name="defaultStack"/>
+            <result type="redirectAction">
+                <param name="actionName">home</param>
+                <param name="namespace">/user</param>
+            </result>
+        </action>
+
+        <action name="upload" class="io.github.benas.todolist.web.action.todo.TodoAction" method="upload">
+            <interceptor-ref name="loginInterceptor"/>
+            <interceptor-ref name="defaultStack"/>
+            <result>/WEB-INF/views/todo/upload.jsp</result>
+        </action>
+
+        <action name="upload.do" class="io.github.benas.todolist.web.action.todo.TodoAction" method="doUpload">
+            <!-- <interceptor-ref name="loginInterceptor"/> -->
+            <interceptor-ref name="defaultStack"/>
+            <interceptor-ref name="fileUpload"/>
+            <result name="success">/WEB-INF/views/user/files.jsp</result>
+        </action>
+
+        <action name="update" class="io.github.benas.todolist.web.action.todo.TodoAction" method="update">
+            <interceptor-ref name="loginInterceptor"/>
+            <interceptor-ref name="defaultStack"/>
+            <result>/WEB-INF/views/todo/update.jsp</result>
+        </action>
+
+        <action name="update.do" class="io.github.benas.todolist.web.action.todo.TodoAction" method="doUpdate">
+            <interceptor-ref name="loginInterceptor"/>
+            <interceptor-ref name="defaultStack"/>
+            <result type="redirectAction">
+                <param name="actionName">home</param>
+                <param name="namespace">/user</param>
+            </result>
+        </action>
+
+        <action name="delete.do" class="io.github.benas.todolist.web.action.todo.TodoAction" method="doDelete">
+            <interceptor-ref name="loginInterceptor"/>
+            <interceptor-ref name="defaultStack"/>
+            <result type="redirectAction">
+                <param name="actionName">home</param>
+                <param name="namespace">/user</param>
+            </result>
+        </action>
+
+        <action name="search" class="io.github.benas.todolist.web.action.todo.SearchTodoAction">
+            <interceptor-ref name="loginInterceptor"/>
+            <interceptor-ref name="defaultStack"/>
+            <result>/WEB-INF/views/todo/search.jsp</result>
+        </action>
+
+    </package>
+
+    <package name="user" namespace="/user" extends="struts-default">
+
+        <interceptors>
+            <interceptor name="loginInterceptor" class="io.github.benas.todolist.web.interceptor.LoginInterceptor"/>
+        </interceptors>
+
+        <global-results>
+            <result name="error">/WEB-INF/views/error.jsp</result>
+            <result name="login">/WEB-INF/views/user/login.jsp</result>
+        </global-results>
+
+        <action name="home" class="io.github.benas.todolist.web.action.user.HomeAction">
+            <interceptor-ref name="loginInterceptor"/>
+            <interceptor-ref name="defaultStack"/>
+            <result>/WEB-INF/views/user/home.jsp</result>
+        </action>
+
+        <action name="files" class="io.github.benas.todolist.web.action.user.FilesAction">
+            <interceptor-ref name="loginInterceptor"/>
+            <interceptor-ref name="defaultStack"/>
+            <result>/WEB-INF/views/user/files.jsp</result>
+        </action>
+
+        <action name="logout" class="io.github.benas.todolist.web.action.user.SessionAction" method="doLogout">
+            <interceptor-ref name="loginInterceptor"/>
+            <interceptor-ref name="defaultStack"/>
+            <result type="redirectAction">
+                <param name="actionName">index</param>
+                <param name="namespace">/</param>
+            </result>
+        </action>
+
+        <action name="account" class="io.github.benas.todolist.web.action.user.AccountAction" method="account">
+            <interceptor-ref name="loginInterceptor"/>
+            <interceptor-ref name="defaultStack"/>
+            <result>/WEB-INF/views/user/account.jsp</result>
+        </action>
+
+        <action name="update.do" class="io.github.benas.todolist.web.action.user.AccountAction" method="doUpdate">
+            <interceptor-ref name="loginInterceptor"/>
+            <interceptor-ref name="defaultStack"/>
+            <result name="input">/WEB-INF/views/user/account.jsp</result>
+            <result>/WEB-INF/views/user/account.jsp</result>
+        </action>
+
+        <action name="delete.do" class="io.github.benas.todolist.web.action.user.AccountAction" method="doDelete">
+            <interceptor-ref name="loginInterceptor"/>
+            <interceptor-ref name="defaultStack"/>
+            <result type="redirectAction">
+                <param name="actionName">index</param>
+                <param name="namespace">/</param>
+            </result>
+        </action>
+
+        <action name="changePassword.do" class="io.github.benas.todolist.web.action.user.AccountAction" method="doChangePassword">
+            <interceptor-ref name="loginInterceptor"/>
+            <interceptor-ref name="defaultStack"/>
+            <result name="input">/WEB-INF/views/user/account.jsp</result>
+            <result>/WEB-INF/views/user/account.jsp</result>
+        </action>
+
+    </package>
+
+    <package name="public" namespace="/" extends="struts-default">
+
+        <default-action-ref name="index" />
+
+        <action name="index" class="io.github.benas.todolist.web.action.IndexAction">
+            <result>/WEB-INF/views/index.jsp</result>
+        </action>
+
+        <action name="about" class="io.github.benas.todolist.web.action.AboutAction">
+            <result>/WEB-INF/views/about.jsp</result>
+        </action>
+
+        <action name="files" class="io.github.benas.todolist.web.action.FilesAction">
+            <result>/WEB-INF/views/files.jsp</result>
+        </action>
+
+
+        <action name="login" class="io.github.benas.todolist.web.action.user.SessionAction" method="login">
+            <result>/WEB-INF/views/user/login.jsp</result>
+        </action>
+
+        <action name="login.do" class="io.github.benas.todolist.web.action.user.SessionAction" method="doLogin">
+            <result name="input">/WEB-INF/views/user/login.jsp</result>
+            <result type="redirectAction">
+                <param name="actionName">home</param>
+                <param name="namespace">/user</param>
+            </result>
+        </action>
+
+        <action name="register" class="io.github.benas.todolist.web.action.user.AccountAction" method="register">
+            <result>/WEB-INF/views/user/register.jsp</result>
+        </action>
+
+        <action name="register.do" class="io.github.benas.todolist.web.action.user.AccountAction" method="doRegister">
+            <result name="input">/WEB-INF/views/user/register.jsp</result>
+            <result type="redirectAction">
+                <param name="actionName">home</param>
+                <param name="namespace">/user</param>
+            </result>
+        </action>
+
+    </package>
+
+</struts>

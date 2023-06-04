@@ -2,3 +2,4 @@
 *.sock
 
 config.rb
+.idea

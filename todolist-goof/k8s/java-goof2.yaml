@@ -1,0 +1,42 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: goof
+  name: goof
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: goof
+  template:
+    metadata:
+      labels:
+        app: goof
+    spec:
+      containers:
+      - image: ${DOCKER_ACCOUNT}/java-goof:latest
+        imagePullPolicy: Always
+        name: java-goof
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 65534 #nobody
+          runAsGroup: 65534 #nobody
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: goof
+  name: goof
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: goof

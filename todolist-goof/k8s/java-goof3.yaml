@@ -1,0 +1,55 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: goof
+  name: goof
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: goof
+  template:
+    metadata:
+      labels:
+        app: goof
+    spec:
+      containers:
+      - image: ${DOCKER_ACCOUNT}/java-goof:latest
+        imagePullPolicy: Always
+        name: java-goof
+        securityContext:
+          readOnlyRootFilesystem: true
+        volumeMounts:
+          - mountPath: /usr/local/tomcat/temp
+            name: tomcat-temp
+          - mountPath: /usr/local/tomcat/work
+            name: tomcat-work
+          - mountPath: /usr/local/tomcat/logs
+            name: tomcat-logs
+      restartPolicy: Always
+      volumes:
+        - name: tomcat-temp
+          emptyDir: {}
+        - name: tomcat-work
+          emptyDir: {}
+        - name: tomcat-logs
+          emptyDir: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: goof
+  name: goof
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: goof

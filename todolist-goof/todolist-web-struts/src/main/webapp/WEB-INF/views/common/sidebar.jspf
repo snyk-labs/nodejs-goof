@@ -1,0 +1,25 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<div class="well sidebar-nav">
+    <ul class="nav nav-list">
+        <li class="nav-header">Hi ${sessionScope.user.name} !</li>
+        <li><a href=<%= response.encodeURL(request.getContextPath() + "/user/home") %>><i class="icon-home"></i> Home</a></li>
+        <li><a href=<%= response.encodeURL(request.getContextPath() + "/user/account") %>><i class="icon-user"></i> My account</a></li>
+        <li><a href=<%= response.encodeURL(request.getContextPath() + "/todo/new") %>><i class="icon-file"></i> Create a todo</a></li>
+        <li><a href=<%= response.encodeURL(request.getContextPath() + "/todo/upload") %>><i class="icon-file"></i> Upload Files</a></li>
+        <li><a href=<%= response.encodeURL(request.getContextPath() + "/user/files") %>><i class="icon-file"></i> My Files</a></li>
+        <li class="divider"></li>
+        <li class="nav-header">Search todo</li>
+        <li>
+            <s:form cssClass="form-search" namespace="/todo" action="search" id="searchForm" method="get">
+                <div class="input-append">
+                    <s:textfield name="title" cssClass="input-small search-query" placeholder="search by title" required="required"/>
+                    <s:submit cssClass="btn" value="Go!" />
+                </div>
+            </s:form>
+        </li>
+    </ul>
+</div>
