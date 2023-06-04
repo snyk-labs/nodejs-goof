@@ -13,8 +13,8 @@ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip
 unzip awscliv2.zip
 sudo ./aws/install
 
-echo "Installing jq, gettext, bash-completion, moreutils..."
-sudo apt-get -y install jq gettext bash-completion moreutils
+echo "Installing jq, gettext, bash-completion, moreutils, pngcrush..."
+sudo apt-get -y install jq gettext bash-completion moreutils pngcrush
 
 echo "Installing yq for yaml processing..."
 echo 'yq() {

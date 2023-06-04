@@ -1,0 +1,54 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: darkweb
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: log4shell
+  name: log4shell
+  namespace: darkweb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: log4shell
+  template:
+    metadata:
+      labels:
+        app: log4shell
+    spec:
+      containers:
+        - name: ldap
+          image: ${ECR_REPO}/log4shell-server:latest
+          imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ldap
+  namespace: darkweb
+spec:
+  selector:
+    app: log4shell
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: evil
+  namespace: darkweb
+spec:
+  selector:
+    app: log4shell
+  ports:
+    - protocol: TCP
+      port: 9999
+      targetPort: 9999
+

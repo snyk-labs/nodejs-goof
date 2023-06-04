@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: thumbnailer
+  name: thumbnailer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: thumbnailer
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: thumbnailer
+    spec:
+      containers:
+        - image: ${ECR_REPO}/thumbnailer:latest
+          imagePullPolicy: Always
+          name: thumbnailer
+          ports:
+            - containerPort: 5000
+              name: http
+              protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: thumbnailer
+spec:
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
+      name: "http"
+  selector:
+    app: thumbnailer
