@@ -14,7 +14,13 @@ unzip awscliv2.zip
 sudo ./aws/install
 
 echo "Installing jq, gettext, bash-completion, moreutils, pngcrush..."
-sudo apt-get -y install jq gettext bash-completion moreutils pngcrush
+
+#if ubuntu use apt-get else use yum (amazon linux)
+if [ -x "$(command -v apt-get)" ]; then
+    sudo apt-get update && sudo apt-get install -y jq gettext bash-completion moreutils pngcrush
+else
+    sudo yum install -y jq gettext bash-completion moreutils pngcrush ImageMagick
+fi
 
 echo "Installing yq for yaml processing..."
 echo 'yq() {
@@ -28,5 +34,8 @@ echo "source <(kubectl completion bash)" >> ~/.bashrc
 echo "Aliasing 'k' to 'kubectl'..."
 echo "alias k=kubectl" >> ~/.bashrc
 echo "complete -F __start_kubectl k" >> ~/.bashrc
+
+export DOCKER_BUILDKIT=1
+echo "export DOCKER_BUILDKIT=1" >> ~/.bashrc
 
 echo "Done. Please source ~/.bashrc to complete the installation."
