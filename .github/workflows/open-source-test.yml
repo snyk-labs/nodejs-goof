@@ -1,0 +1,10 @@
+name: Open Source Test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  open-source-test:
+    uses: somerset-inc/somerset-workflows/.github/workflows/snyk-opensource-wrapper.yml@main
