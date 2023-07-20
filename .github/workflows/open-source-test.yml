@@ -9,5 +9,4 @@ on:
 jobs:
   open-source-test:
     uses: somerset-inc/somerset-workflows/.github/workflows/snyk-opensource-wrapper.yml@main
-    secrets:
-      snyk-token: ${{secrets.SNYK_API_TOKEN}}
+    secrets: inherit
