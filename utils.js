@@ -4,6 +4,7 @@ module.exports = {
     return Math.floor( Math.random() * ( max - min + 1 )) + min;
   },
 
+  // uid
   uid : function ( len ){
     var str     = '';
     var src     = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
