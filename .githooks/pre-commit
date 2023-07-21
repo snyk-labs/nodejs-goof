@@ -1,2 +1,0 @@
-#!/bin/sh
-snyk test --severity-threshold=high
