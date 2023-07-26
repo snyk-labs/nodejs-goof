@@ -17,6 +17,7 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
+#   needs: [other job] 
 
     steps:
     - uses: actions/checkout@v2
@@ -29,34 +30,36 @@ jobs:
     # Install & prepare Snyk
     - run: npm install --location=global snyk
 
-    #  This OPTIONAL step will configure the Snyk CLI to connect to the EU instance of Snyk
-    #- run: snyk config set use-base64-encoding=true
-    #- run: snyk config set endpoint='https://app.eu.snyk.io/api'
-
+    # Login to Snyk Cloud
     - run: snyk auth ${{ secrets.SNYK_TOKEN }}
 
-    - name: Snyk Open Source Scanning
+    - name: Snyk SCA testing
+      run: snyk test  --all-projects --severity-threshold=high
+      continue-on-error: true
+    
+    - name: Snyk SCA results monitor
       run: snyk monitor --org=${{ secrets.SNYK_ORG }} --all-projects --severity-threshold=high
       continue-on-error: true
 
 
-    - name: Snyk Code Scanning
+    - name: Snyk SAST Scanning
       run: snyk code test --org=${{ secrets.SNYK_ORG }} --severity-threshold=high --sarif-file-output=snyk-code.sarif
       continue-on-error: true
+      
     #- name: Upload results to GitHub Code Scanning
       #uses: github/codeql-action/upload-sarif@v2
       #with:
         #sarif_file: snyk-code.sarif
         #args: --severity-threshold=high
 
-    - name: Build the Docker Image
-      run: docker build . --file=Dockerfile --tag alexss200010/nodejs-goof:latest
+    #- name: Build the Docker Image
+    #  run: docker build . --file=Dockerfile --tag alexss200010/nodejs-goof:latest
 
-    - name: Snyk Container Scanning
-      run: snyk container monitor --org=${{ secrets.SNYK_ORG }} --severity-threshold=high --file=Dockerfile alexss200010/nodejs-goof:latest
-      continue-on-error: true
+    #- name: Snyk Container Scanning
+    #  run: snyk container monitor --org=${{ secrets.SNYK_ORG }} --severity-threshold=high --file=Dockerfile alexss200010/nodejs-goof:latest
+    #  continue-on-error: true
 
 
-    - name: Snyk Infrastructure-as-Code Scanning
-      run: snyk iac test --org=${{ secrets.SNYK_ORG }} --severity-threshold=high --report
-      continue-on-error: true
+    #- name: Snyk Infrastructure-as-Code Scanning
+    #  run: snyk iac test --org=${{ secrets.SNYK_ORG }} --severity-threshold=high --report
+    #  continue-on-error: true
