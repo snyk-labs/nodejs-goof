@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 name: Node.js CI
 
 on:
@@ -39,3 +40,17 @@ jobs:
         with:
           name: results
           path: downloads
+=======
+name: Open Source Test
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  open-source-test:
+    uses: somerset-inc/somerset-workflows/.github/workflows/snyk-opensource-wrapper.yml@main
+    secrets: inherit
+>>>>>>> 03ef1a5dbe147860f203c8e2cbb2b045c89d6267
