@@ -17,6 +17,6 @@ jobs:
           run: npm i -g snyk-delta
         - uses: snyk/actions/setup@master
         - name: Snyk Test
-          run: snyk test --json --print-deps | snyk-delta
+          run: snyk test --json --print-deps | snyk-delta --baselineProject edac5e42-e1cb-4d6c-beb6-a8aed9d09b12
           env:
             SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
