@@ -1,4 +1,4 @@
-name: Snyk Delta Test
+name: Snyk Container Test
 
 on:
   workflow_dispatch:
