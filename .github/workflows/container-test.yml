@@ -1,0 +1,20 @@
+name: Snyk Delta Test
+
+on:
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  security-open-source:
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@master
+        - name: Use Node.js
+          uses: actions/setup-node@v1
+          with:
+            node-version: 18.4
+        - uses: snyk/actions/setup@master
+        - name: Snyk Container Test
+          run: snyk container test ubuntu:latest -d
+          env:
+            SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
