@@ -70,6 +70,8 @@ app.use('/users', routesUsers)
 
 const SECRET = 'password123';
 
+const SECRET2 = 'password123';
+
 // Static
 app.use(st({ path: './public', url: '/public' }));
 
