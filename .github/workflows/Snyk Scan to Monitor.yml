@@ -42,9 +42,9 @@ jobs:
       continue-on-error: true
 
 
-    - name: Snyk SAST Scanning
-      run: snyk code test --org=${{ secrets.SNYK_ORG }} --severity-threshold=high --sarif-file-output=snyk-code.sarif
-      continue-on-error: true
+    #- name: Snyk SAST Scanning
+      r#un: snyk code test --org=${{ secrets.SNYK_ORG }} --severity-threshold=high --sarif-file-output=snyk-code.sarif
+      #continue-on-error: true
       
     #- name: Upload results to GitHub Code Scanning
       #uses: github/codeql-action/upload-sarif@v2
