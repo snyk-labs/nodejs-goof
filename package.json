@@ -31,7 +31,7 @@
     "hbs": "^4.0.4",
     "humanize-ms": "1.0.1",
     "jquery": "^2.2.4",
-    "lodash": "4.17.4",
+    "lodash": "4.17.20",
     "marked": "0.3.5",
     "method-override": "latest",
     "moment": "2.15.1",
