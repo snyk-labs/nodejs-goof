@@ -1,0 +1,25 @@
+name: Snyk Scan
+
+on:
+  push:
+    branches:
+      - '**'
+    paths-ignore:
+      - '.github/**'
+
+  pull_request:
+    branches:
+      - '**'
+    paths-ignore:
+      - '.github/**'
+
+concurrency: 
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  Snyk_Check:
+    uses: fsdsdfsdfsdsdf
+    secrets:
+      snyk_org_name: ${{ secrets.SNYK_ORG }}
+      snyk_passwd: ${{ secrets.SNYK_TOKEN }}
