@@ -19,7 +19,7 @@ concurrency:
 
 jobs:
   Snyk_Check:
-    uses: fsdsdfsdfsdsdf
+    uses: Ne0ness/Reusable-Workflow-Modiles/.github/workflows/Snyk-SCA-SAST-NodeJS.yml@main
     secrets:
       snyk_org_name: ${{ secrets.SNYK_ORG }}
       snyk_passwd: ${{ secrets.SNYK_TOKEN }}
