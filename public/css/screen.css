@@ -264,6 +264,7 @@ body {
   width: 6rem;
   height: 6rem;
   margin: 1rem 1rem 0 0;
+  border-radius: 6rem;
 }
 
 #footer-wrap a {
