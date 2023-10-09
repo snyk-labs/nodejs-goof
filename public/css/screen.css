@@ -22,6 +22,9 @@ time, mark, audio, video {
 
 /* line 20, ../../../../../Users/fred/.rvm/gems/ruby-1.9.3-p0/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 body {
+  background: #03001e;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #fdeff9, #ec38bc, #7303c0, #03001e);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #fdeff9, #ec38bc, #7303c0, #03001e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   line-height: 1;
   height: 100vh;
 }
@@ -71,12 +74,14 @@ body {
 
 /* line 10, ../sass/screen.sass */
 #page-title {
-  color: #666666;
-  background-color: #f8f8f8;
+  color: #ffffff;
+  background-color: #ffffff1b;
+  border-radius: 10px;
   font-size: 3rem;
-  margin: 1rem 1rem 0 0;
-  padding: 1rem 2rem 0 2rem;
-  text-shadow: 0 1px 1px white;
+  font-weight: bold;
+  margin: 1rem ;
+  padding: 1rem ;
+  text-shadow: 0 4px 4px rgb(247, 0, 255);
 }
 
 /* line 19, ../sass/screen.sass */
@@ -175,7 +180,9 @@ body {
 
 /* line 89, ../sass/screen.sass */
 #footer-wrap {
-  background-color: #f8f8f8;
+  background: #03001e;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #fdeff9, #ec38bc, #7303c0, #03001e);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #fdeff9, #ec38bc, #7303c0, #03001e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 /* line 92, ../sass/screen.sass */
@@ -243,8 +250,8 @@ body {
 }
 
 .patch {
-  height: 5rem;
-  width: 5rem;
+  height: 6rem;
+  width: 6rem;
   padding: 1rem 1rem 0 0;
 }
 
@@ -254,8 +261,8 @@ body {
 }
 
 .snyk-patch {
-  width: 5rem;
-  height: 5rem;
+  width: 6rem;
+  height: 6rem;
   margin: 1rem 1rem 0 0;
 }
 
