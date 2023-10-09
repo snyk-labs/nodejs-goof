@@ -15,11 +15,13 @@ services:
   goof-mongo:
     container_name: goof-mongo
     image: mongo:3
+    platform: linux/amd64  # Add this line to specify the platform (On M2 Mac)
     ports:
       - "27017:27017"
-  good-mysql:
-    container_name: goof-mysql
+  goof-mysql:   # Corrected the typo here
+    container_name: goof-mysql   # And here
     image: mysql:5
+    platform: linux/amd64  # Add this line to specify the platform (On M2 Mac)
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: acme
