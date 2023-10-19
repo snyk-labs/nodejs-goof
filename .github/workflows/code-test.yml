@@ -1,0 +1,20 @@
+name: Snyk Code Test
+
+on:
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  code-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+
+      - name: Setup Snyk Action
+        uses: snyk/actions/setup@master
+
+      - name: Test Code with Snyk
+        run: snyk code test
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
