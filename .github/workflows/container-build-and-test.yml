@@ -1,0 +1,23 @@
+name: Build Image and Test with Snyk
+
+on:
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  open-source-test:
+    runs-on: ubuntu-latest
+    steps:
+        - name: Checkout Repo
+          uses: actions/checkout@master
+
+        - name: Build Docker image
+          run: docker build -t somerset-inc/nodejs-goof .
+
+        - name: Test Built Image with Snyk
+          uses: snyk/actions/docker@master
+          env:
+            SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+          with:
+            image: somerset-inc/nodejs-goof
+            args: --file=Dockerfile
