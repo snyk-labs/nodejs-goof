@@ -1,56 +1,26 @@
-<<<<<<< HEAD
-name: Node.js CI
-
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
-jobs:
-  build:
-
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [14.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-      - run: npm install
-      - run: npm i -g snyk
-      - run: snyk auth ${{ secrets.SNYK_TOKEN }}
-      - run: snyk monitor
-
-      - name: install snyk-to-html
-        run: |
-          npm install snyk-to-html -g
-          snyk test --json | snyk-to-html -o result.html
-          mkdir downloads
-          mv result.html downloads
-      - name: Use the Upload Artifact GitHub Action
-        uses: actions/upload-artifact@v2
-        with:
-          name: results
-          path: downloads
-=======
-name: Open Source Test
+name: Snyk Open Source Test
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
+  workflow_call:
 
 jobs:
   open-source-test:
-    uses: somerset-inc/somerset-workflows/.github/workflows/snyk-opensource-wrapper.yml@main
-    secrets: inherit
->>>>>>> 03ef1a5dbe147860f203c8e2cbb2b045c89d6267
+    runs-on: ubuntu-latest
+    steps:
+        - name: Checkout Repo
+          uses: actions/checkout@master
+
+        - name: Test Open Source Dependencies with Snyk
+          uses: snyk/actions/node@master
+          env:
+            SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+          with:
+            command: test
+
+        # - name: Upload SBOM
+        #   uses: actions/upload-artifact@v3
+        #   with:
+        #     name: sbom-cyclonedx
+        #     path: sbom-cyclonedx.json
+        #     retention-days: 5
