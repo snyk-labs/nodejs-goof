@@ -3,6 +3,8 @@
   "version": "1.0.1",
   "description": "A vulnerable todo demo application",
   "homepage": "https://snyk.io/",
+
+  
   "repository": {
     "type": "git",
     "url": "https://github.com/Snyk/snyk-todo-list-demo-app/"
