@@ -21,3 +21,10 @@ jobs:
         run: snyk code test --json | snyk-to-html -o snyk-code-results.html
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      - name: Upload HTML
+        uses: actions/upload-artifact@v3
+        with:
+          name: snyk-code-results
+          path: snyk-code-results.html
+          retention-days: 5
