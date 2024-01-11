@@ -1,0 +1,23 @@
+name: Snyk Code Test with Snyk to HTML
+
+on:
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  code-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+
+      - name: Install snyk-to-html
+        run: npm install -g snyk-to-html
+
+      - name: Setup Snyk Action
+        uses: snyk/actions/setup@master
+
+      - name: Test Code with Snyk
+        run: snyk code test --json | snyk-to-html -o snyk-code-results.html
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
