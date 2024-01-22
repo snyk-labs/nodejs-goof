@@ -1,0 +1,2081 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Language" content="en-us">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Snyk test report</title>
+  <meta name="description" content=" known vulnerabilities found in .">
+  <base target="_blank">
+  <link rel="icon" type="image/png" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.png"
+    sizes="194x194">
+  <link rel="shortcut icon" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.ico">
+  <style type="text/css">
+  
+    body {
+      -moz-font-feature-settings: "pnum";
+      -webkit-font-feature-settings: "pnum";
+      font-variant-numeric: proportional-nums;
+      display: flex;
+      flex-direction: column;
+      font-feature-settings: "pnum";
+      font-size: 100%;
+      line-height: 1.5;
+      min-height: 100vh;
+      -webkit-text-size-adjust: 100%;
+      margin: 0;
+      padding: 0;
+      color: #393842;
+      font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif;
+    }
+  
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-weight: 500;
+    }
+  
+    a,
+    a:link,
+    a:visited {
+      border-bottom: 1px solid #4b45a9;
+      text-decoration: none;
+      color: #4b45a9;
+    }
+  
+    a:hover,
+    a:focus,
+    a:active {
+      border-bottom: 1px solid #4b45a9;
+    }
+  
+    hr {
+      border: none;
+      margin: 1em 0;
+      border-top: 1px solid #c5c5c5;
+    }
+  
+    ul {
+      padding: 0 1em;
+      margin: 1em 0;
+    }
+  
+    code {
+      background-color: #EEE;
+      color: #333;
+      padding: 0.25em 0.5em;
+      border-radius: 0.25em;
+    }
+  
+    pre {
+      font-size: 14px;
+    }
+  
+    pre code {
+      padding: 10px;
+      font-family: monospace;
+      background-color: #393842;
+      border-radius: 4px;
+      color: #fff;
+      display: block;
+      white-space: pre-wrap;
+      overflow-x: auto;
+      max-width: 100%;
+      min-width: 100px;
+    }
+  
+    a code {
+      border-radius: .125rem .125rem 0 0;
+      padding-bottom: 0;
+      color: #4b45a9;
+    }
+  
+    a[href^="http://"]:after,
+    a[href^="https://"]:after:not(.brand) {
+      background-image: linear-gradient(transparent,transparent),url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20112%20109%22%3E%3Cg%20id%3D%22Page-1%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20id%3D%22link-external%22%3E%3Cg%20id%3D%22arrow%22%3E%3Cpath%20id%3D%22Line%22%20stroke%3D%22%234B45A9%22%20stroke-width%3D%2215%22%20d%3D%22M88.5%2021l-43%2042.5%22%20stroke-linecap%3D%22square%22%2F%3E%3Cpath%20id%3D%22Triangle%22%20fill%3D%22%234B45A9%22%20d%3D%22M111.2%200v50L61%200z%22%2F%3E%3C%2Fg%3E%3Cpath%20id%3D%22square%22%20fill%3D%22%234B45A9%22%20d%3D%22M66%2015H0v94h94V44L79%2059v35H15V30h36z%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      background-repeat: no-repeat;
+      background-size: .75rem;
+      content: "";
+      display: inline-block;
+      height: .75rem;
+      margin-left: .25rem;
+      width: .75rem;
+    }
+  
+  
+  /* Layout */
+  
+    [class*=layout-container] {
+      margin: 0 auto;
+      max-width: 71.25em;
+      padding: 20px;
+      position: relative;
+    }
+    .layout-container--short {
+      padding-top: 0;
+      padding-bottom: 0;
+      max-width: 48.75em;
+    }
+  
+    .layout-container--short:after {
+      display: block;
+      content: "";
+      clear: both;
+    }
+  
+  /* Header */
+  
+    .header {
+      padding-bottom: 1px;
+    }
+  
+    .paths {
+      margin-left: 8px;
+      font-size:14px;
+    }
+  
+    .project__header {
+      background-color: #4b45a9;
+      background-image: linear-gradient(to right, #7530a6 0%, #461d9f 50%);
+      color: #fff;
+      }
+  
+    .project__header__title {
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      word-break: break-all;
+      margin-top: 0;
+      margin-bottom: 12px;
+    }
+  
+    .meta-count {
+      display: inline-block;
+      margin: 0 12px 6px 0;
+      padding-right: 12px;
+      font-size:14px;
+    }
+  
+  /* Card */
+  
+    .card {
+      background-color: #fff;
+      border: 1px solid #c5c5c5;
+      border-radius: .25rem;
+      margin: 0 0 2em 0;
+      position: relative;
+      min-height: 40px;
+      padding: 0;
+    }
+  
+    .card .label {
+      background-color: #767676;
+      border: 2px solid #767676;
+      color: white;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      display: inline-block;
+      margin: 0;
+      border-radius: 0.25rem;
+    }
+  
+    .card .label__text {
+      vertical-align: text-top;
+        font-weight: bold;
+    }
+  
+    .card .label--critical {
+      background-color: #AB1A1A;
+      border-color: #AB1A1A;
+    }
+  
+    .card .label--high {
+      background-color: #CE5019;
+      border-color: #CE5019;
+    }
+  
+    .card .label--medium {
+      background-color: #D68000;
+      border-color: #D68000;
+    }
+  
+    .card .label--low {
+      background-color: #88879E;
+      border-color: #88879E;
+    }
+  
+    .severity--low {
+      border-color: #88879E;
+    }
+  
+    .severity--medium {
+      border-color: #D68000;
+    }
+  
+    .severity--high {
+      border-color: #CE5019;
+    }
+  
+    .severity--critical {
+      border-color: #AB1A1A;
+    }
+  
+    .card--vuln {
+      padding-top: 4em;
+    }
+  
+    .card--vuln .label {
+      left: 0;
+      position: absolute;
+      top: 1.1em;
+      padding-left: 1.9em;
+      padding-right: 1.9em;
+      border-radius: 0 0.25rem 0.25rem 0;
+    }
+  
+    .card__section {
+      background-color: #faf9fa
+    }
+  
+    .card__section h2 {
+      font-size: 22px;
+      margin-bottom: 0.5em;
+    }
+  
+    .card__section p {
+      margin: 0 0 12px 0;
+    }
+  
+    .card__meta {
+      padding: 0;
+      margin-top: 10px;
+      font-size: 1.1em;
+    }
+  
+    .card__meta__item {
+      display: inline-block;
+    }
+  
+    .card .card__meta__paths {
+      font-size: 0.9em;
+    }
+  
+    .card__title {
+      font-size: 28px;
+      margin-top: 0;
+    }
+  
+    .card__cta p {
+      margin: 0;
+      text-align: right;
+    }
+  
+  /* Styles by Andy */
+  
+  .brand, .brand:link, .brand:visited { display:inline-block; border:none; }
+  .brand::after { background:none; }
+  
+  .test-meta { float:right; max-width:500px; opacity:.75; font-size:12px; text-align: right; }
+  .test-meta .filepath { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .test-meta .timestamp { margin:0 0 6px }
+  
+  .report-summary { display:flex; justify-content: space-between; margin-bottom: 24px; }
+  .header-wrap, .source-panel { align-self: center; }
+  .severity-icon { display:inline-block; width:32px; height: 32px;  }
+  .severity-icon.severity-icon--critical { background:url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNCIgZmlsbD0iI0FCMUExQSIvPgo8cGF0aCBkPSJNMTkuNTYyNSAxOC4zMzk4SDIzLjA2NjRDMjIuOTk2MSAxOS40ODgzIDIyLjY3OTcgMjAuNTA3OCAyMi4xMTcyIDIxLjM5ODRDMjEuNTYyNSAyMi4yODkxIDIwLjc4NTIgMjIuOTg0NCAxOS43ODUyIDIzLjQ4NDRDMTguNzkzIDIzLjk4NDQgMTcuNTk3NyAyNC4yMzQ0IDE2LjE5OTIgMjQuMjM0NEMxNS4xMDU1IDI0LjIzNDQgMTQuMTI1IDI0LjA0NjkgMTMuMjU3OCAyMy42NzE5QzEyLjM5MDYgMjMuMjg5MSAxMS42NDg0IDIyLjc0MjIgMTEuMDMxMiAyMi4wMzEyQzEwLjQyMTkgMjEuMzIwMyA5Ljk1NzAzIDIwLjQ2MDkgOS42MzY3MiAxOS40NTMxQzkuMzE2NDEgMTguNDQ1MyA5LjE1NjI1IDE3LjMxNjQgOS4xNTYyNSAxNi4wNjY0VjE0Ljg4MjhDOS4xNTYyNSAxMy42MzI4IDkuMzIwMzEgMTIuNTAzOSA5LjY0ODQ0IDExLjQ5NjFDOS45ODQzOCAxMC40ODA1IDEwLjQ2MDkgOS42MTcxOSAxMS4wNzgxIDguOTA2MjVDMTEuNzAzMSA4LjE5NTMxIDEyLjQ0OTIgNy42NDg0NCAxMy4zMTY0IDcuMjY1NjJDMTQuMTgzNiA2Ljg4MjgxIDE1LjE1MjMgNi42OTE0MSAxNi4yMjI3IDYuNjkxNDFDMTcuNjQ0NSA2LjY5MTQxIDE4Ljg0MzggNi45NDkyMiAxOS44MjAzIDcuNDY0ODRDMjAuODA0NyA3Ljk4MDQ3IDIxLjU2NjQgOC42OTE0MSAyMi4xMDU1IDkuNTk3NjZDMjIuNjUyMyAxMC41MDM5IDIyLjk4MDUgMTEuNTM1MiAyMy4wODk4IDEyLjY5MTRIMTkuNTc0MkMxOS41MzUyIDEyLjAwMzkgMTkuMzk4NCAxMS40MjE5IDE5LjE2NDEgMTAuOTQ1M0MxOC45Mjk3IDEwLjQ2MDkgMTguNTc0MiAxMC4wOTc3IDE4LjA5NzcgOS44NTU0N0MxNy42Mjg5IDkuNjA1NDcgMTcuMDAzOSA5LjQ4MDQ3IDE2LjIyMjcgOS40ODA0N0MxNS42MzY3IDkuNDgwNDcgMTUuMTI1IDkuNTg5ODQgMTQuNjg3NSA5LjgwODU5QzE0LjI1IDEwLjAyNzMgMTMuODgyOCAxMC4zNTk0IDEzLjU4NTkgMTAuODA0N0MxMy4yODkxIDExLjI1IDEzLjA2NjQgMTEuODEyNSAxMi45MTggMTIuNDkyMkMxMi43NzczIDEzLjE2NDEgMTIuNzA3IDEzLjk1MzEgMTIuNzA3IDE0Ljg1OTRWMTYuMDY2NEMxMi43MDcgMTYuOTQ5MiAxMi43NzM0IDE3LjcyNjYgMTIuOTA2MiAxOC4zOTg0QzEzLjAzOTEgMTkuMDYyNSAxMy4yNDIyIDE5LjYyNSAxMy41MTU2IDIwLjA4NTlDMTMuNzk2OSAyMC41MzkxIDE0LjE1NjIgMjAuODgyOCAxNC41OTM4IDIxLjExNzJDMTUuMDM5MSAyMS4zNDM4IDE1LjU3NDIgMjEuNDU3IDE2LjE5OTIgMjEuNDU3QzE2LjkzMzYgMjEuNDU3IDE3LjUzOTEgMjEuMzM5OCAxOC4wMTU2IDIxLjEwNTVDMTguNDkyMiAyMC44NzExIDE4Ljg1NTUgMjAuNTIzNCAxOS4xMDU1IDIwLjA2MjVDMTkuMzYzMyAxOS42MDE2IDE5LjUxNTYgMTkuMDI3MyAxOS41NjI1IDE4LjMzOThaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K) }
+  .severity-icon.severity-icon--high { background:url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNCIgZmlsbD0iI0NFNTAxOSIvPgo8cGF0aCBkPSJNMjAuNDI5NyAxMy44ODY3VjE2LjYyODlIMTEuNTIzNFYxMy44ODY3SDIwLjQyOTdaTTEyLjU2NjQgNi45Mzc1VjI0SDkuMDUwNzhWNi45Mzc1SDEyLjU2NjRaTTIyLjkzNzUgNi45Mzc1VjI0SDE5LjQzMzZWNi45Mzc1SDIyLjkzNzVaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K) }
+  .severity-icon.severity-icon--medium { background:url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNCIgZmlsbD0iI0Q2ODAwMCIvPgo8cGF0aCBkPSJNOC42MTcxOSA2LjkzNzVIMTEuNTkzOEwxNS45NzY2IDE5LjQ2NDhMMjAuMzU5NCA2LjkzNzVIMjMuMzM1OUwxNy4xNzE5IDI0SDE0Ljc4MTJMOC42MTcxOSA2LjkzNzVaTTcuMDExNzIgNi45Mzc1SDkuOTc2NTZMMTAuNTE1NiAxOS4xNDg0VjI0SDcuMDExNzJWNi45Mzc1Wk0yMS45NzY2IDYuOTM3NUgyNC45NTMxVjI0SDIxLjQzNzVWMTkuMTQ4NEwyMS45NzY2IDYuOTM3NVoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=) }
+  .severity-icon.severity-icon--low { background:url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNCIgZmlsbD0iIzg4ODc5RSIvPgo8cGF0aCBkPSJNMjIgMjEuMjU3OFYyNEgxMy40MTAyVjIxLjI1NzhIMjJaTTE0LjU0NjkgNi45Mzc1VjI0SDExLjAzMTJWNi45Mzc1SDE0LjU0NjlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K) }
+  .meta-count .severity-icon { float:left; width:24px; height:24px; margin-right:6px; background-size: 24px 24px; }
+  
+  .source-panel { text-align: right; }
+  .source-panel__heading { display:block; margin-top:6px; text-transform:uppercase; color:#727184; font-size:12px; }
+  .scan-coverage { max-width: 400px; padding:0; margin:12px 0 0; font-size:14px; }
+  .scan-coverage .type { display:inline-block; list-style-type: none; padding:3px; margin:0 0 0 10px; }
+  
+  .card { padding:0; border-width:4px 1px 1px; border-color:#d3d3d9; border-radius: 4px 4px 0 0 }
+  .card.severity--low { border-top-color: #88879E; }
+  .card.severity--medium { border-top-color: #D68000; }
+  .card.severity--high { border-top-color: #CE5019; }
+  .card.severity--critical { border-top-color: #AB1A1A; }
+  
+  .card .fix-analysis { display:none }
+  .card.show-fix .fix-analysis { display:block }
+  .card.show-fix .dataflow { display:none }
+  
+  .card__header { padding:24px }
+  .card__header__main { display:flex; }
+  .card__header__main .severity-icon { margin-right:12px; }
+  .card__meta { display:flex; align-items:flex-start; margin:0; list-style:none; }
+  .card__meta__item { display:inline-block; padding-right:8px; border-right:1px solid #eee; margin-right: 8px; font-size:12px; color:#727184 }
+  .card__meta__item:last-child { border:none; }
+  .card .card__title { display:inline-block; margin:0; font-size:22px; font-weight:600; vertical-align: top;}
+  
+  .card__actions { display:flex; padding:2px; border:1px solid #d3d3d9; border-radius:20px; background-color:#fff;  margin-left: auto; }
+  .card__action { align-self: center; padding:5px 15px; font-size:14px; cursor: pointer; transition: all .2s; }
+  .card__action:hover { color: #4b45a1; }
+  .card__action.is-selected { background-color:#4b45a1; color:#fff; border-radius:20px; }
+  .severity--high .card-dataflow.is-selected { background-color:#CE5019 ; }
+  .severity--medium .card-dataflow.is-selected { background-color:#D68000 ; }
+  .severity--low .card-dataflow.is-selected { background-color:#88879E ; }
+  
+  .card__section {padding:24px; border-top: 1px solid #d3d3d9}
+  
+  .card__snippet { background-color: transparent; font-family: monospace; white-space: pre; margin: 1em 0px;  }
+  
+  .card__summary { position: relative; padding: 16px 24px; border: 1px solid #d3d3d9; border-left-width:4px; border-radius:2px; background-color:#fff; color:#393842; word-break: break-word; }
+  .card__summary.severity--critical { border-left-color:#AB1A1A ; }
+  .card__summary.severity--high { border-left-color:#CE5019 ; }
+  .card__summary.severity--medium { border-left-color:#D68000 ; }
+  .card__summary.severity--low { border-left-color:#88879E; }
+  .card__summary .file-location { margin-top:12px; font-size:13px; color:#727184 }
+  
+  .dataflow { margin:12px 0 }
+  .dataflow__item, .code-source { display: flex; padding:4px 8px; border:1px solid transparent; border-width: 1px 0; font-family: monospace; color:#393842; font-size:14px }
+  .dataflow__item:hover { cursor:pointer; border-color: #eee; background-color:#fff; }
+  .dataflow__item:hover .marker { background-color: #ffc905; }
+  .dataflow__step, .dataflow__lineno, .code-lineno { align-self: flex-start; flex:0 0 50px; width: 50px; text-align: right; color:#727184; font-size:12px; }
+  .dataflow__step  { flex:0 0 30px; width: 30px; }
+  .dataflow__lineno { flex:0 0 60px;  padding:0 20px 0 0; }
+  .dataflow__code { display:flex; align-self: flex-start; align-content: flex-start; flex-grow: 1; margin-right:40px; line-height:1; overflow:auto; }
+  .dataflow__code h1, .dataflow__code h2, .dataflow__code h3, .dataflow__code h4, .dataflow__code h5, .dataflow__code h6, .dataflow__code strong, .dataflow__code b, .dataflow__code em, .dataflow__code i, .dataflow__code p  { padding:0; margin:0; font-family: monospace; color:#393842; font-size:14px; font-weight:400; font-style: normal;  } /* overriding html default styling within the code */
+  .dataflow__code br { display:none  } /* overriding html default styling within the code */
+  .dataflow__code .dataflow__codeprefix, .dataflow__code .dataflow__codesuffix { display:inline-block; margin:0; white-space:nowrap } 
+  .dataflow__badge { align-self:flex-start; padding:2px 3px; border:1px solid #d3d3d9; border-radius:2px; margin-top:2px; background-color:#f4f4f6; font-size:11px; line-height:1; font-family: sans-serif; text-transform: uppercase; color:#646374 } 
+  .dataflow__filename { padding:6px 12px; border:1px solid #eee; border-radius: 4px; margin:20px 0 10px; font-size:13px; color:#393842; background-color: #fff; }
+  
+  .marker { padding:2px 6px; border-radius:4px; background-color: rgba(0,0,0,.1); word-break: break-all; white-space: nowrap; }
+  .marker.block { white-space: pre; line-height: 1.5; }
+  
+  .card .card__section h2, .card .card__section h3 { font-size:18px; } 
+  .card__panel__heading { padding:5px 0; font-size:22px; font-weight: 600; }
+  .heading-char { display: inline-block; width:22px; height:22px; border:1px solid #d3d3d9; border-radius:15px; margin-right:5px; color:#727184; font-size:14px; background-color:#fff; text-align: center; }
+  
+  .card__panel__markdown { font-size:14px; color:#393842; }
+  .card__panel__markdown table { border-collapse: collapse; border:1px solid #d3d3d9; border-radius:3px; }
+  .card__panel__markdown tbody { display: table-row-group; vertical-align: top; }
+  .card__panel__markdown table td, .card__panel__markdown table th { min-width: 100px; padding:2px 5px; text-align: left; border-top:1px solid #d3d3d9; }
+  .card__panel__markdown table td { background-color:#fff; font-size:14px; line-height: 1.4; }
+  
+  .is-hidden { display:none; }
+  
+  @media print { 
+    /* All your print styles go here */
+     .card .fix-analysis { display:block; }
+     .card__section { background-color: none; }
+     .project__header, .card__actions, .severity-icon { display: none; }
+     .marker { border:1px solid #555; margin:-1px 0; background: transparent }
+  }
+  
+  </style>
+  <style type="text/css">
+    .metatable {
+      text-size-adjust: 100%;
+      -webkit-font-smoothing: antialiased;
+      -webkit-box-direction: normal;
+      color: inherit;
+      font-feature-settings: "pnum";
+      box-sizing: border-box;
+      background: transparent;
+      border: 0;
+      font: inherit;
+      font-size: 100%;
+      margin: 0;
+      outline: none;
+      padding: 0;
+      text-align: left;
+      text-decoration: none;
+      vertical-align: baseline;
+      z-index: auto;
+      margin-top: 12px;
+      border-collapse: collapse;
+      border-spacing: 0;
+      font-variant-numeric: tabular-nums;
+      max-width: 51.75em;
+    }
+  
+    tbody {
+      text-size-adjust: 100%;
+      -webkit-font-smoothing: antialiased;
+      -webkit-box-direction: normal;
+      color: inherit;
+      font-feature-settings: "pnum";
+      border-collapse: collapse;
+      border-spacing: 0;
+      box-sizing: border-box;
+      background: transparent;
+      border: 0;
+      font: inherit;
+      font-size: 100%;
+      margin: 0;
+      outline: none;
+      padding: 0;
+      text-align: left;
+      text-decoration: none;
+      vertical-align: baseline;
+      z-index: auto;
+      display: flex;
+      flex-wrap: wrap;
+    }
+  
+    .meta-row {
+      text-size-adjust: 100%;
+      -webkit-font-smoothing: antialiased;
+      -webkit-box-direction: normal;
+      color: inherit;
+      font-feature-settings: "pnum";
+      border-collapse: collapse;
+      border-spacing: 0;
+      box-sizing: border-box;
+      background: transparent;
+      border: 0;
+      font: inherit;
+      font-size: 100%;
+      outline: none;
+      text-align: left;
+      text-decoration: none;
+      vertical-align: baseline;
+      z-index: auto;
+      display: flex;
+      align-items: start;
+      border-top: 1px solid #d3d3d9;
+      padding: 8px 0 0 0;
+      border-bottom: none;
+      margin: 8px;
+      width: 47.75%;
+    }
+  
+    .meta-row-label {
+      text-size-adjust: 100%;
+      -webkit-font-smoothing: antialiased;
+      -webkit-box-direction: normal;
+      font-feature-settings: "pnum";
+      border-collapse: collapse;
+      border-spacing: 0;
+      color: #4c4a73;
+      box-sizing: border-box;
+      background: transparent;
+      border: 0;
+      font: inherit;
+      margin: 0;
+      outline: none;
+      text-decoration: none;
+      z-index: auto;
+      align-self: start;
+      flex: 1;
+      font-size: 1rem;
+      line-height: 1.5rem;
+      padding: 0;
+      text-align: left;
+      vertical-align: top;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+  
+    .meta-row-value {
+      text-size-adjust: 100%;
+      -webkit-font-smoothing: antialiased;
+      -webkit-box-direction: normal;
+      color: inherit;
+      font-feature-settings: "pnum";
+      border-collapse: collapse;
+      border-spacing: 0;
+      word-break: break-word;
+      box-sizing: border-box;
+      background: transparent;
+      border: 0;
+      font: inherit;
+      font-size: 100%;
+      margin: 0;
+      outline: none;
+      padding: 0;
+      text-align: right;
+      text-decoration: none;
+      vertical-align: baseline;
+      z-index: auto;
+    }
+  </style>
+</head>
+
+<body class="section-projects">
+  <main class="layout-stacked">
+    <header class="project__header">
+      <div class="layout-container">
+        <a class="brand" href="https://snyk.io" title="Snyk">
+          <svg width="100" height="46" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <title>Snyk - Snyk Code</title>
+            <path d="M89.7 24.95h-.4v6.95h-5V14.6l5-7.8v16.15c.99-1.22 4.33-5.84 4.33-5.84h6.17l-5.85 6.18 6.05 8.63h-6.3l-4-6.96ZM75.77 23.8l2.05-6.67h4.94l-5.8 14.71c-1.72 4.43-4.2 7.42-7.89 7.42a7.02 7.02 0 0 1-3.24-.72l1.99-3.08c.3.04.6.05.91.05 1.7 0 2.98-1.66 3.81-3.62l-6.08-14.76h5.6l2.18 6.59c.43 1.25.74 3.64.74 3.64s.39-2.3.79-3.56Zm-15.09-.34c0-1.93-.85-2.84-2.47-2.84-.8 0-1.62.23-2.19.57v10.7h-4.99V17.28l4.89-.4-.12 2.4h.16a6.2 6.2 0 0 1 4.97-2.5c2.56 0 4.77 1.58 4.77 5.33v9.8H60.7v-8.44Zm-23.94 7.67.45-3.4c1.56.77 3.32 1.13 4.8 1.13 1.08 0 1.79-.36 1.79-1.01 0-1.87-6.73-1.42-6.73-6.3 0-3.13 2.86-4.77 6.44-4.77 1.79 0 3.64.48 4.83.9l-.48 3.35a13.22 13.22 0 0 0-4.38-.93c-.88 0-1.59.3-1.59.88 0 1.84 6.88 1.47 6.88 6.24 0 3.17-2.82 4.99-6.68 4.99-2.13 0-3.85-.37-5.33-1.08Z" fill="#fff"/>
+            <g clip-path="url(#a)" fill="#fff">
+              <path d="M25.86 10c.27.73.42 1.5.47 2.28v.24l-1.7 4.53c.4 3.58.77 8 .35 9.06-.2.53-.81 1.48-1.81 2.81l1.08 10.04 4.3-3.08a1.7 1.7 0 0 0 .7-1.37V12.17a1.7 1.7 0 0 0-1.22-1.63 33.9 33.9 0 0 0-2.17-.54ZM11.53 12.29a9.74 9.74 0 0 1 6.22 0l.52-.86.35-2.42s-2.43-.13-3.96-.13c-1.43 0-2.76.05-4 .14l.35 2.42.52.85ZM4.27 26.11c-.41-1.06-.04-5.48.35-9.06l-1.68-4.53v-.24c.04-.78.2-1.55.46-2.28-.9.2-1.62.39-2.18.54A1.7 1.7 0 0 0 0 12.17v22.34a1.7 1.7 0 0 0 .71 1.37l4.32 3.1L6.1 28.95c-1-1.35-1.62-2.3-1.83-2.84Z"/>
+              <path d="M20.7.97a.11.11 0 0 1 .11.06l.57 1.07c1.53 2.84 4.12 8.18 4.12 10.17v.1l-1.7 4.57V17c.54 4.82.7 8.1.42 8.8-.24.62-1.2 1.94-2 3l1.18 9.57-.71.5-7.07 5.07a1.7 1.7 0 0 1-1.98 0l-5.71-4.11-.87-.63-1.16-.83 1.16-9.56a19 19 0 0 1-2.02-3.02c-.27-.7-.11-3.98.42-8.8v-.07l-1.7-4.57v-.1c0-1.99 2.59-7.33 4.12-10.17l.57-1.06a.11.11 0 0 1 .1-.07.12.12 0 0 1 .13.1l1.53 10.67.95 1.56.24-.08c1.04-.37 2.13-.57 3.24-.6 1.1.03 2.2.24 3.25.6l.24.08.93-1.56L20.6 1.07a.12.12 0 0 1 .12-.1Zm0-.97a1.08 1.08 0 0 0-1.07.94l-1.5 10.45-.45.73c-1-.3-2.02-.47-3.05-.49a11 11 0 0 0-3.04.49l-.45-.73L9.64.94A1.08 1.08 0 0 0 8.56 0a1.1 1.1 0 0 0-.97.57l-.57 1.07c-.7 1.31-4.23 8-4.23 10.64v.26l.06.17 1.62 4.36c-.56 5.16-.68 8.22-.34 9.1.08.2.32.82 1.91 2.94l-1.12 9.16-.07.57.47.34 1.16.83.87.62 5.72 4.1a2.66 2.66 0 0 0 3.1 0l7.07-5.06.7-.5.47-.34-.07-.57-1.12-9.18c1.57-2.09 1.82-2.7 1.9-2.9.34-.88.22-3.95-.34-9.1l1.62-4.37.06-.16v-.27c0-2.64-3.53-9.32-4.23-10.64L21.66.58a1.09 1.09 0 0 0-.97-.57L20.7 0Z"/>
+              <path d="m7.76 27.3 2.08-.61a.22.22 0 0 0 .11-.08l1.99-2.26a.24.24 0 0 1 .37.02c.03.04.05.08.05.13l.35 6.48c0 .05-.02.1-.04.15-.14.2-.54.81-.54 1.2 0 .48.73 1.11 1.42 1.62l.03-.06c.24-.44.57-.52.72-.18.06.25.08.5.06.76h.01v.6c0 .03 0 .07-.02.1-.13.26-.75 1.37-2.08 1.37-.57 0-1.96-.18-2.58-1.88a18 18 0 0 1-.78-5.2v-.2l-.13-.15c-.33-.41-.72-.92-1.13-1.46a.24.24 0 0 1 .11-.36ZM20.52 29.11l-.12.16v.2c0 .13 0 3.08-.78 5.2a2.67 2.67 0 0 1-2.58 1.88c-1.33 0-1.94-1.1-2.08-1.37a.24.24 0 0 1-.02-.1v-.6c-.02-.26 0-.52.06-.77.14-.34.46-.26.72.18l.03.07c.7-.51 1.42-1.15 1.42-1.63 0-.38-.4-1-.54-1.2a.26.26 0 0 1-.04-.14l.35-6.48a.24.24 0 0 1 .3-.23c.05.02.09.04.12.08l1.98 2.26c.03.04.07.06.12.07l2.07.6a.24.24 0 0 1 .13.39c-.4.53-.8 1.03-1.14 1.43ZM10.26 22.31a.37.37 0 0 1-.36.32.61.61 0 0 0 .95.36.6.6 0 0 0-.04-1h1.04v.03a1.37 1.37 0 1 1-2.74.02V22h1.06-.02a.37.37 0 0 1 .1.32ZM9.59 20.92a.24.24 0 0 1-.19-.09c-.3-.35-1.2-1.55.37-1.55 1.17 0 2.1.71 2.62 1.22a.24.24 0 0 1-.17.42H9.59ZM19.11 22h-.01 1.06v.05a1.37 1.37 0 1 1-2.75-.02V22h1.05a.6.6 0 0 0-.25.73.6.6 0 0 0 .49.37.6.6 0 0 0 .68-.47.37.37 0 0 1-.27-.63ZM17.04 20.92a.24.24 0 0 1-.17-.42 3.88 3.88 0 0 1 2.63-1.22c1.56 0 .66 1.2.36 1.55a.24.24 0 0 1-.19.09h-2.63Z"/>
+              <path d="M17.02 37.48a2 2 0 0 1-.49-.06.24.24 0 0 0-.24.1 2 2 0 0 1-3.29 0 .24.24 0 0 0-.24-.1c-.15.03-.3.05-.46.05h-.14a.24.24 0 0 0-.26.23c0 .05 0 .09.03.13a3.1 3.1 0 0 0 5.45 0 .24.24 0 0 0-.1-.34.24.24 0 0 0-.13-.02h-.13Zm-1.72-2.72c.17.06.33.14.48.25-.15-.25-.35-.34-.48-.25Zm-1.77.22c.14-.1.3-.17.46-.22-.13-.08-.3-.01-.46.23v-.01ZM13.91 34.26c-.17.06-.35.14-.5.25.17-.25.36-.34.5-.25ZM15.92 34.54a2.26 2.26 0 0 0-.55-.28c.15-.1.37 0 .55.28Z"/>
+              <path d="M13.68 37.12a.1.1 0 0 0-.06.17 1.67 1.67 0 0 0 2.03 0 .1.1 0 0 0 .03-.1.1.1 0 0 0-.1-.07h-1.9ZM5.44 11.62c.1-.97 1-3.12 1.94-5.08a.2.2 0 0 1 .37.06l.18 1.28v.06c-.1.73-.54 3.25-1.67 5.02a.2.2 0 0 1-.35-.04l-.45-1.21a.22.22 0 0 1-.02-.1ZM23.04 12.96a14.32 14.32 0 0 1-1.67-5.08l.19-1.28a.2.2 0 0 1 .36-.06c.94 1.96 1.84 4.1 1.94 5.08v.08l-.45 1.21a.2.2 0 0 1-.28.13.2.2 0 0 1-.09-.08Z"/>
+            </g>
+            <defs>
+              <clipPath id="a">
+                <path fill="#fff" d="M0 0h29.27v45.23H0z"/>
+              </clipPath>
+            </defs>
+          </svg>
+        </a>
+        <div class="test-meta">
+          <p class="timestamp">January 22nd 2024, 10:03:28 am (UTC+00:00)</p>
+          <div class="filepath" title="/Users/dylank/git/nodejs-goof">Source: /Users/dylank/git/nodejs-goof</div>
+        </div>
+      </div>
+    </header>
+
+    <div class="layout-container">
+      <div class="report-summary">
+        <div class="header-wrap">
+            <h1 class="project__header__title">Snyk Code Report</h1>
+
+          <div class="meta-counts">
+            <div class="meta-count">
+              <span class="severity-icon severity-icon--high"></span> <span><strong>5</strong> high issues</span>
+            </div>
+            <div class="meta-count">
+              <span class="severity-icon severity-icon--medium"></span> <span><strong>13</strong> medium issues</span>
+            </div>
+            <div class="meta-count">
+              <span class="severity-icon severity-icon--low"></span> <span><strong>6</strong> low issues</span>
+            </div>
+          </div>
+        </div>
+        <div class="source-panel">
+          <span class="source-panel__heading">Scan Coverage</span>
+          <ul class="scan-coverage">
+            <li class="type">JavaScript files: <strong>10</strong></li><li class="type">EJS files: <strong>4</strong></li><li class="type">HTML files: <strong>1</strong></li>
+          </ul>            
+        </div>
+      </div>
+        <div class="cards--vuln filter--patch filter--ignore">
+          <div class="card card--vuln  disclosure--not-new severity--high" data-snyk-test="high">
+              <header class="card__header">
+                  <div class="card__header__main">
+                      <div class="severity-icon severity-icon--high"></div>
+                      <h2 class="card__title">NoSQL Injection</h2>
+                      <div class="card__actions">
+                          <span class="card__action card-dataflow is-selected" onclick="toggleCardView(event)">Data Flow</span>
+                          <span class="card__action card-fix" onclick="toggleCardView(event)">Fix Analysis</span>
+                      </div>
+                  </div>
+                  <ul class="card__meta">
+                      <li class="card__meta__item">SNYK-CODE</li>
+                      <li class="card__meta__item">CWE-943</li>
+                  </ul>
+              </header>
+              <div class="card__section">
+                  <div class="card__summary severity--high">
+                      <p>Unsanitized input from the HTTP request body flows into find, where it is used in an NoSQL query. This may result in an NoSQL Injection vulnerability.</p>
+                      <div class="file-location">Found in: <strong>routes/index.js (line : 39)</strong></div>    
+                  </div>
+                  <div class="card__panel dataflow">
+                      <h2 class="card__panel__heading"><span class="heading-char">⇣</span> Data Flow</h2>
+                      <div class="dataflow__filename"> routes/index.js</div>
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">38:29</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">  if (validator.isEmail(req.<br /></span><span class="marker">body.</span><span class="dataflow__codesuffix">username)) {</span></div>
+                          <span class="dataflow__badge" title="Data is 'tainted' if it comes from an insecure source such as a file, the network, or the user. This tainted data is passed to a sensitive sink, as described below.">Source</span>
+                          <span class="dataflow__step">0</span>
+                      </div>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">38:29</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">  if (validator.isEmail(req.<br /></span><span class="marker">body.</span><span class="dataflow__codesuffix">username)) {</span></div>
+                          
+                          <span class="dataflow__step">1</span>
+                      </div>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">38:25</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">  if (validator.isEmail(<br /></span><span class="marker">req.body.</span><span class="dataflow__codesuffix">username)) {</span></div>
+                          
+                          <span class="dataflow__step">2</span>
+                      </div>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">39:17</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">    User.find({ <br /></span><span class="marker">username:</span><span class="dataflow__codesuffix"> req.body.username, password: req.body.password }, function (err, users) {</span></div>
+                          
+                          <span class="dataflow__step">3</span>
+                      </div>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">39:15</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">    User.find(<br /></span><span class="marker">{ username: req.body.username, password: req.body.password },</span><span class="dataflow__codesuffix"> function (err, users) {</span></div>
+                          
+                          <span class="dataflow__step">4</span>
+                      </div>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">39:10</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">    User.<br /></span><span class="marker">find(</span><span class="dataflow__codesuffix">{ username: req.body.username, password: req.body.password }, function (err, users) {</span></div>
+                          <span class="dataflow__badge" title="Sinks are the operations that must receive clean data and that you wouldn't want an attacker to be able to manipulate.">Sink</span>
+                          <span class="dataflow__step">5</span>
+                      </div>
+                  </div>
+                  <div class="card__panel fix-analysis">
+                      <h2 class="card__panel__heading"><span class="heading-char">✓</span> Fix Analysis</h2>
+                      <div class="card__panel__markdown"><h2 id="details">Details</h2>
+          <p>In an NoSQL injection attack, the user can submit an NoSQL query directly to the database, gaining access without providing appropriate credentials. Attackers can then view, export, modify, and delete confidential information; change passwords and other authentication information; and possibly gain access to other systems within the network. This is one of the most commonly exploited categories of vulnerability, but can largely be avoided through good coding practices.</p>
+          </div>
+                  </div>
+              </div>
+          </div>
+          <div class="card card--vuln  disclosure--not-new severity--high" data-snyk-test="high">
+              <header class="card__header">
+                  <div class="card__header__main">
+                      <div class="severity-icon severity-icon--high"></div>
+                      <h2 class="card__title">NoSQL Injection</h2>
+                      <div class="card__actions">
+                          <span class="card__action card-dataflow is-selected" onclick="toggleCardView(event)">Data Flow</span>
+                          <span class="card__action card-fix" onclick="toggleCardView(event)">Fix Analysis</span>
+                      </div>
+                  </div>
+                  <ul class="card__meta">
+                      <li class="card__meta__item">SNYK-CODE</li>
+                      <li class="card__meta__item">CWE-943</li>
+                  </ul>
+              </header>
+              <div class="card__section">
+                  <div class="card__summary severity--high">
+                      <p>Unsanitized input from an HTTP parameter flows into findById, where it is used in an NoSQL query. This may result in an NoSQL Injection vulnerability.</p>
+                      <div class="file-location">Found in: <strong>routes/index.js (line : 191)</strong></div>    
+                  </div>
+                  <div class="card__panel dataflow">
+                      <h2 class="card__panel__heading"><span class="heading-char">⇣</span> Data Flow</h2>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">191:21</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">  Todo.findById(req.<br /></span><span class="marker">params.</span><span class="dataflow__codesuffix">id, function (err, todo) {</span></div>
+                          <span class="dataflow__badge" title="Data is 'tainted' if it comes from an insecure source such as a file, the network, or the user. This tainted data is passed to a sensitive sink, as described below.">Source</span>
+                          <span class="dataflow__step">0</span>
+                      </div>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">191:21</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">  Todo.findById(req.<br /></span><span class="marker">params.</span><span class="dataflow__codesuffix">id, function (err, todo) {</span></div>
+                          
+                          <span class="dataflow__step">1</span>
+                      </div>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">191:17</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">  Todo.findById(<br /></span><span class="marker">req.params.</span><span class="dataflow__codesuffix">id, function (err, todo) {</span></div>
+                          
+                          <span class="dataflow__step">2</span>
+                      </div>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">191:17</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">  Todo.findById(<br /></span><span class="marker">req.params.id,</span><span class="dataflow__codesuffix"> function (err, todo) {</span></div>
+                          
+                          <span class="dataflow__step">3</span>
+                      </div>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">191:8</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">  Todo.<br /></span><span class="marker">findById(</span><span class="dataflow__codesuffix">req.params.id, function (err, todo) {</span></div>
+                          <span class="dataflow__badge" title="Sinks are the operations that must receive clean data and that you wouldn't want an attacker to be able to manipulate.">Sink</span>
+                          <span class="dataflow__step">4</span>
+                      </div>
+                  </div>
+                  <div class="card__panel fix-analysis">
+                      <h2 class="card__panel__heading"><span class="heading-char">✓</span> Fix Analysis</h2>
+                      <div class="card__panel__markdown"><h2 id="details">Details</h2>
+          <p>In an NoSQL injection attack, the user can submit an NoSQL query directly to the database, gaining access without providing appropriate credentials. Attackers can then view, export, modify, and delete confidential information; change passwords and other authentication information; and possibly gain access to other systems within the network. This is one of the most commonly exploited categories of vulnerability, but can largely be avoided through good coding practices.</p>
+          </div>
+                  </div>
+              </div>
+          </div>
+          <div class="card card--vuln  disclosure--not-new severity--high" data-snyk-test="high">
+              <header class="card__header">
+                  <div class="card__header__main">
+                      <div class="severity-icon severity-icon--high"></div>
+                      <h2 class="card__title">NoSQL Injection</h2>
+                      <div class="card__actions">
+                          <span class="card__action card-dataflow is-selected" onclick="toggleCardView(event)">Data Flow</span>
+                          <span class="card__action card-fix" onclick="toggleCardView(event)">Fix Analysis</span>
+                      </div>
+                  </div>
+                  <ul class="card__meta">
+                      <li class="card__meta__item">SNYK-CODE</li>
+                      <li class="card__meta__item">CWE-943</li>
+                  </ul>
+              </header>
+              <div class="card__section">
+                  <div class="card__summary severity--high">
+                      <p>Unsanitized input from an HTTP parameter flows into findById, where it is used in an NoSQL query. This may result in an NoSQL Injection vulnerability.</p>
+                      <div class="file-location">Found in: <strong>routes/index.js (line : 219)</strong></div>    
+                  </div>
+                  <div class="card__panel dataflow">
+                      <h2 class="card__panel__heading"><span class="heading-char">⇣</span> Data Flow</h2>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">219:21</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">  Todo.findById(req.<br /></span><span class="marker">params.</span><span class="dataflow__codesuffix">id, function (err, todo) {</span></div>
+                          <span class="dataflow__badge" title="Data is 'tainted' if it comes from an insecure source such as a file, the network, or the user. This tainted data is passed to a sensitive sink, as described below.">Source</span>
+                          <span class="dataflow__step">0</span>
+                      </div>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">219:21</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">  Todo.findById(req.<br /></span><span class="marker">params.</span><span class="dataflow__codesuffix">id, function (err, todo) {</span></div>
+                          
+                          <span class="dataflow__step">1</span>
+                      </div>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">219:17</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">  Todo.findById(<br /></span><span class="marker">req.params.</span><span class="dataflow__codesuffix">id, function (err, todo) {</span></div>
+                          
+                          <span class="dataflow__step">2</span>
+                      </div>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">219:17</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">  Todo.findById(<br /></span><span class="marker">req.params.id,</span><span class="dataflow__codesuffix"> function (err, todo) {</span></div>
+                          
+                          <span class="dataflow__step">3</span>
+                      </div>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">219:8</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">  Todo.<br /></span><span class="marker">findById(</span><span class="dataflow__codesuffix">req.params.id, function (err, todo) {</span></div>
+                          <span class="dataflow__badge" title="Sinks are the operations that must receive clean data and that you wouldn't want an attacker to be able to manipulate.">Sink</span>
+                          <span class="dataflow__step">4</span>
+                      </div>
+                  </div>
+                  <div class="card__panel fix-analysis">
+                      <h2 class="card__panel__heading"><span class="heading-char">✓</span> Fix Analysis</h2>
+                      <div class="card__panel__markdown"><h2 id="details">Details</h2>
+          <p>In an NoSQL injection attack, the user can submit an NoSQL query directly to the database, gaining access without providing appropriate credentials. Attackers can then view, export, modify, and delete confidential information; change passwords and other authentication information; and possibly gain access to other systems within the network. This is one of the most commonly exploited categories of vulnerability, but can largely be avoided through good coding practices.</p>
+          </div>
+                  </div>
+              </div>
+          </div>
+          <div class="card card--vuln  disclosure--not-new severity--high" data-snyk-test="high">
+              <header class="card__header">
+                  <div class="card__header__main">
+                      <div class="severity-icon severity-icon--high"></div>
+                      <h2 class="card__title">Hardcoded Secret</h2>
+                      <div class="card__actions">
+                          <span class="card__action card-dataflow is-selected" onclick="toggleCardView(event)">Data Flow</span>
+                          <span class="card__action card-fix" onclick="toggleCardView(event)">Fix Analysis</span>
+                      </div>
+                  </div>
+                  <ul class="card__meta">
+                      <li class="card__meta__item">SNYK-CODE</li>
+                      <li class="card__meta__item">CWE-547</li>
+                  </ul>
+              </header>
+              <div class="card__section">
+                  <div class="card__summary severity--high">
+                      <p>Avoid hardcoding values that are meant to be secret. Found a hardcoded string used in express-session.</p>
+                      <div class="file-location">Found in: <strong>app.js (line : 42)</strong></div>    
+                  </div>
+                  <div class="card__panel dataflow">
+                      <h2 class="card__panel__heading"><span class="heading-char">⇣</span> Data Flow</h2>
+                      <div class="dataflow__filename"> app.js</div>
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">43:11</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">  secret: <br /></span><span class="marker">&#x27;keyboard cat&#x27;,</span><span class="dataflow__codesuffix"></span></div>
+                          <span class="dataflow__badge" title="Data is 'tainted' if it comes from an insecure source such as a file, the network, or the user. This tainted data is passed to a sensitive sink, as described below.">Source</span>
+                          <span class="dataflow__step">0</span>
+                      </div>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">42:9</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">app.use(<br /></span><span class="marker">session(</span><span class="dataflow__codesuffix">{</span></div>
+                          <span class="dataflow__badge" title="Sinks are the operations that must receive clean data and that you wouldn't want an attacker to be able to manipulate.">Sink</span>
+                          <span class="dataflow__step">1</span>
+                      </div>
+                  </div>
+                  <div class="card__panel fix-analysis">
+                      <h2 class="card__panel__heading"><span class="heading-char">✓</span> Fix Analysis</h2>
+                      <div class="card__panel__markdown"><h2 id="details">Details</h2>
+          <p>When constants are hardcoded into applications, this information could easily be reverse-engineered and become known to attackers. For example, if a breached authentication token is hardcoded in multiple places in the application, it may lead to components of the application remaining vulnerable if not all instances are changed.
+          Another negative effect of hard-coding constants is potential unpredictability in the application&#39;s performance if the development team fails to update every single instance of the hardcoded constant throughout the code. For these reasons, hard-coding security-relevant constants is considered bad coding practice and should be remedied if present and avoided in future.</p>
+          <h2 id="best-practices-for-prevention">Best practices for prevention</h2>
+          <ul>
+          <li>Never hard code security-related constants; use symbolic names or configuration lookup files.</li>
+          <li>As hard coding is often done by coders working alone on a small scale, examine all legacy code components and test carefully when scaling.</li>
+          <li>Adopt a &quot;future-proof code&quot; mindset: While use of constants may save a little time now and make development simpler in the short term, it could cost time and money adapting to scale or other unforeseen circumstances (such as new hardware) in the future.</li>
+          </ul>
+          </div>
+                  </div>
+              </div>
+          </div>
+          <div class="card card--vuln  disclosure--not-new severity--high" data-snyk-test="high">
+              <header class="card__header">
+                  <div class="card__header__main">
+                      <div class="severity-icon severity-icon--high"></div>
+                      <h2 class="card__title">Hardcoded Secret</h2>
+                      <div class="card__actions">
+                          <span class="card__action card-dataflow is-selected" onclick="toggleCardView(event)">Data Flow</span>
+                          <span class="card__action card-fix" onclick="toggleCardView(event)">Fix Analysis</span>
+                      </div>
+                  </div>
+                  <ul class="card__meta">
+                      <li class="card__meta__item">SNYK-CODE</li>
+                      <li class="card__meta__item">CWE-547</li>
+                  </ul>
+              </header>
+              <div class="card__section">
+                  <div class="card__summary severity--high">
+                      <p>Avoid hardcoding values that are meant to be secret. Found a hardcoded string used in here.</p>
+                      <div class="file-location">Found in: <strong>app.js (line : 83)</strong></div>    
+                  </div>
+                  <div class="card__panel dataflow">
+                      <h2 class="card__panel__heading"><span class="heading-char">⇣</span> Data Flow</h2>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">83:13</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">var token &#x3D; <br /></span><span class="marker">&#x27;SECRET_TOKEN_f8ed84e8f41e4146403dd4a6bbcea5e418d23a9&#x27;;</span><span class="dataflow__codesuffix"></span></div>
+                          <span class="dataflow__badge" title="Data is 'tainted' if it comes from an insecure source such as a file, the network, or the user. This tainted data is passed to a sensitive sink, as described below.">Source</span>
+                          <span class="dataflow__step">0</span>
+                      </div>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">83:5</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">var <br /></span><span class="marker">token </span><span class="dataflow__codesuffix">&#x3D; &#x27;SECRET_TOKEN_f8ed84e8f41e4146403dd4a6bbcea5e418d23a9&#x27;;</span></div>
+                          <span class="dataflow__badge" title="Sinks are the operations that must receive clean data and that you wouldn't want an attacker to be able to manipulate.">Sink</span>
+                          <span class="dataflow__step">1</span>
+                      </div>
+                  </div>
+                  <div class="card__panel fix-analysis">
+                      <h2 class="card__panel__heading"><span class="heading-char">✓</span> Fix Analysis</h2>
+                      <div class="card__panel__markdown"><h2 id="details">Details</h2>
+          <p>When constants are hardcoded into applications, this information could easily be reverse-engineered and become known to attackers. For example, if a breached authentication token is hardcoded in multiple places in the application, it may lead to components of the application remaining vulnerable if not all instances are changed.
+          Another negative effect of hard-coding constants is potential unpredictability in the application&#39;s performance if the development team fails to update every single instance of the hardcoded constant throughout the code. For these reasons, hard-coding security-relevant constants is considered bad coding practice and should be remedied if present and avoided in future.</p>
+          <h2 id="best-practices-for-prevention">Best practices for prevention</h2>
+          <ul>
+          <li>Never hard code security-related constants; use symbolic names or configuration lookup files.</li>
+          <li>As hard coding is often done by coders working alone on a small scale, examine all legacy code components and test carefully when scaling.</li>
+          <li>Adopt a &quot;future-proof code&quot; mindset: While use of constants may save a little time now and make development simpler in the short term, it could cost time and money adapting to scale or other unforeseen circumstances (such as new hardware) in the future.</li>
+          </ul>
+          </div>
+                  </div>
+              </div>
+          </div>
+          <div class="card card--vuln  disclosure--not-new severity--medium" data-snyk-test="medium">
+              <header class="card__header">
+                  <div class="card__header__main">
+                      <div class="severity-icon severity-icon--medium"></div>
+                      <h2 class="card__title">Allocation of Resources Without Limits or Throttling</h2>
+                      <div class="card__actions">
+                          <span class="card__action card-dataflow is-selected" onclick="toggleCardView(event)">Data Flow</span>
+                          <span class="card__action card-fix" onclick="toggleCardView(event)">Fix Analysis</span>
+                      </div>
+                  </div>
+                  <ul class="card__meta">
+                      <li class="card__meta__item">SNYK-CODE</li>
+                      <li class="card__meta__item">CWE-770</li>
+                  </ul>
+              </header>
+              <div class="card__section">
+                  <div class="card__summary severity--medium">
+                      <p>This endpoint handler performs a file system operation and does not use a rate-limiting mechanism. It may enable the attackers to perform Denial-of-service attacks. Consider using a rate-limiting middleware such as express-limit.</p>
+                      <div class="file-location">Found in: <strong>routes/index.js (line : 67)</strong></div>    
+                  </div>
+                  <div class="card__panel dataflow">
+                      <h2 class="card__panel__heading"><span class="heading-char">⇣</span> Data Flow</h2>
+                      <div class="dataflow__filename"> routes/index.js</div>
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">67:17</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">exports.login &#x3D; <br /></span><span class="marker block">function (req, res, next) {
+            return res.render(&#x27;admin&#x27;, {
+              title: &#x27;Admin Access&#x27;,
+              granted: false,
+              redirectPage: req.query.redirectPage
+            });
+          };</span><span class="dataflow__codesuffix"></span></div>
+                          <span class="dataflow__badge" title="Data is 'tainted' if it comes from an insecure source such as a file, the network, or the user. This tainted data is passed to a sensitive sink, as described below.">Source</span>
+                          <span class="dataflow__step">0</span>
+                      </div>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">68:14</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">  return res.<br /></span><span class="marker">render(</span><span class="dataflow__codesuffix">&#x27;admin&#x27;, {</span></div>
+                          <span class="dataflow__badge" title="Sinks are the operations that must receive clean data and that you wouldn't want an attacker to be able to manipulate.">Sink</span>
+                          <span class="dataflow__step">1</span>
+                      </div>
+                  </div>
+                  <div class="card__panel fix-analysis">
+                      <h2 class="card__panel__heading"><span class="heading-char">✓</span> Fix Analysis</h2>
+                      <div class="card__panel__markdown"><h2 id="details">Details</h2>
+          <p>Without unlimited resources, software operating in the real world is inherently limited in the resources it may consume; similarly, servers are limited by the number of simultaneous sessions they can handle. Therefore, it is important for developers to design software that considers these real-world physical (or virtual) limitations and limits user sessions accordingly, both in terms of the number of user sessions and in the quantity of resources each user may demand. Software with this weakness does not include such limitations and as a result, individual user sessions may consume too many resources, leading to unintended software behavior including, potentially, denial of service. This can be compared to a single restaurant customer emptying out the entire buffet, leaving no food for other customers--or an entire busload mobbing the buffet all at once, with a similar effect. This may happen inadvertently or as a result of an attack by a malicious user.</p>
+          <h2 id="best-practices-for-prevention">Best practices for prevention</h2>
+          <ul>
+          <li>Test extensively to obtain baseline values indicating how the software performs in the real world under various conditions (normal and peak); use these values to determine reasonable software limits.</li>
+          <li>Set clear limits for all flexible parameters such as maximum allocable memory, number of processes within a given timeframe, file descriptors, requests per client, number of records per request, etc. This is particularly true for any parameters within user control.</li>
+          <li>Release all resources when no longer in use, including incorporating timeouts for inactive users, processes, and resources.</li>
+          <li>Familiarize Dev, Ops, and IT teams with best practices for recognizing and preventing DoS attacks and out-of-control resource allocation to prevent catastrophic failures.</li>
+          </ul>
+          </div>
+                  </div>
+              </div>
+          </div>
+          <div class="card card--vuln  disclosure--not-new severity--medium" data-snyk-test="medium">
+              <header class="card__header">
+                  <div class="card__header__main">
+                      <div class="severity-icon severity-icon--medium"></div>
+                      <h2 class="card__title">Allocation of Resources Without Limits or Throttling</h2>
+                      <div class="card__actions">
+                          <span class="card__action card-dataflow is-selected" onclick="toggleCardView(event)">Data Flow</span>
+                          <span class="card__action card-fix" onclick="toggleCardView(event)">Fix Analysis</span>
+                      </div>
+                  </div>
+                  <ul class="card__meta">
+                      <li class="card__meta__item">SNYK-CODE</li>
+                      <li class="card__meta__item">CWE-770</li>
+                  </ul>
+              </header>
+              <div class="card__section">
+                  <div class="card__summary severity--medium">
+                      <p>This endpoint handler performs a file system operation and does not use a rate-limiting mechanism. It may enable the attackers to perform Denial-of-service attacks. Consider using a rate-limiting middleware such as express-limit.</p>
+                      <div class="file-location">Found in: <strong>routes/index.js (line : 75)</strong></div>    
+                  </div>
+                  <div class="card__panel dataflow">
+                      <h2 class="card__panel__heading"><span class="heading-char">⇣</span> Data Flow</h2>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">75:17</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">exports.admin &#x3D; <br /></span><span class="marker block">function (req, res, next) {
+            return res.render(&#x27;admin&#x27;, {
+              title: &#x27;Admin Access Granted&#x27;,
+              granted: true,
+            });
+          };</span><span class="dataflow__codesuffix"></span></div>
+                          <span class="dataflow__badge" title="Data is 'tainted' if it comes from an insecure source such as a file, the network, or the user. This tainted data is passed to a sensitive sink, as described below.">Source</span>
+                          <span class="dataflow__step">0</span>
+                      </div>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">76:14</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">  return res.<br /></span><span class="marker">render(</span><span class="dataflow__codesuffix">&#x27;admin&#x27;, {</span></div>
+                          <span class="dataflow__badge" title="Sinks are the operations that must receive clean data and that you wouldn't want an attacker to be able to manipulate.">Sink</span>
+                          <span class="dataflow__step">1</span>
+                      </div>
+                  </div>
+                  <div class="card__panel fix-analysis">
+                      <h2 class="card__panel__heading"><span class="heading-char">✓</span> Fix Analysis</h2>
+                      <div class="card__panel__markdown"><h2 id="details">Details</h2>
+          <p>Without unlimited resources, software operating in the real world is inherently limited in the resources it may consume; similarly, servers are limited by the number of simultaneous sessions they can handle. Therefore, it is important for developers to design software that considers these real-world physical (or virtual) limitations and limits user sessions accordingly, both in terms of the number of user sessions and in the quantity of resources each user may demand. Software with this weakness does not include such limitations and as a result, individual user sessions may consume too many resources, leading to unintended software behavior including, potentially, denial of service. This can be compared to a single restaurant customer emptying out the entire buffet, leaving no food for other customers--or an entire busload mobbing the buffet all at once, with a similar effect. This may happen inadvertently or as a result of an attack by a malicious user.</p>
+          <h2 id="best-practices-for-prevention">Best practices for prevention</h2>
+          <ul>
+          <li>Test extensively to obtain baseline values indicating how the software performs in the real world under various conditions (normal and peak); use these values to determine reasonable software limits.</li>
+          <li>Set clear limits for all flexible parameters such as maximum allocable memory, number of processes within a given timeframe, file descriptors, requests per client, number of records per request, etc. This is particularly true for any parameters within user control.</li>
+          <li>Release all resources when no longer in use, including incorporating timeouts for inactive users, processes, and resources.</li>
+          <li>Familiarize Dev, Ops, and IT teams with best practices for recognizing and preventing DoS attacks and out-of-control resource allocation to prevent catastrophic failures.</li>
+          </ul>
+          </div>
+                  </div>
+              </div>
+          </div>
+          <div class="card card--vuln  disclosure--not-new severity--medium" data-snyk-test="medium">
+              <header class="card__header">
+                  <div class="card__header__main">
+                      <div class="severity-icon severity-icon--medium"></div>
+                      <h2 class="card__title">Allocation of Resources Without Limits or Throttling</h2>
+                      <div class="card__actions">
+                          <span class="card__action card-dataflow is-selected" onclick="toggleCardView(event)">Data Flow</span>
+                          <span class="card__action card-fix" onclick="toggleCardView(event)">Fix Analysis</span>
+                      </div>
+                  </div>
+                  <ul class="card__meta">
+                      <li class="card__meta__item">SNYK-CODE</li>
+                      <li class="card__meta__item">CWE-770</li>
+                  </ul>
+              </header>
+              <div class="card__section">
+                  <div class="card__summary severity--medium">
+                      <p>This endpoint handler performs a file system operation and does not use a rate-limiting mechanism. It may enable the attackers to perform Denial-of-service attacks. Consider using a rate-limiting middleware such as express-limit.</p>
+                      <div class="file-location">Found in: <strong>routes/index.js (line : 82)</strong></div>    
+                  </div>
+                  <div class="card__panel dataflow">
+                      <h2 class="card__panel__heading"><span class="heading-char">⇣</span> Data Flow</h2>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">82:31</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">exports.get_account_details &#x3D; <br /></span><span class="marker block">function(req, res, next) {
+            // @TODO need to add a database call to get the profile from the database
+            // and provide it to the view to display
+            const profile &#x3D; {}
+           	return res.render(&#x27;account.hbs&#x27;, profile)
+          }</span><span class="dataflow__codesuffix"></span></div>
+                          <span class="dataflow__badge" title="Data is 'tainted' if it comes from an insecure source such as a file, the network, or the user. This tainted data is passed to a sensitive sink, as described below.">Source</span>
+                          <span class="dataflow__step">0</span>
+                      </div>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">86:14</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix"> 	return res.<br /></span><span class="marker">render(</span><span class="dataflow__codesuffix">&#x27;account.hbs&#x27;, profile)</span></div>
+                          <span class="dataflow__badge" title="Sinks are the operations that must receive clean data and that you wouldn't want an attacker to be able to manipulate.">Sink</span>
+                          <span class="dataflow__step">1</span>
+                      </div>
+                  </div>
+                  <div class="card__panel fix-analysis">
+                      <h2 class="card__panel__heading"><span class="heading-char">✓</span> Fix Analysis</h2>
+                      <div class="card__panel__markdown"><h2 id="details">Details</h2>
+          <p>Without unlimited resources, software operating in the real world is inherently limited in the resources it may consume; similarly, servers are limited by the number of simultaneous sessions they can handle. Therefore, it is important for developers to design software that considers these real-world physical (or virtual) limitations and limits user sessions accordingly, both in terms of the number of user sessions and in the quantity of resources each user may demand. Software with this weakness does not include such limitations and as a result, individual user sessions may consume too many resources, leading to unintended software behavior including, potentially, denial of service. This can be compared to a single restaurant customer emptying out the entire buffet, leaving no food for other customers--or an entire busload mobbing the buffet all at once, with a similar effect. This may happen inadvertently or as a result of an attack by a malicious user.</p>
+          <h2 id="best-practices-for-prevention">Best practices for prevention</h2>
+          <ul>
+          <li>Test extensively to obtain baseline values indicating how the software performs in the real world under various conditions (normal and peak); use these values to determine reasonable software limits.</li>
+          <li>Set clear limits for all flexible parameters such as maximum allocable memory, number of processes within a given timeframe, file descriptors, requests per client, number of records per request, etc. This is particularly true for any parameters within user control.</li>
+          <li>Release all resources when no longer in use, including incorporating timeouts for inactive users, processes, and resources.</li>
+          <li>Familiarize Dev, Ops, and IT teams with best practices for recognizing and preventing DoS attacks and out-of-control resource allocation to prevent catastrophic failures.</li>
+          </ul>
+          </div>
+                  </div>
+              </div>
+          </div>
+          <div class="card card--vuln  disclosure--not-new severity--medium" data-snyk-test="medium">
+              <header class="card__header">
+                  <div class="card__header__main">
+                      <div class="severity-icon severity-icon--medium"></div>
+                      <h2 class="card__title">Allocation of Resources Without Limits or Throttling</h2>
+                      <div class="card__actions">
+                          <span class="card__action card-dataflow is-selected" onclick="toggleCardView(event)">Data Flow</span>
+                          <span class="card__action card-fix" onclick="toggleCardView(event)">Fix Analysis</span>
+                      </div>
+                  </div>
+                  <ul class="card__meta">
+                      <li class="card__meta__item">SNYK-CODE</li>
+                      <li class="card__meta__item">CWE-770</li>
+                  </ul>
+              </header>
+              <div class="card__section">
+                  <div class="card__summary severity--medium">
+                      <p>This endpoint handler performs a file system operation and does not use a rate-limiting mechanism. It may enable the attackers to perform Denial-of-service attacks. Consider using a rate-limiting middleware such as express-limit.</p>
+                      <div class="file-location">Found in: <strong>routes/index.js (line : 89)</strong></div>    
+                  </div>
+                  <div class="card__panel dataflow">
+                      <h2 class="card__panel__heading"><span class="heading-char">⇣</span> Data Flow</h2>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">89:32</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">exports.save_account_details &#x3D; <br /></span><span class="marker block">function(req, res, next) {
+            // get the profile details from the JSON
+          	const profile &#x3D; req.body
+            // validate the input
+            if (validator.isEmail(profile.email, { allow_display_name: true })
+              // allow_display_name allows us to receive input as:
+              // Display Name &lt;email-address&gt;
+              // which we consider valid too
+              &amp;&amp; validator.isMobilePhone(profile.phone, &#x27;he-IL&#x27;)
+              &amp;&amp; validator.isAscii(profile.firstname)
+              &amp;&amp; validator.isAscii(profile.lastname)
+              &amp;&amp; validator.isAscii(profile.country)
+            ) {
+              // trim any extra spaces on the right of the name
+              profile.firstname &#x3D; validator.rtrim(profile.firstname)
+              profile.lastname &#x3D; validator.rtrim(profile.lastname)
+          
+              // render the view
+              return res.render(&#x27;account.hbs&#x27;, profile)
+            } else {
+              // if input validation fails, we just render the view as is
+              console.log(&#x27;error in form details&#x27;)
+              return res.render(&#x27;account.hbs&#x27;)
+            }
+          }</span><span class="dataflow__codesuffix"></span></div>
+                          <span class="dataflow__badge" title="Data is 'tainted' if it comes from an insecure source such as a file, the network, or the user. This tainted data is passed to a sensitive sink, as described below.">Source</span>
+                          <span class="dataflow__step">0</span>
+                      </div>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">107:16</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">    return res.<br /></span><span class="marker">render(</span><span class="dataflow__codesuffix">&#x27;account.hbs&#x27;, profile)</span></div>
+                          <span class="dataflow__badge" title="Sinks are the operations that must receive clean data and that you wouldn't want an attacker to be able to manipulate.">Sink</span>
+                          <span class="dataflow__step">1</span>
+                      </div>
+                  </div>
+                  <div class="card__panel fix-analysis">
+                      <h2 class="card__panel__heading"><span class="heading-char">✓</span> Fix Analysis</h2>
+                      <div class="card__panel__markdown"><h2 id="details">Details</h2>
+          <p>Without unlimited resources, software operating in the real world is inherently limited in the resources it may consume; similarly, servers are limited by the number of simultaneous sessions they can handle. Therefore, it is important for developers to design software that considers these real-world physical (or virtual) limitations and limits user sessions accordingly, both in terms of the number of user sessions and in the quantity of resources each user may demand. Software with this weakness does not include such limitations and as a result, individual user sessions may consume too many resources, leading to unintended software behavior including, potentially, denial of service. This can be compared to a single restaurant customer emptying out the entire buffet, leaving no food for other customers--or an entire busload mobbing the buffet all at once, with a similar effect. This may happen inadvertently or as a result of an attack by a malicious user.</p>
+          <h2 id="best-practices-for-prevention">Best practices for prevention</h2>
+          <ul>
+          <li>Test extensively to obtain baseline values indicating how the software performs in the real world under various conditions (normal and peak); use these values to determine reasonable software limits.</li>
+          <li>Set clear limits for all flexible parameters such as maximum allocable memory, number of processes within a given timeframe, file descriptors, requests per client, number of records per request, etc. This is particularly true for any parameters within user control.</li>
+          <li>Release all resources when no longer in use, including incorporating timeouts for inactive users, processes, and resources.</li>
+          <li>Familiarize Dev, Ops, and IT teams with best practices for recognizing and preventing DoS attacks and out-of-control resource allocation to prevent catastrophic failures.</li>
+          </ul>
+          </div>
+                  </div>
+              </div>
+          </div>
+          <div class="card card--vuln  disclosure--not-new severity--medium" data-snyk-test="medium">
+              <header class="card__header">
+                  <div class="card__header__main">
+                      <div class="severity-icon severity-icon--medium"></div>
+                      <h2 class="card__title">Allocation of Resources Without Limits or Throttling</h2>
+                      <div class="card__actions">
+                          <span class="card__action card-dataflow is-selected" onclick="toggleCardView(event)">Data Flow</span>
+                          <span class="card__action card-fix" onclick="toggleCardView(event)">Fix Analysis</span>
+                      </div>
+                  </div>
+                  <ul class="card__meta">
+                      <li class="card__meta__item">SNYK-CODE</li>
+                      <li class="card__meta__item">CWE-770</li>
+                  </ul>
+              </header>
+              <div class="card__section">
+                  <div class="card__summary severity--medium">
+                      <p>This endpoint handler performs a file system operation and does not use a rate-limiting mechanism. It may enable the attackers to perform Denial-of-service attacks. Consider using a rate-limiting middleware such as express-limit.</p>
+                      <div class="file-location">Found in: <strong>routes/index.js (line : 241)</strong></div>    
+                  </div>
+                  <div class="card__panel dataflow">
+                      <h2 class="card__panel__heading"><span class="heading-char">⇣</span> Data Flow</h2>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">241:18</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">exports.import &#x3D; <br /></span><span class="marker block">function (req, res, next) {
+            if (!req.files) {
+              res.send(&#x27;No files were uploaded.&#x27;);
+              return;
+            }
+          
+            var importFile &#x3D; req.files.importFile;
+            var data;
+            var importedFileType &#x3D; fileType(importFile.data);
+            var zipFileExt &#x3D; { ext: &quot;zip&quot;, mime: &quot;application/zip&quot; };
+            if (importedFileType &#x3D;&#x3D;&#x3D; null) {
+              importedFileType &#x3D; { ext: &quot;txt&quot;, mime: &quot;text/plain&quot; };
+            }
+            if (importedFileType[&quot;mime&quot;] &#x3D;&#x3D;&#x3D; zipFileExt[&quot;mime&quot;]) {
+              var zip &#x3D; AdmZip(importFile.data);
+              var extracted_path &#x3D; &quot;/tmp/extracted_files&quot;;
+              zip.extractAllTo(extracted_path, true);
+              data &#x3D; &quot;No backup.txt file found&quot;;
+              fs.readFile(&#x27;backup.txt&#x27;, &#x27;ascii&#x27;, function (err, data) {
+                if (!err) {
+                  data &#x3D; data;
+                }
+              });
+            } else {
+              data &#x3D; importFile.data.toString(&#x27;ascii&#x27;);
+            }
+            var lines &#x3D; data.split(&#x27;\n&#x27;);
+            lines.forEach(function (line) {
+              var parts &#x3D; line.split(&#x27;,&#x27;);
+              var what &#x3D; parts[0];
+              console.log(&#x27;importing &#x27; + what);
+              var when &#x3D; parts[1];
+              var locale &#x3D; parts[2];
+              var format &#x3D; parts[3];
+              var item &#x3D; what;
+              if (!isBlank(what)) {
+                if (!isBlank(when) &amp;&amp; !isBlank(locale) &amp;&amp; !isBlank(format)) {
+                  console.log(&#x27;setting locale &#x27; + parts[1]);
+                  moment.locale(locale);
+                  var d &#x3D; moment(when);
+                  console.log(&#x27;formatting &#x27; + d);
+                  item +&#x3D; &#x27; [&#x27; + d.format(format) + &#x27;]&#x27;;
+                }
+          
+                new Todo({
+                  content: item,
+                  updated_at: Date.now(),
+                }).save(function (err, todo, count) {
+                  if (err) return next(err);
+                  console.log(&#x27;added &#x27; + todo);
+                });
+              }
+            });
+          
+            res.redirect(&#x27;/&#x27;);
+          };</span><span class="dataflow__codesuffix"></span></div>
+                          <span class="dataflow__badge" title="Data is 'tainted' if it comes from an insecure source such as a file, the network, or the user. This tainted data is passed to a sensitive sink, as described below.">Source</span>
+                          <span class="dataflow__step">0</span>
+                      </div>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">259:5</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">    <br /></span><span class="marker">fs.readFile(</span><span class="dataflow__codesuffix">&#x27;backup.txt&#x27;, &#x27;ascii&#x27;, function (err, data) {</span></div>
+                          <span class="dataflow__badge" title="Sinks are the operations that must receive clean data and that you wouldn't want an attacker to be able to manipulate.">Sink</span>
+                          <span class="dataflow__step">1</span>
+                      </div>
+                  </div>
+                  <div class="card__panel fix-analysis">
+                      <h2 class="card__panel__heading"><span class="heading-char">✓</span> Fix Analysis</h2>
+                      <div class="card__panel__markdown"><h2 id="details">Details</h2>
+          <p>Without unlimited resources, software operating in the real world is inherently limited in the resources it may consume; similarly, servers are limited by the number of simultaneous sessions they can handle. Therefore, it is important for developers to design software that considers these real-world physical (or virtual) limitations and limits user sessions accordingly, both in terms of the number of user sessions and in the quantity of resources each user may demand. Software with this weakness does not include such limitations and as a result, individual user sessions may consume too many resources, leading to unintended software behavior including, potentially, denial of service. This can be compared to a single restaurant customer emptying out the entire buffet, leaving no food for other customers--or an entire busload mobbing the buffet all at once, with a similar effect. This may happen inadvertently or as a result of an attack by a malicious user.</p>
+          <h2 id="best-practices-for-prevention">Best practices for prevention</h2>
+          <ul>
+          <li>Test extensively to obtain baseline values indicating how the software performs in the real world under various conditions (normal and peak); use these values to determine reasonable software limits.</li>
+          <li>Set clear limits for all flexible parameters such as maximum allocable memory, number of processes within a given timeframe, file descriptors, requests per client, number of records per request, etc. This is particularly true for any parameters within user control.</li>
+          <li>Release all resources when no longer in use, including incorporating timeouts for inactive users, processes, and resources.</li>
+          <li>Familiarize Dev, Ops, and IT teams with best practices for recognizing and preventing DoS attacks and out-of-control resource allocation to prevent catastrophic failures.</li>
+          </ul>
+          </div>
+                  </div>
+              </div>
+          </div>
+          <div class="card card--vuln  disclosure--not-new severity--medium" data-snyk-test="medium">
+              <header class="card__header">
+                  <div class="card__header__main">
+                      <div class="severity-icon severity-icon--medium"></div>
+                      <h2 class="card__title">Allocation of Resources Without Limits or Throttling</h2>
+                      <div class="card__actions">
+                          <span class="card__action card-dataflow is-selected" onclick="toggleCardView(event)">Data Flow</span>
+                          <span class="card__action card-fix" onclick="toggleCardView(event)">Fix Analysis</span>
+                      </div>
+                  </div>
+                  <ul class="card__meta">
+                      <li class="card__meta__item">SNYK-CODE</li>
+                      <li class="card__meta__item">CWE-770</li>
+                  </ul>
+              </header>
+              <div class="card__section">
+                  <div class="card__summary severity--medium">
+                      <p>This endpoint handler performs a file system operation and does not use a rate-limiting mechanism. It may enable the attackers to perform Denial-of-service attacks. Consider using a rate-limiting middleware such as express-limit.</p>
+                      <div class="file-location">Found in: <strong>routes/index.js (line : 298)</strong></div>    
+                  </div>
+                  <div class="card__panel dataflow">
+                      <h2 class="card__panel__heading"><span class="heading-char">⇣</span> Data Flow</h2>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">298:21</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">exports.about_new &#x3D; <br /></span><span class="marker block">function (req, res, next) {
+            console.log(JSON.stringify(req.query));
+            return res.render(&quot;about_new.dust&quot;,
+              {
+                title: &#x27;Patch TODO List&#x27;,
+                subhead: &#x27;Vulnerabilities at their best&#x27;,
+                device: req.query.device
+              });
+          };</span><span class="dataflow__codesuffix"></span></div>
+                          <span class="dataflow__badge" title="Data is 'tainted' if it comes from an insecure source such as a file, the network, or the user. This tainted data is passed to a sensitive sink, as described below.">Source</span>
+                          <span class="dataflow__step">0</span>
+                      </div>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">300:14</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">  return res.<br /></span><span class="marker">render(</span><span class="dataflow__codesuffix">&quot;about_new.dust&quot;,</span></div>
+                          <span class="dataflow__badge" title="Sinks are the operations that must receive clean data and that you wouldn't want an attacker to be able to manipulate.">Sink</span>
+                          <span class="dataflow__step">1</span>
+                      </div>
+                  </div>
+                  <div class="card__panel fix-analysis">
+                      <h2 class="card__panel__heading"><span class="heading-char">✓</span> Fix Analysis</h2>
+                      <div class="card__panel__markdown"><h2 id="details">Details</h2>
+          <p>Without unlimited resources, software operating in the real world is inherently limited in the resources it may consume; similarly, servers are limited by the number of simultaneous sessions they can handle. Therefore, it is important for developers to design software that considers these real-world physical (or virtual) limitations and limits user sessions accordingly, both in terms of the number of user sessions and in the quantity of resources each user may demand. Software with this weakness does not include such limitations and as a result, individual user sessions may consume too many resources, leading to unintended software behavior including, potentially, denial of service. This can be compared to a single restaurant customer emptying out the entire buffet, leaving no food for other customers--or an entire busload mobbing the buffet all at once, with a similar effect. This may happen inadvertently or as a result of an attack by a malicious user.</p>
+          <h2 id="best-practices-for-prevention">Best practices for prevention</h2>
+          <ul>
+          <li>Test extensively to obtain baseline values indicating how the software performs in the real world under various conditions (normal and peak); use these values to determine reasonable software limits.</li>
+          <li>Set clear limits for all flexible parameters such as maximum allocable memory, number of processes within a given timeframe, file descriptors, requests per client, number of records per request, etc. This is particularly true for any parameters within user control.</li>
+          <li>Release all resources when no longer in use, including incorporating timeouts for inactive users, processes, and resources.</li>
+          <li>Familiarize Dev, Ops, and IT teams with best practices for recognizing and preventing DoS attacks and out-of-control resource allocation to prevent catastrophic failures.</li>
+          </ul>
+          </div>
+                  </div>
+              </div>
+          </div>
+          <div class="card card--vuln  disclosure--not-new severity--medium" data-snyk-test="medium">
+              <header class="card__header">
+                  <div class="card__header__main">
+                      <div class="severity-icon severity-icon--medium"></div>
+                      <h2 class="card__title">Allocation of Resources Without Limits or Throttling</h2>
+                      <div class="card__actions">
+                          <span class="card__action card-dataflow is-selected" onclick="toggleCardView(event)">Data Flow</span>
+                          <span class="card__action card-fix" onclick="toggleCardView(event)">Fix Analysis</span>
+                      </div>
+                  </div>
+                  <ul class="card__meta">
+                      <li class="card__meta__item">SNYK-CODE</li>
+                      <li class="card__meta__item">CWE-770</li>
+                  </ul>
+              </header>
+              <div class="card__section">
+                  <div class="card__summary severity--medium">
+                      <p>This endpoint handler performs a system command execution and does not use a rate-limiting mechanism. It may enable the attackers to perform Denial-of-service attacks. Consider using a rate-limiting middleware such as express-limit.</p>
+                      <div class="file-location">Found in: <strong>routes/index.js (line : 152)</strong></div>    
+                  </div>
+                  <div class="card__panel dataflow">
+                      <h2 class="card__panel__heading"><span class="heading-char">⇣</span> Data Flow</h2>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">152:18</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">exports.create &#x3D; <br /></span><span class="marker block">function (req, res, next) {
+            // console.log(&#x27;req.body: &#x27; + JSON.stringify(req.body));
+          
+            var item &#x3D; req.body.content;
+            var imgRegex &#x3D; /\!\[alt text\]\((http.*)\s\&quot;.*/;
+            if (typeof (item) &#x3D;&#x3D; &#x27;string&#x27; &amp;&amp; item.match(imgRegex)) {
+              var url &#x3D; item.match(imgRegex)[1];
+              console.log(&#x27;found img: &#x27; + url);
+          
+              exec(&#x27;identify &#x27; + url, function (err, stdout, stderr) {
+                console.log(err);
+                if (err !&#x3D;&#x3D; null) {
+                  console.log(&#x27;Error (&#x27; + err + &#x27;):&#x27; + stderr);
+                }
+              });
+          
+            } else {
+              item &#x3D; parse(item);
+            }
+          
+            new Todo({
+              content: item,
+              updated_at: Date.now(),
+            }).save(function (err, todo, count) {
+              if (err) return next(err);
+          
+              /*
+              res.setHeader(&#x27;Data&#x27;, todo.content.toString(&#x27;base64&#x27;));
+              res.redirect(&#x27;/&#x27;);
+              */
+          
+              res.setHeader(&#x27;Location&#x27;, &#x27;/&#x27;);
+              res.status(302).send(todo.content.toString(&#x27;base64&#x27;));
+          
+              // res.redirect(&#x27;/#&#x27; + todo.content.toString(&#x27;base64&#x27;));
+            });
+          };</span><span class="dataflow__codesuffix"></span></div>
+                          <span class="dataflow__badge" title="Data is 'tainted' if it comes from an insecure source such as a file, the network, or the user. This tainted data is passed to a sensitive sink, as described below.">Source</span>
+                          <span class="dataflow__step">0</span>
+                      </div>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">161:10</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">    exec(<br /></span><span class="marker">&#x27;identify &#x27; + url,</span><span class="dataflow__codesuffix"> function (err, stdout, stderr) {</span></div>
+                          <span class="dataflow__badge" title="Sinks are the operations that must receive clean data and that you wouldn't want an attacker to be able to manipulate.">Sink</span>
+                          <span class="dataflow__step">1</span>
+                      </div>
+                  </div>
+                  <div class="card__panel fix-analysis">
+                      <h2 class="card__panel__heading"><span class="heading-char">✓</span> Fix Analysis</h2>
+                      <div class="card__panel__markdown"><h2 id="details">Details</h2>
+          <p>Without unlimited resources, software operating in the real world is inherently limited in the resources it may consume; similarly, servers are limited by the number of simultaneous sessions they can handle. Therefore, it is important for developers to design software that considers these real-world physical (or virtual) limitations and limits user sessions accordingly, both in terms of the number of user sessions and in the quantity of resources each user may demand. Software with this weakness does not include such limitations and as a result, individual user sessions may consume too many resources, leading to unintended software behavior including, potentially, denial of service. This can be compared to a single restaurant customer emptying out the entire buffet, leaving no food for other customers--or an entire busload mobbing the buffet all at once, with a similar effect. This may happen inadvertently or as a result of an attack by a malicious user.</p>
+          <h2 id="best-practices-for-prevention">Best practices for prevention</h2>
+          <ul>
+          <li>Test extensively to obtain baseline values indicating how the software performs in the real world under various conditions (normal and peak); use these values to determine reasonable software limits.</li>
+          <li>Set clear limits for all flexible parameters such as maximum allocable memory, number of processes within a given timeframe, file descriptors, requests per client, number of records per request, etc. This is particularly true for any parameters within user control.</li>
+          <li>Release all resources when no longer in use, including incorporating timeouts for inactive users, processes, and resources.</li>
+          <li>Familiarize Dev, Ops, and IT teams with best practices for recognizing and preventing DoS attacks and out-of-control resource allocation to prevent catastrophic failures.</li>
+          </ul>
+          </div>
+                  </div>
+              </div>
+          </div>
+          <div class="card card--vuln  disclosure--not-new severity--medium" data-snyk-test="medium">
+              <header class="card__header">
+                  <div class="card__header__main">
+                      <div class="severity-icon severity-icon--medium"></div>
+                      <h2 class="card__title">Use of Hardcoded Credentials</h2>
+                      <div class="card__actions">
+                          <span class="card__action card-dataflow is-selected" onclick="toggleCardView(event)">Data Flow</span>
+                          <span class="card__action card-fix" onclick="toggleCardView(event)">Fix Analysis</span>
+                      </div>
+                  </div>
+                  <ul class="card__meta">
+                      <li class="card__meta__item">SNYK-CODE</li>
+                      <li class="card__meta__item">CWE-798,CWE-259</li>
+                  </ul>
+              </header>
+              <div class="card__section">
+                  <div class="card__summary severity--medium">
+                      <p>Do not hardcode passwords in code. Found hardcoded password used in typeorm.createConnection.</p>
+                      <div class="file-location">Found in: <strong>typeorm-db.js (line : 12)</strong></div>    
+                  </div>
+                  <div class="card__panel dataflow">
+                      <h2 class="card__panel__heading"><span class="heading-char">⇣</span> Data Flow</h2>
+                      <div class="dataflow__filename"> typeorm-db.js</div>
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">6:1</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix"><br /></span><span class="marker">typeorm.createConnection(</span><span class="dataflow__codesuffix">{</span></div>
+                          <span class="dataflow__badge" title="Data is 'tainted' if it comes from an insecure source such as a file, the network, or the user. This tainted data is passed to a sensitive sink, as described below.">Source</span><span class="dataflow__badge" title="Sinks are the operations that must receive clean data and that you wouldn't want an attacker to be able to manipulate.">Sink</span>
+                          <span class="dataflow__step">0</span>
+                      </div>
+                  </div>
+                  <div class="card__panel fix-analysis">
+                      <h2 class="card__panel__heading"><span class="heading-char">✓</span> Fix Analysis</h2>
+                      <div class="card__panel__markdown"><h2 id="details">Details</h2>
+          <p>Developers may use hardcoded credentials for convenience when coding in order to simplify their workflow. While they are responsible for removing these before production, occasionally this task may fall through the cracks. This also becomes a maintenance challenge when credentials are re-used across multiple applications.</p>
+          <p>Once attackers gain access, they may take advantage of privilege level to remove or alter data, take down a site or app, or hold any of the above for ransom. The risk across multiple similar projects is even greater. If code containing the credentials is reused across multiple projects, they will all be compromised.</p>
+          <h2 id="best-practices-for-prevention">Best practices for prevention</h2>
+          <ul>
+          <li>Plan software architecture such that keys and passwords are always stored outside the code, wherever possible.</li>
+          <li>Plan encryption into software architecture for all credential information and ensure proper handling of keys, credentials, and passwords.</li>
+          <li>Prompt for a secure password on first login rather than hard-code a default password.</li>
+          <li>If a hardcoded password or credential must be used, limit its use, for example, to system console users rather than via the network.</li>
+          <li>Use strong hashes for inbound password authentication, ideally with randomly assigned salts to increase the difficulty level in case of brute-force attack.</li>
+          </ul>
+          </div>
+                  </div>
+              </div>
+          </div>
+          <div class="card card--vuln  disclosure--not-new severity--medium" data-snyk-test="medium">
+              <header class="card__header">
+                  <div class="card__header__main">
+                      <div class="severity-icon severity-icon--medium"></div>
+                      <h2 class="card__title">Cleartext Transmission of Sensitive Information</h2>
+                      <div class="card__actions">
+                          <span class="card__action card-dataflow is-selected" onclick="toggleCardView(event)">Data Flow</span>
+                          <span class="card__action card-fix" onclick="toggleCardView(event)">Fix Analysis</span>
+                      </div>
+                  </div>
+                  <ul class="card__meta">
+                      <li class="card__meta__item">SNYK-CODE</li>
+                      <li class="card__meta__item">CWE-319</li>
+                  </ul>
+              </header>
+              <div class="card__section">
+                  <div class="card__summary severity--medium">
+                      <p>http.createServer uses HTTP which is an insecure protocol and should not be used in code due to cleartext transmission of information. Data in cleartext in a communication channel can be sniffed by unauthorized actors. Consider using the https module instead.</p>
+                      <div class="file-location">Found in: <strong>app.js (line : 86)</strong></div>    
+                  </div>
+                  <div class="card__panel dataflow">
+                      <h2 class="card__panel__heading"><span class="heading-char">⇣</span> Data Flow</h2>
+                      <div class="dataflow__filename"> app.js</div>
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">86:1</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix"><br /></span><span class="marker">http.createServer(</span><span class="dataflow__codesuffix">app).listen(app.get(&#x27;port&#x27;), function () {</span></div>
+                          <span class="dataflow__badge" title="Data is 'tainted' if it comes from an insecure source such as a file, the network, or the user. This tainted data is passed to a sensitive sink, as described below.">Source</span><span class="dataflow__badge" title="Sinks are the operations that must receive clean data and that you wouldn't want an attacker to be able to manipulate.">Sink</span>
+                          <span class="dataflow__step">0</span>
+                      </div>
+                  </div>
+                  <div class="card__panel fix-analysis">
+                      <h2 class="card__panel__heading"><span class="heading-char">✓</span> Fix Analysis</h2>
+                      <div class="card__panel__markdown"><h2 id="details">Details</h2>
+          <p>This weakness occurs when software transmits sensitive information, such as passwords or credit card numbers, in unencrypted form. This information may then be intercepted by threat actors using sniffer tools or interception techniques such as man-in-the-middle (MITM) attacks (often involving social engineering). Attackers can then use information gleaned to perform a variety of actions, depending on the information type. Possible actions include gaining unauthorized access, impersonating a user, moving laterally within the organization&#39;s network, or retrieving and potentially modifying files. This weakness is almost completely avoidable through intelligent architecture and design.</p>
+          <h2 id="best-practices-for-prevention">Best practices for prevention</h2>
+          <ul>
+          <li>Build web applications around a security mindset and the awareness that sniffers may be present at any time.</li>
+          <li>Ensure that all sensitive data transmission uses reliable encryption.</li>
+          <li>Implement security measures so that sensitive results are never returned in plain text.</li>
+          <li>Implement multiple-factor authentication methods to validate remote instances.</li>
+          <li>Use SSL not only at logon but throughout communications.</li>
+          </ul>
+          </div>
+                  </div>
+              </div>
+          </div>
+          <div class="card card--vuln  disclosure--not-new severity--medium" data-snyk-test="medium">
+              <header class="card__header">
+                  <div class="card__header__main">
+                      <div class="severity-icon severity-icon--medium"></div>
+                      <h2 class="card__title">Cross-Site Request Forgery (CSRF)</h2>
+                      <div class="card__actions">
+                          <span class="card__action card-dataflow is-selected" onclick="toggleCardView(event)">Data Flow</span>
+                          <span class="card__action card-fix" onclick="toggleCardView(event)">Fix Analysis</span>
+                      </div>
+                  </div>
+                  <ul class="card__meta">
+                      <li class="card__meta__item">SNYK-CODE</li>
+                      <li class="card__meta__item">CWE-352</li>
+                  </ul>
+              </header>
+              <div class="card__section">
+                  <div class="card__summary severity--medium">
+                      <p>CSRF protection is disabled for your Express app. This allows the attackers to execute requests on a user&#x27;s behalf.</p>
+                      <div class="file-location">Found in: <strong>app.js (line : 28)</strong></div>    
+                  </div>
+                  <div class="card__panel dataflow">
+                      <h2 class="card__panel__heading"><span class="heading-char">⇣</span> Data Flow</h2>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">28:11</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">var app &#x3D; <br /></span><span class="marker">express(</span><span class="dataflow__codesuffix">);</span></div>
+                          <span class="dataflow__badge" title="Data is 'tainted' if it comes from an insecure source such as a file, the network, or the user. This tainted data is passed to a sensitive sink, as described below.">Source</span><span class="dataflow__badge" title="Sinks are the operations that must receive clean data and that you wouldn't want an attacker to be able to manipulate.">Sink</span>
+                          <span class="dataflow__step">0</span>
+                      </div>
+                  </div>
+                  <div class="card__panel fix-analysis">
+                      <h2 class="card__panel__heading"><span class="heading-char">✓</span> Fix Analysis</h2>
+                      <div class="card__panel__markdown"><h2 id="details">Details</h2>
+          <p>Cross-site request forgery is an attack in which a malicious third party takes advantage of a user&#39;s authenticated credentials (such as a browser cookie) to impersonate that trusted user and perform unauthorized actions. The web application server cannot tell the difference between legitimate and malicious requests. This type of attack generally begins by tricking the user with a social engineering attack, such as a link or popup that the user inadvertently clicks, causing an unauthorized request to be sent to the web server. Consequences vary: At a standard user level, attackers can change passwords, transfer funds, make purchases, or connect with contacts; from an administrator account, attackers can then make changes to or even take down the app itself.</p>
+          <h2 id="best-practices-for-prevention">Best practices for prevention</h2>
+          <ul>
+          <li>Use development frameworks that defend against CSRF, using a nonce, hash, or some other security device to the URL and/or to forms.</li>
+          <li>Implement secure, unique, hidden tokens that are checked by the server each time to validate state-change requests.</li>
+          <li>Never assume that authentication tokens and session identifiers mean a request is legitimate.</li>
+          <li>Understand and implement other safe-cookie techniques, such as double submit cookies.</li>
+          <li>Terminate user sessions when not in use, including automatic timeout.</li>
+          <li>Ensure rigorous coding practices and defenses against other commonly exploited CWEs, since cross-site scripting (XSS), for example, can be used to bypass defenses against CSRF.</li>
+          </ul>
+          <h2 id="references">References</h2>
+          <ul>
+          <li><a href="https://expressjs.com/en/resources/middleware/csurf.html">Express Documentation - Implement CSRF Protection</a></li>
+          <li><a href="https://blog.risingstack.com/node-js-security-checklist/#csrf">Node Security Checklist - CSRF</a></li>
+          </ul>
+          </div>
+                  </div>
+              </div>
+          </div>
+          <div class="card card--vuln  disclosure--not-new severity--medium" data-snyk-test="medium">
+              <header class="card__header">
+                  <div class="card__header__main">
+                      <div class="severity-icon severity-icon--medium"></div>
+                      <h2 class="card__title">Open Redirect</h2>
+                      <div class="card__actions">
+                          <span class="card__action card-dataflow is-selected" onclick="toggleCardView(event)">Data Flow</span>
+                          <span class="card__action card-fix" onclick="toggleCardView(event)">Fix Analysis</span>
+                      </div>
+                  </div>
+                  <ul class="card__meta">
+                      <li class="card__meta__item">SNYK-CODE</li>
+                      <li class="card__meta__item">CWE-601</li>
+                  </ul>
+              </header>
+              <div class="card__section">
+                  <div class="card__summary severity--medium">
+                      <p>Unsanitized input from the HTTP request body flows into redirect, where it is used as an URL to redirect the user. This may result in an Open Redirect vulnerability.</p>
+                      <div class="file-location">Found in: <strong>routes/index.js (line : 61)</strong></div>    
+                  </div>
+                  <div class="card__panel dataflow">
+                      <h2 class="card__panel__heading"><span class="heading-char">⇣</span> Data Flow</h2>
+                      <div class="dataflow__filename"> routes/index.js</div>
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">41:34</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">        const redirectPage &#x3D; req.<br /></span><span class="marker">body.</span><span class="dataflow__codesuffix">redirectPage</span></div>
+                          <span class="dataflow__badge" title="Data is 'tainted' if it comes from an insecure source such as a file, the network, or the user. This tainted data is passed to a sensitive sink, as described below.">Source</span>
+                          <span class="dataflow__step">0</span>
+                      </div>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">41:34</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">        const redirectPage &#x3D; req.<br /></span><span class="marker">body.</span><span class="dataflow__codesuffix">redirectPage</span></div>
+                          
+                          <span class="dataflow__step">1</span>
+                      </div>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">41:30</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">        const redirectPage &#x3D; <br /></span><span class="marker">req.body.</span><span class="dataflow__codesuffix">redirectPage</span></div>
+                          
+                          <span class="dataflow__step">2</span>
+                      </div>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">41:15</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">        const <br /></span><span class="marker">redirectPage </span><span class="dataflow__codesuffix">&#x3D; req.body.redirectPage</span></div>
+                          
+                          <span class="dataflow__step">3</span>
+                      </div>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">44:34</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">        return adminLoginSuccess(<br /></span><span class="marker">redirectPage,</span><span class="dataflow__codesuffix"> session, username, res)</span></div>
+                          
+                          <span class="dataflow__step">4</span>
+                      </div>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">54:28</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">function adminLoginSuccess(<br /></span><span class="marker">redirectPage,</span><span class="dataflow__codesuffix"> session, username, res) {</span></div>
+                          
+                          <span class="dataflow__step">5</span>
+                      </div>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">60:7</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">  if (<br /></span><span class="marker">redirectPage)</span><span class="dataflow__codesuffix"> {</span></div>
+                          
+                          <span class="dataflow__step">6</span>
+                      </div>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">61:27</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">      return res.redirect(<br /></span><span class="marker">redirectPage)</span><span class="dataflow__codesuffix"></span></div>
+                          
+                          <span class="dataflow__step">7</span>
+                      </div>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">61:18</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">      return res.<br /></span><span class="marker">redirect(</span><span class="dataflow__codesuffix">redirectPage)</span></div>
+                          <span class="dataflow__badge" title="Sinks are the operations that must receive clean data and that you wouldn't want an attacker to be able to manipulate.">Sink</span>
+                          <span class="dataflow__step">8</span>
+                      </div>
+                  </div>
+                  <div class="card__panel fix-analysis">
+                      <h2 class="card__panel__heading"><span class="heading-char">✓</span> Fix Analysis</h2>
+                      <div class="card__panel__markdown"><h2 id="details">Details</h2>
+          <p>An open redirect attack takes place when a web application redirects the user to an unauthorized and untrusted site. In general, URL redirection refers to the ability of a website or application to redirect users to another site. This is often a benign and useful feature. For example, if a resource has moved to a new location, URL redirection can transfer the user to that location rather than displaying an error message.
+          However, this ability can be exploited through social engineering, tricking the user into believing they are accessing one site when, in reality, they are being redirected to a dangerous site, such as a phishing site. Once there, the user may be further tricked into entering credentials or personally identifiable information (PII), believing they are still within the original, trusted domain. Attackers can then use these credentials to gain unauthorized access or leverage the user&#39;s PII for sale or ransom.</p>
+          <h2 id="best-practices-for-prevention">Best practices for prevention</h2>
+          <ul>
+          <li>When developing a site or web app, consider implementing a disclaimer page to remind users that they are leaving a secure site.</li>
+          <li>Adopt a zero-trust approach in which all input is treated with suspicion.</li>
+          <li>Validate all input against deny-lists to ensure it does not contain code to redirect the user. This method is good but inherently incomplete.</li>
+          <li>Be aware of all sources of untrusted input being sent to the server that could be used to redirect the user, such as cookies, URL components, filenames, query results, request headers, and more.</li>
+          <li>In particular, be aware of potential API calls that could send input indirectly to redirect the user.</li>
+          <li>To protect end users, use a firewall to block known malicious sites, train users to recognize basic signs of a phishing attack, and ensure that all network endpoints are patched with the most current updates.</li>
+          </ul>
+          </div>
+                  </div>
+              </div>
+          </div>
+          <div class="card card--vuln  disclosure--not-new severity--medium" data-snyk-test="medium">
+              <header class="card__header">
+                  <div class="card__header__main">
+                      <div class="severity-icon severity-icon--medium"></div>
+                      <h2 class="card__title">Information Exposure</h2>
+                      <div class="card__actions">
+                          <span class="card__action card-dataflow is-selected" onclick="toggleCardView(event)">Data Flow</span>
+                          <span class="card__action card-fix" onclick="toggleCardView(event)">Fix Analysis</span>
+                      </div>
+                  </div>
+                  <ul class="card__meta">
+                      <li class="card__meta__item">SNYK-CODE</li>
+                      <li class="card__meta__item">CWE-200</li>
+                  </ul>
+              </header>
+              <div class="card__section">
+                  <div class="card__summary severity--medium">
+                      <p>Disable X-Powered-By header for your Express app (consider using Helmet middleware), because it exposes information about the used framework to potential attackers.</p>
+                      <div class="file-location">Found in: <strong>app.js (line : 28)</strong></div>    
+                  </div>
+                  <div class="card__panel dataflow">
+                      <h2 class="card__panel__heading"><span class="heading-char">⇣</span> Data Flow</h2>
+                      <div class="dataflow__filename"> app.js</div>
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">28:11</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">var app &#x3D; <br /></span><span class="marker">express(</span><span class="dataflow__codesuffix">);</span></div>
+                          <span class="dataflow__badge" title="Data is 'tainted' if it comes from an insecure source such as a file, the network, or the user. This tainted data is passed to a sensitive sink, as described below.">Source</span><span class="dataflow__badge" title="Sinks are the operations that must receive clean data and that you wouldn't want an attacker to be able to manipulate.">Sink</span>
+                          <span class="dataflow__step">0</span>
+                      </div>
+                  </div>
+                  <div class="card__panel fix-analysis">
+                      <h2 class="card__panel__heading"><span class="heading-char">✓</span> Fix Analysis</h2>
+                      <div class="card__panel__markdown"><h2 id="details">Details</h2>
+          <p>Sensitive data includes: personally identifiable information (PII) of employees, customers, users, or other third parties; financial information; code; intellectual property; or protected network information such as passwords. Exposure of sensitive information to an unauthorized actor occurs when any party who does not require this information for business purposes can remove this information from the secure network.
+          Consequences of exposure can include holding it for ransom payment, identity theft, or access to other internal network resources-along with financial loss due to regulatory fines, court settlements, or cost to restore compromised systems. As most attackers aim to extract sensitive information, this CWE only describes exploits that take advantage of vulnerabilities related to how data is handled: the management, storage, transfer, or removal of sensitive information.</p>
+          <h2 id="best-practices-for-prevention">Best practices for prevention</h2>
+          <ul>
+          <li>Encrypt data at all times, whether in transit or at rest.</li>
+          <li>When transporting data, always use a secure protocol such as TLS.</li>
+          <li>Before collecting PII or financial information, consider whether there is a true business need for this information; similarly, before storing the data, ensure that there is an ongoing business need.</li>
+          <li>Classify all incoming data according to privacy and security guidelines to improve awareness of sensitive data.</li>
+          <li>Ensure that caching is disabled for all transactions involving sensitive information.</li>
+          <li>Store passwords with secure, salted hashing functions.</li>
+          <li>Apply a network-wide least-privilege policy so sensitive data is provided only to users with business need to know.</li>
+          </ul>
+          </div>
+                  </div>
+              </div>
+          </div>
+          <div class="card card--vuln  disclosure--not-new severity--medium" data-snyk-test="medium">
+              <header class="card__header">
+                  <div class="card__header__main">
+                      <div class="severity-icon severity-icon--medium"></div>
+                      <h2 class="card__title">Use of Hardcoded Credentials</h2>
+                      <div class="card__actions">
+                          <span class="card__action card-dataflow is-selected" onclick="toggleCardView(event)">Data Flow</span>
+                          <span class="card__action card-fix" onclick="toggleCardView(event)">Fix Analysis</span>
+                      </div>
+                  </div>
+                  <ul class="card__meta">
+                      <li class="card__meta__item">SNYK-CODE</li>
+                      <li class="card__meta__item">CWE-798,CWE-259</li>
+                  </ul>
+              </header>
+              <div class="card__section">
+                  <div class="card__summary severity--medium">
+                      <p>Do not hardcode passwords in code. Found hardcoded password used in password.</p>
+                      <div class="file-location">Found in: <strong>mongoose-db.js (line : 52)</strong></div>    
+                  </div>
+                  <div class="card__panel dataflow">
+                      <h2 class="card__panel__heading"><span class="heading-char">⇣</span> Data Flow</h2>
+                      <div class="dataflow__filename"> mongoose-db.js</div>
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">52:43</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">    new User({ username: &#x27;admin@snyk.io&#x27;, <br /></span><span class="marker">password:</span><span class="dataflow__codesuffix"> &#x27;SuperSecretPassword&#x27; }).save(function (err, user, count) {</span></div>
+                          <span class="dataflow__badge" title="Data is 'tainted' if it comes from an insecure source such as a file, the network, or the user. This tainted data is passed to a sensitive sink, as described below.">Source</span><span class="dataflow__badge" title="Sinks are the operations that must receive clean data and that you wouldn't want an attacker to be able to manipulate.">Sink</span>
+                          <span class="dataflow__step">0</span>
+                      </div>
+                  </div>
+                  <div class="card__panel fix-analysis">
+                      <h2 class="card__panel__heading"><span class="heading-char">✓</span> Fix Analysis</h2>
+                      <div class="card__panel__markdown"><h2 id="details">Details</h2>
+          <p>Developers may use hardcoded credentials for convenience when coding in order to simplify their workflow. While they are responsible for removing these before production, occasionally this task may fall through the cracks. This also becomes a maintenance challenge when credentials are re-used across multiple applications.</p>
+          <p>Once attackers gain access, they may take advantage of privilege level to remove or alter data, take down a site or app, or hold any of the above for ransom. The risk across multiple similar projects is even greater. If code containing the credentials is reused across multiple projects, they will all be compromised.</p>
+          <h2 id="best-practices-for-prevention">Best practices for prevention</h2>
+          <ul>
+          <li>Plan software architecture such that keys and passwords are always stored outside the code, wherever possible.</li>
+          <li>Plan encryption into software architecture for all credential information and ensure proper handling of keys, credentials, and passwords.</li>
+          <li>Prompt for a secure password on first login rather than hard-code a default password.</li>
+          <li>If a hardcoded password or credential must be used, limit its use, for example, to system console users rather than via the network.</li>
+          <li>Use strong hashes for inbound password authentication, ideally with randomly assigned salts to increase the difficulty level in case of brute-force attack.</li>
+          </ul>
+          </div>
+                  </div>
+              </div>
+          </div>
+          <div class="card card--vuln  disclosure--not-new severity--low" data-snyk-test="low">
+              <header class="card__header">
+                  <div class="card__header__main">
+                      <div class="severity-icon severity-icon--low"></div>
+                      <h2 class="card__title">Use of Hardcoded Credentials</h2>
+                      <div class="card__actions">
+                          <span class="card__action card-dataflow is-selected" onclick="toggleCardView(event)">Data Flow</span>
+                          <span class="card__action card-fix" onclick="toggleCardView(event)">Fix Analysis</span>
+                      </div>
+                  </div>
+                  <ul class="card__meta">
+                      <li class="card__meta__item">SNYK-CODE</li>
+                      <li class="card__meta__item">CWE-798,CWE-259</li>
+                  </ul>
+              </header>
+              <div class="card__section">
+                  <div class="card__summary severity--low">
+                      <p>Do not hardcode passwords in code. Found hardcoded password used in changePassword.</p>
+                      <div class="file-location">Found in: <strong>tests/authentication.component.spec.js (line : 35)</strong></div>    
+                  </div>
+                  <div class="card__panel dataflow">
+                      <h2 class="card__panel__heading"><span class="heading-char">⇣</span> Data Flow</h2>
+                      <div class="dataflow__filename"> tests/authentication.component.spec.js</div>
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">27:12</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">      comp.<br /></span><span class="marker">changePassword(</span><span class="dataflow__codesuffix">);</span></div>
+                          <span class="dataflow__badge" title="Data is 'tainted' if it comes from an insecure source such as a file, the network, or the user. This tainted data is passed to a sensitive sink, as described below.">Source</span><span class="dataflow__badge" title="Sinks are the operations that must receive clean data and that you wouldn't want an attacker to be able to manipulate.">Sink</span>
+                          <span class="dataflow__step">0</span>
+                      </div>
+                  </div>
+                  <div class="card__panel fix-analysis">
+                      <h2 class="card__panel__heading"><span class="heading-char">✓</span> Fix Analysis</h2>
+                      <div class="card__panel__markdown"><h2 id="details">Details</h2>
+          <p>Developers may use hardcoded credentials for convenience when coding in order to simplify their workflow. While they are responsible for removing these before production, occasionally this task may fall through the cracks. This also becomes a maintenance challenge when credentials are re-used across multiple applications.</p>
+          <p>Once attackers gain access, they may take advantage of privilege level to remove or alter data, take down a site or app, or hold any of the above for ransom. The risk across multiple similar projects is even greater. If code containing the credentials is reused across multiple projects, they will all be compromised.</p>
+          <h2 id="best-practices-for-prevention">Best practices for prevention</h2>
+          <ul>
+          <li>Plan software architecture such that keys and passwords are always stored outside the code, wherever possible.</li>
+          <li>Plan encryption into software architecture for all credential information and ensure proper handling of keys, credentials, and passwords.</li>
+          <li>Prompt for a secure password on first login rather than hard-code a default password.</li>
+          <li>If a hardcoded password or credential must be used, limit its use, for example, to system console users rather than via the network.</li>
+          <li>Use strong hashes for inbound password authentication, ideally with randomly assigned salts to increase the difficulty level in case of brute-force attack.</li>
+          </ul>
+          </div>
+                  </div>
+              </div>
+          </div>
+          <div class="card card--vuln  disclosure--not-new severity--low" data-snyk-test="low">
+              <header class="card__header">
+                  <div class="card__header__main">
+                      <div class="severity-icon severity-icon--low"></div>
+                      <h2 class="card__title">Use of Hardcoded Credentials</h2>
+                      <div class="card__actions">
+                          <span class="card__action card-dataflow is-selected" onclick="toggleCardView(event)">Data Flow</span>
+                          <span class="card__action card-fix" onclick="toggleCardView(event)">Fix Analysis</span>
+                      </div>
+                  </div>
+                  <ul class="card__meta">
+                      <li class="card__meta__item">SNYK-CODE</li>
+                      <li class="card__meta__item">CWE-798,CWE-259</li>
+                  </ul>
+              </header>
+              <div class="card__section">
+                  <div class="card__summary severity--low">
+                      <p>Do not hardcode passwords in code. Found hardcoded password used in changePassword.</p>
+                      <div class="file-location">Found in: <strong>tests/authentication.component.spec.js (line : 35)</strong></div>    
+                  </div>
+                  <div class="card__panel dataflow">
+                      <h2 class="card__panel__heading"><span class="heading-char">⇣</span> Data Flow</h2>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">27:12</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">      comp.<br /></span><span class="marker">changePassword(</span><span class="dataflow__codesuffix">);</span></div>
+                          <span class="dataflow__badge" title="Data is 'tainted' if it comes from an insecure source such as a file, the network, or the user. This tainted data is passed to a sensitive sink, as described below.">Source</span><span class="dataflow__badge" title="Sinks are the operations that must receive clean data and that you wouldn't want an attacker to be able to manipulate.">Sink</span>
+                          <span class="dataflow__step">0</span>
+                      </div>
+                  </div>
+                  <div class="card__panel fix-analysis">
+                      <h2 class="card__panel__heading"><span class="heading-char">✓</span> Fix Analysis</h2>
+                      <div class="card__panel__markdown"><h2 id="details">Details</h2>
+          <p>Developers may use hardcoded credentials for convenience when coding in order to simplify their workflow. While they are responsible for removing these before production, occasionally this task may fall through the cracks. This also becomes a maintenance challenge when credentials are re-used across multiple applications.</p>
+          <p>Once attackers gain access, they may take advantage of privilege level to remove or alter data, take down a site or app, or hold any of the above for ransom. The risk across multiple similar projects is even greater. If code containing the credentials is reused across multiple projects, they will all be compromised.</p>
+          <h2 id="best-practices-for-prevention">Best practices for prevention</h2>
+          <ul>
+          <li>Plan software architecture such that keys and passwords are always stored outside the code, wherever possible.</li>
+          <li>Plan encryption into software architecture for all credential information and ensure proper handling of keys, credentials, and passwords.</li>
+          <li>Prompt for a secure password on first login rather than hard-code a default password.</li>
+          <li>If a hardcoded password or credential must be used, limit its use, for example, to system console users rather than via the network.</li>
+          <li>Use strong hashes for inbound password authentication, ideally with randomly assigned salts to increase the difficulty level in case of brute-force attack.</li>
+          </ul>
+          </div>
+                  </div>
+              </div>
+          </div>
+          <div class="card card--vuln  disclosure--not-new severity--low" data-snyk-test="low">
+              <header class="card__header">
+                  <div class="card__header__main">
+                      <div class="severity-icon severity-icon--low"></div>
+                      <h2 class="card__title">Use of Hardcoded Credentials</h2>
+                      <div class="card__actions">
+                          <span class="card__action card-dataflow is-selected" onclick="toggleCardView(event)">Data Flow</span>
+                          <span class="card__action card-fix" onclick="toggleCardView(event)">Fix Analysis</span>
+                      </div>
+                  </div>
+                  <ul class="card__meta">
+                      <li class="card__meta__item">SNYK-CODE</li>
+                      <li class="card__meta__item">CWE-798,CWE-259</li>
+                  </ul>
+              </header>
+              <div class="card__section">
+                  <div class="card__summary severity--low">
+                      <p>Do not hardcode passwords in code. Found hardcoded password used in changePassword.</p>
+                      <div class="file-location">Found in: <strong>tests/authentication.component.spec.js (line : 48)</strong></div>    
+                  </div>
+                  <div class="card__panel dataflow">
+                      <h2 class="card__panel__heading"><span class="heading-char">⇣</span> Data Flow</h2>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">38:12</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">      comp.<br /></span><span class="marker">changePassword(</span><span class="dataflow__codesuffix">);</span></div>
+                          <span class="dataflow__badge" title="Data is 'tainted' if it comes from an insecure source such as a file, the network, or the user. This tainted data is passed to a sensitive sink, as described below.">Source</span><span class="dataflow__badge" title="Sinks are the operations that must receive clean data and that you wouldn't want an attacker to be able to manipulate.">Sink</span>
+                          <span class="dataflow__step">0</span>
+                      </div>
+                  </div>
+                  <div class="card__panel fix-analysis">
+                      <h2 class="card__panel__heading"><span class="heading-char">✓</span> Fix Analysis</h2>
+                      <div class="card__panel__markdown"><h2 id="details">Details</h2>
+          <p>Developers may use hardcoded credentials for convenience when coding in order to simplify their workflow. While they are responsible for removing these before production, occasionally this task may fall through the cracks. This also becomes a maintenance challenge when credentials are re-used across multiple applications.</p>
+          <p>Once attackers gain access, they may take advantage of privilege level to remove or alter data, take down a site or app, or hold any of the above for ransom. The risk across multiple similar projects is even greater. If code containing the credentials is reused across multiple projects, they will all be compromised.</p>
+          <h2 id="best-practices-for-prevention">Best practices for prevention</h2>
+          <ul>
+          <li>Plan software architecture such that keys and passwords are always stored outside the code, wherever possible.</li>
+          <li>Plan encryption into software architecture for all credential information and ensure proper handling of keys, credentials, and passwords.</li>
+          <li>Prompt for a secure password on first login rather than hard-code a default password.</li>
+          <li>If a hardcoded password or credential must be used, limit its use, for example, to system console users rather than via the network.</li>
+          <li>Use strong hashes for inbound password authentication, ideally with randomly assigned salts to increase the difficulty level in case of brute-force attack.</li>
+          </ul>
+          </div>
+                  </div>
+              </div>
+          </div>
+          <div class="card card--vuln  disclosure--not-new severity--low" data-snyk-test="low">
+              <header class="card__header">
+                  <div class="card__header__main">
+                      <div class="severity-icon severity-icon--low"></div>
+                      <h2 class="card__title">Use of Hardcoded Credentials</h2>
+                      <div class="card__actions">
+                          <span class="card__action card-dataflow is-selected" onclick="toggleCardView(event)">Data Flow</span>
+                          <span class="card__action card-fix" onclick="toggleCardView(event)">Fix Analysis</span>
+                      </div>
+                  </div>
+                  <ul class="card__meta">
+                      <li class="card__meta__item">SNYK-CODE</li>
+                      <li class="card__meta__item">CWE-798,CWE-259</li>
+                  </ul>
+              </header>
+              <div class="card__section">
+                  <div class="card__summary severity--low">
+                      <p>Do not hardcode passwords in code. Found hardcoded password used in changePassword.</p>
+                      <div class="file-location">Found in: <strong>tests/authentication.component.spec.js (line : 48)</strong></div>    
+                  </div>
+                  <div class="card__panel dataflow">
+                      <h2 class="card__panel__heading"><span class="heading-char">⇣</span> Data Flow</h2>
+                      
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">38:12</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">      comp.<br /></span><span class="marker">changePassword(</span><span class="dataflow__codesuffix">);</span></div>
+                          <span class="dataflow__badge" title="Data is 'tainted' if it comes from an insecure source such as a file, the network, or the user. This tainted data is passed to a sensitive sink, as described below.">Source</span><span class="dataflow__badge" title="Sinks are the operations that must receive clean data and that you wouldn't want an attacker to be able to manipulate.">Sink</span>
+                          <span class="dataflow__step">0</span>
+                      </div>
+                  </div>
+                  <div class="card__panel fix-analysis">
+                      <h2 class="card__panel__heading"><span class="heading-char">✓</span> Fix Analysis</h2>
+                      <div class="card__panel__markdown"><h2 id="details">Details</h2>
+          <p>Developers may use hardcoded credentials for convenience when coding in order to simplify their workflow. While they are responsible for removing these before production, occasionally this task may fall through the cracks. This also becomes a maintenance challenge when credentials are re-used across multiple applications.</p>
+          <p>Once attackers gain access, they may take advantage of privilege level to remove or alter data, take down a site or app, or hold any of the above for ransom. The risk across multiple similar projects is even greater. If code containing the credentials is reused across multiple projects, they will all be compromised.</p>
+          <h2 id="best-practices-for-prevention">Best practices for prevention</h2>
+          <ul>
+          <li>Plan software architecture such that keys and passwords are always stored outside the code, wherever possible.</li>
+          <li>Plan encryption into software architecture for all credential information and ensure proper handling of keys, credentials, and passwords.</li>
+          <li>Prompt for a secure password on first login rather than hard-code a default password.</li>
+          <li>If a hardcoded password or credential must be used, limit its use, for example, to system console users rather than via the network.</li>
+          <li>Use strong hashes for inbound password authentication, ideally with randomly assigned salts to increase the difficulty level in case of brute-force attack.</li>
+          </ul>
+          </div>
+                  </div>
+              </div>
+          </div>
+          <div class="card card--vuln  disclosure--not-new severity--low" data-snyk-test="low">
+              <header class="card__header">
+                  <div class="card__header__main">
+                      <div class="severity-icon severity-icon--low"></div>
+                      <h2 class="card__title">Sensitive Cookie in HTTPS Session Without &#x27;Secure&#x27; Attribute</h2>
+                      <div class="card__actions">
+                          <span class="card__action card-dataflow is-selected" onclick="toggleCardView(event)">Data Flow</span>
+                          <span class="card__action card-fix" onclick="toggleCardView(event)">Fix Analysis</span>
+                      </div>
+                  </div>
+                  <ul class="card__meta">
+                      <li class="card__meta__item">SNYK-CODE</li>
+                      <li class="card__meta__item">CWE-614</li>
+                  </ul>
+              </header>
+              <div class="card__section">
+                  <div class="card__summary severity--low">
+                      <p>Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.</p>
+                      <div class="file-location">Found in: <strong>app.js (line : 45)</strong></div>    
+                  </div>
+                  <div class="card__panel dataflow">
+                      <h2 class="card__panel__heading"><span class="heading-char">⇣</span> Data Flow</h2>
+                      <div class="dataflow__filename"> app.js</div>
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">45:3</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix">  <br /></span><span class="marker">cookie:</span><span class="dataflow__codesuffix"> { path: &#x27;/&#x27; }</span></div>
+                          <span class="dataflow__badge" title="Data is 'tainted' if it comes from an insecure source such as a file, the network, or the user. This tainted data is passed to a sensitive sink, as described below.">Source</span><span class="dataflow__badge" title="Sinks are the operations that must receive clean data and that you wouldn't want an attacker to be able to manipulate.">Sink</span>
+                          <span class="dataflow__step">0</span>
+                      </div>
+                  </div>
+                  <div class="card__panel fix-analysis">
+                      <h2 class="card__panel__heading"><span class="heading-char">✓</span> Fix Analysis</h2>
+                      <div class="card__panel__markdown"><h2 id="details">Details</h2>
+          <p>In a session hijacking attack, if a cookie containing sensitive data is set without the <code>secure</code> attribute, an attacker might be able to intercept that cookie. Once the attacker has this information, they can potentially impersonate a user, accessing confidential data and performing actions that they would not normally be authorized to do. Attackers often gain access to this sensitive cookie data when it is transmitted insecurely in plain text over a standard HTTP session, rather than being encrypted and sent over an HTTPS session. This type of attack is highly preventable by following best practices when setting sensitive session cookies.</p>
+          <h2 id="best-practices-for-prevention">Best practices for prevention</h2>
+          <ul>
+          <li>Set the <code>secure</code> attribute in the response header when setting cookies on the client side, and use a test tool to verify that secure cookie transmission is in place.</li>
+          <li>Always use HTTPS for all login pages and never redirect from HTTP to HTTPS, which leaves secure session data open to interception.</li>
+          <li>Follow other best practices when it comes to session cookies, such as setting the HttpOnly flag and maintaining highly time-limited sessions.</li>
+          <li>Consider implementing browser checks and providing secure data only within a browser that supports tight cookie security.</li>
+          <li>Generate session IDs in a way that is not easily predictable, invalidate sessions upon logout, and never reuse session IDs.</li>
+          <li>Educate developers to use built-in secure session-management functionality within the development environment instead of taking a DIY approach.</li>
+          </ul>
+          </div>
+                  </div>
+              </div>
+          </div>
+          <div class="card card--vuln  disclosure--not-new severity--low" data-snyk-test="low">
+              <header class="card__header">
+                  <div class="card__header__main">
+                      <div class="severity-icon severity-icon--low"></div>
+                      <h2 class="card__title">Use of Hardcoded Credentials</h2>
+                      <div class="card__actions">
+                          <span class="card__action card-dataflow is-selected" onclick="toggleCardView(event)">Data Flow</span>
+                          <span class="card__action card-fix" onclick="toggleCardView(event)">Fix Analysis</span>
+                      </div>
+                  </div>
+                  <ul class="card__meta">
+                      <li class="card__meta__item">SNYK-CODE</li>
+                      <li class="card__meta__item">CWE-798</li>
+                  </ul>
+              </header>
+              <div class="card__section">
+                  <div class="card__summary severity--low">
+                      <p>Do not hardcode credentials in code. Found hardcoded credential used in typeorm.createConnection.</p>
+                      <div class="file-location">Found in: <strong>typeorm-db.js (line : 11)</strong></div>    
+                  </div>
+                  <div class="card__panel dataflow">
+                      <h2 class="card__panel__heading"><span class="heading-char">⇣</span> Data Flow</h2>
+                      <div class="dataflow__filename"> typeorm-db.js</div>
+                      <div class="dataflow__item">
+                          <span class="dataflow__lineno" title="line:column">6:1</span>
+                          <div class="dataflow__code"><span class="dataflow__codeprefix"><br /></span><span class="marker">typeorm.createConnection(</span><span class="dataflow__codesuffix">{</span></div>
+                          <span class="dataflow__badge" title="Data is 'tainted' if it comes from an insecure source such as a file, the network, or the user. This tainted data is passed to a sensitive sink, as described below.">Source</span><span class="dataflow__badge" title="Sinks are the operations that must receive clean data and that you wouldn't want an attacker to be able to manipulate.">Sink</span>
+                          <span class="dataflow__step">0</span>
+                      </div>
+                  </div>
+                  <div class="card__panel fix-analysis">
+                      <h2 class="card__panel__heading"><span class="heading-char">✓</span> Fix Analysis</h2>
+                      <div class="card__panel__markdown"><h2 id="details">Details</h2>
+          <p>Developers may use hardcoded credentials for convenience when coding in order to simplify their workflow. While they are responsible for removing these before production, occasionally this task may fall through the cracks. This also becomes a maintenance challenge when credentials are re-used across multiple applications.</p>
+          <p>Once attackers gain access, they may take advantage of privilege level to remove or alter data, take down a site or app, or hold any of the above for ransom. The risk across multiple similar projects is even greater. If code containing the credentials is reused across multiple projects, they will all be compromised.</p>
+          <h2 id="best-practices-for-prevention">Best practices for prevention</h2>
+          <ul>
+          <li>Plan software architecture such that keys and passwords are always stored outside the code, wherever possible.</li>
+          <li>Plan encryption into software architecture for all credential information and ensure proper handling of keys, credentials, and passwords.</li>
+          <li>Prompt for a secure password on first login rather than hard-code a default password.</li>
+          <li>If a hardcoded password or credential must be used, limit its use, for example, to system console users rather than via the network.</li>
+          <li>Use strong hashes for inbound password authentication, ideally with randomly assigned salts to increase the difficulty level in case of brute-force attack.</li>
+          </ul>
+          </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+    </div>
+  </main>
+</body>
+<script>
+  // collapse vulns in remediations
+  const remediations = document.querySelectorAll(".js-remediation");
+  remediations.forEach((remediation) => {
+    remediation.parentElement.classList.toggle("shown");
+    remediation.addEventListener("click", remediationClick);
+  })
+
+  // hide all panes
+  const allPanes = document.querySelectorAll(`[data-pane]`);
+  allPanes.forEach((pane) => {
+    pane.classList.remove('shown');
+  });
+  // set first nav item as active & un-hide it's pane
+  const remediationNav = document.querySelectorAll(".js-nav");
+  remediationNav.forEach((nav) => {
+    nav.addEventListener("click", navClick);
+  })
+  if (remediationNav && remediationNav.length > 0) {
+    remediationNav[0].classList.add('active');
+    const targetPaneData = remediationNav[0].dataset && remediationNav[0].dataset.toggle;
+    if (targetPaneData) {
+      showPane(targetPaneData);
+    }
+  }
+
+  function remediationClick() {
+    this.parentElement.classList.toggle("shown");
+  }
+
+  function navClick() {
+    const remediationNav = document.querySelectorAll(".js-nav");
+    remediationNav.forEach((nav) => {
+      nav.classList.remove('active');
+    });
+    this.classList.toggle('active');
+    const targetPaneData = this.dataset && this.dataset.toggle;
+    if (targetPaneData) {
+      showPane(targetPaneData);
+    }
+  }
+
+  function showPane(targetPaneData) {
+    const targetPanes = document.querySelectorAll(`[data-pane='${targetPaneData}']`);
+    if (targetPanes) {
+      const allPanes = document.querySelectorAll(`[data-pane]`);
+      allPanes.forEach((pane) => {
+        pane.classList.remove('shown');
+      });
+      targetPanes[0].classList.add('shown');
+    }
+  }
+
+// https://gomakethings.com/how-to-get-the-closest-parent-element-with-a-matching-selector-using-vanilla-javascript/
+  function getClosest(element, selector) {
+    for ( ; element && element !== document; element = element.parentNode ) {
+      if ( element.matches( selector ) ) return element;
+    }
+    return null;
+  }
+
+  function toggleCardView(event) {
+    var clickedButton = event.target;
+    var card = this.getClosest(clickedButton, '.card');
+    if (clickedButton.classList.contains('card-fix')){
+      if (clickedButton.classList.contains('is-selected')) 
+        return;
+      clickedButton.classList.add('is-selected');
+      clickedButton.previousElementSibling.classList.remove('is-selected');
+      card.classList.add('show-fix');
+    } else {
+      if (clickedButton.classList.contains('is-selected')) 
+        return;
+      clickedButton.classList.add('is-selected');
+      clickedButton.nextElementSibling.classList.remove('is-selected');
+      card.classList.remove('show-fix');
+    }
+  }
+</script>
+</html>
