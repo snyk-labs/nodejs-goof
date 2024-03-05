@@ -1,0 +1,12 @@
+version: '2.1'
+orbs:
+  snyk: snyk/snyk@x.y.z
+jobs:
+  build:
+    docker:
+      - image: cimg/node:lts
+    steps:
+      - checkout
+      - run: npm ci
+      - snyk/scan
+workflows: null
