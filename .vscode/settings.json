@@ -1,0 +1,10 @@
+{
+    "snyk.trustedFolders": [
+
+        "/Users/sameerkhassawneh/Documents/GitHub/nodejs-goof"       
+    ],
+    "snyk.advanced.customEndpoint": "",
+    "snyk.advanced.organization": "sameer.khassawneh",
+    "editor.defaultFormatter": "aaron-bond.better-comments",
+    "snyk.advanced.additionalParameters": "-all-projects"
+}
