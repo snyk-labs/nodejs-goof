@@ -35,7 +35,7 @@ exports.index = function (req, res, next) {
 };
 
 // Insert new vulnerable code:
-/*
+
 
 exports.loginHandler = function (req, res, next) {
   if (validator.isEmail(req.body.username)) {
@@ -69,7 +69,8 @@ if (validator.isEmail(req.body.username)) {
 } else {
   return res.status(401).send()
 };
-*/
+
+
 function adminLoginSuccess(redirectPage, session, username, res) {
   session.loggedIn = 1
 
@@ -207,7 +208,7 @@ exports.create = function (req, res, next) {
 };
 
 // Insert new vulnerable code:
-/*
+
 exports.destroy = function (req, res, next) {
   Todo.findById(req.params.id, function (err, todo) {
 
@@ -248,7 +249,7 @@ exports.update = function (req, res, next) {
     });
   });
 };
-*/
+
 // ** express turns the cookie key to lowercase **
 exports.current_user = function (req, res, next) {
 
