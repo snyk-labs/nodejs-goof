@@ -51,7 +51,7 @@ exports.loginHandler = function (req, res, next) {
   }
 };
 // Insert new vuln
-/* 
+/*
 if (validator.isEmail(req.body.username)) {
   User.find({ username: req.body.username, password: req.body.password }, function (err, users) {
     if (users.length > 0) {
