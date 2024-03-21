@@ -15,6 +15,7 @@
     "test": "snyk test"
   },
   "dependencies": {
+    "acorn": "5.5.0",
     "adm-zip": "0.4.7",
     "body-parser": "1.9.0",
     "cfenv": "^1.0.4",
