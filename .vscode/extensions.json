@@ -1,0 +1,6 @@
+{
+    "recommendations": [
+        "snyk-security.snyk-vulnerability-scanner",
+        "ms-vscode-remote.remote-containers"
+    ]
+}
