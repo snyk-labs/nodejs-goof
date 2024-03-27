@@ -1,0 +1,173 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -o nodejs-goof-k8s.yaml
+    kompose.version: 1.26.1 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: good-mysql
+  name: good-mysql
+spec:
+  ports:
+    - name: "3306"
+      port: 3306
+      targetPort: 3306
+  selector:
+    io.kompose.service: good-mysql
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -o nodejs-goof-k8s.yaml
+    kompose.version: 1.26.1 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: goof
+  name: goof
+spec:
+  ports:
+    - name: "3001"
+      port: 3001
+      targetPort: 3001
+    - name: "9229"
+      port: 9229
+      targetPort: 9229
+  selector:
+    io.kompose.service: goof
+status:
+  loadBalancer: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -o nodejs-goof-k8s.yaml
+    kompose.version: 1.26.1 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: goof-mongo
+  name: goof-mongo
+spec:
+  ports:
+    - name: "27017"
+      port: 27017
+      targetPort: 27017
+  selector:
+    io.kompose.service: goof-mongo
+status:
+  loadBalancer: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -o nodejs-goof-k8s.yaml
+    kompose.version: 1.26.1 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: good-mysql
+  name: good-mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: good-mysql
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -o nodejs-goof-k8s.yaml
+        kompose.version: 1.26.1 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: good-mysql
+    spec:
+      containers:
+        - env:
+            - name: MYSQL_DATABASE
+              value: acme
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
+          image: mysql:5
+          name: goof-mysql
+          ports:
+            - containerPort: 3306
+          resources: {}
+      restartPolicy: Always
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -o nodejs-goof-k8s.yaml
+    kompose.version: 1.26.1 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: goof
+  name: goof
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: goof
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -o nodejs-goof-k8s.yaml
+        kompose.version: 1.26.1 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: goof
+    spec:
+      containers:
+        - env:
+            - name: DOCKER
+              value: "1"
+          image: 478468688580.dkr.ecr.us-east-1.amazonaws.com/nodejs-goof:latest
+          name: goof
+          ports:
+            - containerPort: 3001
+            - containerPort: 9229
+          resources: {}
+          securityContext:
+            privileged: true
+      restartPolicy: Always
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -o nodejs-goof-k8s.yaml
+    kompose.version: 1.26.1 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: goof-mongo
+  name: goof-mongo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: goof-mongo
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -o nodejs-goof-k8s.yaml
+        kompose.version: 1.26.1 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: goof-mongo
+    spec:
+      containers:
+        - image: mongo:5.0.13
+          name: goof-mongo
+          ports:
+            - containerPort: 27017
+          resources: {}
+      restartPolicy: Always
+status: {}
+
