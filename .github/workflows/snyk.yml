@@ -1,0 +1,33 @@
+name: Snyk Security Scan
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  snyk:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install Snyk CLI
+        run: npm install -g snyk
+
+      - name: Authenticate Snyk
+        run: snyk auth ${{ secrets.SNYK_TOKEN }}
+
+      - name: Run Snyk Test
+        if: github.ref != 'refs/heads/main'
+        run: snyk test --severity-threshold=high
+
+      - name: Run Snyk Monitor
+        if: github.ref == 'refs/heads/main'
+        run: snyk monitor
