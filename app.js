@@ -40,7 +40,7 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(methodOverride());
 app.use(session({
-  secret: 'keyboard cat',
+  secret: process.env.SESSION_SECRET,
   name: 'connect.sid',
   cookie: { path: '/' }
 }))
@@ -66,6 +66,9 @@ app.get('/about_new', routes.about_new);
 app.get('/chat', routes.chat.get);
 app.put('/chat', routes.chat.add);
 app.delete('/chat', routes.chat.delete);
+// User role check API endpoints
+app.get('/api/user/role/:userId', routes.isLoggedIn, routes.checkUserRole);
+app.post('/api/user/role-check', routes.isLoggedIn, routes.checkUserRole);
 app.use('/users', routesUsers)
 
 // Static
@@ -80,9 +83,8 @@ if (app.get('env') == 'development') {
   app.use(errorHandler());
 }
 
-var token = 'SECRET_TOKEN_f8ed84e8f41e4146403dd4a6bbcea5e418d23a9';
-console.log('token: ' + token);
+
 
 http.createServer(app).listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'));
-});
+});git 

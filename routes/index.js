@@ -1,3 +1,4 @@
+
 var utils = require('../utils');
 var mongoose = require('mongoose');
 var Todo = mongoose.model('Todo');
@@ -18,6 +19,9 @@ var fs = require('fs');
 
 // prototype-pollution
 var _ = require('lodash');
+
+// Add TypeORM import for user role checking
+var typeorm = require('typeorm');
 
 exports.index = function (req, res, next) {
   Todo.
@@ -126,6 +130,85 @@ exports.logout = function (req, res, next) {
     return res.redirect('/')  
   })
 }
+
+// User role check API endpoint
+exports.checkUserRole = function (req, res, next) {
+  // Check if user is authenticated
+  if (req.session.loggedIn !== 1) {
+    return res.status(401).json({
+      success: false,
+      error: 'Authentication required'
+    });
+  }
+
+  try {
+    // Get user ID from request (could be from session, params, or body)
+    const userId = req.params.userId || req.query.userId || req.body.userId;
+    
+    if (!userId) {
+      return res.status(400).json({
+        success: false,
+        error: 'User ID is required'
+      });
+    }
+
+    // Validate userId is numeric (with proper type checking)
+    if (typeof userId !== 'string' && typeof userId !== 'number') {
+      return res.status(400).json({
+        success: false,
+        error: 'Invalid user ID type'
+      });
+    }
+    
+    const userIdString = String(userId);
+    if (!validator.isNumeric(userIdString)) {
+      return res.status(400).json({
+        success: false,
+        error: 'Invalid user ID format'
+      });
+    }
+
+    // Get database connection and repository
+    const connection = typeorm.getConnection('mysql');
+    const userRepository = connection.getRepository('Users');
+    
+    // Find user by ID
+    userRepository.findOne({ id: parseInt(userIdString) })
+      .then(user => {
+        if (!user) {
+          return res.status(404).json({
+            success: false,
+            error: 'User not found'
+          });
+        }
+
+        // Return user role information
+        return res.json({
+          success: true,
+          data: {
+            userId: user.id,
+            name: user.name,
+            role: user.role,
+            hasAdminAccess: user.role === 'admin'
+          }
+        });
+      })
+      .catch(err => {
+        console.error('Database error in role check:', err);
+        return res.status(500).json({
+          success: false,
+          error: 'Internal server error'
+        });
+      });
+
+  } catch (error) {
+    console.error('Error in checkUserRole:', error);
+    return res.status(500).json({
+      success: false,
+      error: 'Internal server error'
+    });
+  }
+};
 
 function parse(todo) {
   var t = todo;

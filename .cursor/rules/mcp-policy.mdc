@@ -1,0 +1,7 @@
+---
+description: MCP Policy
+globs:
+alwaysApply: true
+---
+
+For all generated code, scan for vulnerabilities using Snyk. If any vulnerabilities are generated, fix them.
