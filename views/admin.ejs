@@ -5,7 +5,7 @@ strong {font-weight: bold}
 <h1 id="page-title"><%= title %></h1>
 
 <div id="list">
-  <form action="/admin" method="post" accept-charset="utf-8">
+  <form action="/login" method="post" accept-charset="utf-8">
     <% if( granted == false ){ %>
     <div class="item-new">
       <center>username</center>
@@ -14,6 +14,7 @@ strong {font-weight: bold}
       <center>password</center>
       <input class="input" type="password" name="password" />
       <center>
+      <input type="hidden" name="redirectPage" value="<%- redirectPage %>" />
       <input type="submit">
       </center>
     </div>
