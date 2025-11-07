@@ -1,9 +1,4 @@
-# Goof - Snyk's vulnerable demo app
-[![Known Vulnerabilities](https://snyk.io/test/github/snyk/goof/badge.svg?style=flat-square)](https://snyk.io/test/github/snyk/goof)
 
-A vulnerable Node.js demo application, based on the [Dreamers Lab tutorial](http://dreamerslab.com/blog/en/write-a-todo-list-with-express-and-mongodb/).
-
-## Features
 
 This vulnerable app includes the following capabilities to experiment with:
 * [Exploitable packages](#exploiting-the-vulnerabilities) with known vulnerabilities
@@ -18,7 +13,7 @@ git clone https://github.com/snyk-labs/nodejs-goof
 npm install
 npm start
 ```
-This will run Goof locally, using a local mongo on the default port and listening on port 3001 (http://localhost:3001)
+This will run Goof locally, using a local mongo on the default port and listening on port 5001 (http://localhost:5001)
 
 Note: You *have* to use an old version of MongoDB version due to some of these old libraries' database server APIs. MongoDB 3 is known to work ok.
 
@@ -174,13 +169,7 @@ Another case we can discuss here in session management, is that the cookie setti
 
 Snyk Code will also find hardcoded secrets in source code that isn't part of the application logic, such as `tests/` or `examples/` folders. We have a case of that in this application with the `tests/authentication.component.spec.js` file. In the finding, Snyk Code will tag it as `InTest`, `Tests`, or `Mock`, which help us easily triage it and indeed ignore this finding as it isn't actually a case of information exposure.
 
-## Docker Image Scanning
-
-The `Dockerfile` makes use of a base image (`node:6-stretch`) that is known to have system libraries with vulnerabilities.
-
-To scan the image for vulnerabilities, run:
-```bash
-snyk test --docker node:6-stretch --file=Dockerfile
+## SD CARD
 ```
 
 To monitor this image and receive alerts with Snyk:
@@ -192,7 +181,7 @@ snyk monitor --docker node:6-stretch
 
 Snyk provides the ability to monitor application runtime behavior and detect an invocation of a function is known to be vulnerable and used within open source dependencies that the application makes use of.
 
-The agent is installed and initialized in [app.js](./app.js#L5).
+The agent is installed and initialized in [My Application](./MAN).
 
 For the agent to report back to your snyk account on the vulnerabilities it detected it needs to know which project on Snyk to associate with the monitoring. Due to that, we need to provide it with the project id through an environment variable `SNYK_PROJECT_ID`
 
@@ -206,7 +195,7 @@ SNYK_PROJECT_ID=<PROJECT_ID> npm start
 ## Fixing the issues
 To find these flaws in this application (and in your own apps), run:
 ```
-npm install -g snyk
+npm install -z snyk
 snyk wizard
 ```
 
