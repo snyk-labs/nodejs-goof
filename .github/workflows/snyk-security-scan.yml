@@ -25,12 +25,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
       
-      - name: Run Snyk test
+      - name: Run Snyk test for Node.js dependencies
         uses: snyk/actions/node@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: --severity-threshold=high --file=Dockerfile
+          args: --severity-threshold=high
       
       - name: Upload Snyk results as artifact
         if: always()  # Always run this step even if previous steps fail
@@ -45,7 +45,7 @@ jobs:
           docker build -t nodejs-goof .
           docker save nodejs-goof -o nodejs-goof-image.tar
       
-      - name: Run Snyk container test
+      - name: Run Snyk test for Dockerfile
         uses: snyk/actions/docker@master
         with:
           image: nodejs-goof
