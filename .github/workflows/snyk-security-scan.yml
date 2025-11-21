@@ -17,11 +17,12 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Run Snyk Code scan
-        uses: snyk/actions/code@master
+        uses: snyk/actions@master
+        with:
+          command: code
+          args: --severity-threshold=high
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          args: --severity-threshold=high
       
       - name: Setup Node.js
         uses: actions/setup-node@v3
