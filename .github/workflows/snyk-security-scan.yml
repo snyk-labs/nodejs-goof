@@ -46,7 +46,7 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: test --docker node:14.18.1 --severity-threshold=high
+          args: --docker node:14.18.1 --severity-threshold=high
       
       - name: Upload Snyk results as artifact
         if: always()  # Always run this step even if previous steps fail
