@@ -1,0 +1,57 @@
+name: Snyk Security Scan
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  security-scan:
+    name: Run Snyk Security Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run Snyk test
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high --file=Dockerfile
+        continue-on-error: true  # Don't fail the build for Snyk findings
+      
+      - name: Upload Snyk results as artifact
+        if: always()  # Always run this step even if previous steps fail
+        uses: actions/upload-artifact@v3
+        with:
+          name: snyk-results
+          path: snyk*.json
+          if-no-files-found: ignore
+      
+      - name: Build and scan container image
+        run: |
+          docker build -t nodejs-goof .
+          docker save nodejs-goof -o nodejs-goof-image.tar
+      
+      - name: Run Snyk container test
+        uses: snyk/actions/docker@master
+        continue-on-error: true
+        with:
+          image: nodejs-goof
+          file: Dockerfile
+          args: --severity-threshold=high
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
