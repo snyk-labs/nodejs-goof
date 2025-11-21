@@ -31,7 +31,6 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           args: --severity-threshold=high --file=Dockerfile
-        continue-on-error: true  # Don't fail the build for Snyk findings
       
       - name: Upload Snyk results as artifact
         if: always()  # Always run this step even if previous steps fail
@@ -48,7 +47,6 @@ jobs:
       
       - name: Run Snyk container test
         uses: snyk/actions/docker@master
-        continue-on-error: true
         with:
           image: nodejs-goof
           file: Dockerfile
