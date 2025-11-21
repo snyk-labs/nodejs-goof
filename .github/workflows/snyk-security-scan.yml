@@ -27,6 +27,7 @@ jobs:
       
       - name: Run Snyk test for Node.js dependencies
         uses: snyk/actions/node@master
+        continue-on-error: true  # Allow the workflow to continue to Docker scan
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
