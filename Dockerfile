@@ -1,5 +1,5 @@
-# FROM node:6-stretch
-FROM node:18.13.0
+# Using Node.js 14.18.1 which has known vulnerabilities
+FROM node:14.18.1
 
 RUN mkdir /usr/src/goof
 RUN mkdir /tmp/extracted_files
