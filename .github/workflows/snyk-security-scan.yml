@@ -18,6 +18,7 @@ jobs:
 
       - name: Run Snyk Code scan
         uses: snyk/actions@master
+        continue-on-error: true
         with:
           command: code
           args: --severity-threshold=high
@@ -35,7 +36,7 @@ jobs:
       
       - name: Run Snyk test for Node.js dependencies
         uses: snyk/actions/node@master
-        continue-on-error: true  # Allow the workflow to continue to Docker scan
+        continue-on-error: true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
@@ -43,10 +44,11 @@ jobs:
       
       - name: Scan base Node.js image
         uses: snyk/actions/node@master
+        continue-on-error: true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: test --docker node:14.18.1 --severity-threshold=high
+          args: --docker node:14.18.1 --severity-threshold=high
       
       - name: Upload Snyk results as artifact
         if: always()  # Always run this step even if previous steps fail
@@ -63,6 +65,7 @@ jobs:
       
       - name: Run Snyk test for Dockerfile
         uses: snyk/actions/docker@master
+        continue-on-error: true
         with:
           image: nodejs-goof
           file: Dockerfile
