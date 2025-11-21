@@ -35,7 +35,7 @@ jobs:
       
       - name: Upload Snyk results as artifact
         if: always()  # Always run this step even if previous steps fail
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: snyk-results
           path: snyk*.json
