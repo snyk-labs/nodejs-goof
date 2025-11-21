@@ -26,9 +26,12 @@ jobs:
         continue-on-error: true
         with:
           file: vulnerable.tf
-          args: --severity-threshold=high
+          args: --report
+          # Enable SARIF output for GitHub code scanning
+          sarif: true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+          SNYK_CFG_ORG: goof-ltd-demo-default  # Ensure we're using the same org as local
 
       - name: Run Snyk Code scan
         uses: snyk/actions@master
