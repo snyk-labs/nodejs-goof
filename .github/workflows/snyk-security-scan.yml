@@ -16,6 +16,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.0
+
+      - name: Run Snyk IaC scan for Terraform
+        uses: snyk/actions/iac@master
+        continue-on-error: true
+        with:
+          file: vulnerable.tf
+          args: --severity-threshold=high
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
       - name: Run Snyk Code scan
         uses: snyk/actions@master
         continue-on-error: true
