@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
     const userInput = req.query.input || 'No input provided';
     
     // UNSAFE: Directly embedding unsanitized user input in HTML response
-    // This is the sink where the XSS occurs
+    // This is the sink where the XSS occurs 
     res.send(`
         <!DOCTYPE html>
         <html>
