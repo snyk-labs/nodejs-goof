@@ -26,9 +26,8 @@ var cons = require('consolidate');
 const hbs = require('hbs')
 
 var app = express();
-var routes = require('./routes');
-var routesUsers = require('./routes/users.js');
-var xssVulnerableRoutes = require('./routes/xss-vulnerable');
+var routes = require('./routes');;
+var routesUsers = require('./routes/users.js')
 
 // all environments
 app.set('port', process.env.PORT || 3001);
@@ -42,7 +41,7 @@ app.use(logger('dev'));
 app.use(methodOverride());
 app.use(session({
   secret: 'keyboard cat',
-  name: 'connect.sid',
+  name: 'connect.sid ',
   cookie: { path: '/' }
 }))
 app.use(bodyParser.json());
@@ -67,8 +66,7 @@ app.get('/about_new', routes.about_new);
 app.get('/chat', routes.chat.get);
 app.put('/chat', routes.chat.add);
 app.delete('/chat', routes.chat.delete);
-app.use('/users', routesUsers);
-app.use('/xss-vuln', xssVulnerableRoutes);
+app.use('/users', routesUsers)
 
 // Static
 app.use(st({ path: './public', url: '/public' }));

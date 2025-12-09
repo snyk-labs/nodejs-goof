@@ -13,3 +13,6 @@ npm-debug.log
 .dccache
 
 
+
+# Snyk Security Extension - AI Rules (auto-generated)
+.windsurf/rules/snyk_rules.md
