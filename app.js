@@ -26,7 +26,7 @@ var cons = require('consolidate');
 const hbs = require('hbs')
 
 var app = express();
-var routes = require('./routes');
+var routes = require('./routes');;
 var routesUsers = require('./routes/users.js')
 
 // all environments
@@ -41,7 +41,7 @@ app.use(logger('dev'));
 app.use(methodOverride());
 app.use(session({
   secret: 'keyboard cat',
-  name: 'connect.sid',
+  name: 'connect.sid ',
   cookie: { path: '/' }
 }))
 app.use(bodyParser.json());
