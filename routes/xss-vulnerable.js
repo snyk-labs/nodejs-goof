@@ -13,29 +13,7 @@ const sanitizeInput = (value = '') =>
         '/': '&#47;'
     }[char] || char));
 
-// UNSAFE: Direct XSS vulnerability - matches pattern Snyk detects
-// This is a simple reflected XSS that Snyk should flag
-router.get('/', (req, res) => {
-    // Get user input directly from query parameter without sanitization
-    // This is the source of the XSS vulnerability
-    const userInput = req.query.input || 'No input provided';
-    
-    // UNSAFE: Directly embedding unsanitized user input in HTML response
-    // This is the sink where the XSS occurs 
-    res.send(`
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>XSS Vulnerability Demo</title>
-        </head>
-        <body>
-            <h1>XSS Vulnerability Demo</h1>
-            <div>${userInput}</div>
-            <p><a href="/xss-vuln/secure?input=Try%20this%20secure%20endpoint">Try the secure endpoint</a></p>
-        </body>
-        </html>
-    `);
-});
+
 
 // SECURE: Safe endpoint with proper HTML escaping
 router.get('/secure', (req, res) => {
