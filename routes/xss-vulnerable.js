@@ -36,7 +36,7 @@ router.get('/', (req, res) => {
         </html>
     `);
 });
-
+ 
 
 // SECURE: Safe endpoint with proper HTML escaping
 router.get('/secure', (req, res) => {
