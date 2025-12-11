@@ -17,15 +17,15 @@ const { startVulnerableResponse } = require('../service/xssResponder');
 
 // UNSAFE: Direct XSS vulnerability - matches pattern Snyk detects
 // This is a simple reflected XSS that Snyk should flag
-router.get('/', (req, res) => {
-    // Get user input directly from query parameter without sanitization
-    // This is the source of the XSS vulnerability
-    const userInput = req.query.input || 'No input provided';
+// router.get('/', (req, res) => {
+//     // Get user input directly from query parameter without sanitization
+//     // This is the source of the XSS vulnerability
+//     const userInput = req.query.input || 'No input provided';
 
-    const html = processUserInput(userInput, res);
+//     const html = processUserInput(userInput, res);
 
-    res.send(html);
-});
+//     res.send(html);
+// });
 
 function processUserInput(userInput, res) {
     return `
