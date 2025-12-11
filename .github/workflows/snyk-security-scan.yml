@@ -78,7 +78,7 @@ jobs:
         continue-on-error: true
         with:
           file: vulnerable.tf
-          args: --report --project-name=nodejs-goof-ga-iac
+          args: --report --target-name=nodejs-goof
           # Enable SARIF output for GitHub code scanning
           sarif: true
 
