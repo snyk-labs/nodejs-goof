@@ -14,6 +14,7 @@ jobs:
     env:
       SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       SNYK_CFG_ORG: varner-tech-engineering
+      SNYK_CFG_PROJECT_NAME: nodejs-goof-ga
     
     steps:
       - name: Checkout code
