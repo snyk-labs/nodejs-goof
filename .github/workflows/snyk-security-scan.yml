@@ -24,25 +24,8 @@ jobs:
         with:
           terraform_version: 1.5.0
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18.x'
-          cache: 'npm'
-      
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Snyk SCA Scan (test + monitor)
-        continue-on-error: true
-        run: |
-          npm install -g snyk
-          snyk test --severity-threshold=high --project-name=nodejs-goof-ga-sca --target-reference=nodejs-goof-ga-target --target-name=nodejs-goof --remote-repo-url=https://github.com/varner-tech/nodejs-goof || true
-          snyk monitor --project-name=nodejs-goof-ga-sca --target-reference=nodejs-goof-ga-target --target-name=nodejs-goof --remote-repo-url=https://github.com/varner-tech/nodejs-goof
-
-      - name: Snyk SAST Scan
-        continue-on-error: true
-        run: snyk code test --severity-threshold=high --report --project-name=nodejs-goof-ga-sast --target-reference=nodejs-goof-ga-target --target-name=nodejs-goof --remote-repo-url=https://github.com/varner-tech/nodejs-goof
+      - name: Install Snyk CLI
+        run: npm install -g snyk
 
       - name: Build Container Image
         run: docker build -t nodejs-goof .
