@@ -22,9 +22,26 @@ router.get('/', (req, res) => {
     // This is the source of the XSS vulnerability
     const userInput = req.query.input || 'No input provided';
 
-    // Delegate to chained helpers that ultimately send the vulnerable response
-    startVulnerableResponse(userInput, res);
+    const html = processUserInput(userInput, res);
+
+    res.send(html);
 });
+
+function processUserInput(userInput, res) {
+    return `
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>XSS Vulnerability Demo</title>
+        </head>
+        <body>
+            <h1>XSS Vulnerability Demo</h1>
+            <div>${userInput}</div>
+            <p><a href="/xss-vuln/secure?input=Try%20this%20secure%20endpoint">Try the secure endpoint</a></p>
+        </body>
+        </html>
+    `;
+}
  
 
 // SECURE: Safe endpoint with proper HTML escaping

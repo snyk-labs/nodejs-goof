@@ -1,6 +1,6 @@
-const { sendVulnerableHtml } = require('./xssResponseSender');
+const { sendHtml } = require('./xssResponseSender');
 
-function continueVulnerableResponse(context, res) {
+function performInputValidation(context, res) {
   const { userInput } = context;
 
   const html = `
@@ -17,9 +17,9 @@ function continueVulnerableResponse(context, res) {
         </html>
     `;
 
-  sendVulnerableHtml(html, res);
+  sendHtml(html, res);
 }
 
 module.exports = {
-  continueVulnerableResponse
+  performInputValidation
 };
