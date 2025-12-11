@@ -1,0 +1,7 @@
+function sendHtml(html, res) {
+  res.send(html);
+}
+
+module.exports = {
+  sendHtml
+};

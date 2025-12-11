@@ -30,7 +30,7 @@ jobs:
         continue-on-error: true
         with:
           file: vulnerable.tf
-          args: --report
+          args: --report --project-name=nodejs-goof-ga
           # Enable SARIF output for GitHub code scanning
           sarif: true
 
@@ -40,13 +40,14 @@ jobs:
         with:
           command: monitor
           file: vulnerable.tf
+          args: --project-name=nodejs-goof-ga
 
       - name: Run Snyk Code scan
         uses: snyk/actions@master
         continue-on-error: true
         with:
           command: code
-          args: --severity-threshold=high
+          args: --severity-threshold=high --project-name=nodejs-goof-ga
 
       - name: Monitor Snyk Code scan
         uses: snyk/actions@master
@@ -54,6 +55,7 @@ jobs:
         with:
           command: code
           monitor_mode: true
+          args: --project-name=nodejs-goof-ga
       
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -68,26 +70,27 @@ jobs:
         uses: snyk/actions/node@master
         continue-on-error: true
         with:
-          args: --severity-threshold=high
+          args: --severity-threshold=high --project-name=nodejs-goof-ga
 
       - name: Monitor Node.js dependencies in Snyk
         uses: snyk/actions/node@master
         continue-on-error: true
         with:
           command: monitor
+          args: --project-name=nodejs-goof-ga
       
       - name: Scan base Node.js image
         uses: snyk/actions/node@master
         continue-on-error: true
         with:
-          args: --docker node:14.18.1 --severity-threshold=high
+          args: --docker node:14.18.1 --severity-threshold=high --project-name=nodejs-goof-ga
 
       - name: Monitor base Node.js image in Snyk
         uses: snyk/actions/node@master
         continue-on-error: true
         with:
           command: monitor
-          args: --docker node:14.18.1
+          args: --docker node:14.18.1 --project-name=nodejs-goof-ga
       
       - name: Upload Snyk results as artifact
         if: always()  # Always run this step even if previous steps fail
@@ -107,7 +110,7 @@ jobs:
         continue-on-error: true
         with:
           image: nodejs-goof
-          args: --severity-threshold=high --file=Dockerfile
+          args: --severity-threshold=high --file=Dockerfile --project-name=nodejs-goof-ga
 
       - name: Monitor Docker image in Snyk
         uses: snyk/actions/docker@master
@@ -115,4 +118,4 @@ jobs:
         with:
           command: monitor
           image: nodejs-goof
-          args: --file=Dockerfile
+          args: --file=Dockerfile --project-name=nodejs-goof-ga
