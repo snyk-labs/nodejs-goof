@@ -53,19 +53,6 @@ jobs:
           command: code
           args: --severity-threshold=high --report --project-name=nodejs-goof-ga-sast --target-reference=nodejs-goof-ga-target --target-name=nodejs-goof --remote-repo-url=https://github.com/varner-tech/nodejs-goof
 
-      - name: Scan base Node.js image (Container Base Image)
-        uses: snyk/actions/node@master
-        continue-on-error: true
-        with:
-          args: --docker node:14.18.1 --severity-threshold=high --project-name=nodejs-goof-ga-container-base-image --target-reference=nodejs-goof-ga-target --target-name=nodejs-goof --remote-repo-url=https://github.com/varner-tech/nodejs-goof
-
-      - name: Monitor base Node.js image in Snyk (Container Base Image)
-        uses: snyk/actions/node@master
-        continue-on-error: true
-        with:
-          command: monitor
-          args: --docker node:14.18.1 --project-name=nodejs-goof-ga-container-base-image --target-reference=nodejs-goof-ga-target --target-name=nodejs-goof --remote-repo-url=https://github.com/varner-tech/nodejs-goof
-
       - name: Build and scan container image
         run: |
           docker build -t nodejs-goof .
@@ -76,7 +63,7 @@ jobs:
         continue-on-error: true
         with:
           image: nodejs-goof
-          args: --severity-threshold=high --file=Dockerfile --project-name=nodejs-goof-ga-container-full --target-reference=nodejs-goof-ga-target --target-name=nodejs-goof
+          args: --severity-threshold=high --file=Dockerfile --project-name=ga-container-full --target-reference=nodejs-goof-ga-target --target-name=nodejs-goof
 
       - name: Monitor Docker image in Snyk (Full Container)
         uses: snyk/actions/docker@master
@@ -84,7 +71,7 @@ jobs:
         with:
           command: monitor
           image: nodejs-goof
-          args: --file=Dockerfile --project-name=nodejs-goof-ga-container-full --target-reference=nodejs-goof-ga-target --target-name=nodejs-goof
+          args: --file=Dockerfile --project-name=ga-container-full --target-reference=nodejs-goof-ga-target --target-name=nodejs-goof
 
       - name: Run Snyk IaC scan for Terraform (reports to UI)
         uses: snyk/actions/iac@master
