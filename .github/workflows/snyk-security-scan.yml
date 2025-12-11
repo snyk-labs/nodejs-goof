@@ -24,54 +24,54 @@ jobs:
         with:
           terraform_version: 1.5.0
 
-      # - name: Setup Node.js
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     node-version: '18.x'
-      #     cache: 'npm'
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          cache: 'npm'
       
-      # - name: Install dependencies
-      #   run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
-      # - name: Run Snyk test for Node.js dependencies (SCA)
-      #   uses: snyk/actions/node@master
-      #   continue-on-error: true
-      #   with:
-      #     args: --severity-threshold=high --project-name=nodejs-goof-ga-sca --target-reference=nodejs-goof-ga-target --target-name=nodejs-goof --remote-repo-url=https://github.com/varner-tech/nodejs-goof
+      - name: Run Snyk test for Node.js dependencies (SCA)
+        uses: snyk/actions/node@master
+        continue-on-error: true
+        with:
+          args: --severity-threshold=high --project-name=nodejs-goof-ga-sca --target-reference=nodejs-goof-ga-target --target-name=nodejs-goof --remote-repo-url=https://github.com/varner-tech/nodejs-goof
 
-      # - name: Monitor Node.js dependencies in Snyk (SCA)
-      #   uses: snyk/actions/node@master
-      #   continue-on-error: true
-      #   with:
-      #     command: monitor
-      #     args: --project-name=nodejs-goof-ga-sca --target-reference=nodejs-goof-ga-target --target-name=nodejs-goof --remote-repo-url=https://github.com/varner-tech/nodejs-goof
+      - name: Monitor Node.js dependencies in Snyk (SCA)
+        uses: snyk/actions/node@master
+        continue-on-error: true
+        with:
+          command: monitor
+          args: --project-name=nodejs-goof-ga-sca --target-reference=nodejs-goof-ga-target --target-name=nodejs-goof --remote-repo-url=https://github.com/varner-tech/nodejs-goof
 
-      # - name: Run Snyk Code scan (SAST)
-      #   uses: snyk/actions@master
-      #   continue-on-error: true
-      #   with:
-      #     command: code
-      #     args: --severity-threshold=high --report --project-name=nodejs-goof-ga-sast --target-reference=nodejs-goof-ga-target --target-name=nodejs-goof --remote-repo-url=https://github.com/varner-tech/nodejs-goof
+      - name: Run Snyk Code scan (SAST)
+        uses: snyk/actions@master
+        continue-on-error: true
+        with:
+          command: code
+          args: --severity-threshold=high --report --project-name=nodejs-goof-ga-sast --target-reference=nodejs-goof-ga-target --target-name=nodejs-goof --remote-repo-url=https://github.com/varner-tech/nodejs-goof
 
-      # - name: Build and scan container image
-      #   run: |
-      #     docker build -t nodejs-goof .
-      #     docker save nodejs-goof -o nodejs-goof-image.tar
+      - name: Build and scan container image
+        run: |
+          docker build -t nodejs-goof .
+          docker save nodejs-goof -o nodejs-goof-image.tar
       
-      # - name: Run Snyk test for Dockerfile (Full Container)
-      #   uses: snyk/actions/docker@master
-      #   continue-on-error: true
-      #   with:
-      #     image: nodejs-goof
-      #     args: --severity-threshold=high --file=Dockerfile --project-name=ga-container-full --target-reference=nodejs-goof-ga-target --target-name=nodejs-goof
+      - name: Run Snyk test for Dockerfile (Full Container)
+        uses: snyk/actions/docker@master
+        continue-on-error: true
+        with:
+          image: nodejs-goof
+          args: --severity-threshold=high --file=Dockerfile --project-name=ga-container-full --target-reference=nodejs-goof-ga-target --target-name=nodejs-goof
 
-      # - name: Monitor Docker image in Snyk (Full Container)
-      #   uses: snyk/actions/docker@master
-      #   continue-on-error: true
-      #   with:
-      #     command: monitor
-      #     image: nodejs-goof
-      #     args: --file=Dockerfile --project-name=ga-container-full --target-reference=nodejs-goof-ga-target --target-name=nodejs-goof
+      - name: Monitor Docker image in Snyk (Full Container)
+        uses: snyk/actions/docker@master
+        continue-on-error: true
+        with:
+          command: monitor
+          image: nodejs-goof
+          args: --file=Dockerfile --project-name=ga-container-full --target-reference=nodejs-goof-ga-target --target-name=nodejs-goof
 
       - name: Run Snyk IaC scan for Terraform (reports to UI)
         uses: snyk/actions/iac@master
