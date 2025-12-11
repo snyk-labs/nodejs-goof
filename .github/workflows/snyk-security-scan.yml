@@ -61,46 +61,60 @@ jobs:
           monitor_mode: true
           args: --project-name=nodejs-goof-ga-sast --target-reference=nodejs-goof-ga-target --target-name=nodejs-goof-ga --remote-repo-url=nodejs-goof-ga-target
 
-      - name: Scan base Node.js image
+      - name: Scan base Node.js image (Container Base Image)
         uses: snyk/actions/node@master
         continue-on-error: true
         with:
           args: --docker node:14.18.1 --severity-threshold=high --project-name=nodejs-goof-ga-container-base-image --target-reference=nodejs-goof-ga-target --target-name=nodejs-goof-ga --remote-repo-url=nodejs-goof-ga-target
 
-      - name: Monitor base Node.js image in Snyk
+      - name: Monitor base Node.js image in Snyk (Container Base Image)
         uses: snyk/actions/node@master
         continue-on-error: true
         with:
           command: monitor
           args: --docker node:14.18.1 --project-name=nodejs-goof-ga-container-base-image --target-reference=nodejs-goof-ga-target --target-name=nodejs-goof-ga --remote-repo-url=nodejs-goof-ga-target
-          args: --severity-threshold=high --project-name=nodejs-goof-ga-sast --target-reference=nodejs-goof-ga-target --target-name=nodejs-goof-ga --remote-repo-url=nodejs-goof-ga-target
 
-      - name: Monitor Snyk Code scan
-        uses: snyk/actions@master
-        continue-on-error: true
-        with:
-          command: code
-          monitor_mode: true
-          args: --project-name=nodejs-goof-ga-sast --target-reference=nodejs-goof-ga-target --target-name=nodejs-goof-ga --remote-repo-url=nodejs-goof-ga-target
-
-          if-no-files-found: ignore
-      
       - name: Build and scan container image
         run: |
           docker build -t nodejs-goof .
           docker save nodejs-goof -o nodejs-goof-image.tar
       
-      - name: Run Snyk test for Dockerfile
+      - name: Run Snyk test for Dockerfile (Full Container)
         uses: snyk/actions/docker@master
         continue-on-error: true
         with:
           image: nodejs-goof
           args: --severity-threshold=high --file=Dockerfile --project-name=nodejs-goof-ga-container-full --target-reference=nodejs-goof-ga-target --target-name=nodejs-goof-ga
 
-      - name: Monitor Docker image in Snyk
+      - name: Monitor Docker image in Snyk (Full Container)
         uses: snyk/actions/docker@master
         continue-on-error: true
         with:
           command: monitor
           image: nodejs-goof
           args: --file=Dockerfile --project-name=nodejs-goof-ga-container-full --target-reference=nodejs-goof-ga-target --target-name=nodejs-goof-ga
+
+      - name: Run Snyk IaC scan for Terraform
+        uses: snyk/actions/iac@master
+        continue-on-error: true
+        with:
+          file: vulnerable.tf
+          args: --report --project-name=nodejs-goof-ga-iac --target-reference=nodejs-goof-ga-target --target-name=nodejs-goof-ga --remote-repo-url=nodejs-goof-ga-target
+          # Enable SARIF output for GitHub code scanning
+          sarif: true
+
+      - name: Monitor Terraform IaC in Snyk
+        uses: snyk/actions/iac@master
+        continue-on-error: true
+        with:
+          command: monitor
+          file: vulnerable.tf
+          args: --project-name=nodejs-goof-ga-iac --target-reference=nodejs-goof-ga-target --target-name=nodejs-goof-ga --remote-repo-url=nodejs-goof-ga-target
+
+      - name: Upload Snyk results as artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: snyk-results
+          path: snyk*.json
+          if-no-files-found: ignore
