@@ -78,7 +78,7 @@ jobs:
         continue-on-error: true
         with:
           file: vulnerable.tf
-          args: --report --target-name=nodejs-goof --remote-repo-url=https://github.com/varner-tech/nodejs-goof
+          args: --report --target-name=nodejs-goof --target-reference=nodejs-goof-ga-target --remote-repo-url=https://github.com/varner-tech/nodejs-goof
           # Enable SARIF output for GitHub code scanning
           sarif: true
 
