@@ -9,7 +9,7 @@ on:
 
 jobs:
   security-scan:
-    name: Run Snyk Security Scan
+    name: Snyk IaC and Container Scans
     runs-on: ubuntu-latest
     env:
       SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
