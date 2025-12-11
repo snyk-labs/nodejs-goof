@@ -11,6 +11,9 @@ jobs:
   security-scan:
     name: Run Snyk Security Scan
     runs-on: ubuntu-latest
+    env:
+      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      SNYK_CFG_ORG: varner-tech-engineering
     
     steps:
       - name: Checkout code
@@ -29,9 +32,6 @@ jobs:
           args: --report
           # Enable SARIF output for GitHub code scanning
           sarif: true
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-          SNYK_CFG_ORG: goof-ltd-demo-default  # Ensure we're using the same org as local
 
       - name: Monitor Terraform IaC in Snyk
         uses: snyk/actions/iac@master
@@ -39,9 +39,6 @@ jobs:
         with:
           command: monitor
           file: vulnerable.tf
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-          SNYK_CFG_ORG: goof-ltd-demo-default
 
       - name: Run Snyk Code scan
         uses: snyk/actions@master
@@ -49,8 +46,6 @@ jobs:
         with:
           command: code
           args: --severity-threshold=high
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
       - name: Monitor Snyk Code scan
         uses: snyk/actions@master
@@ -58,8 +53,6 @@ jobs:
         with:
           command: code
           monitor_mode: true
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -73,32 +66,24 @@ jobs:
       - name: Run Snyk test for Node.js dependencies
         uses: snyk/actions/node@master
         continue-on-error: true
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           args: --severity-threshold=high
 
       - name: Monitor Node.js dependencies in Snyk
         uses: snyk/actions/node@master
         continue-on-error: true
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           command: monitor
       
       - name: Scan base Node.js image
         uses: snyk/actions/node@master
         continue-on-error: true
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           args: --docker node:14.18.1 --severity-threshold=high
 
       - name: Monitor base Node.js image in Snyk
         uses: snyk/actions/node@master
         continue-on-error: true
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           command: monitor
           args: --docker node:14.18.1
@@ -122,8 +107,6 @@ jobs:
         with:
           image: nodejs-goof
           args: --severity-threshold=high --file=Dockerfile
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
       - name: Monitor Docker image in Snyk
         uses: snyk/actions/docker@master
@@ -132,5 +115,3 @@ jobs:
           command: monitor
           image: nodejs-goof
           args: --file=Dockerfile
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
