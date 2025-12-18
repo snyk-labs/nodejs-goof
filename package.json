@@ -15,7 +15,7 @@
     "test": "snyk test"
   },
   "dependencies": {
-    "handlebars": "4.7.6",
+    "handlebars": "4.7.4",
     "adm-zip": "0.4.7",
     "body-parser": "1.9.0",
     "cfenv": "^1.0.4",
