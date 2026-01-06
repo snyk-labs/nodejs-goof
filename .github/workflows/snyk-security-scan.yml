@@ -78,7 +78,7 @@ jobs:
           files: sbom.cdx.json
 
       - name: Submit SBOM to Dependency Graph
-        uses: advanced-security/sbom-dependency-submission-action@v0
+        uses: advanced-security/dependency-submission-action@v3
         with:
           sbom-path: sbom.cdx.json
           fail-on-error: true
