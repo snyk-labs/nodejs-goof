@@ -70,9 +70,17 @@ jobs:
       - name: Generate SBOM (CycloneDX JSON)
         run: |
           echo "Generating SBOM with Snyk..."
-          snyk sbom --format=cyclonedx1.6+json > sbom.cdx.json
-          echo "SBOM generation completed successfully"
-          ls -la sbom.cdx.json
+          if snyk sbom --format=cyclonedx1.6+json > sbom.cdx.json; then
+            echo "SBOM generation completed successfully"
+            ls -la sbom.cdx.json
+          else
+            echo "SBOM generation failed with exit code $?"
+            echo "Checking if any output was created:"
+            ls -la sbom.cdx.json || echo "No SBOM file created"
+            echo "Trying to capture error output:"
+            snyk sbom --format=cyclonedx1.6+json 2>&1 || true
+            exit 1
+          fi
 
       - name: Upload SBOM artifact
         uses: actions/upload-artifact@v4
