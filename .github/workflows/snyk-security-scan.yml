@@ -71,14 +71,8 @@ jobs:
           name: release-sbom
           path: sbom.cdx.json
 
-      - name: Attach SBOM to GitHub Release
-        if: github.event_name == 'release'
-        uses: softprops/action-gh-release@v1
-        with:
-          files: sbom.cdx.json
-
       - name: Submit SBOM to Dependency Graph
-        uses: advanced-security/dependency-submission-action@v3
+        uses: github/dependency-submission-action@v4
         with:
           sbom-path: sbom.cdx.json
           fail-on-error: true
