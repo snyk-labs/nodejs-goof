@@ -68,7 +68,7 @@ jobs:
         run: snyk auth "${{ secrets.SNYK_TOKEN }}"
 
       - name: Generate SBOM (CycloneDX JSON)
-        run: snyk sbom --format cyclonedx1.6+json --output sbom.cdx.json
+        run: snyk sbom --format cyclonedx1.6+json > sbom.cdx.json
 
       - name: Upload SBOM artifact
         uses: actions/upload-artifact@v4
