@@ -62,13 +62,13 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Snyk CLI
-        uses: snyk/actions/setup@v2
+        uses: snyk/actions/setup@master
 
       - name: Authenticate Snyk CLI
         run: snyk auth "${{ secrets.SNYK_TOKEN }}"
 
       - name: Generate SBOM (CycloneDX JSON)
-        run: snyk sbom --format cyclonedx1.6+json --output; sbom.cdx.json
+        run: snyk sbom --format cyclonedx1.6+json --output sbom.cdx.json
 
       - name: Upload SBOM artifact
         uses: actions/upload-artifact@v4
