@@ -55,15 +55,20 @@ jobs:
     permissions:
       contents: write
       actions: read
+    env:
+      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Setup Snyk CLI
+        uses: snyk/actions/setup@v2
+
+      - name: Authenticate Snyk CLI
+        run: snyk auth "${{ secrets.SNYK_TOKEN }}"
+
       - name: Generate SBOM (CycloneDX JSON)
-        uses: anchore/sbom-action@v0
-        with:
-          format: cyclonedx-json
-          output-file: sbom.cdx.json
+        run: snyk sbom --format cyclonedx1.6+json --output; sbom.cdx.json
 
       - name: Upload SBOM artifact
         uses: actions/upload-artifact@v4
@@ -71,8 +76,14 @@ jobs:
           name: release-sbom
           path: sbom.cdx.json
 
-      - name: Submit SBOM to Dependency Graph
-        uses: github/dependency-submission-action@v4
+      - name: Attach SBOM to GitHub Release
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v1
         with:
-          sbom-path: sbom.cdx.json
-          fail-on-error: true
+          files: sbom.cdx.json
+
+      - name: Display SBOM info
+        run: |
+          echo "SBOM generated successfully"
+          ls -la sbom.cdx.json
+          echo "SBOM size: $(wc -c < sbom.cdx.json) bytes"
