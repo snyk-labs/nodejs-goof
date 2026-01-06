@@ -69,29 +69,10 @@ jobs:
 
       - name: Generate SBOM (CycloneDX JSON)
         run: |
-          echo "Attempting SBOM generation with Snyk..."
-          if snyk sbom --format=cyclonedx1.6+json > sbom.cdx.json; then
-            echo "Snyk SBOM generation completed successfully"
-            ls -la sbom.cdx.json
-          else
-            echo "Snyk SBOM failed, checking partial output..."
-            ls -la sbom.cdx.json || echo "No SBOM file created"
-            if [ -f sbom.cdx.json ]; then
-              echo "Partial SBOM file exists, checking content:"
-              head -20 sbom.cdx.json || true
-            fi
-            
-            echo "Falling back to Syft for SBOM generation..."
-            rm -f sbom.cdx.json
-            
-            # Install Syft
-            curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
-            
-            # Generate SBOM with Syft
-            syft . -o cyclonedx-json=sbom.cdx.json
-            echo "Syft SBOM generation completed successfully"
-            ls -la sbom.cdx.json
-          fi
+          echo "Generating SBOM with Snyk..."
+          snyk sbom --format=cyclonedx1.6+json > sbom.cdx.json
+          echo "SBOM generation completed successfully"
+          ls -la sbom.cdx.json
 
       - name: Upload SBOM artifact
         uses: actions/upload-artifact@v4
