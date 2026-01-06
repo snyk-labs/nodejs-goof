@@ -69,13 +69,8 @@ jobs:
 
       - name: Generate SBOM (CycloneDX JSON)
         run: |
-          echo "Running snyk sbom command..."
-          snyk sbom --format=cyclonedx1.6+json > sbom.cdx.json 2>&1 || {
-            echo "SBOM generation failed with exit code $?"
-            echo "Error output:"
-            cat sbom.cdx.json || echo "No output file created"
-            exit 1
-          }
+          echo "Generating SBOM with Snyk..."
+          snyk sbom --format=cyclonedx1.6+json > sbom.cdx.json
           echo "SBOM generation completed successfully"
           ls -la sbom.cdx.json
 
