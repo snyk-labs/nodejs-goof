@@ -6,9 +6,10 @@ jobs:
   snyk-scan:
     docker:
       - image: cimg/node:16.0
-    steps:    
+    steps:
       - checkout
       - run: npm install
+      - run: snyk auth
       - snyk/scan:
           command: monitor
           monitor-on-build: false
