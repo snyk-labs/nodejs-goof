@@ -5,10 +5,10 @@ orbs:
 jobs:
   snyk-scan:
     docker:
-      - image: cimg/openjdk:11.0
+      - image: cimg/node:16.0
     steps:    
       - checkout
-      - run: mvn install
+      - run: npm install
       - snyk/scan:
           command: monitor
           monitor-on-build: false
