@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  snyk: snyk/snyk@1.1.2
+  snyk: snyk/snyk@2.3.3
 
 jobs:
   snyk-scan:
