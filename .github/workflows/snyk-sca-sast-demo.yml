@@ -21,7 +21,7 @@ on:
 # for known vulnerabilities in third-party packages
 jobs:
   snyk-sca-scan:
-    name: Snyk Open Source (SCA) Scan
+    name: SCA - Snyk Open Source Scan
     runs-on: ubuntu-latest
     
     # Required permissions for GitHub integration
@@ -94,7 +94,6 @@ jobs:
         continue-on-error: true
         run: |
           snyk monitor \
-            --all-projects \
             --org=${{ secrets.SNYK_ORG_ID }} \
             --project-name="nodejs-goof-sca" \
             --target-reference=${{ github.ref_name }}
@@ -107,7 +106,7 @@ jobs:
 # Static Application Security Testing (SAST) analyzes your first-party code
 # for security vulnerabilities and code quality issues
   snyk-code-scan:
-    name: Snyk Code (SAST) Scan
+    name: SAST - Snyk Code Scan
     runs-on: ubuntu-latest
     
     # Required permissions for GitHub integration
@@ -157,20 +156,11 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
-      # Step 5: Run Snyk Code MONITOR (using snyk monitor with --unmanaged flag)
-      # This sends SAST results to Snyk Dashboard for continuous monitoring
-      # Note: Snyk Code results are included when using 'snyk monitor'
-      # --project-name: Custom name visible in Snyk UI
-      # --target-reference: Git branch/tag for tracking
-      - name: Snyk Code Monitor (Send to Dashboard)
-        continue-on-error: true
-        run: |
-          snyk monitor \
-            --org=${{ secrets.SNYK_ORG_ID }} \
-            --project-name="nodejs-goof-sast" \
-            --target-reference=${{ github.ref_name }}
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      # Step 5: Snyk Code Results Automatically Sent to Dashboard
+      # IMPORTANT: Snyk Code (SAST) does NOT use 'snyk monitor'
+      # The 'snyk code test' command above automatically sends results to the Snyk Dashboard
+      # No separate monitor step is needed for SAST - results appear in the Code Analysis section
+      # You can view them at: https://app.snyk.io/org/YOUR_ORG/projects (filter by "Code analysis")
 
 # ============================================================================
 # REQUIRED GITHUB SECRETS
