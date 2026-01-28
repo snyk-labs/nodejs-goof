@@ -68,33 +68,25 @@ jobs:
       #   run: |
       #     snyk test \
       #       --severity-threshold=high \
-      #       --all-projects \
-      #       --org=${{ secrets.SNYK_ORG_ID }}
+      #       --report \
+      #       --org=2c2549f7-de55-4c31-aaea-bea685244487 \
+      #       --project-name="nodejs-goof-sca" \
+      #       --target-reference=${{ github.ref_name }}
       #   env:
       #     SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       
-      # MONITOR-ONLY MODE (CURRENTLY ACTIVE)
-      # This version runs the test but doesn't block the pipeline
-      - name: Snyk Open Source Test (Report Only)
+      # REPORT-ONLY MODE (CURRENTLY ACTIVE)
+      # This version runs the test, reports to dashboard, but doesn't block the pipeline
+      # --report: Sends results to Snyk Dashboard for continuous monitoring
+      # --project-name: Custom name visible in Snyk UI
+      # --target-reference: Git branch/tag for tracking different environments
+      - name: Snyk Open Source Test & Report (Send to Dashboard)
         continue-on-error: true
         run: |
           snyk test \
             --severity-threshold=high \
-            --all-projects \
-            --org=${{ secrets.SNYK_ORG_ID }}
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-
-      # Step 7: Run Snyk Open Source MONITOR
-      # This sends results to Snyk Dashboard for continuous monitoring
-      # Runs even if test fails (continue-on-error: true)
-      # --project-name: Custom name visible in Snyk UI
-      # --target-reference: Git branch/tag for tracking different environments
-      - name: Snyk Open Source Monitor (Send to Dashboard)
-        continue-on-error: true
-        run: |
-          snyk monitor \
-            --org=${{ secrets.SNYK_ORG_ID }} \
+            --report \
+            --org=2c2549f7-de55-4c31-aaea-bea685244487 \
             --project-name="nodejs-goof-sca" \
             --target-reference=${{ github.ref_name }}
         env:
@@ -141,26 +133,31 @@ jobs:
       #   run: |
       #     snyk code test \
       #       --severity-threshold=high \
-      #       --org=${{ secrets.SNYK_ORG_ID }}
+      #       --report \
+      #       --org=2c2549f7-de55-4c31-aaea-bea685244487 \
+      #       --project-name="nodejs-goof-sast"
       #   env:
       #     SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       
-      # MONITOR-ONLY MODE (CURRENTLY ACTIVE)
-      # This version runs the test but doesn't block the pipeline
-      - name: Snyk Code Test (Report Only)
+      # REPORT-ONLY MODE (CURRENTLY ACTIVE)
+      # This version runs the test, reports to dashboard, but doesn't block the pipeline
+      # --report: Sends SAST results to Snyk Dashboard for continuous monitoring
+      # --project-name: Custom name visible in Snyk UI (required for --report)
+      - name: Snyk Code Test & Report (Send to Dashboard)
         continue-on-error: true
         run: |
           snyk code test \
             --severity-threshold=high \
-            --org=${{ secrets.SNYK_ORG_ID }}
+            --report \
+            --org=2c2549f7-de55-4c31-aaea-bea685244487 \
+            --project-name="nodejs-goof-sast"
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
-      # Step 5: Snyk Code Results Automatically Sent to Dashboard
-      # IMPORTANT: Snyk Code (SAST) does NOT use 'snyk monitor'
-      # The 'snyk code test' command above automatically sends results to the Snyk Dashboard
-      # No separate monitor step is needed for SAST - results appear in the Code Analysis section
-      # You can view them at: https://app.snyk.io/org/YOUR_ORG/projects (filter by "Code analysis")
+      # Step 5: SAST Results Sent to Dashboard
+      # The --report flag above sends Snyk Code results to the Snyk Dashboard
+      # Results will appear at: https://app.snyk.io/org/varner-tech-engineering/projects
+      # Look for project name: nodejs-goof-sast
 
 # ============================================================================
 # REQUIRED GITHUB SECRETS
