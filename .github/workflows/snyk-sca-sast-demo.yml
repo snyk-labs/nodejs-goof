@@ -1,0 +1,198 @@
+name: Snyk SCA and SAST Security Pipeline
+
+# ============================================================================
+# TRIGGER CONFIGURATION
+# ============================================================================
+# This workflow runs on:
+# - Every push to main/master branches (typical for production deployments)
+# - Pull requests targeting main/master (for pre-merge security validation)
+# - Manual trigger via workflow_dispatch (for on-demand testing)
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+# ============================================================================
+# SNYK OPEN SOURCE (SCA) SCAN JOB
+# ============================================================================
+# Software Composition Analysis (SCA) scans your open-source dependencies
+# for known vulnerabilities in third-party packages
+jobs:
+  snyk-sca-scan:
+    name: Snyk Open Source (SCA) Scan
+    runs-on: ubuntu-latest
+    
+    # Required permissions for GitHub integration
+    permissions:
+      contents: read
+      security-events: write
+    
+    steps:
+      # Step 1: Check out the repository code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Node.js environment (required for npm projects)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      # Step 3: Install project dependencies
+      # This ensures Snyk can analyze the actual dependency tree
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Install and configure Snyk CLI
+      - name: Setup Snyk CLI
+        uses: snyk/actions/setup@master
+
+      # Step 5: Authenticate with Snyk using organization token
+      # SNYK_TOKEN should be configured as a GitHub secret
+      - name: Authenticate Snyk
+        run: snyk auth ${{ secrets.SNYK_TOKEN }}
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      # Step 6: Run Snyk Open Source TEST
+      # This scans dependencies and BLOCKS the pipeline if high/critical vulns are found
+      # --severity-threshold=high: Only fail on high or critical severity issues
+      # --all-projects: Scan all package manager manifests in the repo
+      #
+      # BLOCKING MODE (COMMENTED OUT FOR DEMO)
+      # Uncomment the step below to enable pipeline blocking on high/critical vulnerabilities
+      # Remove 'continue-on-error: true' to enforce the block
+      # - name: Snyk Open Source Test (Block on High+)
+      #   run: |
+      #     snyk test \
+      #       --severity-threshold=high \
+      #       --all-projects \
+      #       --org=${{ secrets.SNYK_ORG_ID }}
+      #   env:
+      #     SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      
+      # MONITOR-ONLY MODE (CURRENTLY ACTIVE)
+      # This version runs the test but doesn't block the pipeline
+      - name: Snyk Open Source Test (Report Only)
+        continue-on-error: true
+        run: |
+          snyk test \
+            --severity-threshold=high \
+            --all-projects \
+            --org=${{ secrets.SNYK_ORG_ID }}
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      # Step 7: Run Snyk Open Source MONITOR
+      # This sends results to Snyk Dashboard for continuous monitoring
+      # Runs even if test fails (continue-on-error: true)
+      # --project-name: Custom name visible in Snyk UI
+      # --target-reference: Git branch/tag for tracking different environments
+      - name: Snyk Open Source Monitor (Send to Dashboard)
+        continue-on-error: true
+        run: |
+          snyk monitor \
+            --all-projects \
+            --org=${{ secrets.SNYK_ORG_ID }} \
+            --project-name="nodejs-goof-sca" \
+            --target-reference=${{ github.ref_name }}
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+# ============================================================================
+# SNYK CODE (SAST) SCAN JOB
+# ============================================================================
+# Static Application Security Testing (SAST) analyzes your first-party code
+# for security vulnerabilities and code quality issues
+  snyk-code-scan:
+    name: Snyk Code (SAST) Scan
+    runs-on: ubuntu-latest
+    
+    # Required permissions for GitHub integration
+    permissions:
+      contents: read
+      security-events: write
+    
+    steps:
+      # Step 1: Check out the repository code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Install and configure Snyk CLI
+      - name: Setup Snyk CLI
+        uses: snyk/actions/setup@master
+
+      # Step 3: Authenticate with Snyk using organization token
+      - name: Authenticate Snyk
+        run: snyk auth ${{ secrets.SNYK_TOKEN }}
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      # Step 4: Run Snyk Code TEST
+      # This scans your source code and BLOCKS the pipeline if high/critical vulns are found
+      # --severity-threshold=high: Only fail on high or critical severity issues
+      # Snyk Code analyzes: JavaScript, TypeScript, Python, Java, C#, Go, PHP, Ruby, etc.
+      #
+      # BLOCKING MODE (COMMENTED OUT FOR DEMO)
+      # Uncomment the step below to enable pipeline blocking on high/critical vulnerabilities
+      # Remove 'continue-on-error: true' to enforce the block
+      # - name: Snyk Code Test (Block on High+)
+      #   run: |
+      #     snyk code test \
+      #       --severity-threshold=high \
+      #       --org=${{ secrets.SNYK_ORG_ID }}
+      #   env:
+      #     SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      
+      # MONITOR-ONLY MODE (CURRENTLY ACTIVE)
+      # This version runs the test but doesn't block the pipeline
+      - name: Snyk Code Test (Report Only)
+        continue-on-error: true
+        run: |
+          snyk code test \
+            --severity-threshold=high \
+            --org=${{ secrets.SNYK_ORG_ID }}
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      # Step 5: Run Snyk Code MONITOR (using snyk monitor with --unmanaged flag)
+      # This sends SAST results to Snyk Dashboard for continuous monitoring
+      # Note: Snyk Code results are included when using 'snyk monitor'
+      # --project-name: Custom name visible in Snyk UI
+      # --target-reference: Git branch/tag for tracking
+      - name: Snyk Code Monitor (Send to Dashboard)
+        continue-on-error: true
+        run: |
+          snyk monitor \
+            --org=${{ secrets.SNYK_ORG_ID }} \
+            --project-name="nodejs-goof-sast" \
+            --target-reference=${{ github.ref_name }}
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+# ============================================================================
+# REQUIRED GITHUB SECRETS
+# ============================================================================
+# To use this pipeline, configure these secrets in your GitHub repository:
+# Settings > Secrets and variables > Actions > New repository secret
+#
+# 1. SNYK_TOKEN: Your Snyk API token
+#    - Get from: https://app.snyk.io/account (Account Settings > API Token)
+#    - Format: UUID string (e.g., 12345678-1234-1234-1234-123456789abc)
+#
+# 2. SNYK_ORG_ID: Your Snyk Organization ID (optional but recommended)
+#    - Get from: https://app.snyk.io/org/YOUR_ORG/manage/settings
+#    - Format: UUID string or organization slug
+#    - If not set, uses your default organization
+#
+# ============================================================================
+# DEMO TALKING POINTS
+# ============================================================================
+# 1. SHIFT-LEFT SECURITY: Scans run on every commit and PR before merge
+# 2. DUAL SCANNING: Both SCA (dependencies) and SAST (your code) in one pipeline
+# 3. FAIL-FAST: Pipeline blocks on high/critical vulnerabilities
+# 4. CONTINUOUS MONITORING: Results sent to Snyk Dashboard for tracking over time
+# 5. DEVELOPER FRIENDLY: Clear feedback in PR checks and GitHub Actions UI
+# 6. CUSTOMIZABLE: Adjust severity thresholds, add more Snyk scans (Container, IaC)
