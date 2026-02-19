@@ -1,0 +1,33 @@
+name: Replicate Podman Registry Error
+
+on: [push, workflow_dispatch]
+
+jobs:
+  replicate-snyk-error:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Podman to emulate Docker
+        run: |
+          # Create a symlink so /bin/docker points to podman
+          sudo ln -sf $(which podman) /bin/docker
+          /bin/docker --version
+
+      - name: Inject Broken Configuration
+        run: |
+          # Create a custom registries.conf that triggers the error
+          mkdir -p $HOME/.config/containers
+          echo 'unqualified-search-registries = ["please.set.dockerhostname"]' > $HOME/.config/containers/registries.conf
+          
+          # Point Podman to use this specific broken config
+          echo "CONTAINERS_REGISTRIES_CONF=$HOME/.config/containers/registries.conf" >> $GITHUB_ENV
+
+      - name: Attempt Broken Pull (Should fail with 125)
+        continue-on-error: true
+        run: |
+          echo "This command will fail because it uses a short-name with a broken config."
+          /bin/docker pull snyk/snyk:python-3.11
+
+      - name: Fixed Pull (Using Full Registry Path)
+        run: |
+          echo "This command succeeds because it bypasses registry lookup logic."
+          /bin/docker pull docker.io/snyk/snyk:python-3.11
