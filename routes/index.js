@@ -2,6 +2,11 @@ var utils = require('../utils');
 var mongoose = require('mongoose');
 var Todo = mongoose.model('Todo');
 var User = mongoose.model('User');
+var Note = mongoose.model('Note');
+var marked = require('marked');
+var createDOMPurify = require('dompurify');
+var { JSDOM } = require('jsdom');
+var DOMPurify = createDOMPurify(new JSDOM('').window);
 // TODO:
 var hms = require('humanize-ms');
 var ms = require('ms');
@@ -303,6 +308,45 @@ exports.about_new = function (req, res, next) {
       subhead: 'Vulnerabilities at their best',
       device: req.query.device
     });
+};
+
+// Notes CRUD
+
+exports.createNote = function (req, res, next) {
+  var title = req.body.title;
+  var content = req.body.content;
+
+  if (!title || !content) {
+    return res.status(400).json({ error: 'Title and content are required' });
+  }
+
+  new Note({
+    title: validator.escape(title),
+    content: content,
+    created_at: Date.now(),
+    updated_at: Date.now(),
+  }).save(function (err, note) {
+    if (err) return next(err);
+    res.status(201).json({ id: note._id, title: note.title });
+  });
+};
+
+exports.getNote = function (req, res, next) {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    return res.status(400).send('Invalid note ID');
+  }
+
+  Note.findById(req.params.id, function (err, note) {
+    if (err) return next(err);
+    if (!note) return res.status(404).send('Note not found');
+
+    var renderedContent = DOMPurify.sanitize(marked(note.content));
+
+    res.send(
+      '<h1>' + note.title + '</h1>' +
+      '<div>' + renderedContent + '</div>'
+    );
+  });
 };
 
 // Prototype Pollution

@@ -1,0 +1,14 @@
+Subject: Snyk CLI commands – pushing results to the dashboard
+
+Hey,
+
+We talked about the CLI commands on the call. Here are the ones you ran before, plus the container and infrastructure-as-code ones.
+
+These all push results up to your Snyk dashboard:
+
+• SCA (dependencies):  snyk monitor --project-name="sca/nodejs-goof" --remote-repo-url="https://github.com/Snyk-Integration-App/nodejs-goof"
+• SAST (code):          snyk code test --report --target-name="nodejs-goof" --project-name="sast"
+• IaC:                  snyk iac test vulnerable.tf --report --remote-repo-url="https://github.com/Snyk-Integration-App/nodejs-goof" --target-name="nodejs-goof/iac"
+• Containers:           snyk container monitor <image> --project-name="container/nodejs-goof"
+
+Replace the repo URL and project name (e.g. nodejs-goof) with yours. For containers, use your image in place of <image>. Run from your project directory (or pass the path to your Terraform/Kubernetes/CloudFormation files where it applies).

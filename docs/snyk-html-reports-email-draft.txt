@@ -1,0 +1,33 @@
+Subject: How to generate Snyk HTML reports
+
+Hi,
+
+You can generate HTML reports from Snyk CLI by piping the JSON output into the snyk-to-html tool. Replace the placeholders with your own values.
+
+Install the converter once (globally):
+
+  npm install snyk-to-html -g
+
+Then run your Snyk scan with --json and pipe it to snyk-to-html. Use -o to set the output HTML filename.
+
+Open Source (dependencies):
+  snyk test --json | snyk-to-html -o <report-name>-opensource.html
+
+Code (SAST):
+  snyk code test --json | snyk-to-html -o <report-name>-code.html
+
+Infrastructure as Code (Terraform, Kubernetes, CloudFormation, etc.):
+  snyk iac test <path-to-your-iac-files> --json | snyk-to-html -o <report-name>-iac.html
+
+Container:
+  snyk container test <your-image-name> --json | snyk-to-html -o <report-name>-container.html
+
+Placeholders to replace:
+  <report-name>        — e.g. my-project, weekly-scan (used in the output filenames)
+  <path-to-your-iac-files> — e.g. . for current dir, or infra/, or path/to/terraform.tf
+  <your-image-name>   — e.g. myapp:latest or node:18-alpine (required for container)
+
+Run each command from your project root (or the directory that contains your manifests / Dockerfile). The HTML files are written in the current directory unless you use a path in -o (e.g. -o reports/code.html).
+
+Optional: to use a JSON file instead of piping, run the Snyk command with --json and save to a file, then run:
+  snyk-to-html -i <your-file>.json -o <your-file>.html

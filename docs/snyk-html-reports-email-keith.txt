@@ -1,0 +1,68 @@
+Subject: Exporting SAST, SCA, and container scan results to HTML reports
+
+Hi Keith,
+
+You can export your SAST, SCA, and container scan results to HTML reports using the Snyk CLI and the snyk-to-html tool. That way you get shareable HTML files (e.g. for internal reporting or audits) in addition to the results in the Snyk dashboard.
+
+snyk-to-html is Snyk's official tool for turning CLI JSON output into HTML. It's published on npm by Snyk (https://www.npmjs.com/package/snyk-to-html), and the source is in Snyk's GitHub repo (https://github.com/snyk/snyk-to-html). You can also find it in our docs under CLI tools.
+
+Using this on Windows with C#, Java, or Python
+
+snyk-to-html is a Node.js tool, so you need Node.js (and npm) installed to run it—even if your app is C#, Java, or Python. Install the LTS version from https://nodejs.org. You can install the Snyk CLI the same way (npm) or use the standalone Windows executable (https://github.com/snyk/cli/releases or https://downloads.snyk.io/cli/stable/snyk-win.exe).
+
+Then install both tools (if using npm for Snyk CLI):
+
+  npm install -g snyk snyk-to-html
+
+Run the scan and HTML commands from your project directory in PowerShell or cmd (the pipe | works in both). Use the directory that contains your manifest:
+
+  • C# — folder with your .sln or .csproj (e.g. cd C:\path\to\MyApp)
+  • Java — folder with pom.xml or build.gradle
+  • Python — folder with requirements.txt or pyproject.toml
+
+The same commands below apply; Snyk will detect the project type. Example for any of these:
+
+  snyk test --json | snyk-to-html -o report-opensource.html
+  snyk code test --json | snyk-to-html -o report-code.html
+
+If you already have the Snyk CLI and only need the HTML converter:
+
+  npm install snyk-to-html -g
+
+Then run your usual Snyk scan with --json and pipe the output into snyk-to-html. Replace the placeholders with your project names, paths, and image names.
+
+SAST (Snyk Code)
+  Run from the root of the repo you're scanning (e.g. CBCVinnovationTech or PCBBWeb):
+  snyk code test --json | snyk-to-html -o <report-name>-code.html
+
+  Example: snyk code test --json | snyk-to-html -o PCBBWeb-code.html
+
+SCA (Open Source / dependencies)
+  If the project has a manifest (pom.xml, build.gradle, package.json, etc.) at the repo root:
+  snyk test --json | snyk-to-html -o <report-name>-opensource.html
+
+  For PCBBWeb (unmanaged JARs in sharedlibs, no manifest), use the same approach you're already using for monitor, but with --json and then pipe to snyk-to-html:
+  snyk test --scan-all-unmanaged --file=PCBBWeb/sharedlibs --json | snyk-to-html -o <report-name>-opensource.html
+
+  Example: snyk test --scan-all-unmanaged --file=PCBBWeb/sharedlibs --json | snyk-to-html -o PCBBWeb-opensource.html
+
+Container
+  After you've built your image (e.g. docker build -t <project-name>:local .), run:
+  snyk container test <project-name>:local --json | snyk-to-html -o <report-name>-container.html
+
+  Example: snyk container test myapp:local --json | snyk-to-html -o myapp-container.html
+
+Placeholders:
+  <report-name>   — Any name you want for the report (e.g. PCBBWeb, CBCVinnovationTech, weekly-scan). It's used in the output filename.
+  <project-name>  — The same image name you used in docker build -t (e.g. myapp:local).
+
+The HTML files are written in the current directory unless you add a path in -o (e.g. -o reports/PCBBWeb-code.html). You can open the HTML file in a browser to view or share the results.
+
+If you prefer to save the JSON first and then convert (e.g. for debugging or re-running the HTML step):
+  snyk code test --json > results.json
+  snyk-to-html -i results.json -o results.html
+
+Let me know if you run into any issues or want to add IaC (Terraform/Kubernetes) reports later.
+
+Thanks,
+Phil

@@ -1,0 +1,23 @@
+Subject: Running a local container scan with Snyk (build + monitor)
+
+Hi,
+
+Here's how to run a Snyk container scan on an image you build locally. It's a two-step process: build the image, then point Snyk at that same image name.
+
+Replace <project-name> with your actual project name (e.g. nodejs-goof, my-app) everywhere below.
+
+Step 1 — Build the image and give it a name
+
+From your project directory (where the Dockerfile lives):
+
+  docker build -t <project-name>:local .
+
+The -t flag tags the image: "<project-name>" is the name, "local" is the tag. After this, the image on your machine is called <project-name>:local.
+
+Step 2 — Run Snyk container monitor on that image
+
+  snyk container monitor <project-name>:local --project-name="container/<project-name>"
+
+Use the exact same image name you used in the build (<project-name>:local). Snyk will scan that image and send the results to your dashboard under the project name you set with --project-name (container/<project-name>).
+
+Summary: whatever you put after -t in the build is what you pass as the first argument to snyk container monitor. Use the same <project-name> in both commands so the names match.

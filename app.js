@@ -26,8 +26,12 @@ var cons = require('consolidate');
 const hbs = require('hbs')
 
 var app = express();
-var routes = require('./routes');;
-var routesUsers = require('./routes/users.js')
+var routes = require('./routes');
+var routesUsers = require('./routes/users.js');
+var todoImport = require('./routes/todo-import');
+var apiRoutes = require('./routes/api');
+var apiAuth = require('./middleware/api-auth');
+var ruleEngine = require('./services/rule-engine');
 
 // all environments
 app.set('port', process.env.PORT || 3001);
@@ -62,10 +66,15 @@ app.get('/destroy/:id', routes.destroy);
 app.get('/edit/:id', routes.edit);
 app.post('/update/:id', routes.update);
 app.post('/import', routes.import);
+app.post('/todos/import/csv', todoImport.uploadMiddleware, todoImport.importCsv);
+app.get('/todos/import/:jobId/status', todoImport.importStatus);
+app.use('/api', apiAuth.setApiUser, apiRoutes);
 app.get('/about_new', routes.about_new);
 app.get('/chat', routes.chat.get);
 app.put('/chat', routes.chat.add);
 app.delete('/chat', routes.chat.delete);
+app.post('/notes', routes.createNote);
+app.get('/notes/:id', routes.getNote);
 app.use('/users', routesUsers)
 
 // Static
@@ -85,4 +94,5 @@ console.log('token: ' + token);
 
 http.createServer(app).listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'));
+  ruleEngine.startScheduler();
 });
