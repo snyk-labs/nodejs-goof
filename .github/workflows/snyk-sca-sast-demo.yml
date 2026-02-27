@@ -10,8 +10,8 @@ name: Snyk SCA and SAST Security Pipeline
 on:
   push:
     branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
+  # pull_request:
+  #   branches: [ main, master ]
   workflow_dispatch:
 
 # ============================================================================
