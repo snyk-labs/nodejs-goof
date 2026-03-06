@@ -1,0 +1,44 @@
+# Snyk (https://snyk.io) policy file
+# See https://docs.snyk.io/manage-risk/policies/the-.snyk-file for details
+version: v1.25.0
+
+# =============================================================================
+# EXCLUDE: Prevent files/directories from being scanned by Snyk Code (SAST)
+# =============================================================================
+# Patterns follow .gitignore syntax. These files will be completely skipped
+# during SAST analysis.
+# exclude:
+#   global:
+#     # Skip intentionally vulnerable demo files
+#     # - routes/xss-vulnerable.js
+#
+#     # Skip test files — they often contain mock payloads that trigger false positives
+#     - tests/**
+
+# =============================================================================
+# IGNORE: Suppress specific Open Source (SCA) vulnerabilities
+# =============================================================================
+# Use this when a vulnerability has been reviewed and accepted as low risk,
+# is not exploitable in your context, or has no available fix.
+# Each entry requires an expiry date and a reason for audit trail purposes.
+ignore:
+  # --- Critical: Zip Slip in adm-zip (accepted risk — no user-uploaded zips) ---
+  'npm:adm-zip:20180415':
+    - '*':
+        reason: 'Accepted risk — application does not process user-uploaded zip files'
+        expires: 2026-03-07T00:00:00.000Z
+        created: 2026-02-27T00:00:00.000Z
+
+  # # --- High: Prototype Pollution in lodash (deep dependency, no direct usage) ---
+  # SNYK-JS-LODASH-567746:
+  #   - '*':
+  #       reason: 'Transitive dependency — lodash merge/defaults not called with user input'
+  #       expires: 2026-06-01T00:00:00.000Z
+  #       created: 2026-02-27T00:00:00.000Z
+
+  # # --- Medium: Prototype Pollution in js-yaml (dev/config only) ---
+  # SNYK-JS-JSYAML-13961110:
+  #   - '*':
+  #       reason: 'js-yaml only parses trusted config files, not user-supplied input'
+  #       expires: 2026-06-01T00:00:00.000Z
+  #       created: 2026-01-27T00:00:00.000Z
