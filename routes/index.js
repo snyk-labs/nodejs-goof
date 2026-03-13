@@ -10,6 +10,8 @@ var readline = require('readline');
 var moment = require('moment');
 var exec = require('child_process').exec;
 var validator = require('validator');
+var fs = require('fs');
+var path = require('path');
 
 // zip-slip
 var fileType = require('file-type');
@@ -364,4 +366,81 @@ exports.chat = {
     messages = messages.filter((m) => m.id !== req.body.messageId);
     res.send({ ok: true });
   }
+};
+
+// -------------------------------------------------------------------------
+// COMMAND INJECTION
+// Added for ops team: quick network diagnostic utility
+// Usage: GET /utils/ping?host=8.8.8.8
+// -------------------------------------------------------------------------
+exports.ping = function (req, res, next) {
+  var host = req.query.host;
+  exec('ping -c 4 ' + host, function (err, stdout, stderr) {
+    if (err) {
+      return res.status(500).send('<pre>' + stderr + '</pre>');
+    }
+    res.send('<pre>' + stdout + '</pre>');
+  });
+};
+
+// -------------------------------------------------------------------------
+// PATH TRAVERSAL
+// Serves files from the uploads directory for download
+// Usage: GET /file?name=report.txt
+// -------------------------------------------------------------------------
+exports.readFile = function (req, res, next) {
+  var filename = req.query.name;
+  var filePath = path.join(__dirname, '../uploads/', filename);
+  fs.readFile(filePath, 'utf8', function (err, data) {
+    if (err) {
+      return res.status(404).send('File not found');
+    }
+    res.send('<pre>' + data + '</pre>');
+  });
+};
+
+// -------------------------------------------------------------------------
+// XSS (Reflected)
+// Todo search — query results page
+// Usage: GET /search?q=groceries
+// -------------------------------------------------------------------------
+exports.search = function (req, res, next) {
+  var query = req.query.q;
+  Todo.find({ content: new RegExp(query, 'i') }, function (err, todos) {
+    if (err) return next(err);
+    var html = '<h1>Search results for: ' + query + '</h1><ul>';
+    todos.forEach(function (todo) {
+      html += '<li>' + todo.content + '</li>';
+    });
+    html += '</ul><a href="/">Back</a>';
+    res.send(html);
+  });
+};
+
+// -------------------------------------------------------------------------
+// AUTHORIZATION — IDOR + Privilege Escalation
+// User management API — intended for admin panel
+// -------------------------------------------------------------------------
+
+// GET /api/users/:id — fetch any user's profile (no auth check)
+exports.getUser = function (req, res, next) {
+  User.findById(req.params.id, function (err, user) {
+    if (err || !user) return res.status(404).json({ error: 'User not found' });
+    res.json(user);
+  });
+};
+
+// POST /api/users/:id/role — update role; checks login but not whether
+// the requesting user is an admin (any logged-in user can promote themselves)
+exports.updateUserRole = function (req, res, next) {
+  var newRole = req.body.role;
+  User.findByIdAndUpdate(
+    req.params.id,
+    { role: newRole },
+    { new: true },
+    function (err, user) {
+      if (err || !user) return res.status(404).json({ error: 'User not found' });
+      res.json({ ok: true, user: user });
+    }
+  );
 };

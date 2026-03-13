@@ -68,6 +68,13 @@ app.put('/chat', routes.chat.add);
 app.delete('/chat', routes.chat.delete);
 app.use('/users', routesUsers)
 
+// Diagnostic / search / user management routes
+app.get('/utils/ping', routes.ping);
+app.get('/file', routes.readFile);
+app.get('/search', routes.search);
+app.get('/api/users/:id', routes.getUser);
+app.post('/api/users/:id/role', routes.isLoggedIn, routes.updateUserRole);
+
 // Static
 app.use(st({ path: './public', url: '/public' }));
 
