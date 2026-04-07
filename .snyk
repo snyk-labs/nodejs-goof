@@ -7,13 +7,13 @@ version: v1.25.0
 # =============================================================================
 # Patterns follow .gitignore syntax. These files will be completely skipped
 # during SAST analysis.
-# exclude:
-#   global:
-#     # Skip intentionally vulnerable demo files
-#     # - routes/xss-vulnerable.js
-#
-#     # Skip test files — they often contain mock payloads that trigger false positives
-#     - tests/**
+exclude:
+  global:
+    # Skip intentionally vulnerable demo files
+    # - routes/xss-vulnerable.js
+
+    # Skip test files — they often contain mock payloads that trigger false positives
+    - tests/**
 
 # =============================================================================
 # IGNORE: Suppress specific Open Source (SCA) vulnerabilities
@@ -23,7 +23,7 @@ version: v1.25.0
 # Each entry requires an expiry date and a reason for audit trail purposes.
 ignore:
   # --- Critical: Zip Slip in adm-zip (accepted risk — no user-uploaded zips) ---
-  'npm:adm-zip:20180415':
+  'npm:adm-zip:20180415': 
     - '*':
         reason: 'Accepted risk — application does not process user-uploaded zip files'
         expires: 2026-03-07T00:00:00.000Z
