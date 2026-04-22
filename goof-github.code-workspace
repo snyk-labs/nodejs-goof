@@ -5,6 +5,7 @@
 		}
 	],
 	"settings": {
-		"sarif-viewer.connectToGithubCodeScanning": "on"
+		"sarif-viewer.connectToGithubCodeScanning": "on",
+		"wiz.codePolicies.IAC Configuration": []
 	}
 }
