@@ -80,8 +80,10 @@ if (app.get('env') == 'development') {
   app.use(errorHandler());
 }
 
-var token = 'SECRET_TOKEN_f8ed84e8f41e4146403dd4a6bbcea5e418d23a9';
-console.log('token: ' + token);
+var token = process.env.SESSION_SECRET || crypto.randomBytes(32).toString('hex');
+if (app.get('env') === 'development') {
+  console.log('Session secret (dev only):', token);
+}
 
 http.createServer(app).listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'));
