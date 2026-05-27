@@ -17,7 +17,7 @@ jobs:
     steps:
     # Checkout Code
     - name: Checkout Code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     # Install snyk-api-import
     - name: Install snyk-api-import
@@ -30,7 +30,7 @@ jobs:
          ls
       continue-on-error: true
     - name: snyk-api-import logs
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
           name: snyk-api-import logs
           path: |

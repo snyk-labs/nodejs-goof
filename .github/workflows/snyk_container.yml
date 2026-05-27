@@ -9,7 +9,7 @@ jobs:
   snyk_container:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v4
     - name: Build image
       env:
         DOCKER_BUILDKIT: 1
@@ -24,7 +24,7 @@ jobs:
         image: goof-github-actions
         args: --file=Dockerfile
     - name: Upload result to GitHub Code Scanning
-      uses: github/codeql-action/upload-sarif@v1
+      uses: github/codeql-action/upload-sarif@v3
       with:
         sarif_file: snyk.sarif
     - name: Snyk Monitor
@@ -39,7 +39,7 @@ jobs:
   #snyk_monitor:
    # runs-on: ubuntu-latest
     #steps:
-    #- uses: actions/checkout@master
+    #- uses: actions/checkout@v4
     #- name: Run Snyk to check Docker image for vulnerabilities
       #continue-on-error: true
       #uses: snyk/actions/docker@master

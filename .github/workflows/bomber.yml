@@ -16,7 +16,7 @@ jobs:
     steps:
     # Checkout Code
     - name: Checkout Code
-      uses: actions/checkout@v1
+      uses: actions/checkout@v4
 
     # Install Bomber
     - name: Install Bomber
@@ -24,7 +24,7 @@ jobs:
          wget --progress=bar:force:noscroll "https://github.com/devops-kung-fu/bomber/releases/download/v0.4.0/bomber_0.4.0_linux_amd64.deb" && sudo dpkg --install "bomber_0.4.0_linux_amd64.deb"
          bomber -v
     - name: Archive Scan Results
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
           name: Archive Scan Results
           path: |

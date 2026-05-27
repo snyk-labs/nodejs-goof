@@ -16,7 +16,7 @@ jobs:
     steps:
     # Checkout Code
     - name: Checkout Code
-      uses: actions/checkout@v1
+      uses: actions/checkout@v4
 
     # Install and Authenticate to Snyk
     - name: Install Snyk & Authenticate
@@ -34,7 +34,7 @@ jobs:
          snyk container test snykschmidtty/goof:latest --json | snyk-to-html -o results_container.html || true
       continue-on-error: true
     - name: Upload SARIF file
-      uses: github/codeql-action/upload-sarif@v2
+      uses: github/codeql-action/upload-sarif@v3
       with:
         # Path to SARIF file relative to the root of the repository
         sarif_file: results_code.sarif
