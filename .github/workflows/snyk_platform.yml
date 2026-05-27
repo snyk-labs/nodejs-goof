@@ -1,0 +1,50 @@
+name: "Snyk Platform Scan"
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  Pipeline-Job:
+    # Configure Environment
+    name: 'Snyk Platform Scan'
+    runs-on: ubuntu-latest
+    env: 
+      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+       
+    steps:
+    # Checkout Code
+    - name: Checkout Code
+      uses: actions/checkout@v1
+
+    # Install and Authenticate to Snyk
+    - name: Install Snyk & Authenticate
+      run: |
+         sudo npm install -g snyk
+         sudo npm install -g snyk-to-html
+         snyk auth ${SNYK_TOKEN}
+    # Run Snyk Code
+    - name: Run Snyk
+      run: |
+         snyk code test --sarif  > results_code.sarif || true
+         snyk-to-html -i results_code.sarif -o results_code.html || true
+         snyk test --json | snyk-to-html -o results_sca.html || true
+         snyk iac test . --json | snyk-to-html -o results_iac.html || true
+         snyk container test snykschmidtty/goof:latest --json | snyk-to-html -o results_container.html || true
+      continue-on-error: true
+    - name: Upload SARIF file
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        # Path to SARIF file relative to the root of the repository
+        sarif_file: results_code.sarif
+    - name: Archive Snyk Code Coverage Results
+      uses: actions/upload-artifact@v4
+      with:
+          name: Archive Snyk Code Scan Results
+          path: | 
+            results_code.sarif
+            results_code.html
+            results_iac.html
+            results_sca.html
+            results_container.html

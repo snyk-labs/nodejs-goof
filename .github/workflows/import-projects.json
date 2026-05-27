@@ -1,0 +1,34 @@
+{
+  "targets": [
+    {
+      "orgId": "0e415b97-149f-46d2-8728-0f9fda933b27",
+      "integrationId": "a7374b6a-3f5d-4422-b2a2-2d21471a5807",
+      "target": {
+        "name": "shallow-goof",
+        "owner": "snyk-schmidtty",
+        "branch": "policy-file"
+      },
+      "exclusionGlobs": "fixtures, test"
+    },
+    {
+      "orgId": "54c6a5a5-1f23-46e2-8853-3a6acdaecd46",
+      "integrationId": "76ee71c4-f168-4737-99dd-2d18b8703b63",
+      "target": {
+        "name": "OWASP-NodeGoat",
+        "owner": "snyk-schmidtty",
+        "branch": "master"
+      },
+      "exclusionGlobs": "fixtures, test"
+    },
+    {
+      "orgId": "0e415b97-149f-46d2-8728-0f9fda933b27",
+      "integrationId": "0e33153e-7323-4f87-92ac-27c2d4fb1f37",
+      "target": {
+        "projectKey": "BB",
+        "repoSlug": "shallow-goof",
+        "branch": "policy-file"
+      },
+      "exclusionGlobs": "fixtures, test"
+    }
+  ]
+}

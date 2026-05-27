@@ -1,0 +1,4 @@
+{
+    "deepcode.uploadApproved": true,
+    "sarif-viewer.connectToGithubCodeScanning": "on"
+}

@@ -1,0 +1,26 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Docker login
+      env:
+        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+      run: docker login -u snykschmidtty -p $DOCKER_PASSWORD
+    - name: Build the Docker image
+      run: |
+        DOCKER_BUILDKIT=1 docker build . --file Dockerfile --tag snykschmidtty/nodejs-goof:latest
+        DOCKER_BUILDKIT=1 docker build . --file node-14.1.0.Dockerfile --tag snykschmidtty/nodejs-goof:node-14.1.0
+    - name: Docker Push
+      run: |
+        docker push snykschmidtty/nodejs-goof:latest
+        docker push snykschmidtty/nodejs-goof:node-14.1.0

@@ -1,0 +1,39 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	ignorecase = true
+	precomposeunicode = true
+[submodule]
+	active = .
+[remote "origin"]
+	url = https://github.com/snyk-schmidtty/goof-github.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+[remote "upstream"]
+	url = https://github.com/snyk/goof.git
+	fetch = +refs/heads/*:refs/remotes/upstream/*
+[remote "gitlab"]
+	url = git@gitlab.com:snyk-schmidtty/goof-gitlab.git
+	fetch = +refs/heads/*:refs/remotes/gitlab/*
+[remote "artifactory_https"]
+	url = https://github.com/snyk-schmidtty/goof-artifactory.git
+	fetch = +refs/heads/*:refs/remotes/artifactory/*
+[remote "bitbucket"]
+	url = git@bitbucket.org:snyk-schmidtty/goof.git
+	fetch = +refs/heads/*:refs/remotes/bitbucket/*
+[remote "azure"]
+	url = git@ssh.dev.azure.com:v3/snyk-schmidtty/goof-azure/goof-azure
+	fetch = +refs/heads/*:refs/remotes/azure/*
+[remote "bitbucketserver"]
+	url = ssh://git@bitbucket.797enterprises.com:7999/goof/goof-bitbucket.git
+	fetch = +refs/heads/*:refs/remotes/bitbucketserver/*
+[remote "artifactory"]
+	url = git@github.com:snyk-schmidtty/goof-artifactory.git
+	fetch = +refs/heads/*:refs/remotes/artifactory/*
+[remote "heroku"]
+	url = https://git.heroku.com/mighty-thicket-32200.git
+	fetch = +refs/heads/*:refs/remotes/heroku/*

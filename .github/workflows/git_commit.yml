@@ -1,0 +1,29 @@
+name: Modify files, git commit and push
+
+on:
+  push:
+    branches:
+      - '**'      # matches every branch
+      - '!main'   # excludes main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: Commit files
+        run: |
+          git config --local user.name "{{ secrets.GIT_NAME }}"
+          git config --local user.email "{{ secrets.GIT_EMAIL }}"
+          git remote add gitlab "https://gitlab.com/snyk-schmidtty/goof-gitlab.git"
+          git pull github ${GITHUB_REF} --ff-only
+          git add .
+          if [ -z "$(git status --porcelain)" ]; then
+            exit 0
+          fi
+          git commit -m "Fix a[href] in Webflow exported html"
+          git push github HEAD:${GITHUB_REF}

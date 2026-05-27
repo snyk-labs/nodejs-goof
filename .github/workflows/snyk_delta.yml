@@ -1,0 +1,19 @@
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+      - uses: actions/checkout@master
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Installing snyk-delta and dependencies
+        run: npm i -g snyk-delta
+      - uses: snyk/actions/setup@master
+      - name: Snyk Test
+        run: snyk test --json --print-deps | snyk-delta
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}

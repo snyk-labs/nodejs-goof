@@ -1,0 +1,30 @@
+name: "Snyk Unmanaged Scan"
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  Pipeline-Job:
+    # Configure Environment
+    name: 'Snyk Unmanaged Scan'
+    runs-on: ubuntu-latest
+    env: 
+      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+       
+    steps:
+    # Checkout Code
+    - name: Checkout Code
+      uses: actions/checkout@v1
+
+    # Install and Authenticate to Snyk
+    - name: Install Snyk & Authenticate
+      run: |
+         sudo npm install -g snyk
+         snyk auth ${SNYK_TOKEN}
+    # Run Snyk Code
+    - name: Run Snyk Unmanaged Scan
+      run: |
+         snyk unmanaged monitor
+      continue-on-error: true

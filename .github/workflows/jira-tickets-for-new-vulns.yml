@@ -1,0 +1,30 @@
+name: "jira-tickets-for-new-vulns"
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  Pipeline-Job:
+    # Configure Environment
+    name: 'jira-tickets-for-new-vulns'
+    runs-on: ubuntu-latest
+    env: 
+      SNYK_TOKEN: ${{ secrets.SNYK_API }}
+       
+    steps:
+    # Checkout Code
+    - name: Checkout Code
+      uses: actions/checkout@v1
+
+    # Install jira-tickets-for-new-vulns
+    - name: Install jira-tickets-for-new-vulns
+      run: |
+         curl -O -s -L "https://github.com/snyk-tech-services/jira-tickets-for-new-vulns/releases/download/1.25.0/snyk-jira-sync-linux"
+         sudo chmod -R +x snyk-jira-sync-linux
+    # Run snyk-jira-sync
+    - name: Run jira-tickets-for-new-vulns
+      run: |
+         snyk-jira-sync-linux -orgID=<SNYK_ORG_ID> -token=$SNYK_API -jiraProjectKey=SS
+      continue-on-error: true

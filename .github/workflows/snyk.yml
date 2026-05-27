@@ -1,0 +1,30 @@
+name: "Snyk SCA Scan"
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  snyk_monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Run Snyk to check for vulnerabilities
+        continue-on-error: true
+        uses: snyk/actions@0.3.0
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command: monitor
+          args: --remote-repo-url="snyk-schmidtty/nodejs-goof" --project-environment=frontend --project-lifecycle=production --project-business-criticality=high --project-tags=CI=GithubActions,PCI=yes,component=pkg:github/snyk-schmidtty/nodejs-goof@master
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+        # Path to SARIF file relative to the root of the repository
+          sarif_file: results.sarif
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: Snyk Report
+          path: results.html

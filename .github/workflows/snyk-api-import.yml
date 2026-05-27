@@ -1,0 +1,39 @@
+name: "snyk-api-import "
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  Pipeline-Job:
+    # Configure Environment
+    name: 'snyk-api-import'
+    runs-on: ubuntu-latest
+    env: 
+      SNYK_TOKEN: ${{ secrets.SNYK_API }}
+      SNYK_LOG_PATH: "."
+       
+    steps:
+    # Checkout Code
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    # Install snyk-api-import
+    - name: Install snyk-api-import
+      run: |
+         sudo npm install snyk-api-import@latest -g
+    # Run snyk-api-import
+    - name: Run snyk-api-import
+      run: |
+         snyk-api-import --file=./.github/workflows/import-projects.json
+         ls
+      continue-on-error: true
+    - name: snyk-api-import logs
+      uses: actions/upload-artifact@v2
+      with:
+          name: snyk-api-import logs
+          path: |
+            import-job-results.log
+            imported-batches.log
+            imported-targets.log

@@ -1,7 +1,7 @@
 .DS_Store
 node_modules
 *.sock
-
+.dccache
 .sass-cache
 sass
 config.rb
@@ -12,3 +12,4 @@ npm-debug.log
 .idea/
 .dccache
 
+snyk-win.exe

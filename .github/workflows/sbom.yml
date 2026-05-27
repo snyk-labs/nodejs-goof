@@ -1,0 +1,30 @@
+name: "Generate SBOM"
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  Pipeline-Job:
+    # Configure Environment
+    name: 'Generate SBOM'
+    runs-on: ubuntu-latest
+    env: 
+      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+       
+    steps:
+    # Checkout Code
+    - name: Checkout Code
+      uses: actions/checkout@v1
+
+    # curl SBOM API
+    - name: curl SBOM API
+      run: |
+         curl -X GET "https://api.snyk.io/rest/orgs/0e415b97-149f-46d2-8728-0f9fda933b27/projects/fce0e42a-5df2-4485-9b2f-a460f1383bf3/sbom?version=2022-04-06%7Eexperimental&format=cyclonedx%2Bjson" -H "Accept: application/vnd.api+json" -H "Accept: application/vnd.cyclonedx+json" -H "Authorization: token ${SNYK_TOKEN}" > nodejs-goof_cyclonedx.json
+    - name: Archive SBOM
+      uses: actions/upload-artifact@v2
+      with:
+          name: Archive SBOM
+          path: |
+            nodejs-goof_cyclonedx.json

@@ -1,0 +1,3074 @@
+goof @ 1.0.1
+   ├─ adm-zip @ 0.4.7
+   ├─ body-parser @ 1.9.0
+   │  ├─ bytes @ 1.0.0
+   │  ├─ depd @ 1.0.1
+   │  ├─ iconv-lite @ 0.4.4
+   │  ├─ media-typer @ 0.3.0
+   │  ├─ on-finished @ 2.1.0
+   │  │  └─ ee-first @ 1.0.5
+   │  ├─ qs @ 2.2.4
+   │  ├─ raw-body @ 1.3.0
+   │  │  ├─ bytes @ 1.0.0
+   │  │  └─ iconv-lite @ 0.4.4
+   │  └─ type-is @ 1.5.7
+   │     ├─ media-typer @ 0.3.0
+   │     └─ mime-types @ 2.0.14
+   │        └─ mime-db @ 1.12.0
+   ├─ cfenv @ 1.2.2
+   │  ├─ js-yaml @ 3.13.1
+   │  │  ├─ argparse @ 1.0.10
+   │  │  │  └─ sprintf-js @ 1.0.3
+   │  │  └─ esprima @ 4.0.1
+   │  ├─ ports @ 1.1.0
+   │  └─ underscore @ 1.9.1
+   ├─ consolidate @ 0.14.5
+   │  └─ bluebird @ 3.5.4
+   ├─ cookie-parser @ 1.3.3
+   │  ├─ cookie @ 0.1.2
+   │  └─ cookie-signature @ 1.0.5
+   ├─ dustjs-helpers @ 1.5.0
+   ├─ dustjs-linkedin @ 2.5.0
+   ├─ ejs @ 1.0.0
+   ├─ ejs-locals @ 1.0.2
+   │  └─ ejs @ 0.8.8
+   ├─ errorhandler @ 1.2.0
+   │  ├─ accepts @ 1.1.4
+   │  │  ├─ mime-types @ 2.0.14
+   │  │  │  └─ mime-db @ 1.12.0
+   │  │  └─ negotiator @ 0.4.9
+   │  └─ escape-html @ 1.0.1
+   ├─ express @ 4.12.4
+   │  ├─ accepts @ 1.2.13
+   │  │  ├─ mime-types @ 2.1.23
+   │  │  │  └─ mime-db @ 1.39.0
+   │  │  └─ negotiator @ 0.5.3
+   │  ├─ content-disposition @ 0.5.0
+   │  ├─ content-type @ 1.0.4
+   │  ├─ cookie @ 0.1.2
+   │  ├─ cookie-signature @ 1.0.6
+   │  ├─ debug @ 2.2.0
+   │  │  └─ ms @ 0.7.1
+   │  ├─ depd @ 1.0.1
+   │  ├─ escape-html @ 1.0.1
+   │  ├─ etag @ 1.6.0
+   │  │  └─ crc @ 3.2.1
+   │  ├─ finalhandler @ 0.3.6
+   │  │  ├─ debug @ 2.2.0
+   │  │  │  └─ ms @ 0.7.1
+   │  │  ├─ escape-html @ 1.0.1
+   │  │  └─ on-finished @ 2.2.1
+   │  │     └─ ee-first @ 1.1.0
+   │  ├─ fresh @ 0.2.4
+   │  ├─ merge-descriptors @ 1.0.0
+   │  ├─ methods @ 1.1.2
+   │  ├─ on-finished @ 2.2.1
+   │  │  └─ ee-first @ 1.1.0
+   │  ├─ parseurl @ 1.3.3
+   │  ├─ path-to-regexp @ 0.1.3
+   │  ├─ proxy-addr @ 1.0.10
+   │  │  ├─ forwarded @ 0.1.2
+   │  │  └─ ipaddr.js @ 1.0.5
+   │  ├─ qs @ 2.4.2
+   │  ├─ range-parser @ 1.0.3
+   │  ├─ send @ 0.12.3
+   │  │  ├─ debug @ 2.2.0
+   │  │  │  └─ ms @ 0.7.1
+   │  │  ├─ depd @ 1.0.1
+   │  │  ├─ destroy @ 1.0.3
+   │  │  ├─ escape-html @ 1.0.1
+   │  │  ├─ etag @ 1.6.0
+   │  │  │  └─ crc @ 3.2.1
+   │  │  ├─ fresh @ 0.2.4
+   │  │  ├─ mime @ 1.3.4
+   │  │  ├─ ms @ 0.7.1
+   │  │  ├─ on-finished @ 2.2.1
+   │  │  │  └─ ee-first @ 1.1.0
+   │  │  └─ range-parser @ 1.0.3
+   │  ├─ serve-static @ 1.9.3
+   │  │  ├─ escape-html @ 1.0.1
+   │  │  ├─ parseurl @ 1.3.3
+   │  │  ├─ send @ 0.12.3
+   │  │  │  ├─ debug @ 2.2.0
+   │  │  │  │  └─ ms @ 0.7.1
+   │  │  │  ├─ depd @ 1.0.1
+   │  │  │  ├─ destroy @ 1.0.3
+   │  │  │  ├─ escape-html @ 1.0.1
+   │  │  │  ├─ etag @ 1.6.0
+   │  │  │  │  └─ crc @ 3.2.1
+   │  │  │  ├─ fresh @ 0.2.4
+   │  │  │  ├─ mime @ 1.3.4
+   │  │  │  ├─ ms @ 0.7.1
+   │  │  │  ├─ on-finished @ 2.2.1
+   │  │  │  │  └─ ee-first @ 1.1.0
+   │  │  │  └─ range-parser @ 1.0.3
+   │  │  └─ utils-merge @ 1.0.0
+   │  ├─ type-is @ 1.6.16
+   │  │  ├─ media-typer @ 0.3.0
+   │  │  └─ mime-types @ 2.1.23
+   │  │     └─ mime-db @ 1.39.0
+   │  ├─ utils-merge @ 1.0.0
+   │  └─ vary @ 1.0.1
+   ├─ express-fileupload @ 0.0.5
+   │  ├─ connect-busboy @ 0.0.2
+   │  │  └─ busboy @ 0.3.1
+   │  │     └─ dicer @ 0.3.0
+   │  │        └─ streamsearch @ 0.1.2
+   │  ├─ fs-extra @ 0.22.1
+   │  │  ├─ graceful-fs @ 4.1.15
+   │  │  ├─ jsonfile @ 2.4.0
+   │  │  │  └─ graceful-fs @ 4.1.15
+   │  │  └─ rimraf @ 2.6.3
+   │  │     └─ glob @ 7.1.3
+   │  │        ├─ fs.realpath @ 1.0.0
+   │  │        ├─ inflight @ 1.0.6
+   │  │        │  ├─ once @ 1.4.0
+   │  │        │  │  └─ wrappy @ 1.0.2
+   │  │        │  └─ wrappy @ 1.0.2
+   │  │        ├─ inherits @ 2.0.3
+   │  │        ├─ minimatch @ 3.0.4
+   │  │        │  └─ brace-expansion @ 1.1.11
+   │  │        │     ├─ balanced-match @ 1.0.0
+   │  │        │     └─ concat-map @ 0.0.1
+   │  │        ├─ once @ 1.4.0
+   │  │        │  └─ wrappy @ 1.0.2
+   │  │        └─ path-is-absolute @ 1.0.1
+   │  └─ streamifier @ 0.1.1
+   ├─ file-type @ 8.1.0
+   ├─ humanize-ms @ 1.0.1
+   │  └─ ms @ 0.6.2
+   ├─ jquery @ 2.2.4
+   ├─ lodash @ 4.17.4
+   ├─ marked @ 0.3.5
+   ├─ method-override @ 3.0.0
+   │  ├─ debug @ 3.1.0
+   │  │  └─ ms @ 2.0.0
+   │  ├─ methods @ 1.1.2
+   │  ├─ parseurl @ 1.3.3
+   │  └─ vary @ 1.1.2
+   ├─ moment @ 2.15.1
+   ├─ mongodb @ 3.5.9
+   │  ├─ bl @ 2.2.0
+   │  │  ├─ readable-stream @ 2.3.7
+   │  │  │  ├─ core-util-is @ 1.0.2
+   │  │  │  ├─ inherits @ 2.0.3
+   │  │  │  ├─ isarray @ 1.0.0
+   │  │  │  ├─ process-nextick-args @ 2.0.0
+   │  │  │  ├─ safe-buffer @ 5.1.2
+   │  │  │  ├─ string_decoder @ 1.1.1
+   │  │  │  │  └─ safe-buffer @ 5.1.2
+   │  │  │  └─ util-deprecate @ 1.0.2
+   │  │  └─ safe-buffer @ 5.1.2
+   │  ├─ bson @ 1.1.4
+   │  ├─ denque @ 1.4.1
+   │  ├─ require_optional @ 1.0.1
+   │  │  ├─ resolve-from @ 2.0.0
+   │  │  └─ semver @ 5.7.0
+   │  ├─ safe-buffer @ 5.1.2
+   │  └─ saslprep @ 1.0.3
+   │     └─ sparse-bitfield @ 3.0.3
+   │        └─ memory-pager @ 1.5.0
+   ├─ mongoose @ 4.2.4
+   │  ├─ async @ 0.9.0
+   │  ├─ bson @ 0.4.23
+   │  ├─ hooks-fixed @ 1.1.0
+   │  ├─ kareem @ 1.0.1
+   │  ├─ mongodb @ 2.0.46
+   │  │  ├─ es6-promise @ 2.1.1
+   │  │  ├─ mongodb-core @ 1.2.19
+   │  │  │  ├─ bson @ 0.4.23
+   │  │  │  └─ kerberos @ 0.0.24
+   │  │  │     └─ nan @ 2.10.0
+   │  │  └─ readable-stream @ 1.0.31
+   │  │     ├─ core-util-is @ 1.0.2
+   │  │     ├─ inherits @ 2.0.3
+   │  │     ├─ isarray @ 0.0.1
+   │  │     └─ string_decoder @ 0.10.31
+   │  ├─ mpath @ 0.1.1
+   │  ├─ mpromise @ 0.5.4
+   │  ├─ mquery @ 1.6.3
+   │  │  ├─ bluebird @ 2.9.26
+   │  │  ├─ debug @ 2.2.0
+   │  │  │  └─ ms @ 0.7.1
+   │  │  ├─ regexp-clone @ 0.0.1
+   │  │  └─ sliced @ 0.0.5
+   │  ├─ ms @ 0.7.1
+   │  ├─ muri @ 1.0.0
+   │  ├─ regexp-clone @ 0.0.1
+   │  └─ sliced @ 0.0.5
+   ├─ morgan @ 1.10.0
+   │  ├─ basic-auth @ 2.0.1
+   │  │  └─ safe-buffer @ 5.1.2
+   │  ├─ debug @ 2.6.9
+   │  │  └─ ms @ 2.0.0
+   │  ├─ depd @ 2.0.0
+   │  ├─ on-finished @ 2.3.0
+   │  │  └─ ee-first @ 1.1.1
+   │  └─ on-headers @ 1.0.2
+   ├─ ms @ 0.7.3
+   ├─ mysql @ 2.18.1
+   │  ├─ bignumber.js @ 9.0.0
+   │  ├─ readable-stream @ 2.3.7
+   │  │  ├─ core-util-is @ 1.0.2
+   │  │  ├─ inherits @ 2.0.3
+   │  │  ├─ isarray @ 1.0.0
+   │  │  ├─ process-nextick-args @ 2.0.0
+   │  │  ├─ safe-buffer @ 5.1.2
+   │  │  ├─ string_decoder @ 1.1.1
+   │  │  │  └─ safe-buffer @ 5.1.2
+   │  │  └─ util-deprecate @ 1.0.2
+   │  ├─ safe-buffer @ 5.1.2
+   │  └─ sqlstring @ 2.3.1
+   ├─ npmconf @ 0.0.24
+   │  ├─ config-chain @ 1.1.12
+   │  │  ├─ ini @ 1.3.5
+   │  │  └─ proto-list @ 1.2.4
+   │  ├─ inherits @ 1.0.2
+   │  ├─ ini @ 1.1.0
+   │  ├─ mkdirp @ 0.3.5
+   │  ├─ nopt @ 2.2.1
+   │  │  └─ abbrev @ 1.1.1
+   │  ├─ once @ 1.1.1
+   │  ├─ osenv @ 0.0.3
+   │  └─ semver @ 1.1.4
+   ├─ optional @ 0.1.4
+   ├─ st @ 0.2.4
+   │  ├─ async-cache @ 0.1.5
+   │  │  └─ lru-cache @ 2.3.1
+   │  ├─ fd @ 0.0.3
+   │  ├─ graceful-fs @ 1.2.3
+   │  ├─ mime @ 1.2.11
+   │  └─ negotiator @ 0.2.8
+   ├─ stream-buffers @ 3.0.2
+   ├─ tap @ 11.1.5
+   │  ├─ bind-obj-methods @ 2.0.0
+   │  ├─ bluebird @ 3.5.4
+   │  ├─ clean-yaml-object @ 0.1.0
+   │  ├─ color-support @ 1.1.3
+   │  ├─ coveralls @ 3.0.9
+   │  │  ├─ js-yaml @ 3.13.1
+   │  │  │  ├─ argparse @ 1.0.10
+   │  │  │  │  └─ sprintf-js @ 1.0.3
+   │  │  │  └─ esprima @ 4.0.1
+   │  │  ├─ lcov-parse @ 1.0.0
+   │  │  ├─ log-driver @ 1.2.7
+   │  │  ├─ minimist @ 1.2.0
+   │  │  └─ request @ 2.88.0
+   │  │     ├─ aws-sign2 @ 0.7.0
+   │  │     ├─ aws4 @ 1.9.1
+   │  │     ├─ caseless @ 0.12.0
+   │  │     ├─ combined-stream @ 1.0.8
+   │  │     │  └─ delayed-stream @ 1.0.0
+   │  │     ├─ extend @ 3.0.2
+   │  │     ├─ forever-agent @ 0.6.1
+   │  │     ├─ form-data @ 2.3.3
+   │  │     │  ├─ asynckit @ 0.4.0
+   │  │     │  ├─ combined-stream @ 1.0.8
+   │  │     │  │  └─ delayed-stream @ 1.0.0
+   │  │     │  └─ mime-types @ 2.1.26
+   │  │     │     └─ mime-db @ 1.43.0
+   │  │     ├─ har-validator @ 5.1.3
+   │  │     │  ├─ ajv @ 6.10.2
+   │  │     │  │  ├─ fast-deep-equal @ 2.0.1
+   │  │     │  │  ├─ fast-json-stable-stringify @ 2.1.0
+   │  │     │  │  ├─ json-schema-traverse @ 0.4.1
+   │  │     │  │  └─ uri-js @ 4.2.2
+   │  │     │  │     └─ punycode @ 2.1.1
+   │  │     │  └─ har-schema @ 2.0.0
+   │  │     ├─ http-signature @ 1.2.0
+   │  │     │  ├─ assert-plus @ 1.0.0
+   │  │     │  ├─ jsprim @ 1.4.1
+   │  │     │  │  ├─ assert-plus @ 1.0.0
+   │  │     │  │  ├─ extsprintf @ 1.3.0
+   │  │     │  │  ├─ json-schema @ 0.2.3
+   │  │     │  │  └─ verror @ 1.10.0
+   │  │     │  │     ├─ assert-plus @ 1.0.0
+   │  │     │  │     ├─ core-util-is @ 1.0.2
+   │  │     │  │     └─ extsprintf @ 1.3.0
+   │  │     │  └─ sshpk @ 1.16.1
+   │  │     │     ├─ asn1 @ 0.2.4
+   │  │     │     │  └─ safer-buffer @ 2.1.2
+   │  │     │     ├─ assert-plus @ 1.0.0
+   │  │     │     ├─ bcrypt-pbkdf @ 1.0.2
+   │  │     │     │  └─ tweetnacl @ 0.14.5
+   │  │     │     ├─ dashdash @ 1.14.1
+   │  │     │     │  └─ assert-plus @ 1.0.0
+   │  │     │     ├─ ecc-jsbn @ 0.1.2
+   │  │     │     │  ├─ jsbn @ 0.1.1
+   │  │     │     │  └─ safer-buffer @ 2.1.2
+   │  │     │     ├─ getpass @ 0.1.7
+   │  │     │     │  └─ assert-plus @ 1.0.0
+   │  │     │     ├─ jsbn @ 0.1.1
+   │  │     │     ├─ safer-buffer @ 2.1.2
+   │  │     │     └─ tweetnacl @ 0.14.5
+   │  │     ├─ is-typedarray @ 1.0.0
+   │  │     ├─ isstream @ 0.1.2
+   │  │     ├─ json-stringify-safe @ 5.0.1
+   │  │     ├─ mime-types @ 2.1.26
+   │  │     │  └─ mime-db @ 1.43.0
+   │  │     ├─ oauth-sign @ 0.9.0
+   │  │     ├─ performance-now @ 2.1.0
+   │  │     ├─ qs @ 6.5.2
+   │  │     ├─ safe-buffer @ 5.1.2
+   │  │     ├─ tough-cookie @ 2.4.3
+   │  │     │  ├─ psl @ 1.7.0
+   │  │     │  └─ punycode @ 1.4.1
+   │  │     ├─ tunnel-agent @ 0.6.0
+   │  │     │  └─ safe-buffer @ 5.1.2
+   │  │     └─ uuid @ 3.3.2
+   │  ├─ foreground-child @ 1.5.6
+   │  │  ├─ cross-spawn @ 4.0.2
+   │  │  │  ├─ lru-cache @ 4.1.5
+   │  │  │  │  ├─ pseudomap @ 1.0.2
+   │  │  │  │  └─ yallist @ 2.1.2
+   │  │  │  └─ which @ 1.3.1
+   │  │  │     └─ isexe @ 2.0.0
+   │  │  └─ signal-exit @ 3.0.2
+   │  ├─ fs-exists-cached @ 1.0.0
+   │  ├─ function-loop @ 1.0.2
+   │  ├─ glob @ 7.1.3
+   │  │  ├─ fs.realpath @ 1.0.0
+   │  │  ├─ inflight @ 1.0.6
+   │  │  │  ├─ once @ 1.4.0
+   │  │  │  │  └─ wrappy @ 1.0.2
+   │  │  │  └─ wrappy @ 1.0.2
+   │  │  ├─ inherits @ 2.0.3
+   │  │  ├─ minimatch @ 3.0.4
+   │  │  │  └─ brace-expansion @ 1.1.11
+   │  │  │     ├─ balanced-match @ 1.0.0
+   │  │  │     └─ concat-map @ 0.0.1
+   │  │  ├─ once @ 1.4.0
+   │  │  │  └─ wrappy @ 1.0.2
+   │  │  └─ path-is-absolute @ 1.0.1
+   │  ├─ isexe @ 2.0.0
+   │  ├─ js-yaml @ 3.13.1
+   │  │  ├─ argparse @ 1.0.10
+   │  │  │  └─ sprintf-js @ 1.0.3
+   │  │  └─ esprima @ 4.0.1
+   │  ├─ minipass @ 2.9.0
+   │  │  ├─ safe-buffer @ 5.1.2
+   │  │  └─ yallist @ 3.1.1
+   │  ├─ mkdirp @ 0.5.1
+   │  │  └─ minimist @ 0.0.8
+   │  ├─ nyc @ 11.9.0
+   │  │  ├─ archy @ 1.0.0
+   │  │  ├─ arrify @ 1.0.1
+   │  │  ├─ caching-transform @ 1.0.1
+   │  │  │  ├─ md5-hex @ 1.3.0
+   │  │  │  │  └─ md5-o-matic @ 0.1.1
+   │  │  │  ├─ mkdirp @ 0.5.1
+   │  │  │  │  └─ minimist @ 0.0.8
+   │  │  │  └─ write-file-atomic @ 1.3.4
+   │  │  │     ├─ graceful-fs @ 4.1.11
+   │  │  │     ├─ imurmurhash @ 0.1.4
+   │  │  │     └─ slide @ 1.1.6
+   │  │  ├─ convert-source-map @ 1.5.1
+   │  │  ├─ debug-log @ 1.0.1
+   │  │  ├─ default-require-extensions @ 1.0.0
+   │  │  │  └─ strip-bom @ 2.0.0
+   │  │  │     └─ is-utf8 @ 0.2.1
+   │  │  ├─ find-cache-dir @ 0.1.1
+   │  │  │  ├─ commondir @ 1.0.1
+   │  │  │  ├─ mkdirp @ 0.5.1
+   │  │  │  │  └─ minimist @ 0.0.8
+   │  │  │  └─ pkg-dir @ 1.0.0
+   │  │  │     └─ find-up @ 1.1.2
+   │  │  │        ├─ path-exists @ 2.1.0
+   │  │  │        │  └─ pinkie-promise @ 2.0.1
+   │  │  │        │     └─ pinkie @ 2.0.4
+   │  │  │        └─ pinkie-promise @ 2.0.1
+   │  │  │           └─ pinkie @ 2.0.4
+   │  │  ├─ find-up @ 2.1.0
+   │  │  │  └─ locate-path @ 2.0.0
+   │  │  │     ├─ p-locate @ 2.0.0
+   │  │  │     │  └─ p-limit @ 1.2.0
+   │  │  │     │     └─ p-try @ 1.0.0
+   │  │  │     └─ path-exists @ 3.0.0
+   │  │  ├─ foreground-child @ 1.5.6
+   │  │  │  ├─ cross-spawn @ 4.0.2
+   │  │  │  │  ├─ lru-cache @ 4.1.3
+   │  │  │  │  │  ├─ pseudomap @ 1.0.2
+   │  │  │  │  │  └─ yallist @ 2.1.2
+   │  │  │  │  └─ which @ 1.3.0
+   │  │  │  │     └─ isexe @ 2.0.0
+   │  │  │  └─ signal-exit @ 3.0.2
+   │  │  ├─ glob @ 7.1.2
+   │  │  │  ├─ fs.realpath @ 1.0.0
+   │  │  │  ├─ inflight @ 1.0.6
+   │  │  │  │  ├─ once @ 1.4.0
+   │  │  │  │  │  └─ wrappy @ 1.0.2
+   │  │  │  │  └─ wrappy @ 1.0.2
+   │  │  │  ├─ inherits @ 2.0.3
+   │  │  │  ├─ minimatch @ 3.0.4
+   │  │  │  │  └─ brace-expansion @ 1.1.11
+   │  │  │  │     ├─ balanced-match @ 1.0.0
+   │  │  │  │     └─ concat-map @ 0.0.1
+   │  │  │  ├─ once @ 1.4.0
+   │  │  │  │  └─ wrappy @ 1.0.2
+   │  │  │  └─ path-is-absolute @ 1.0.1
+   │  │  ├─ istanbul-lib-coverage @ 1.2.0
+   │  │  ├─ istanbul-lib-hook @ 1.1.0
+   │  │  │  └─ append-transform @ 0.4.0
+   │  │  │     └─ default-require-extensions @ 1.0.0
+   │  │  │        └─ strip-bom @ 2.0.0
+   │  │  │           └─ is-utf8 @ 0.2.1
+   │  │  ├─ istanbul-lib-instrument @ 1.10.1
+   │  │  │  ├─ babel-generator @ 6.26.1
+   │  │  │  │  ├─ babel-messages @ 6.23.0
+   │  │  │  │  │  └─ babel-runtime @ 6.26.0
+   │  │  │  │  │     ├─ core-js @ 2.5.6
+   │  │  │  │  │     └─ regenerator-runtime @ 0.11.1
+   │  │  │  │  ├─ babel-runtime @ 6.26.0
+   │  │  │  │  │  ├─ core-js @ 2.5.6
+   │  │  │  │  │  └─ regenerator-runtime @ 0.11.1
+   │  │  │  │  ├─ babel-types @ 6.26.0
+   │  │  │  │  │  ├─ babel-runtime @ 6.26.0
+   │  │  │  │  │  │  ├─ core-js @ 2.5.6
+   │  │  │  │  │  │  └─ regenerator-runtime @ 0.11.1
+   │  │  │  │  │  ├─ esutils @ 2.0.2
+   │  │  │  │  │  ├─ lodash @ 4.17.10
+   │  │  │  │  │  └─ to-fast-properties @ 1.0.3
+   │  │  │  │  ├─ detect-indent @ 4.0.0
+   │  │  │  │  │  └─ repeating @ 2.0.1
+   │  │  │  │  │     └─ is-finite @ 1.0.2
+   │  │  │  │  │        └─ number-is-nan @ 1.0.1
+   │  │  │  │  ├─ jsesc @ 1.3.0
+   │  │  │  │  ├─ lodash @ 4.17.10
+   │  │  │  │  ├─ source-map @ 0.5.7
+   │  │  │  │  └─ trim-right @ 1.0.1
+   │  │  │  ├─ babel-template @ 6.26.0
+   │  │  │  │  ├─ babel-runtime @ 6.26.0
+   │  │  │  │  │  ├─ core-js @ 2.5.6
+   │  │  │  │  │  └─ regenerator-runtime @ 0.11.1
+   │  │  │  │  ├─ babel-traverse @ 6.26.0
+   │  │  │  │  │  ├─ babel-code-frame @ 6.26.0
+   │  │  │  │  │  │  ├─ chalk @ 1.1.3
+   │  │  │  │  │  │  │  ├─ ansi-styles @ 2.2.1
+   │  │  │  │  │  │  │  ├─ escape-string-regexp @ 1.0.5
+   │  │  │  │  │  │  │  ├─ has-ansi @ 2.0.0
+   │  │  │  │  │  │  │  │  └─ ansi-regex @ 2.1.1
+   │  │  │  │  │  │  │  ├─ strip-ansi @ 3.0.1
+   │  │  │  │  │  │  │  │  └─ ansi-regex @ 2.1.1
+   │  │  │  │  │  │  │  └─ supports-color @ 2.0.0
+   │  │  │  │  │  │  ├─ esutils @ 2.0.2
+   │  │  │  │  │  │  └─ js-tokens @ 3.0.2
+   │  │  │  │  │  ├─ babel-messages @ 6.23.0
+   │  │  │  │  │  │  └─ babel-runtime @ 6.26.0
+   │  │  │  │  │  │     ├─ core-js @ 2.5.6
+   │  │  │  │  │  │     └─ regenerator-runtime @ 0.11.1
+   │  │  │  │  │  ├─ babel-runtime @ 6.26.0
+   │  │  │  │  │  │  ├─ core-js @ 2.5.6
+   │  │  │  │  │  │  └─ regenerator-runtime @ 0.11.1
+   │  │  │  │  │  ├─ babel-types @ 6.26.0
+   │  │  │  │  │  │  ├─ babel-runtime @ 6.26.0
+   │  │  │  │  │  │  │  ├─ core-js @ 2.5.6
+   │  │  │  │  │  │  │  └─ regenerator-runtime @ 0.11.1
+   │  │  │  │  │  │  ├─ esutils @ 2.0.2
+   │  │  │  │  │  │  ├─ lodash @ 4.17.10
+   │  │  │  │  │  │  └─ to-fast-properties @ 1.0.3
+   │  │  │  │  │  ├─ babylon @ 6.18.0
+   │  │  │  │  │  ├─ debug @ 2.6.9
+   │  │  │  │  │  │  └─ ms @ 2.0.0
+   │  │  │  │  │  ├─ globals @ 9.18.0
+   │  │  │  │  │  ├─ invariant @ 2.2.4
+   │  │  │  │  │  │  └─ loose-envify @ 1.3.1
+   │  │  │  │  │  │     └─ js-tokens @ 3.0.2
+   │  │  │  │  │  └─ lodash @ 4.17.10
+   │  │  │  │  ├─ babel-types @ 6.26.0
+   │  │  │  │  │  ├─ babel-runtime @ 6.26.0
+   │  │  │  │  │  │  ├─ core-js @ 2.5.6
+   │  │  │  │  │  │  └─ regenerator-runtime @ 0.11.1
+   │  │  │  │  │  ├─ esutils @ 2.0.2
+   │  │  │  │  │  ├─ lodash @ 4.17.10
+   │  │  │  │  │  └─ to-fast-properties @ 1.0.3
+   │  │  │  │  ├─ babylon @ 6.18.0
+   │  │  │  │  └─ lodash @ 4.17.10
+   │  │  │  ├─ babel-traverse @ 6.26.0
+   │  │  │  │  ├─ babel-code-frame @ 6.26.0
+   │  │  │  │  │  ├─ chalk @ 1.1.3
+   │  │  │  │  │  │  ├─ ansi-styles @ 2.2.1
+   │  │  │  │  │  │  ├─ escape-string-regexp @ 1.0.5
+   │  │  │  │  │  │  ├─ has-ansi @ 2.0.0
+   │  │  │  │  │  │  │  └─ ansi-regex @ 2.1.1
+   │  │  │  │  │  │  ├─ strip-ansi @ 3.0.1
+   │  │  │  │  │  │  │  └─ ansi-regex @ 2.1.1
+   │  │  │  │  │  │  └─ supports-color @ 2.0.0
+   │  │  │  │  │  ├─ esutils @ 2.0.2
+   │  │  │  │  │  └─ js-tokens @ 3.0.2
+   │  │  │  │  ├─ babel-messages @ 6.23.0
+   │  │  │  │  │  └─ babel-runtime @ 6.26.0
+   │  │  │  │  │     ├─ core-js @ 2.5.6
+   │  │  │  │  │     └─ regenerator-runtime @ 0.11.1
+   │  │  │  │  ├─ babel-runtime @ 6.26.0
+   │  │  │  │  │  ├─ core-js @ 2.5.6
+   │  │  │  │  │  └─ regenerator-runtime @ 0.11.1
+   │  │  │  │  ├─ babel-types @ 6.26.0
+   │  │  │  │  │  ├─ babel-runtime @ 6.26.0
+   │  │  │  │  │  │  ├─ core-js @ 2.5.6
+   │  │  │  │  │  │  └─ regenerator-runtime @ 0.11.1
+   │  │  │  │  │  ├─ esutils @ 2.0.2
+   │  │  │  │  │  ├─ lodash @ 4.17.10
+   │  │  │  │  │  └─ to-fast-properties @ 1.0.3
+   │  │  │  │  ├─ babylon @ 6.18.0
+   │  │  │  │  ├─ debug @ 2.6.9
+   │  │  │  │  │  └─ ms @ 2.0.0
+   │  │  │  │  ├─ globals @ 9.18.0
+   │  │  │  │  ├─ invariant @ 2.2.4
+   │  │  │  │  │  └─ loose-envify @ 1.3.1
+   │  │  │  │  │     └─ js-tokens @ 3.0.2
+   │  │  │  │  └─ lodash @ 4.17.10
+   │  │  │  ├─ babel-types @ 6.26.0
+   │  │  │  │  ├─ babel-runtime @ 6.26.0
+   │  │  │  │  │  ├─ core-js @ 2.5.6
+   │  │  │  │  │  └─ regenerator-runtime @ 0.11.1
+   │  │  │  │  ├─ esutils @ 2.0.2
+   │  │  │  │  ├─ lodash @ 4.17.10
+   │  │  │  │  └─ to-fast-properties @ 1.0.3
+   │  │  │  ├─ babylon @ 6.18.0
+   │  │  │  ├─ istanbul-lib-coverage @ 1.2.0
+   │  │  │  └─ semver @ 5.5.0
+   │  │  ├─ istanbul-lib-report @ 1.1.3
+   │  │  │  ├─ istanbul-lib-coverage @ 1.2.0
+   │  │  │  ├─ mkdirp @ 0.5.1
+   │  │  │  │  └─ minimist @ 0.0.8
+   │  │  │  ├─ path-parse @ 1.0.5
+   │  │  │  └─ supports-color @ 3.2.3
+   │  │  │     └─ has-flag @ 1.0.0
+   │  │  ├─ istanbul-lib-source-maps @ 1.2.3
+   │  │  │  ├─ debug @ 3.1.0
+   │  │  │  │  └─ ms @ 2.0.0
+   │  │  │  ├─ istanbul-lib-coverage @ 1.2.0
+   │  │  │  ├─ mkdirp @ 0.5.1
+   │  │  │  │  └─ minimist @ 0.0.8
+   │  │  │  ├─ rimraf @ 2.6.2
+   │  │  │  │  └─ glob @ 7.1.2
+   │  │  │  │     ├─ fs.realpath @ 1.0.0
+   │  │  │  │     ├─ inflight @ 1.0.6
+   │  │  │  │     │  ├─ once @ 1.4.0
+   │  │  │  │     │  │  └─ wrappy @ 1.0.2
+   │  │  │  │     │  └─ wrappy @ 1.0.2
+   │  │  │  │     ├─ inherits @ 2.0.3
+   │  │  │  │     ├─ minimatch @ 3.0.4
+   │  │  │  │     │  └─ brace-expansion @ 1.1.11
+   │  │  │  │     │     ├─ balanced-match @ 1.0.0
+   │  │  │  │     │     └─ concat-map @ 0.0.1
+   │  │  │  │     ├─ once @ 1.4.0
+   │  │  │  │     │  └─ wrappy @ 1.0.2
+   │  │  │  │     └─ path-is-absolute @ 1.0.1
+   │  │  │  └─ source-map @ 0.5.7
+   │  │  ├─ istanbul-reports @ 1.4.0
+   │  │  │  └─ handlebars @ 4.0.11
+   │  │  │     ├─ async @ 1.5.2
+   │  │  │     ├─ optimist @ 0.6.1
+   │  │  │     │  ├─ minimist @ 0.0.8
+   │  │  │     │  └─ wordwrap @ 0.0.3
+   │  │  │     ├─ source-map @ 0.4.4
+   │  │  │     │  └─ amdefine @ 1.0.1
+   │  │  │     └─ uglify-js @ 2.8.29
+   │  │  │        ├─ source-map @ 0.5.7
+   │  │  │        ├─ uglify-to-browserify @ 1.0.2
+   │  │  │        └─ yargs @ 3.10.0
+   │  │  │           ├─ camelcase @ 1.2.1
+   │  │  │           ├─ cliui @ 2.1.0
+   │  │  │           │  ├─ center-align @ 0.1.3
+   │  │  │           │  │  ├─ align-text @ 0.1.4
+   │  │  │           │  │  │  ├─ kind-of @ 3.2.2
+   │  │  │           │  │  │  │  └─ is-buffer @ 1.1.6
+   │  │  │           │  │  │  ├─ longest @ 1.0.1
+   │  │  │           │  │  │  └─ repeat-string @ 1.6.1
+   │  │  │           │  │  └─ lazy-cache @ 1.0.4
+   │  │  │           │  ├─ right-align @ 0.1.3
+   │  │  │           │  │  └─ align-text @ 0.1.4
+   │  │  │           │  │     ├─ kind-of @ 3.2.2
+   │  │  │           │  │     │  └─ is-buffer @ 1.1.6
+   │  │  │           │  │     ├─ longest @ 1.0.1
+   │  │  │           │  │     └─ repeat-string @ 1.6.1
+   │  │  │           │  └─ wordwrap @ 0.0.2
+   │  │  │           ├─ decamelize @ 1.2.0
+   │  │  │           └─ window-size @ 0.1.0
+   │  │  ├─ md5-hex @ 1.3.0
+   │  │  │  └─ md5-o-matic @ 0.1.1
+   │  │  ├─ merge-source-map @ 1.1.0
+   │  │  │  └─ source-map @ 0.6.1
+   │  │  ├─ micromatch @ 3.1.10
+   │  │  │  ├─ arr-diff @ 4.0.0
+   │  │  │  ├─ array-unique @ 0.3.2
+   │  │  │  ├─ braces @ 2.3.2
+   │  │  │  │  ├─ arr-flatten @ 1.1.0
+   │  │  │  │  ├─ array-unique @ 0.3.2
+   │  │  │  │  ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  └─ is-extendable @ 0.1.1
+   │  │  │  │  ├─ fill-range @ 4.0.0
+   │  │  │  │  │  ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  │  └─ is-extendable @ 0.1.1
+   │  │  │  │  │  ├─ is-number @ 3.0.0
+   │  │  │  │  │  │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  ├─ repeat-string @ 1.6.1
+   │  │  │  │  │  └─ to-regex-range @ 2.1.1
+   │  │  │  │  │     ├─ is-number @ 3.0.0
+   │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │     └─ repeat-string @ 1.6.1
+   │  │  │  │  ├─ isobject @ 3.0.1
+   │  │  │  │  ├─ repeat-element @ 1.1.2
+   │  │  │  │  ├─ snapdragon @ 0.8.2
+   │  │  │  │  │  ├─ base @ 0.11.2
+   │  │  │  │  │  │  ├─ cache-base @ 1.0.1
+   │  │  │  │  │  │  │  ├─ collection-visit @ 1.0.0
+   │  │  │  │  │  │  │  │  ├─ map-visit @ 1.0.0
+   │  │  │  │  │  │  │  │  │  └─ object-visit @ 1.0.1
+   │  │  │  │  │  │  │  │  │     └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  └─ object-visit @ 1.0.1
+   │  │  │  │  │  │  │  │     └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  ├─ component-emitter @ 1.2.1
+   │  │  │  │  │  │  │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │  ├─ has-value @ 1.0.0
+   │  │  │  │  │  │  │  │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │  │  ├─ has-values @ 1.0.0
+   │  │  │  │  │  │  │  │  │  ├─ is-number @ 3.0.0
+   │  │  │  │  │  │  │  │  │  │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │  │  │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  │  └─ kind-of @ 4.0.0
+   │  │  │  │  │  │  │  │  │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  ├─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  ├─ set-value @ 2.0.0
+   │  │  │  │  │  │  │  │  ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  │  │  │  │  └─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  ├─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  ├─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │  │  │  └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  └─ split-string @ 3.1.0
+   │  │  │  │  │  │  │  │     └─ extend-shallow @ 3.0.2
+   │  │  │  │  │  │  │  │        ├─ assign-symbols @ 1.0.0
+   │  │  │  │  │  │  │  │        └─ is-extendable @ 1.0.1
+   │  │  │  │  │  │  │  │           └─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │  │              └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  ├─ to-object-path @ 0.3.0
+   │  │  │  │  │  │  │  │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  ├─ union-value @ 1.0.0
+   │  │  │  │  │  │  │  │  ├─ arr-union @ 3.1.0
+   │  │  │  │  │  │  │  │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │  │  ├─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  └─ set-value @ 0.4.3
+   │  │  │  │  │  │  │  │     ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  │  │  │     │  └─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │     ├─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │     ├─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │  │     │  └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │     └─ to-object-path @ 0.3.0
+   │  │  │  │  │  │  │  │        └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │           └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  └─ unset-value @ 1.0.0
+   │  │  │  │  │  │  │     ├─ has-value @ 0.3.1
+   │  │  │  │  │  │  │     │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │     │  ├─ has-values @ 0.1.4
+   │  │  │  │  │  │  │     │  └─ isobject @ 2.1.0
+   │  │  │  │  │  │  │     │     └─ isarray @ 1.0.0
+   │  │  │  │  │  │  │     └─ isobject @ 3.0.1
+   │  │  │  │  │  │  ├─ class-utils @ 0.3.6
+   │  │  │  │  │  │  │  ├─ arr-union @ 3.1.0
+   │  │  │  │  │  │  │  ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  │  │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │  │  ├─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  └─ static-extend @ 0.1.2
+   │  │  │  │  │  │  │     ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  │     │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │  │     │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │  │     │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │     │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │     │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │  │     │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │     │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │     │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │  │     └─ object-copy @ 0.1.0
+   │  │  │  │  │  │  │        ├─ copy-descriptor @ 0.1.1
+   │  │  │  │  │  │  │        ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  │        │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │  │        │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │  │        │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │        │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │        │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │  │        │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │        │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │        │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │  │        └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │           └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  ├─ component-emitter @ 1.2.1
+   │  │  │  │  │  │  ├─ define-property @ 1.0.0
+   │  │  │  │  │  │  │  └─ is-descriptor @ 1.0.2
+   │  │  │  │  │  │  │     ├─ is-accessor-descriptor @ 1.0.0
+   │  │  │  │  │  │  │     │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  │     ├─ is-data-descriptor @ 1.0.0
+   │  │  │  │  │  │  │     │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  │     └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  ├─ isobject @ 3.0.1
+   │  │  │  │  │  │  ├─ mixin-deep @ 1.3.1
+   │  │  │  │  │  │  │  ├─ for-in @ 1.0.2
+   │  │  │  │  │  │  │  └─ is-extendable @ 1.0.1
+   │  │  │  │  │  │  │     └─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │        └─ isobject @ 3.0.1
+   │  │  │  │  │  │  └─ pascalcase @ 0.1.1
+   │  │  │  │  │  ├─ debug @ 2.6.9
+   │  │  │  │  │  │  └─ ms @ 2.0.0
+   │  │  │  │  │  ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  │  └─ is-extendable @ 0.1.1
+   │  │  │  │  │  ├─ map-cache @ 0.2.2
+   │  │  │  │  │  ├─ source-map @ 0.5.7
+   │  │  │  │  │  ├─ source-map-resolve @ 0.5.1
+   │  │  │  │  │  │  ├─ atob @ 2.1.1
+   │  │  │  │  │  │  ├─ decode-uri-component @ 0.2.0
+   │  │  │  │  │  │  ├─ resolve-url @ 0.2.1
+   │  │  │  │  │  │  ├─ source-map-url @ 0.4.0
+   │  │  │  │  │  │  └─ urix @ 0.1.0
+   │  │  │  │  │  └─ use @ 3.1.0
+   │  │  │  │  │     └─ kind-of @ 6.0.2
+   │  │  │  │  ├─ snapdragon-node @ 2.1.1
+   │  │  │  │  │  ├─ define-property @ 1.0.0
+   │  │  │  │  │  │  └─ is-descriptor @ 1.0.2
+   │  │  │  │  │  │     ├─ is-accessor-descriptor @ 1.0.0
+   │  │  │  │  │  │     │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │     ├─ is-data-descriptor @ 1.0.0
+   │  │  │  │  │  │     │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │     └─ kind-of @ 6.0.2
+   │  │  │  │  │  ├─ isobject @ 3.0.1
+   │  │  │  │  │  └─ snapdragon-util @ 3.0.1
+   │  │  │  │  │     └─ kind-of @ 3.2.2
+   │  │  │  │  │        └─ is-buffer @ 1.1.6
+   │  │  │  │  ├─ split-string @ 3.1.0
+   │  │  │  │  │  └─ extend-shallow @ 3.0.2
+   │  │  │  │  │     ├─ assign-symbols @ 1.0.0
+   │  │  │  │  │     └─ is-extendable @ 1.0.1
+   │  │  │  │  │        └─ is-plain-object @ 2.0.4
+   │  │  │  │  │           └─ isobject @ 3.0.1
+   │  │  │  │  └─ to-regex @ 3.0.2
+   │  │  │  │     ├─ define-property @ 2.0.2
+   │  │  │  │     │  ├─ is-descriptor @ 1.0.2
+   │  │  │  │     │  │  ├─ is-accessor-descriptor @ 1.0.0
+   │  │  │  │     │  │  │  └─ kind-of @ 6.0.2
+   │  │  │  │     │  │  ├─ is-data-descriptor @ 1.0.0
+   │  │  │  │     │  │  │  └─ kind-of @ 6.0.2
+   │  │  │  │     │  │  └─ kind-of @ 6.0.2
+   │  │  │  │     │  └─ isobject @ 3.0.1
+   │  │  │  │     ├─ extend-shallow @ 3.0.2
+   │  │  │  │     │  ├─ assign-symbols @ 1.0.0
+   │  │  │  │     │  └─ is-extendable @ 1.0.1
+   │  │  │  │     │     └─ is-plain-object @ 2.0.4
+   │  │  │  │     │        └─ isobject @ 3.0.1
+   │  │  │  │     ├─ regex-not @ 1.0.2
+   │  │  │  │     │  ├─ extend-shallow @ 3.0.2
+   │  │  │  │     │  │  ├─ assign-symbols @ 1.0.0
+   │  │  │  │     │  │  └─ is-extendable @ 1.0.1
+   │  │  │  │     │  │     └─ is-plain-object @ 2.0.4
+   │  │  │  │     │  │        └─ isobject @ 3.0.1
+   │  │  │  │     │  └─ safe-regex @ 1.1.0
+   │  │  │  │     │     └─ ret @ 0.1.15
+   │  │  │  │     └─ safe-regex @ 1.1.0
+   │  │  │  │        └─ ret @ 0.1.15
+   │  │  │  ├─ define-property @ 2.0.2
+   │  │  │  │  ├─ is-descriptor @ 1.0.2
+   │  │  │  │  │  ├─ is-accessor-descriptor @ 1.0.0
+   │  │  │  │  │  │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  ├─ is-data-descriptor @ 1.0.0
+   │  │  │  │  │  │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  └─ kind-of @ 6.0.2
+   │  │  │  │  └─ isobject @ 3.0.1
+   │  │  │  ├─ extend-shallow @ 3.0.2
+   │  │  │  │  ├─ assign-symbols @ 1.0.0
+   │  │  │  │  └─ is-extendable @ 1.0.1
+   │  │  │  │     └─ is-plain-object @ 2.0.4
+   │  │  │  │        └─ isobject @ 3.0.1
+   │  │  │  ├─ extglob @ 2.0.4
+   │  │  │  │  ├─ array-unique @ 0.3.2
+   │  │  │  │  ├─ define-property @ 1.0.0
+   │  │  │  │  │  └─ is-descriptor @ 1.0.2
+   │  │  │  │  │     ├─ is-accessor-descriptor @ 1.0.0
+   │  │  │  │  │     │  └─ kind-of @ 6.0.2
+   │  │  │  │  │     ├─ is-data-descriptor @ 1.0.0
+   │  │  │  │  │     │  └─ kind-of @ 6.0.2
+   │  │  │  │  │     └─ kind-of @ 6.0.2
+   │  │  │  │  ├─ expand-brackets @ 2.1.4
+   │  │  │  │  │  ├─ debug @ 2.6.9
+   │  │  │  │  │  │  └─ ms @ 2.0.0
+   │  │  │  │  │  ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  │  └─ is-extendable @ 0.1.1
+   │  │  │  │  │  ├─ posix-character-classes @ 0.1.1
+   │  │  │  │  │  ├─ regex-not @ 1.0.2
+   │  │  │  │  │  │  ├─ extend-shallow @ 3.0.2
+   │  │  │  │  │  │  │  ├─ assign-symbols @ 1.0.0
+   │  │  │  │  │  │  │  └─ is-extendable @ 1.0.1
+   │  │  │  │  │  │  │     └─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │        └─ isobject @ 3.0.1
+   │  │  │  │  │  │  └─ safe-regex @ 1.1.0
+   │  │  │  │  │  │     └─ ret @ 0.1.15
+   │  │  │  │  │  ├─ snapdragon @ 0.8.2
+   │  │  │  │  │  │  ├─ base @ 0.11.2
+   │  │  │  │  │  │  │  ├─ cache-base @ 1.0.1
+   │  │  │  │  │  │  │  │  ├─ collection-visit @ 1.0.0
+   │  │  │  │  │  │  │  │  │  ├─ map-visit @ 1.0.0
+   │  │  │  │  │  │  │  │  │  │  └─ object-visit @ 1.0.1
+   │  │  │  │  │  │  │  │  │  │     └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  │  └─ object-visit @ 1.0.1
+   │  │  │  │  │  │  │  │  │     └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  ├─ component-emitter @ 1.2.1
+   │  │  │  │  │  │  │  │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │  │  ├─ has-value @ 1.0.0
+   │  │  │  │  │  │  │  │  │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │  │  │  ├─ has-values @ 1.0.0
+   │  │  │  │  │  │  │  │  │  │  ├─ is-number @ 3.0.0
+   │  │  │  │  │  │  │  │  │  │  │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │  │  │  │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  │  │  └─ kind-of @ 4.0.0
+   │  │  │  │  │  │  │  │  │  │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  │  └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  ├─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  ├─ set-value @ 2.0.0
+   │  │  │  │  │  │  │  │  │  ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  │  │  │  │  │  └─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  │  ├─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  │  ├─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │  │  │  │  └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  │  └─ split-string @ 3.1.0
+   │  │  │  │  │  │  │  │  │     └─ extend-shallow @ 3.0.2
+   │  │  │  │  │  │  │  │  │        ├─ assign-symbols @ 1.0.0
+   │  │  │  │  │  │  │  │  │        └─ is-extendable @ 1.0.1
+   │  │  │  │  │  │  │  │  │           └─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │  │  │              └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  ├─ to-object-path @ 0.3.0
+   │  │  │  │  │  │  │  │  │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │  │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  ├─ union-value @ 1.0.0
+   │  │  │  │  │  │  │  │  │  ├─ arr-union @ 3.1.0
+   │  │  │  │  │  │  │  │  │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │  │  │  ├─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  │  └─ set-value @ 0.4.3
+   │  │  │  │  │  │  │  │  │     ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  │  │  │  │     │  └─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  │     ├─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  │     ├─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │  │  │     │  └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  │     └─ to-object-path @ 0.3.0
+   │  │  │  │  │  │  │  │  │        └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │  │           └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  └─ unset-value @ 1.0.0
+   │  │  │  │  │  │  │  │     ├─ has-value @ 0.3.1
+   │  │  │  │  │  │  │  │     │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │  │     │  ├─ has-values @ 0.1.4
+   │  │  │  │  │  │  │  │     │  └─ isobject @ 2.1.0
+   │  │  │  │  │  │  │  │     │     └─ isarray @ 1.0.0
+   │  │  │  │  │  │  │  │     └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  ├─ class-utils @ 0.3.6
+   │  │  │  │  │  │  │  │  ├─ arr-union @ 3.1.0
+   │  │  │  │  │  │  │  │  ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  │  │  │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │  │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │  │  │  ├─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  └─ static-extend @ 0.1.2
+   │  │  │  │  │  │  │  │     ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  │  │     │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │     │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │     │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │     │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │     │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │  │  │     │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │     │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │     │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │  │  │     └─ object-copy @ 0.1.0
+   │  │  │  │  │  │  │  │        ├─ copy-descriptor @ 0.1.1
+   │  │  │  │  │  │  │  │        ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  │  │        │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │        │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │        │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │        │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │        │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │  │  │        │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │        │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │        │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │  │  │        └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │           └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  ├─ component-emitter @ 1.2.1
+   │  │  │  │  │  │  │  ├─ define-property @ 1.0.0
+   │  │  │  │  │  │  │  │  └─ is-descriptor @ 1.0.2
+   │  │  │  │  │  │  │  │     ├─ is-accessor-descriptor @ 1.0.0
+   │  │  │  │  │  │  │  │     │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  │  │     ├─ is-data-descriptor @ 1.0.0
+   │  │  │  │  │  │  │  │     │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  │  │     └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  │  ├─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  ├─ mixin-deep @ 1.3.1
+   │  │  │  │  │  │  │  │  ├─ for-in @ 1.0.2
+   │  │  │  │  │  │  │  │  └─ is-extendable @ 1.0.1
+   │  │  │  │  │  │  │  │     └─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │  │        └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  └─ pascalcase @ 0.1.1
+   │  │  │  │  │  │  ├─ debug @ 2.6.9
+   │  │  │  │  │  │  │  └─ ms @ 2.0.0
+   │  │  │  │  │  │  ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │  │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │  ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  │  │  └─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  ├─ map-cache @ 0.2.2
+   │  │  │  │  │  │  ├─ source-map @ 0.5.7
+   │  │  │  │  │  │  ├─ source-map-resolve @ 0.5.1
+   │  │  │  │  │  │  │  ├─ atob @ 2.1.1
+   │  │  │  │  │  │  │  ├─ decode-uri-component @ 0.2.0
+   │  │  │  │  │  │  │  ├─ resolve-url @ 0.2.1
+   │  │  │  │  │  │  │  ├─ source-map-url @ 0.4.0
+   │  │  │  │  │  │  │  └─ urix @ 0.1.0
+   │  │  │  │  │  │  └─ use @ 3.1.0
+   │  │  │  │  │  │     └─ kind-of @ 6.0.2
+   │  │  │  │  │  └─ to-regex @ 3.0.2
+   │  │  │  │  │     ├─ define-property @ 2.0.2
+   │  │  │  │  │     │  ├─ is-descriptor @ 1.0.2
+   │  │  │  │  │     │  │  ├─ is-accessor-descriptor @ 1.0.0
+   │  │  │  │  │     │  │  │  └─ kind-of @ 6.0.2
+   │  │  │  │  │     │  │  ├─ is-data-descriptor @ 1.0.0
+   │  │  │  │  │     │  │  │  └─ kind-of @ 6.0.2
+   │  │  │  │  │     │  │  └─ kind-of @ 6.0.2
+   │  │  │  │  │     │  └─ isobject @ 3.0.1
+   │  │  │  │  │     ├─ extend-shallow @ 3.0.2
+   │  │  │  │  │     │  ├─ assign-symbols @ 1.0.0
+   │  │  │  │  │     │  └─ is-extendable @ 1.0.1
+   │  │  │  │  │     │     └─ is-plain-object @ 2.0.4
+   │  │  │  │  │     │        └─ isobject @ 3.0.1
+   │  │  │  │  │     ├─ regex-not @ 1.0.2
+   │  │  │  │  │     │  ├─ extend-shallow @ 3.0.2
+   │  │  │  │  │     │  │  ├─ assign-symbols @ 1.0.0
+   │  │  │  │  │     │  │  └─ is-extendable @ 1.0.1
+   │  │  │  │  │     │  │     └─ is-plain-object @ 2.0.4
+   │  │  │  │  │     │  │        └─ isobject @ 3.0.1
+   │  │  │  │  │     │  └─ safe-regex @ 1.1.0
+   │  │  │  │  │     │     └─ ret @ 0.1.15
+   │  │  │  │  │     └─ safe-regex @ 1.1.0
+   │  │  │  │  │        └─ ret @ 0.1.15
+   │  │  │  │  ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  └─ is-extendable @ 0.1.1
+   │  │  │  │  ├─ fragment-cache @ 0.2.1
+   │  │  │  │  │  └─ map-cache @ 0.2.2
+   │  │  │  │  ├─ regex-not @ 1.0.2
+   │  │  │  │  │  ├─ extend-shallow @ 3.0.2
+   │  │  │  │  │  │  ├─ assign-symbols @ 1.0.0
+   │  │  │  │  │  │  └─ is-extendable @ 1.0.1
+   │  │  │  │  │  │     └─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │        └─ isobject @ 3.0.1
+   │  │  │  │  │  └─ safe-regex @ 1.1.0
+   │  │  │  │  │     └─ ret @ 0.1.15
+   │  │  │  │  ├─ snapdragon @ 0.8.2
+   │  │  │  │  │  ├─ base @ 0.11.2
+   │  │  │  │  │  │  ├─ cache-base @ 1.0.1
+   │  │  │  │  │  │  │  ├─ collection-visit @ 1.0.0
+   │  │  │  │  │  │  │  │  ├─ map-visit @ 1.0.0
+   │  │  │  │  │  │  │  │  │  └─ object-visit @ 1.0.1
+   │  │  │  │  │  │  │  │  │     └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  └─ object-visit @ 1.0.1
+   │  │  │  │  │  │  │  │     └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  ├─ component-emitter @ 1.2.1
+   │  │  │  │  │  │  │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │  ├─ has-value @ 1.0.0
+   │  │  │  │  │  │  │  │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │  │  ├─ has-values @ 1.0.0
+   │  │  │  │  │  │  │  │  │  ├─ is-number @ 3.0.0
+   │  │  │  │  │  │  │  │  │  │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │  │  │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  │  └─ kind-of @ 4.0.0
+   │  │  │  │  │  │  │  │  │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  ├─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  ├─ set-value @ 2.0.0
+   │  │  │  │  │  │  │  │  ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  │  │  │  │  └─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  ├─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  ├─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │  │  │  └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  └─ split-string @ 3.1.0
+   │  │  │  │  │  │  │  │     └─ extend-shallow @ 3.0.2
+   │  │  │  │  │  │  │  │        ├─ assign-symbols @ 1.0.0
+   │  │  │  │  │  │  │  │        └─ is-extendable @ 1.0.1
+   │  │  │  │  │  │  │  │           └─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │  │              └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  ├─ to-object-path @ 0.3.0
+   │  │  │  │  │  │  │  │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  ├─ union-value @ 1.0.0
+   │  │  │  │  │  │  │  │  ├─ arr-union @ 3.1.0
+   │  │  │  │  │  │  │  │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │  │  ├─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  └─ set-value @ 0.4.3
+   │  │  │  │  │  │  │  │     ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  │  │  │     │  └─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │     ├─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │     ├─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │  │     │  └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │     └─ to-object-path @ 0.3.0
+   │  │  │  │  │  │  │  │        └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │           └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  └─ unset-value @ 1.0.0
+   │  │  │  │  │  │  │     ├─ has-value @ 0.3.1
+   │  │  │  │  │  │  │     │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │     │  ├─ has-values @ 0.1.4
+   │  │  │  │  │  │  │     │  └─ isobject @ 2.1.0
+   │  │  │  │  │  │  │     │     └─ isarray @ 1.0.0
+   │  │  │  │  │  │  │     └─ isobject @ 3.0.1
+   │  │  │  │  │  │  ├─ class-utils @ 0.3.6
+   │  │  │  │  │  │  │  ├─ arr-union @ 3.1.0
+   │  │  │  │  │  │  │  ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  │  │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │  │  ├─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  └─ static-extend @ 0.1.2
+   │  │  │  │  │  │  │     ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  │     │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │  │     │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │  │     │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │     │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │     │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │  │     │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │     │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │     │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │  │     └─ object-copy @ 0.1.0
+   │  │  │  │  │  │  │        ├─ copy-descriptor @ 0.1.1
+   │  │  │  │  │  │  │        ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  │        │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │  │        │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │  │        │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │        │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │        │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │  │        │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │        │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │        │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │  │        └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │           └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  ├─ component-emitter @ 1.2.1
+   │  │  │  │  │  │  ├─ define-property @ 1.0.0
+   │  │  │  │  │  │  │  └─ is-descriptor @ 1.0.2
+   │  │  │  │  │  │  │     ├─ is-accessor-descriptor @ 1.0.0
+   │  │  │  │  │  │  │     │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  │     ├─ is-data-descriptor @ 1.0.0
+   │  │  │  │  │  │  │     │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  │     └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  ├─ isobject @ 3.0.1
+   │  │  │  │  │  │  ├─ mixin-deep @ 1.3.1
+   │  │  │  │  │  │  │  ├─ for-in @ 1.0.2
+   │  │  │  │  │  │  │  └─ is-extendable @ 1.0.1
+   │  │  │  │  │  │  │     └─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │        └─ isobject @ 3.0.1
+   │  │  │  │  │  │  └─ pascalcase @ 0.1.1
+   │  │  │  │  │  ├─ debug @ 2.6.9
+   │  │  │  │  │  │  └─ ms @ 2.0.0
+   │  │  │  │  │  ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  │  └─ is-extendable @ 0.1.1
+   │  │  │  │  │  ├─ map-cache @ 0.2.2
+   │  │  │  │  │  ├─ source-map @ 0.5.7
+   │  │  │  │  │  ├─ source-map-resolve @ 0.5.1
+   │  │  │  │  │  │  ├─ atob @ 2.1.1
+   │  │  │  │  │  │  ├─ decode-uri-component @ 0.2.0
+   │  │  │  │  │  │  ├─ resolve-url @ 0.2.1
+   │  │  │  │  │  │  ├─ source-map-url @ 0.4.0
+   │  │  │  │  │  │  └─ urix @ 0.1.0
+   │  │  │  │  │  └─ use @ 3.1.0
+   │  │  │  │  │     └─ kind-of @ 6.0.2
+   │  │  │  │  └─ to-regex @ 3.0.2
+   │  │  │  │     ├─ define-property @ 2.0.2
+   │  │  │  │     │  ├─ is-descriptor @ 1.0.2
+   │  │  │  │     │  │  ├─ is-accessor-descriptor @ 1.0.0
+   │  │  │  │     │  │  │  └─ kind-of @ 6.0.2
+   │  │  │  │     │  │  ├─ is-data-descriptor @ 1.0.0
+   │  │  │  │     │  │  │  └─ kind-of @ 6.0.2
+   │  │  │  │     │  │  └─ kind-of @ 6.0.2
+   │  │  │  │     │  └─ isobject @ 3.0.1
+   │  │  │  │     ├─ extend-shallow @ 3.0.2
+   │  │  │  │     │  ├─ assign-symbols @ 1.0.0
+   │  │  │  │     │  └─ is-extendable @ 1.0.1
+   │  │  │  │     │     └─ is-plain-object @ 2.0.4
+   │  │  │  │     │        └─ isobject @ 3.0.1
+   │  │  │  │     ├─ regex-not @ 1.0.2
+   │  │  │  │     │  ├─ extend-shallow @ 3.0.2
+   │  │  │  │     │  │  ├─ assign-symbols @ 1.0.0
+   │  │  │  │     │  │  └─ is-extendable @ 1.0.1
+   │  │  │  │     │  │     └─ is-plain-object @ 2.0.4
+   │  │  │  │     │  │        └─ isobject @ 3.0.1
+   │  │  │  │     │  └─ safe-regex @ 1.1.0
+   │  │  │  │     │     └─ ret @ 0.1.15
+   │  │  │  │     └─ safe-regex @ 1.1.0
+   │  │  │  │        └─ ret @ 0.1.15
+   │  │  │  ├─ fragment-cache @ 0.2.1
+   │  │  │  │  └─ map-cache @ 0.2.2
+   │  │  │  ├─ kind-of @ 6.0.2
+   │  │  │  ├─ nanomatch @ 1.2.9
+   │  │  │  │  ├─ arr-diff @ 4.0.0
+   │  │  │  │  ├─ array-unique @ 0.3.2
+   │  │  │  │  ├─ define-property @ 2.0.2
+   │  │  │  │  │  ├─ is-descriptor @ 1.0.2
+   │  │  │  │  │  │  ├─ is-accessor-descriptor @ 1.0.0
+   │  │  │  │  │  │  │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  ├─ is-data-descriptor @ 1.0.0
+   │  │  │  │  │  │  │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  └─ isobject @ 3.0.1
+   │  │  │  │  ├─ extend-shallow @ 3.0.2
+   │  │  │  │  │  ├─ assign-symbols @ 1.0.0
+   │  │  │  │  │  └─ is-extendable @ 1.0.1
+   │  │  │  │  │     └─ is-plain-object @ 2.0.4
+   │  │  │  │  │        └─ isobject @ 3.0.1
+   │  │  │  │  ├─ fragment-cache @ 0.2.1
+   │  │  │  │  │  └─ map-cache @ 0.2.2
+   │  │  │  │  ├─ is-odd @ 2.0.0
+   │  │  │  │  │  └─ is-number @ 4.0.0
+   │  │  │  │  ├─ is-windows @ 1.0.2
+   │  │  │  │  ├─ kind-of @ 6.0.2
+   │  │  │  │  ├─ object.pick @ 1.3.0
+   │  │  │  │  │  └─ isobject @ 3.0.1
+   │  │  │  │  ├─ regex-not @ 1.0.2
+   │  │  │  │  │  ├─ extend-shallow @ 3.0.2
+   │  │  │  │  │  │  ├─ assign-symbols @ 1.0.0
+   │  │  │  │  │  │  └─ is-extendable @ 1.0.1
+   │  │  │  │  │  │     └─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │        └─ isobject @ 3.0.1
+   │  │  │  │  │  └─ safe-regex @ 1.1.0
+   │  │  │  │  │     └─ ret @ 0.1.15
+   │  │  │  │  ├─ snapdragon @ 0.8.2
+   │  │  │  │  │  ├─ base @ 0.11.2
+   │  │  │  │  │  │  ├─ cache-base @ 1.0.1
+   │  │  │  │  │  │  │  ├─ collection-visit @ 1.0.0
+   │  │  │  │  │  │  │  │  ├─ map-visit @ 1.0.0
+   │  │  │  │  │  │  │  │  │  └─ object-visit @ 1.0.1
+   │  │  │  │  │  │  │  │  │     └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  └─ object-visit @ 1.0.1
+   │  │  │  │  │  │  │  │     └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  ├─ component-emitter @ 1.2.1
+   │  │  │  │  │  │  │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │  ├─ has-value @ 1.0.0
+   │  │  │  │  │  │  │  │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │  │  ├─ has-values @ 1.0.0
+   │  │  │  │  │  │  │  │  │  ├─ is-number @ 3.0.0
+   │  │  │  │  │  │  │  │  │  │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │  │  │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  │  └─ kind-of @ 4.0.0
+   │  │  │  │  │  │  │  │  │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  ├─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  ├─ set-value @ 2.0.0
+   │  │  │  │  │  │  │  │  ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  │  │  │  │  └─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  ├─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  ├─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │  │  │  └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  └─ split-string @ 3.1.0
+   │  │  │  │  │  │  │  │     └─ extend-shallow @ 3.0.2
+   │  │  │  │  │  │  │  │        ├─ assign-symbols @ 1.0.0
+   │  │  │  │  │  │  │  │        └─ is-extendable @ 1.0.1
+   │  │  │  │  │  │  │  │           └─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │  │              └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  ├─ to-object-path @ 0.3.0
+   │  │  │  │  │  │  │  │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  ├─ union-value @ 1.0.0
+   │  │  │  │  │  │  │  │  ├─ arr-union @ 3.1.0
+   │  │  │  │  │  │  │  │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │  │  ├─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  └─ set-value @ 0.4.3
+   │  │  │  │  │  │  │  │     ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  │  │  │     │  └─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │     ├─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │     ├─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │  │     │  └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │     └─ to-object-path @ 0.3.0
+   │  │  │  │  │  │  │  │        └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │           └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  └─ unset-value @ 1.0.0
+   │  │  │  │  │  │  │     ├─ has-value @ 0.3.1
+   │  │  │  │  │  │  │     │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │     │  ├─ has-values @ 0.1.4
+   │  │  │  │  │  │  │     │  └─ isobject @ 2.1.0
+   │  │  │  │  │  │  │     │     └─ isarray @ 1.0.0
+   │  │  │  │  │  │  │     └─ isobject @ 3.0.1
+   │  │  │  │  │  │  ├─ class-utils @ 0.3.6
+   │  │  │  │  │  │  │  ├─ arr-union @ 3.1.0
+   │  │  │  │  │  │  │  ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  │  │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │  │  ├─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  └─ static-extend @ 0.1.2
+   │  │  │  │  │  │  │     ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  │     │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │  │     │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │  │     │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │     │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │     │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │  │     │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │     │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │     │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │  │     └─ object-copy @ 0.1.0
+   │  │  │  │  │  │  │        ├─ copy-descriptor @ 0.1.1
+   │  │  │  │  │  │  │        ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  │        │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │  │        │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │  │        │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │        │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │        │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │  │        │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │        │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │        │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │  │        └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │           └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  ├─ component-emitter @ 1.2.1
+   │  │  │  │  │  │  ├─ define-property @ 1.0.0
+   │  │  │  │  │  │  │  └─ is-descriptor @ 1.0.2
+   │  │  │  │  │  │  │     ├─ is-accessor-descriptor @ 1.0.0
+   │  │  │  │  │  │  │     │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  │     ├─ is-data-descriptor @ 1.0.0
+   │  │  │  │  │  │  │     │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  │     └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  ├─ isobject @ 3.0.1
+   │  │  │  │  │  │  ├─ mixin-deep @ 1.3.1
+   │  │  │  │  │  │  │  ├─ for-in @ 1.0.2
+   │  │  │  │  │  │  │  └─ is-extendable @ 1.0.1
+   │  │  │  │  │  │  │     └─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │        └─ isobject @ 3.0.1
+   │  │  │  │  │  │  └─ pascalcase @ 0.1.1
+   │  │  │  │  │  ├─ debug @ 2.6.9
+   │  │  │  │  │  │  └─ ms @ 2.0.0
+   │  │  │  │  │  ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  │  └─ is-extendable @ 0.1.1
+   │  │  │  │  │  ├─ map-cache @ 0.2.2
+   │  │  │  │  │  ├─ source-map @ 0.5.7
+   │  │  │  │  │  ├─ source-map-resolve @ 0.5.1
+   │  │  │  │  │  │  ├─ atob @ 2.1.1
+   │  │  │  │  │  │  ├─ decode-uri-component @ 0.2.0
+   │  │  │  │  │  │  ├─ resolve-url @ 0.2.1
+   │  │  │  │  │  │  ├─ source-map-url @ 0.4.0
+   │  │  │  │  │  │  └─ urix @ 0.1.0
+   │  │  │  │  │  └─ use @ 3.1.0
+   │  │  │  │  │     └─ kind-of @ 6.0.2
+   │  │  │  │  └─ to-regex @ 3.0.2
+   │  │  │  │     ├─ define-property @ 2.0.2
+   │  │  │  │     │  ├─ is-descriptor @ 1.0.2
+   │  │  │  │     │  │  ├─ is-accessor-descriptor @ 1.0.0
+   │  │  │  │     │  │  │  └─ kind-of @ 6.0.2
+   │  │  │  │     │  │  ├─ is-data-descriptor @ 1.0.0
+   │  │  │  │     │  │  │  └─ kind-of @ 6.0.2
+   │  │  │  │     │  │  └─ kind-of @ 6.0.2
+   │  │  │  │     │  └─ isobject @ 3.0.1
+   │  │  │  │     ├─ extend-shallow @ 3.0.2
+   │  │  │  │     │  ├─ assign-symbols @ 1.0.0
+   │  │  │  │     │  └─ is-extendable @ 1.0.1
+   │  │  │  │     │     └─ is-plain-object @ 2.0.4
+   │  │  │  │     │        └─ isobject @ 3.0.1
+   │  │  │  │     ├─ regex-not @ 1.0.2
+   │  │  │  │     │  ├─ extend-shallow @ 3.0.2
+   │  │  │  │     │  │  ├─ assign-symbols @ 1.0.0
+   │  │  │  │     │  │  └─ is-extendable @ 1.0.1
+   │  │  │  │     │  │     └─ is-plain-object @ 2.0.4
+   │  │  │  │     │  │        └─ isobject @ 3.0.1
+   │  │  │  │     │  └─ safe-regex @ 1.1.0
+   │  │  │  │     │     └─ ret @ 0.1.15
+   │  │  │  │     └─ safe-regex @ 1.1.0
+   │  │  │  │        └─ ret @ 0.1.15
+   │  │  │  ├─ object.pick @ 1.3.0
+   │  │  │  │  └─ isobject @ 3.0.1
+   │  │  │  ├─ regex-not @ 1.0.2
+   │  │  │  │  ├─ extend-shallow @ 3.0.2
+   │  │  │  │  │  ├─ assign-symbols @ 1.0.0
+   │  │  │  │  │  └─ is-extendable @ 1.0.1
+   │  │  │  │  │     └─ is-plain-object @ 2.0.4
+   │  │  │  │  │        └─ isobject @ 3.0.1
+   │  │  │  │  └─ safe-regex @ 1.1.0
+   │  │  │  │     └─ ret @ 0.1.15
+   │  │  │  ├─ snapdragon @ 0.8.2
+   │  │  │  │  ├─ base @ 0.11.2
+   │  │  │  │  │  ├─ cache-base @ 1.0.1
+   │  │  │  │  │  │  ├─ collection-visit @ 1.0.0
+   │  │  │  │  │  │  │  ├─ map-visit @ 1.0.0
+   │  │  │  │  │  │  │  │  └─ object-visit @ 1.0.1
+   │  │  │  │  │  │  │  │     └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  └─ object-visit @ 1.0.1
+   │  │  │  │  │  │  │     └─ isobject @ 3.0.1
+   │  │  │  │  │  │  ├─ component-emitter @ 1.2.1
+   │  │  │  │  │  │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  ├─ has-value @ 1.0.0
+   │  │  │  │  │  │  │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │  ├─ has-values @ 1.0.0
+   │  │  │  │  │  │  │  │  ├─ is-number @ 3.0.0
+   │  │  │  │  │  │  │  │  │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │  │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  └─ kind-of @ 4.0.0
+   │  │  │  │  │  │  │  │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  └─ isobject @ 3.0.1
+   │  │  │  │  │  │  ├─ isobject @ 3.0.1
+   │  │  │  │  │  │  ├─ set-value @ 2.0.0
+   │  │  │  │  │  │  │  ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  │  │  │  └─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  ├─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  ├─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │  │  └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  └─ split-string @ 3.1.0
+   │  │  │  │  │  │  │     └─ extend-shallow @ 3.0.2
+   │  │  │  │  │  │  │        ├─ assign-symbols @ 1.0.0
+   │  │  │  │  │  │  │        └─ is-extendable @ 1.0.1
+   │  │  │  │  │  │  │           └─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │              └─ isobject @ 3.0.1
+   │  │  │  │  │  │  ├─ to-object-path @ 0.3.0
+   │  │  │  │  │  │  │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  ├─ union-value @ 1.0.0
+   │  │  │  │  │  │  │  ├─ arr-union @ 3.1.0
+   │  │  │  │  │  │  │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │  ├─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  └─ set-value @ 0.4.3
+   │  │  │  │  │  │  │     ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  │  │     │  └─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │     ├─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │     ├─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │     │  └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │     └─ to-object-path @ 0.3.0
+   │  │  │  │  │  │  │        └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │           └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  └─ unset-value @ 1.0.0
+   │  │  │  │  │  │     ├─ has-value @ 0.3.1
+   │  │  │  │  │  │     │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │     │  ├─ has-values @ 0.1.4
+   │  │  │  │  │  │     │  └─ isobject @ 2.1.0
+   │  │  │  │  │  │     │     └─ isarray @ 1.0.0
+   │  │  │  │  │  │     └─ isobject @ 3.0.1
+   │  │  │  │  │  ├─ class-utils @ 0.3.6
+   │  │  │  │  │  │  ├─ arr-union @ 3.1.0
+   │  │  │  │  │  │  ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │  │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │  ├─ isobject @ 3.0.1
+   │  │  │  │  │  │  └─ static-extend @ 0.1.2
+   │  │  │  │  │  │     ├─ define-property @ 0.2.5
+   │  │  │  │  │  │     │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │     │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │     │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │     │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │     │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │     │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │     │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │     │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │     └─ object-copy @ 0.1.0
+   │  │  │  │  │  │        ├─ copy-descriptor @ 0.1.1
+   │  │  │  │  │  │        ├─ define-property @ 0.2.5
+   │  │  │  │  │  │        │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │        │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │        │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │        │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │        │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │        │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │        │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │        │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │        └─ kind-of @ 3.2.2
+   │  │  │  │  │  │           └─ is-buffer @ 1.1.6
+   │  │  │  │  │  ├─ component-emitter @ 1.2.1
+   │  │  │  │  │  ├─ define-property @ 1.0.0
+   │  │  │  │  │  │  └─ is-descriptor @ 1.0.2
+   │  │  │  │  │  │     ├─ is-accessor-descriptor @ 1.0.0
+   │  │  │  │  │  │     │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │     ├─ is-data-descriptor @ 1.0.0
+   │  │  │  │  │  │     │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │     └─ kind-of @ 6.0.2
+   │  │  │  │  │  ├─ isobject @ 3.0.1
+   │  │  │  │  │  ├─ mixin-deep @ 1.3.1
+   │  │  │  │  │  │  ├─ for-in @ 1.0.2
+   │  │  │  │  │  │  └─ is-extendable @ 1.0.1
+   │  │  │  │  │  │     └─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │        └─ isobject @ 3.0.1
+   │  │  │  │  │  └─ pascalcase @ 0.1.1
+   │  │  │  │  ├─ debug @ 2.6.9
+   │  │  │  │  │  └─ ms @ 2.0.0
+   │  │  │  │  ├─ define-property @ 0.2.5
+   │  │  │  │  │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │     └─ kind-of @ 5.1.0
+   │  │  │  │  ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  └─ is-extendable @ 0.1.1
+   │  │  │  │  ├─ map-cache @ 0.2.2
+   │  │  │  │  ├─ source-map @ 0.5.7
+   │  │  │  │  ├─ source-map-resolve @ 0.5.1
+   │  │  │  │  │  ├─ atob @ 2.1.1
+   │  │  │  │  │  ├─ decode-uri-component @ 0.2.0
+   │  │  │  │  │  ├─ resolve-url @ 0.2.1
+   │  │  │  │  │  ├─ source-map-url @ 0.4.0
+   │  │  │  │  │  └─ urix @ 0.1.0
+   │  │  │  │  └─ use @ 3.1.0
+   │  │  │  │     └─ kind-of @ 6.0.2
+   │  │  │  └─ to-regex @ 3.0.2
+   │  │  │     ├─ define-property @ 2.0.2
+   │  │  │     │  ├─ is-descriptor @ 1.0.2
+   │  │  │     │  │  ├─ is-accessor-descriptor @ 1.0.0
+   │  │  │     │  │  │  └─ kind-of @ 6.0.2
+   │  │  │     │  │  ├─ is-data-descriptor @ 1.0.0
+   │  │  │     │  │  │  └─ kind-of @ 6.0.2
+   │  │  │     │  │  └─ kind-of @ 6.0.2
+   │  │  │     │  └─ isobject @ 3.0.1
+   │  │  │     ├─ extend-shallow @ 3.0.2
+   │  │  │     │  ├─ assign-symbols @ 1.0.0
+   │  │  │     │  └─ is-extendable @ 1.0.1
+   │  │  │     │     └─ is-plain-object @ 2.0.4
+   │  │  │     │        └─ isobject @ 3.0.1
+   │  │  │     ├─ regex-not @ 1.0.2
+   │  │  │     │  ├─ extend-shallow @ 3.0.2
+   │  │  │     │  │  ├─ assign-symbols @ 1.0.0
+   │  │  │     │  │  └─ is-extendable @ 1.0.1
+   │  │  │     │  │     └─ is-plain-object @ 2.0.4
+   │  │  │     │  │        └─ isobject @ 3.0.1
+   │  │  │     │  └─ safe-regex @ 1.1.0
+   │  │  │     │     └─ ret @ 0.1.15
+   │  │  │     └─ safe-regex @ 1.1.0
+   │  │  │        └─ ret @ 0.1.15
+   │  │  ├─ mkdirp @ 0.5.1
+   │  │  │  └─ minimist @ 0.0.8
+   │  │  ├─ resolve-from @ 2.0.0
+   │  │  ├─ rimraf @ 2.6.2
+   │  │  │  └─ glob @ 7.1.2
+   │  │  │     ├─ fs.realpath @ 1.0.0
+   │  │  │     ├─ inflight @ 1.0.6
+   │  │  │     │  ├─ once @ 1.4.0
+   │  │  │     │  │  └─ wrappy @ 1.0.2
+   │  │  │     │  └─ wrappy @ 1.0.2
+   │  │  │     ├─ inherits @ 2.0.3
+   │  │  │     ├─ minimatch @ 3.0.4
+   │  │  │     │  └─ brace-expansion @ 1.1.11
+   │  │  │     │     ├─ balanced-match @ 1.0.0
+   │  │  │     │     └─ concat-map @ 0.0.1
+   │  │  │     ├─ once @ 1.4.0
+   │  │  │     │  └─ wrappy @ 1.0.2
+   │  │  │     └─ path-is-absolute @ 1.0.1
+   │  │  ├─ signal-exit @ 3.0.2
+   │  │  ├─ spawn-wrap @ 1.4.2
+   │  │  │  ├─ foreground-child @ 1.5.6
+   │  │  │  │  ├─ cross-spawn @ 4.0.2
+   │  │  │  │  │  ├─ lru-cache @ 4.1.3
+   │  │  │  │  │  │  ├─ pseudomap @ 1.0.2
+   │  │  │  │  │  │  └─ yallist @ 2.1.2
+   │  │  │  │  │  └─ which @ 1.3.0
+   │  │  │  │  │     └─ isexe @ 2.0.0
+   │  │  │  │  └─ signal-exit @ 3.0.2
+   │  │  │  ├─ mkdirp @ 0.5.1
+   │  │  │  │  └─ minimist @ 0.0.8
+   │  │  │  ├─ os-homedir @ 1.0.2
+   │  │  │  ├─ rimraf @ 2.6.2
+   │  │  │  │  └─ glob @ 7.1.2
+   │  │  │  │     ├─ fs.realpath @ 1.0.0
+   │  │  │  │     ├─ inflight @ 1.0.6
+   │  │  │  │     │  ├─ once @ 1.4.0
+   │  │  │  │     │  │  └─ wrappy @ 1.0.2
+   │  │  │  │     │  └─ wrappy @ 1.0.2
+   │  │  │  │     ├─ inherits @ 2.0.3
+   │  │  │  │     ├─ minimatch @ 3.0.4
+   │  │  │  │     │  └─ brace-expansion @ 1.1.11
+   │  │  │  │     │     ├─ balanced-match @ 1.0.0
+   │  │  │  │     │     └─ concat-map @ 0.0.1
+   │  │  │  │     ├─ once @ 1.4.0
+   │  │  │  │     │  └─ wrappy @ 1.0.2
+   │  │  │  │     └─ path-is-absolute @ 1.0.1
+   │  │  │  ├─ signal-exit @ 3.0.2
+   │  │  │  └─ which @ 1.3.0
+   │  │  │     └─ isexe @ 2.0.0
+   │  │  ├─ test-exclude @ 4.2.1
+   │  │  │  ├─ arrify @ 1.0.1
+   │  │  │  ├─ micromatch @ 3.1.10
+   │  │  │  │  ├─ arr-diff @ 4.0.0
+   │  │  │  │  ├─ array-unique @ 0.3.2
+   │  │  │  │  ├─ braces @ 2.3.2
+   │  │  │  │  │  ├─ arr-flatten @ 1.1.0
+   │  │  │  │  │  ├─ array-unique @ 0.3.2
+   │  │  │  │  │  ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  │  └─ is-extendable @ 0.1.1
+   │  │  │  │  │  ├─ fill-range @ 4.0.0
+   │  │  │  │  │  │  ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  │  │  └─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  ├─ is-number @ 3.0.0
+   │  │  │  │  │  │  │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  ├─ repeat-string @ 1.6.1
+   │  │  │  │  │  │  └─ to-regex-range @ 2.1.1
+   │  │  │  │  │  │     ├─ is-number @ 3.0.0
+   │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │     └─ repeat-string @ 1.6.1
+   │  │  │  │  │  ├─ isobject @ 3.0.1
+   │  │  │  │  │  ├─ repeat-element @ 1.1.2
+   │  │  │  │  │  ├─ snapdragon @ 0.8.2
+   │  │  │  │  │  │  ├─ base @ 0.11.2
+   │  │  │  │  │  │  │  ├─ cache-base @ 1.0.1
+   │  │  │  │  │  │  │  │  ├─ collection-visit @ 1.0.0
+   │  │  │  │  │  │  │  │  │  ├─ map-visit @ 1.0.0
+   │  │  │  │  │  │  │  │  │  │  └─ object-visit @ 1.0.1
+   │  │  │  │  │  │  │  │  │  │     └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  │  └─ object-visit @ 1.0.1
+   │  │  │  │  │  │  │  │  │     └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  ├─ component-emitter @ 1.2.1
+   │  │  │  │  │  │  │  │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │  │  ├─ has-value @ 1.0.0
+   │  │  │  │  │  │  │  │  │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │  │  │  ├─ has-values @ 1.0.0
+   │  │  │  │  │  │  │  │  │  │  ├─ is-number @ 3.0.0
+   │  │  │  │  │  │  │  │  │  │  │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │  │  │  │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  │  │  └─ kind-of @ 4.0.0
+   │  │  │  │  │  │  │  │  │  │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  │  └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  ├─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  ├─ set-value @ 2.0.0
+   │  │  │  │  │  │  │  │  │  ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  │  │  │  │  │  └─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  │  ├─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  │  ├─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │  │  │  │  └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  │  └─ split-string @ 3.1.0
+   │  │  │  │  │  │  │  │  │     └─ extend-shallow @ 3.0.2
+   │  │  │  │  │  │  │  │  │        ├─ assign-symbols @ 1.0.0
+   │  │  │  │  │  │  │  │  │        └─ is-extendable @ 1.0.1
+   │  │  │  │  │  │  │  │  │           └─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │  │  │              └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  ├─ to-object-path @ 0.3.0
+   │  │  │  │  │  │  │  │  │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │  │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  ├─ union-value @ 1.0.0
+   │  │  │  │  │  │  │  │  │  ├─ arr-union @ 3.1.0
+   │  │  │  │  │  │  │  │  │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │  │  │  ├─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  │  └─ set-value @ 0.4.3
+   │  │  │  │  │  │  │  │  │     ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  │  │  │  │     │  └─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  │     ├─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  │     ├─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │  │  │     │  └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  │     └─ to-object-path @ 0.3.0
+   │  │  │  │  │  │  │  │  │        └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │  │           └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  └─ unset-value @ 1.0.0
+   │  │  │  │  │  │  │  │     ├─ has-value @ 0.3.1
+   │  │  │  │  │  │  │  │     │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │  │     │  ├─ has-values @ 0.1.4
+   │  │  │  │  │  │  │  │     │  └─ isobject @ 2.1.0
+   │  │  │  │  │  │  │  │     │     └─ isarray @ 1.0.0
+   │  │  │  │  │  │  │  │     └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  ├─ class-utils @ 0.3.6
+   │  │  │  │  │  │  │  │  ├─ arr-union @ 3.1.0
+   │  │  │  │  │  │  │  │  ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  │  │  │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │  │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │  │  │  ├─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  └─ static-extend @ 0.1.2
+   │  │  │  │  │  │  │  │     ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  │  │     │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │     │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │     │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │     │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │     │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │  │  │     │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │     │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │     │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │  │  │     └─ object-copy @ 0.1.0
+   │  │  │  │  │  │  │  │        ├─ copy-descriptor @ 0.1.1
+   │  │  │  │  │  │  │  │        ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  │  │        │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │        │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │        │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │        │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │        │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │  │  │        │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │        │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │        │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │  │  │        └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │           └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  ├─ component-emitter @ 1.2.1
+   │  │  │  │  │  │  │  ├─ define-property @ 1.0.0
+   │  │  │  │  │  │  │  │  └─ is-descriptor @ 1.0.2
+   │  │  │  │  │  │  │  │     ├─ is-accessor-descriptor @ 1.0.0
+   │  │  │  │  │  │  │  │     │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  │  │     ├─ is-data-descriptor @ 1.0.0
+   │  │  │  │  │  │  │  │     │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  │  │     └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  │  ├─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  ├─ mixin-deep @ 1.3.1
+   │  │  │  │  │  │  │  │  ├─ for-in @ 1.0.2
+   │  │  │  │  │  │  │  │  └─ is-extendable @ 1.0.1
+   │  │  │  │  │  │  │  │     └─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │  │        └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  └─ pascalcase @ 0.1.1
+   │  │  │  │  │  │  ├─ debug @ 2.6.9
+   │  │  │  │  │  │  │  └─ ms @ 2.0.0
+   │  │  │  │  │  │  ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │  │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │  ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  │  │  └─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  ├─ map-cache @ 0.2.2
+   │  │  │  │  │  │  ├─ source-map @ 0.5.7
+   │  │  │  │  │  │  ├─ source-map-resolve @ 0.5.1
+   │  │  │  │  │  │  │  ├─ atob @ 2.1.1
+   │  │  │  │  │  │  │  ├─ decode-uri-component @ 0.2.0
+   │  │  │  │  │  │  │  ├─ resolve-url @ 0.2.1
+   │  │  │  │  │  │  │  ├─ source-map-url @ 0.4.0
+   │  │  │  │  │  │  │  └─ urix @ 0.1.0
+   │  │  │  │  │  │  └─ use @ 3.1.0
+   │  │  │  │  │  │     └─ kind-of @ 6.0.2
+   │  │  │  │  │  ├─ snapdragon-node @ 2.1.1
+   │  │  │  │  │  │  ├─ define-property @ 1.0.0
+   │  │  │  │  │  │  │  └─ is-descriptor @ 1.0.2
+   │  │  │  │  │  │  │     ├─ is-accessor-descriptor @ 1.0.0
+   │  │  │  │  │  │  │     │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  │     ├─ is-data-descriptor @ 1.0.0
+   │  │  │  │  │  │  │     │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  │     └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  ├─ isobject @ 3.0.1
+   │  │  │  │  │  │  └─ snapdragon-util @ 3.0.1
+   │  │  │  │  │  │     └─ kind-of @ 3.2.2
+   │  │  │  │  │  │        └─ is-buffer @ 1.1.6
+   │  │  │  │  │  ├─ split-string @ 3.1.0
+   │  │  │  │  │  │  └─ extend-shallow @ 3.0.2
+   │  │  │  │  │  │     ├─ assign-symbols @ 1.0.0
+   │  │  │  │  │  │     └─ is-extendable @ 1.0.1
+   │  │  │  │  │  │        └─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │           └─ isobject @ 3.0.1
+   │  │  │  │  │  └─ to-regex @ 3.0.2
+   │  │  │  │  │     ├─ define-property @ 2.0.2
+   │  │  │  │  │     │  ├─ is-descriptor @ 1.0.2
+   │  │  │  │  │     │  │  ├─ is-accessor-descriptor @ 1.0.0
+   │  │  │  │  │     │  │  │  └─ kind-of @ 6.0.2
+   │  │  │  │  │     │  │  ├─ is-data-descriptor @ 1.0.0
+   │  │  │  │  │     │  │  │  └─ kind-of @ 6.0.2
+   │  │  │  │  │     │  │  └─ kind-of @ 6.0.2
+   │  │  │  │  │     │  └─ isobject @ 3.0.1
+   │  │  │  │  │     ├─ extend-shallow @ 3.0.2
+   │  │  │  │  │     │  ├─ assign-symbols @ 1.0.0
+   │  │  │  │  │     │  └─ is-extendable @ 1.0.1
+   │  │  │  │  │     │     └─ is-plain-object @ 2.0.4
+   │  │  │  │  │     │        └─ isobject @ 3.0.1
+   │  │  │  │  │     ├─ regex-not @ 1.0.2
+   │  │  │  │  │     │  ├─ extend-shallow @ 3.0.2
+   │  │  │  │  │     │  │  ├─ assign-symbols @ 1.0.0
+   │  │  │  │  │     │  │  └─ is-extendable @ 1.0.1
+   │  │  │  │  │     │  │     └─ is-plain-object @ 2.0.4
+   │  │  │  │  │     │  │        └─ isobject @ 3.0.1
+   │  │  │  │  │     │  └─ safe-regex @ 1.1.0
+   │  │  │  │  │     │     └─ ret @ 0.1.15
+   │  │  │  │  │     └─ safe-regex @ 1.1.0
+   │  │  │  │  │        └─ ret @ 0.1.15
+   │  │  │  │  ├─ define-property @ 2.0.2
+   │  │  │  │  │  ├─ is-descriptor @ 1.0.2
+   │  │  │  │  │  │  ├─ is-accessor-descriptor @ 1.0.0
+   │  │  │  │  │  │  │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  ├─ is-data-descriptor @ 1.0.0
+   │  │  │  │  │  │  │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  └─ isobject @ 3.0.1
+   │  │  │  │  ├─ extend-shallow @ 3.0.2
+   │  │  │  │  │  ├─ assign-symbols @ 1.0.0
+   │  │  │  │  │  └─ is-extendable @ 1.0.1
+   │  │  │  │  │     └─ is-plain-object @ 2.0.4
+   │  │  │  │  │        └─ isobject @ 3.0.1
+   │  │  │  │  ├─ extglob @ 2.0.4
+   │  │  │  │  │  ├─ array-unique @ 0.3.2
+   │  │  │  │  │  ├─ define-property @ 1.0.0
+   │  │  │  │  │  │  └─ is-descriptor @ 1.0.2
+   │  │  │  │  │  │     ├─ is-accessor-descriptor @ 1.0.0
+   │  │  │  │  │  │     │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │     ├─ is-data-descriptor @ 1.0.0
+   │  │  │  │  │  │     │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │     └─ kind-of @ 6.0.2
+   │  │  │  │  │  ├─ expand-brackets @ 2.1.4
+   │  │  │  │  │  │  ├─ debug @ 2.6.9
+   │  │  │  │  │  │  │  └─ ms @ 2.0.0
+   │  │  │  │  │  │  ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │  │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │  ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  │  │  └─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  ├─ posix-character-classes @ 0.1.1
+   │  │  │  │  │  │  ├─ regex-not @ 1.0.2
+   │  │  │  │  │  │  │  ├─ extend-shallow @ 3.0.2
+   │  │  │  │  │  │  │  │  ├─ assign-symbols @ 1.0.0
+   │  │  │  │  │  │  │  │  └─ is-extendable @ 1.0.1
+   │  │  │  │  │  │  │  │     └─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │  │        └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  └─ safe-regex @ 1.1.0
+   │  │  │  │  │  │  │     └─ ret @ 0.1.15
+   │  │  │  │  │  │  ├─ snapdragon @ 0.8.2
+   │  │  │  │  │  │  │  ├─ base @ 0.11.2
+   │  │  │  │  │  │  │  │  ├─ cache-base @ 1.0.1
+   │  │  │  │  │  │  │  │  │  ├─ collection-visit @ 1.0.0
+   │  │  │  │  │  │  │  │  │  │  ├─ map-visit @ 1.0.0
+   │  │  │  │  │  │  │  │  │  │  │  └─ object-visit @ 1.0.1
+   │  │  │  │  │  │  │  │  │  │  │     └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  │  │  └─ object-visit @ 1.0.1
+   │  │  │  │  │  │  │  │  │  │     └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  │  ├─ component-emitter @ 1.2.1
+   │  │  │  │  │  │  │  │  │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │  │  │  ├─ has-value @ 1.0.0
+   │  │  │  │  │  │  │  │  │  │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │  │  │  │  ├─ has-values @ 1.0.0
+   │  │  │  │  │  │  │  │  │  │  │  ├─ is-number @ 3.0.0
+   │  │  │  │  │  │  │  │  │  │  │  │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │  │  │  │  │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  │  │  │  └─ kind-of @ 4.0.0
+   │  │  │  │  │  │  │  │  │  │  │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  │  │  └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  │  ├─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  │  ├─ set-value @ 2.0.0
+   │  │  │  │  │  │  │  │  │  │  ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  │  │  │  │  │  │  └─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  │  │  ├─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  │  │  ├─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │  │  │  │  │  └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  │  │  └─ split-string @ 3.1.0
+   │  │  │  │  │  │  │  │  │  │     └─ extend-shallow @ 3.0.2
+   │  │  │  │  │  │  │  │  │  │        ├─ assign-symbols @ 1.0.0
+   │  │  │  │  │  │  │  │  │  │        └─ is-extendable @ 1.0.1
+   │  │  │  │  │  │  │  │  │  │           └─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │  │  │  │              └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  │  ├─ to-object-path @ 0.3.0
+   │  │  │  │  │  │  │  │  │  │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │  │  │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  │  ├─ union-value @ 1.0.0
+   │  │  │  │  │  │  │  │  │  │  ├─ arr-union @ 3.1.0
+   │  │  │  │  │  │  │  │  │  │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │  │  │  │  ├─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  │  │  └─ set-value @ 0.4.3
+   │  │  │  │  │  │  │  │  │  │     ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  │  │  │  │  │     │  └─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  │  │     ├─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  │  │     ├─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │  │  │  │     │  └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  │  │     └─ to-object-path @ 0.3.0
+   │  │  │  │  │  │  │  │  │  │        └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │  │  │           └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  │  └─ unset-value @ 1.0.0
+   │  │  │  │  │  │  │  │  │     ├─ has-value @ 0.3.1
+   │  │  │  │  │  │  │  │  │     │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │  │  │     │  ├─ has-values @ 0.1.4
+   │  │  │  │  │  │  │  │  │     │  └─ isobject @ 2.1.0
+   │  │  │  │  │  │  │  │  │     │     └─ isarray @ 1.0.0
+   │  │  │  │  │  │  │  │  │     └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  ├─ class-utils @ 0.3.6
+   │  │  │  │  │  │  │  │  │  ├─ arr-union @ 3.1.0
+   │  │  │  │  │  │  │  │  │  ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  │  │  │  │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │  │  │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  │  │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  │  │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │  │  │  │  ├─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  │  └─ static-extend @ 0.1.2
+   │  │  │  │  │  │  │  │  │     ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  │  │  │     │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │  │     │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │  │     │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │  │     │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  │     │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │  │  │  │     │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │  │     │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  │     │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │  │  │  │     └─ object-copy @ 0.1.0
+   │  │  │  │  │  │  │  │  │        ├─ copy-descriptor @ 0.1.1
+   │  │  │  │  │  │  │  │  │        ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  │  │  │        │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │  │        │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │  │        │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │  │        │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  │        │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │  │  │  │        │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │  │        │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  │        │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │  │  │  │        └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │  │           └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  ├─ component-emitter @ 1.2.1
+   │  │  │  │  │  │  │  │  ├─ define-property @ 1.0.0
+   │  │  │  │  │  │  │  │  │  └─ is-descriptor @ 1.0.2
+   │  │  │  │  │  │  │  │  │     ├─ is-accessor-descriptor @ 1.0.0
+   │  │  │  │  │  │  │  │  │     │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  │  │  │     ├─ is-data-descriptor @ 1.0.0
+   │  │  │  │  │  │  │  │  │     │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  │  │  │     └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  │  │  ├─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  ├─ mixin-deep @ 1.3.1
+   │  │  │  │  │  │  │  │  │  ├─ for-in @ 1.0.2
+   │  │  │  │  │  │  │  │  │  └─ is-extendable @ 1.0.1
+   │  │  │  │  │  │  │  │  │     └─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │  │  │        └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  └─ pascalcase @ 0.1.1
+   │  │  │  │  │  │  │  ├─ debug @ 2.6.9
+   │  │  │  │  │  │  │  │  └─ ms @ 2.0.0
+   │  │  │  │  │  │  │  ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  │  │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │  │  ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  │  │  │  └─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  ├─ map-cache @ 0.2.2
+   │  │  │  │  │  │  │  ├─ source-map @ 0.5.7
+   │  │  │  │  │  │  │  ├─ source-map-resolve @ 0.5.1
+   │  │  │  │  │  │  │  │  ├─ atob @ 2.1.1
+   │  │  │  │  │  │  │  │  ├─ decode-uri-component @ 0.2.0
+   │  │  │  │  │  │  │  │  ├─ resolve-url @ 0.2.1
+   │  │  │  │  │  │  │  │  ├─ source-map-url @ 0.4.0
+   │  │  │  │  │  │  │  │  └─ urix @ 0.1.0
+   │  │  │  │  │  │  │  └─ use @ 3.1.0
+   │  │  │  │  │  │  │     └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  └─ to-regex @ 3.0.2
+   │  │  │  │  │  │     ├─ define-property @ 2.0.2
+   │  │  │  │  │  │     │  ├─ is-descriptor @ 1.0.2
+   │  │  │  │  │  │     │  │  ├─ is-accessor-descriptor @ 1.0.0
+   │  │  │  │  │  │     │  │  │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │     │  │  ├─ is-data-descriptor @ 1.0.0
+   │  │  │  │  │  │     │  │  │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │     │  │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │     │  └─ isobject @ 3.0.1
+   │  │  │  │  │  │     ├─ extend-shallow @ 3.0.2
+   │  │  │  │  │  │     │  ├─ assign-symbols @ 1.0.0
+   │  │  │  │  │  │     │  └─ is-extendable @ 1.0.1
+   │  │  │  │  │  │     │     └─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │     │        └─ isobject @ 3.0.1
+   │  │  │  │  │  │     ├─ regex-not @ 1.0.2
+   │  │  │  │  │  │     │  ├─ extend-shallow @ 3.0.2
+   │  │  │  │  │  │     │  │  ├─ assign-symbols @ 1.0.0
+   │  │  │  │  │  │     │  │  └─ is-extendable @ 1.0.1
+   │  │  │  │  │  │     │  │     └─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │     │  │        └─ isobject @ 3.0.1
+   │  │  │  │  │  │     │  └─ safe-regex @ 1.1.0
+   │  │  │  │  │  │     │     └─ ret @ 0.1.15
+   │  │  │  │  │  │     └─ safe-regex @ 1.1.0
+   │  │  │  │  │  │        └─ ret @ 0.1.15
+   │  │  │  │  │  ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  │  └─ is-extendable @ 0.1.1
+   │  │  │  │  │  ├─ fragment-cache @ 0.2.1
+   │  │  │  │  │  │  └─ map-cache @ 0.2.2
+   │  │  │  │  │  ├─ regex-not @ 1.0.2
+   │  │  │  │  │  │  ├─ extend-shallow @ 3.0.2
+   │  │  │  │  │  │  │  ├─ assign-symbols @ 1.0.0
+   │  │  │  │  │  │  │  └─ is-extendable @ 1.0.1
+   │  │  │  │  │  │  │     └─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │        └─ isobject @ 3.0.1
+   │  │  │  │  │  │  └─ safe-regex @ 1.1.0
+   │  │  │  │  │  │     └─ ret @ 0.1.15
+   │  │  │  │  │  ├─ snapdragon @ 0.8.2
+   │  │  │  │  │  │  ├─ base @ 0.11.2
+   │  │  │  │  │  │  │  ├─ cache-base @ 1.0.1
+   │  │  │  │  │  │  │  │  ├─ collection-visit @ 1.0.0
+   │  │  │  │  │  │  │  │  │  ├─ map-visit @ 1.0.0
+   │  │  │  │  │  │  │  │  │  │  └─ object-visit @ 1.0.1
+   │  │  │  │  │  │  │  │  │  │     └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  │  └─ object-visit @ 1.0.1
+   │  │  │  │  │  │  │  │  │     └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  ├─ component-emitter @ 1.2.1
+   │  │  │  │  │  │  │  │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │  │  ├─ has-value @ 1.0.0
+   │  │  │  │  │  │  │  │  │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │  │  │  ├─ has-values @ 1.0.0
+   │  │  │  │  │  │  │  │  │  │  ├─ is-number @ 3.0.0
+   │  │  │  │  │  │  │  │  │  │  │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │  │  │  │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  │  │  └─ kind-of @ 4.0.0
+   │  │  │  │  │  │  │  │  │  │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  │  └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  ├─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  ├─ set-value @ 2.0.0
+   │  │  │  │  │  │  │  │  │  ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  │  │  │  │  │  └─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  │  ├─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  │  ├─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │  │  │  │  └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  │  └─ split-string @ 3.1.0
+   │  │  │  │  │  │  │  │  │     └─ extend-shallow @ 3.0.2
+   │  │  │  │  │  │  │  │  │        ├─ assign-symbols @ 1.0.0
+   │  │  │  │  │  │  │  │  │        └─ is-extendable @ 1.0.1
+   │  │  │  │  │  │  │  │  │           └─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │  │  │              └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  ├─ to-object-path @ 0.3.0
+   │  │  │  │  │  │  │  │  │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │  │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  ├─ union-value @ 1.0.0
+   │  │  │  │  │  │  │  │  │  ├─ arr-union @ 3.1.0
+   │  │  │  │  │  │  │  │  │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │  │  │  ├─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  │  └─ set-value @ 0.4.3
+   │  │  │  │  │  │  │  │  │     ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  │  │  │  │     │  └─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  │     ├─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  │     ├─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │  │  │     │  └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  │     └─ to-object-path @ 0.3.0
+   │  │  │  │  │  │  │  │  │        └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │  │           └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  └─ unset-value @ 1.0.0
+   │  │  │  │  │  │  │  │     ├─ has-value @ 0.3.1
+   │  │  │  │  │  │  │  │     │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │  │     │  ├─ has-values @ 0.1.4
+   │  │  │  │  │  │  │  │     │  └─ isobject @ 2.1.0
+   │  │  │  │  │  │  │  │     │     └─ isarray @ 1.0.0
+   │  │  │  │  │  │  │  │     └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  ├─ class-utils @ 0.3.6
+   │  │  │  │  │  │  │  │  ├─ arr-union @ 3.1.0
+   │  │  │  │  │  │  │  │  ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  │  │  │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │  │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │  │  │  ├─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  └─ static-extend @ 0.1.2
+   │  │  │  │  │  │  │  │     ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  │  │     │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │     │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │     │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │     │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │     │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │  │  │     │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │     │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │     │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │  │  │     └─ object-copy @ 0.1.0
+   │  │  │  │  │  │  │  │        ├─ copy-descriptor @ 0.1.1
+   │  │  │  │  │  │  │  │        ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  │  │        │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │        │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │        │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │        │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │        │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │  │  │        │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │        │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │        │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │  │  │        └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │           └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  ├─ component-emitter @ 1.2.1
+   │  │  │  │  │  │  │  ├─ define-property @ 1.0.0
+   │  │  │  │  │  │  │  │  └─ is-descriptor @ 1.0.2
+   │  │  │  │  │  │  │  │     ├─ is-accessor-descriptor @ 1.0.0
+   │  │  │  │  │  │  │  │     │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  │  │     ├─ is-data-descriptor @ 1.0.0
+   │  │  │  │  │  │  │  │     │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  │  │     └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  │  ├─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  ├─ mixin-deep @ 1.3.1
+   │  │  │  │  │  │  │  │  ├─ for-in @ 1.0.2
+   │  │  │  │  │  │  │  │  └─ is-extendable @ 1.0.1
+   │  │  │  │  │  │  │  │     └─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │  │        └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  └─ pascalcase @ 0.1.1
+   │  │  │  │  │  │  ├─ debug @ 2.6.9
+   │  │  │  │  │  │  │  └─ ms @ 2.0.0
+   │  │  │  │  │  │  ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │  │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │  ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  │  │  └─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  ├─ map-cache @ 0.2.2
+   │  │  │  │  │  │  ├─ source-map @ 0.5.7
+   │  │  │  │  │  │  ├─ source-map-resolve @ 0.5.1
+   │  │  │  │  │  │  │  ├─ atob @ 2.1.1
+   │  │  │  │  │  │  │  ├─ decode-uri-component @ 0.2.0
+   │  │  │  │  │  │  │  ├─ resolve-url @ 0.2.1
+   │  │  │  │  │  │  │  ├─ source-map-url @ 0.4.0
+   │  │  │  │  │  │  │  └─ urix @ 0.1.0
+   │  │  │  │  │  │  └─ use @ 3.1.0
+   │  │  │  │  │  │     └─ kind-of @ 6.0.2
+   │  │  │  │  │  └─ to-regex @ 3.0.2
+   │  │  │  │  │     ├─ define-property @ 2.0.2
+   │  │  │  │  │     │  ├─ is-descriptor @ 1.0.2
+   │  │  │  │  │     │  │  ├─ is-accessor-descriptor @ 1.0.0
+   │  │  │  │  │     │  │  │  └─ kind-of @ 6.0.2
+   │  │  │  │  │     │  │  ├─ is-data-descriptor @ 1.0.0
+   │  │  │  │  │     │  │  │  └─ kind-of @ 6.0.2
+   │  │  │  │  │     │  │  └─ kind-of @ 6.0.2
+   │  │  │  │  │     │  └─ isobject @ 3.0.1
+   │  │  │  │  │     ├─ extend-shallow @ 3.0.2
+   │  │  │  │  │     │  ├─ assign-symbols @ 1.0.0
+   │  │  │  │  │     │  └─ is-extendable @ 1.0.1
+   │  │  │  │  │     │     └─ is-plain-object @ 2.0.4
+   │  │  │  │  │     │        └─ isobject @ 3.0.1
+   │  │  │  │  │     ├─ regex-not @ 1.0.2
+   │  │  │  │  │     │  ├─ extend-shallow @ 3.0.2
+   │  │  │  │  │     │  │  ├─ assign-symbols @ 1.0.0
+   │  │  │  │  │     │  │  └─ is-extendable @ 1.0.1
+   │  │  │  │  │     │  │     └─ is-plain-object @ 2.0.4
+   │  │  │  │  │     │  │        └─ isobject @ 3.0.1
+   │  │  │  │  │     │  └─ safe-regex @ 1.1.0
+   │  │  │  │  │     │     └─ ret @ 0.1.15
+   │  │  │  │  │     └─ safe-regex @ 1.1.0
+   │  │  │  │  │        └─ ret @ 0.1.15
+   │  │  │  │  ├─ fragment-cache @ 0.2.1
+   │  │  │  │  │  └─ map-cache @ 0.2.2
+   │  │  │  │  ├─ kind-of @ 6.0.2
+   │  │  │  │  ├─ nanomatch @ 1.2.9
+   │  │  │  │  │  ├─ arr-diff @ 4.0.0
+   │  │  │  │  │  ├─ array-unique @ 0.3.2
+   │  │  │  │  │  ├─ define-property @ 2.0.2
+   │  │  │  │  │  │  ├─ is-descriptor @ 1.0.2
+   │  │  │  │  │  │  │  ├─ is-accessor-descriptor @ 1.0.0
+   │  │  │  │  │  │  │  │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  │  ├─ is-data-descriptor @ 1.0.0
+   │  │  │  │  │  │  │  │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  └─ isobject @ 3.0.1
+   │  │  │  │  │  ├─ extend-shallow @ 3.0.2
+   │  │  │  │  │  │  ├─ assign-symbols @ 1.0.0
+   │  │  │  │  │  │  └─ is-extendable @ 1.0.1
+   │  │  │  │  │  │     └─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │        └─ isobject @ 3.0.1
+   │  │  │  │  │  ├─ fragment-cache @ 0.2.1
+   │  │  │  │  │  │  └─ map-cache @ 0.2.2
+   │  │  │  │  │  ├─ is-odd @ 2.0.0
+   │  │  │  │  │  │  └─ is-number @ 4.0.0
+   │  │  │  │  │  ├─ is-windows @ 1.0.2
+   │  │  │  │  │  ├─ kind-of @ 6.0.2
+   │  │  │  │  │  ├─ object.pick @ 1.3.0
+   │  │  │  │  │  │  └─ isobject @ 3.0.1
+   │  │  │  │  │  ├─ regex-not @ 1.0.2
+   │  │  │  │  │  │  ├─ extend-shallow @ 3.0.2
+   │  │  │  │  │  │  │  ├─ assign-symbols @ 1.0.0
+   │  │  │  │  │  │  │  └─ is-extendable @ 1.0.1
+   │  │  │  │  │  │  │     └─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │        └─ isobject @ 3.0.1
+   │  │  │  │  │  │  └─ safe-regex @ 1.1.0
+   │  │  │  │  │  │     └─ ret @ 0.1.15
+   │  │  │  │  │  ├─ snapdragon @ 0.8.2
+   │  │  │  │  │  │  ├─ base @ 0.11.2
+   │  │  │  │  │  │  │  ├─ cache-base @ 1.0.1
+   │  │  │  │  │  │  │  │  ├─ collection-visit @ 1.0.0
+   │  │  │  │  │  │  │  │  │  ├─ map-visit @ 1.0.0
+   │  │  │  │  │  │  │  │  │  │  └─ object-visit @ 1.0.1
+   │  │  │  │  │  │  │  │  │  │     └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  │  └─ object-visit @ 1.0.1
+   │  │  │  │  │  │  │  │  │     └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  ├─ component-emitter @ 1.2.1
+   │  │  │  │  │  │  │  │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │  │  ├─ has-value @ 1.0.0
+   │  │  │  │  │  │  │  │  │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │  │  │  ├─ has-values @ 1.0.0
+   │  │  │  │  │  │  │  │  │  │  ├─ is-number @ 3.0.0
+   │  │  │  │  │  │  │  │  │  │  │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │  │  │  │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  │  │  └─ kind-of @ 4.0.0
+   │  │  │  │  │  │  │  │  │  │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  │  └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  ├─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  ├─ set-value @ 2.0.0
+   │  │  │  │  │  │  │  │  │  ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  │  │  │  │  │  └─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  │  ├─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  │  ├─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │  │  │  │  └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  │  └─ split-string @ 3.1.0
+   │  │  │  │  │  │  │  │  │     └─ extend-shallow @ 3.0.2
+   │  │  │  │  │  │  │  │  │        ├─ assign-symbols @ 1.0.0
+   │  │  │  │  │  │  │  │  │        └─ is-extendable @ 1.0.1
+   │  │  │  │  │  │  │  │  │           └─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │  │  │              └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  ├─ to-object-path @ 0.3.0
+   │  │  │  │  │  │  │  │  │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │  │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  ├─ union-value @ 1.0.0
+   │  │  │  │  │  │  │  │  │  ├─ arr-union @ 3.1.0
+   │  │  │  │  │  │  │  │  │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │  │  │  ├─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  │  └─ set-value @ 0.4.3
+   │  │  │  │  │  │  │  │  │     ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  │  │  │  │     │  └─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  │     ├─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  │     ├─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │  │  │     │  └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  │     └─ to-object-path @ 0.3.0
+   │  │  │  │  │  │  │  │  │        └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │  │           └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  └─ unset-value @ 1.0.0
+   │  │  │  │  │  │  │  │     ├─ has-value @ 0.3.1
+   │  │  │  │  │  │  │  │     │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │  │     │  ├─ has-values @ 0.1.4
+   │  │  │  │  │  │  │  │     │  └─ isobject @ 2.1.0
+   │  │  │  │  │  │  │  │     │     └─ isarray @ 1.0.0
+   │  │  │  │  │  │  │  │     └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  ├─ class-utils @ 0.3.6
+   │  │  │  │  │  │  │  │  ├─ arr-union @ 3.1.0
+   │  │  │  │  │  │  │  │  ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  │  │  │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │  │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │  │  │  ├─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  └─ static-extend @ 0.1.2
+   │  │  │  │  │  │  │  │     ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  │  │     │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │     │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │     │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │     │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │     │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │  │  │     │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │     │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │     │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │  │  │     └─ object-copy @ 0.1.0
+   │  │  │  │  │  │  │  │        ├─ copy-descriptor @ 0.1.1
+   │  │  │  │  │  │  │  │        ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  │  │        │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │        │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │        │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │        │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │        │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │  │  │        │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │        │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │        │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │  │  │        └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │           └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  ├─ component-emitter @ 1.2.1
+   │  │  │  │  │  │  │  ├─ define-property @ 1.0.0
+   │  │  │  │  │  │  │  │  └─ is-descriptor @ 1.0.2
+   │  │  │  │  │  │  │  │     ├─ is-accessor-descriptor @ 1.0.0
+   │  │  │  │  │  │  │  │     │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  │  │     ├─ is-data-descriptor @ 1.0.0
+   │  │  │  │  │  │  │  │     │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  │  │     └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  │  ├─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  ├─ mixin-deep @ 1.3.1
+   │  │  │  │  │  │  │  │  ├─ for-in @ 1.0.2
+   │  │  │  │  │  │  │  │  └─ is-extendable @ 1.0.1
+   │  │  │  │  │  │  │  │     └─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │  │        └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  └─ pascalcase @ 0.1.1
+   │  │  │  │  │  │  ├─ debug @ 2.6.9
+   │  │  │  │  │  │  │  └─ ms @ 2.0.0
+   │  │  │  │  │  │  ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │  │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │  ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  │  │  └─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  ├─ map-cache @ 0.2.2
+   │  │  │  │  │  │  ├─ source-map @ 0.5.7
+   │  │  │  │  │  │  ├─ source-map-resolve @ 0.5.1
+   │  │  │  │  │  │  │  ├─ atob @ 2.1.1
+   │  │  │  │  │  │  │  ├─ decode-uri-component @ 0.2.0
+   │  │  │  │  │  │  │  ├─ resolve-url @ 0.2.1
+   │  │  │  │  │  │  │  ├─ source-map-url @ 0.4.0
+   │  │  │  │  │  │  │  └─ urix @ 0.1.0
+   │  │  │  │  │  │  └─ use @ 3.1.0
+   │  │  │  │  │  │     └─ kind-of @ 6.0.2
+   │  │  │  │  │  └─ to-regex @ 3.0.2
+   │  │  │  │  │     ├─ define-property @ 2.0.2
+   │  │  │  │  │     │  ├─ is-descriptor @ 1.0.2
+   │  │  │  │  │     │  │  ├─ is-accessor-descriptor @ 1.0.0
+   │  │  │  │  │     │  │  │  └─ kind-of @ 6.0.2
+   │  │  │  │  │     │  │  ├─ is-data-descriptor @ 1.0.0
+   │  │  │  │  │     │  │  │  └─ kind-of @ 6.0.2
+   │  │  │  │  │     │  │  └─ kind-of @ 6.0.2
+   │  │  │  │  │     │  └─ isobject @ 3.0.1
+   │  │  │  │  │     ├─ extend-shallow @ 3.0.2
+   │  │  │  │  │     │  ├─ assign-symbols @ 1.0.0
+   │  │  │  │  │     │  └─ is-extendable @ 1.0.1
+   │  │  │  │  │     │     └─ is-plain-object @ 2.0.4
+   │  │  │  │  │     │        └─ isobject @ 3.0.1
+   │  │  │  │  │     ├─ regex-not @ 1.0.2
+   │  │  │  │  │     │  ├─ extend-shallow @ 3.0.2
+   │  │  │  │  │     │  │  ├─ assign-symbols @ 1.0.0
+   │  │  │  │  │     │  │  └─ is-extendable @ 1.0.1
+   │  │  │  │  │     │  │     └─ is-plain-object @ 2.0.4
+   │  │  │  │  │     │  │        └─ isobject @ 3.0.1
+   │  │  │  │  │     │  └─ safe-regex @ 1.1.0
+   │  │  │  │  │     │     └─ ret @ 0.1.15
+   │  │  │  │  │     └─ safe-regex @ 1.1.0
+   │  │  │  │  │        └─ ret @ 0.1.15
+   │  │  │  │  ├─ object.pick @ 1.3.0
+   │  │  │  │  │  └─ isobject @ 3.0.1
+   │  │  │  │  ├─ regex-not @ 1.0.2
+   │  │  │  │  │  ├─ extend-shallow @ 3.0.2
+   │  │  │  │  │  │  ├─ assign-symbols @ 1.0.0
+   │  │  │  │  │  │  └─ is-extendable @ 1.0.1
+   │  │  │  │  │  │     └─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │        └─ isobject @ 3.0.1
+   │  │  │  │  │  └─ safe-regex @ 1.1.0
+   │  │  │  │  │     └─ ret @ 0.1.15
+   │  │  │  │  ├─ snapdragon @ 0.8.2
+   │  │  │  │  │  ├─ base @ 0.11.2
+   │  │  │  │  │  │  ├─ cache-base @ 1.0.1
+   │  │  │  │  │  │  │  ├─ collection-visit @ 1.0.0
+   │  │  │  │  │  │  │  │  ├─ map-visit @ 1.0.0
+   │  │  │  │  │  │  │  │  │  └─ object-visit @ 1.0.1
+   │  │  │  │  │  │  │  │  │     └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  └─ object-visit @ 1.0.1
+   │  │  │  │  │  │  │  │     └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  ├─ component-emitter @ 1.2.1
+   │  │  │  │  │  │  │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │  ├─ has-value @ 1.0.0
+   │  │  │  │  │  │  │  │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │  │  ├─ has-values @ 1.0.0
+   │  │  │  │  │  │  │  │  │  ├─ is-number @ 3.0.0
+   │  │  │  │  │  │  │  │  │  │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │  │  │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  │  └─ kind-of @ 4.0.0
+   │  │  │  │  │  │  │  │  │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │  └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  ├─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  ├─ set-value @ 2.0.0
+   │  │  │  │  │  │  │  │  ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  │  │  │  │  └─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  ├─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  ├─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │  │  │  └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │  └─ split-string @ 3.1.0
+   │  │  │  │  │  │  │  │     └─ extend-shallow @ 3.0.2
+   │  │  │  │  │  │  │  │        ├─ assign-symbols @ 1.0.0
+   │  │  │  │  │  │  │  │        └─ is-extendable @ 1.0.1
+   │  │  │  │  │  │  │  │           └─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │  │              └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  ├─ to-object-path @ 0.3.0
+   │  │  │  │  │  │  │  │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  ├─ union-value @ 1.0.0
+   │  │  │  │  │  │  │  │  ├─ arr-union @ 3.1.0
+   │  │  │  │  │  │  │  │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │  │  ├─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │  └─ set-value @ 0.4.3
+   │  │  │  │  │  │  │  │     ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  │  │  │     │  └─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │     ├─ is-extendable @ 0.1.1
+   │  │  │  │  │  │  │  │     ├─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │  │     │  └─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  │     └─ to-object-path @ 0.3.0
+   │  │  │  │  │  │  │  │        └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │           └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  └─ unset-value @ 1.0.0
+   │  │  │  │  │  │  │     ├─ has-value @ 0.3.1
+   │  │  │  │  │  │  │     │  ├─ get-value @ 2.0.6
+   │  │  │  │  │  │  │     │  ├─ has-values @ 0.1.4
+   │  │  │  │  │  │  │     │  └─ isobject @ 2.1.0
+   │  │  │  │  │  │  │     │     └─ isarray @ 1.0.0
+   │  │  │  │  │  │  │     └─ isobject @ 3.0.1
+   │  │  │  │  │  │  ├─ class-utils @ 0.3.6
+   │  │  │  │  │  │  │  ├─ arr-union @ 3.1.0
+   │  │  │  │  │  │  │  ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  │  │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │  │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │  │  ├─ isobject @ 3.0.1
+   │  │  │  │  │  │  │  └─ static-extend @ 0.1.2
+   │  │  │  │  │  │  │     ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  │     │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │  │     │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │  │     │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │     │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │     │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │  │     │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │     │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │     │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │  │     └─ object-copy @ 0.1.0
+   │  │  │  │  │  │  │        ├─ copy-descriptor @ 0.1.1
+   │  │  │  │  │  │  │        ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  │        │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │  │        │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │  │        │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │        │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │        │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │  │        │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │        │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  │        │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  │  │        └─ kind-of @ 3.2.2
+   │  │  │  │  │  │  │           └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │  ├─ component-emitter @ 1.2.1
+   │  │  │  │  │  │  ├─ define-property @ 1.0.0
+   │  │  │  │  │  │  │  └─ is-descriptor @ 1.0.2
+   │  │  │  │  │  │  │     ├─ is-accessor-descriptor @ 1.0.0
+   │  │  │  │  │  │  │     │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  │     ├─ is-data-descriptor @ 1.0.0
+   │  │  │  │  │  │  │     │  └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  │     └─ kind-of @ 6.0.2
+   │  │  │  │  │  │  ├─ isobject @ 3.0.1
+   │  │  │  │  │  │  ├─ mixin-deep @ 1.3.1
+   │  │  │  │  │  │  │  ├─ for-in @ 1.0.2
+   │  │  │  │  │  │  │  └─ is-extendable @ 1.0.1
+   │  │  │  │  │  │  │     └─ is-plain-object @ 2.0.4
+   │  │  │  │  │  │  │        └─ isobject @ 3.0.1
+   │  │  │  │  │  │  └─ pascalcase @ 0.1.1
+   │  │  │  │  │  ├─ debug @ 2.6.9
+   │  │  │  │  │  │  └─ ms @ 2.0.0
+   │  │  │  │  │  ├─ define-property @ 0.2.5
+   │  │  │  │  │  │  └─ is-descriptor @ 0.1.6
+   │  │  │  │  │  │     ├─ is-accessor-descriptor @ 0.1.6
+   │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │     ├─ is-data-descriptor @ 0.1.4
+   │  │  │  │  │  │     │  └─ kind-of @ 3.2.2
+   │  │  │  │  │  │     │     └─ is-buffer @ 1.1.6
+   │  │  │  │  │  │     └─ kind-of @ 5.1.0
+   │  │  │  │  │  ├─ extend-shallow @ 2.0.1
+   │  │  │  │  │  │  └─ is-extendable @ 0.1.1
+   │  │  │  │  │  ├─ map-cache @ 0.2.2
+   │  │  │  │  │  ├─ source-map @ 0.5.7
+   │  │  │  │  │  ├─ source-map-resolve @ 0.5.1
+   │  │  │  │  │  │  ├─ atob @ 2.1.1
+   │  │  │  │  │  │  ├─ decode-uri-component @ 0.2.0
+   │  │  │  │  │  │  ├─ resolve-url @ 0.2.1
+   │  │  │  │  │  │  ├─ source-map-url @ 0.4.0
+   │  │  │  │  │  │  └─ urix @ 0.1.0
+   │  │  │  │  │  └─ use @ 3.1.0
+   │  │  │  │  │     └─ kind-of @ 6.0.2
+   │  │  │  │  └─ to-regex @ 3.0.2
+   │  │  │  │     ├─ define-property @ 2.0.2
+   │  │  │  │     │  ├─ is-descriptor @ 1.0.2
+   │  │  │  │     │  │  ├─ is-accessor-descriptor @ 1.0.0
+   │  │  │  │     │  │  │  └─ kind-of @ 6.0.2
+   │  │  │  │     │  │  ├─ is-data-descriptor @ 1.0.0
+   │  │  │  │     │  │  │  └─ kind-of @ 6.0.2
+   │  │  │  │     │  │  └─ kind-of @ 6.0.2
+   │  │  │  │     │  └─ isobject @ 3.0.1
+   │  │  │  │     ├─ extend-shallow @ 3.0.2
+   │  │  │  │     │  ├─ assign-symbols @ 1.0.0
+   │  │  │  │     │  └─ is-extendable @ 1.0.1
+   │  │  │  │     │     └─ is-plain-object @ 2.0.4
+   │  │  │  │     │        └─ isobject @ 3.0.1
+   │  │  │  │     ├─ regex-not @ 1.0.2
+   │  │  │  │     │  ├─ extend-shallow @ 3.0.2
+   │  │  │  │     │  │  ├─ assign-symbols @ 1.0.0
+   │  │  │  │     │  │  └─ is-extendable @ 1.0.1
+   │  │  │  │     │  │     └─ is-plain-object @ 2.0.4
+   │  │  │  │     │  │        └─ isobject @ 3.0.1
+   │  │  │  │     │  └─ safe-regex @ 1.1.0
+   │  │  │  │     │     └─ ret @ 0.1.15
+   │  │  │  │     └─ safe-regex @ 1.1.0
+   │  │  │  │        └─ ret @ 0.1.15
+   │  │  │  ├─ object-assign @ 4.1.1
+   │  │  │  ├─ read-pkg-up @ 1.0.1
+   │  │  │  │  ├─ find-up @ 1.1.2
+   │  │  │  │  │  ├─ path-exists @ 2.1.0
+   │  │  │  │  │  │  └─ pinkie-promise @ 2.0.1
+   │  │  │  │  │  │     └─ pinkie @ 2.0.4
+   │  │  │  │  │  └─ pinkie-promise @ 2.0.1
+   │  │  │  │  │     └─ pinkie @ 2.0.4
+   │  │  │  │  └─ read-pkg @ 1.1.0
+   │  │  │  │     ├─ load-json-file @ 1.1.0
+   │  │  │  │     │  ├─ graceful-fs @ 4.1.11
+   │  │  │  │     │  ├─ parse-json @ 2.2.0
+   │  │  │  │     │  │  └─ error-ex @ 1.3.1
+   │  │  │  │     │  │     └─ is-arrayish @ 0.2.1
+   │  │  │  │     │  ├─ pify @ 2.3.0
+   │  │  │  │     │  ├─ pinkie-promise @ 2.0.1
+   │  │  │  │     │  │  └─ pinkie @ 2.0.4
+   │  │  │  │     │  └─ strip-bom @ 2.0.0
+   │  │  │  │     │     └─ is-utf8 @ 0.2.1
+   │  │  │  │     ├─ normalize-package-data @ 2.4.0
+   │  │  │  │     │  ├─ hosted-git-info @ 2.6.0
+   │  │  │  │     │  ├─ is-builtin-module @ 1.0.0
+   │  │  │  │     │  │  └─ builtin-modules @ 1.1.1
+   │  │  │  │     │  ├─ semver @ 5.5.0
+   │  │  │  │     │  └─ validate-npm-package-license @ 3.0.3
+   │  │  │  │     │     ├─ spdx-correct @ 3.0.0
+   │  │  │  │     │     │  ├─ spdx-expression-parse @ 3.0.0
+   │  │  │  │     │     │  │  ├─ spdx-exceptions @ 2.1.0
+   │  │  │  │     │     │  │  └─ spdx-license-ids @ 3.0.0
+   │  │  │  │     │     │  └─ spdx-license-ids @ 3.0.0
+   │  │  │  │     │     └─ spdx-expression-parse @ 3.0.0
+   │  │  │  │     │        ├─ spdx-exceptions @ 2.1.0
+   │  │  │  │     │        └─ spdx-license-ids @ 3.0.0
+   │  │  │  │     └─ path-type @ 1.1.0
+   │  │  │  │        ├─ graceful-fs @ 4.1.11
+   │  │  │  │        ├─ pify @ 2.3.0
+   │  │  │  │        └─ pinkie-promise @ 2.0.1
+   │  │  │  │           └─ pinkie @ 2.0.4
+   │  │  │  └─ require-main-filename @ 1.0.1
+   │  │  ├─ yargs @ 11.1.0
+   │  │  │  ├─ cliui @ 4.1.0
+   │  │  │  │  ├─ string-width @ 2.1.1
+   │  │  │  │  │  ├─ is-fullwidth-code-point @ 2.0.0
+   │  │  │  │  │  └─ strip-ansi @ 4.0.0
+   │  │  │  │  │     └─ ansi-regex @ 3.0.0
+   │  │  │  │  ├─ strip-ansi @ 4.0.0
+   │  │  │  │  │  └─ ansi-regex @ 3.0.0
+   │  │  │  │  └─ wrap-ansi @ 2.1.0
+   │  │  │  │     ├─ string-width @ 1.0.2
+   │  │  │  │     │  ├─ code-point-at @ 1.1.0
+   │  │  │  │     │  ├─ is-fullwidth-code-point @ 1.0.0
+   │  │  │  │     │  │  └─ number-is-nan @ 1.0.1
+   │  │  │  │     │  └─ strip-ansi @ 3.0.1
+   │  │  │  │     │     └─ ansi-regex @ 2.1.1
+   │  │  │  │     └─ strip-ansi @ 3.0.1
+   │  │  │  │        └─ ansi-regex @ 2.1.1
+   │  │  │  ├─ decamelize @ 1.2.0
+   │  │  │  ├─ find-up @ 2.1.0
+   │  │  │  │  └─ locate-path @ 2.0.0
+   │  │  │  │     ├─ p-locate @ 2.0.0
+   │  │  │  │     │  └─ p-limit @ 1.2.0
+   │  │  │  │     │     └─ p-try @ 1.0.0
+   │  │  │  │     └─ path-exists @ 3.0.0
+   │  │  │  ├─ get-caller-file @ 1.0.2
+   │  │  │  ├─ os-locale @ 2.1.0
+   │  │  │  │  ├─ execa @ 0.7.0
+   │  │  │  │  │  ├─ cross-spawn @ 5.1.0
+   │  │  │  │  │  │  ├─ lru-cache @ 4.1.3
+   │  │  │  │  │  │  │  ├─ pseudomap @ 1.0.2
+   │  │  │  │  │  │  │  └─ yallist @ 2.1.2
+   │  │  │  │  │  │  ├─ shebang-command @ 1.2.0
+   │  │  │  │  │  │  │  └─ shebang-regex @ 1.0.0
+   │  │  │  │  │  │  └─ which @ 1.3.0
+   │  │  │  │  │  │     └─ isexe @ 2.0.0
+   │  │  │  │  │  ├─ get-stream @ 3.0.0
+   │  │  │  │  │  ├─ is-stream @ 1.1.0
+   │  │  │  │  │  ├─ npm-run-path @ 2.0.2
+   │  │  │  │  │  │  └─ path-key @ 2.0.1
+   │  │  │  │  │  ├─ p-finally @ 1.0.0
+   │  │  │  │  │  ├─ signal-exit @ 3.0.2
+   │  │  │  │  │  └─ strip-eof @ 1.0.0
+   │  │  │  │  ├─ lcid @ 1.0.0
+   │  │  │  │  │  └─ invert-kv @ 1.0.0
+   │  │  │  │  └─ mem @ 1.1.0
+   │  │  │  │     └─ mimic-fn @ 1.2.0
+   │  │  │  ├─ require-directory @ 2.1.1
+   │  │  │  ├─ require-main-filename @ 1.0.1
+   │  │  │  ├─ set-blocking @ 2.0.0
+   │  │  │  ├─ string-width @ 2.1.1
+   │  │  │  │  ├─ is-fullwidth-code-point @ 2.0.0
+   │  │  │  │  └─ strip-ansi @ 4.0.0
+   │  │  │  │     └─ ansi-regex @ 3.0.0
+   │  │  │  ├─ which-module @ 2.0.0
+   │  │  │  ├─ y18n @ 3.2.1
+   │  │  │  └─ yargs-parser @ 9.0.2
+   │  │  │     └─ camelcase @ 4.1.0
+   │  │  └─ yargs-parser @ 8.1.0
+   │  │     └─ camelcase @ 4.1.0
+   │  ├─ opener @ 1.5.1
+   │  ├─ os-homedir @ 1.0.2
+   │  ├─ own-or @ 1.0.0
+   │  ├─ own-or-env @ 1.0.1
+   │  │  └─ own-or @ 1.0.0
+   │  ├─ rimraf @ 2.6.3
+   │  │  └─ glob @ 7.1.3
+   │  │     ├─ fs.realpath @ 1.0.0
+   │  │     ├─ inflight @ 1.0.6
+   │  │     │  ├─ once @ 1.4.0
+   │  │     │  │  └─ wrappy @ 1.0.2
+   │  │     │  └─ wrappy @ 1.0.2
+   │  │     ├─ inherits @ 2.0.3
+   │  │     ├─ minimatch @ 3.0.4
+   │  │     │  └─ brace-expansion @ 1.1.11
+   │  │     │     ├─ balanced-match @ 1.0.0
+   │  │     │     └─ concat-map @ 0.0.1
+   │  │     ├─ once @ 1.4.0
+   │  │     │  └─ wrappy @ 1.0.2
+   │  │     └─ path-is-absolute @ 1.0.1
+   │  ├─ signal-exit @ 3.0.2
+   │  ├─ source-map-support @ 0.5.16
+   │  │  ├─ buffer-from @ 1.1.1
+   │  │  └─ source-map @ 0.6.1
+   │  ├─ stack-utils @ 1.0.2
+   │  ├─ tap-mocha-reporter @ 3.0.9
+   │  │  ├─ color-support @ 1.1.3
+   │  │  ├─ debug @ 2.6.9
+   │  │  │  └─ ms @ 2.0.0
+   │  │  ├─ diff @ 1.4.0
+   │  │  ├─ escape-string-regexp @ 1.0.5
+   │  │  ├─ glob @ 7.1.3
+   │  │  │  ├─ fs.realpath @ 1.0.0
+   │  │  │  ├─ inflight @ 1.0.6
+   │  │  │  │  ├─ once @ 1.4.0
+   │  │  │  │  │  └─ wrappy @ 1.0.2
+   │  │  │  │  └─ wrappy @ 1.0.2
+   │  │  │  ├─ inherits @ 2.0.3
+   │  │  │  ├─ minimatch @ 3.0.4
+   │  │  │  │  └─ brace-expansion @ 1.1.11
+   │  │  │  │     ├─ balanced-match @ 1.0.0
+   │  │  │  │     └─ concat-map @ 0.0.1
+   │  │  │  ├─ once @ 1.4.0
+   │  │  │  │  └─ wrappy @ 1.0.2
+   │  │  │  └─ path-is-absolute @ 1.0.1
+   │  │  ├─ js-yaml @ 3.13.1
+   │  │  │  ├─ argparse @ 1.0.10
+   │  │  │  │  └─ sprintf-js @ 1.0.3
+   │  │  │  └─ esprima @ 4.0.1
+   │  │  ├─ readable-stream @ 2.3.7
+   │  │  │  ├─ core-util-is @ 1.0.2
+   │  │  │  ├─ inherits @ 2.0.3
+   │  │  │  ├─ isarray @ 1.0.0
+   │  │  │  ├─ process-nextick-args @ 2.0.0
+   │  │  │  ├─ safe-buffer @ 5.1.2
+   │  │  │  ├─ string_decoder @ 1.1.1
+   │  │  │  │  └─ safe-buffer @ 5.1.2
+   │  │  │  └─ util-deprecate @ 1.0.2
+   │  │  ├─ tap-parser @ 5.4.0
+   │  │  │  ├─ events-to-array @ 1.1.2
+   │  │  │  ├─ js-yaml @ 3.13.1
+   │  │  │  │  ├─ argparse @ 1.0.10
+   │  │  │  │  │  └─ sprintf-js @ 1.0.3
+   │  │  │  │  └─ esprima @ 4.0.1
+   │  │  │  └─ readable-stream @ 2.3.7
+   │  │  │     ├─ core-util-is @ 1.0.2
+   │  │  │     ├─ inherits @ 2.0.3
+   │  │  │     ├─ isarray @ 1.0.0
+   │  │  │     ├─ process-nextick-args @ 2.0.0
+   │  │  │     ├─ safe-buffer @ 5.1.2
+   │  │  │     ├─ string_decoder @ 1.1.1
+   │  │  │     │  └─ safe-buffer @ 5.1.2
+   │  │  │     └─ util-deprecate @ 1.0.2
+   │  │  └─ unicode-length @ 1.0.3
+   │  │     ├─ punycode @ 1.4.1
+   │  │     └─ strip-ansi @ 3.0.1
+   │  │        └─ ansi-regex @ 2.1.1
+   │  ├─ tap-parser @ 7.0.0
+   │  │  ├─ events-to-array @ 1.1.2
+   │  │  ├─ js-yaml @ 3.13.1
+   │  │  │  ├─ argparse @ 1.0.10
+   │  │  │  │  └─ sprintf-js @ 1.0.3
+   │  │  │  └─ esprima @ 4.0.1
+   │  │  └─ minipass @ 2.9.0
+   │  │     ├─ safe-buffer @ 5.1.2
+   │  │     └─ yallist @ 3.1.1
+   │  ├─ tmatch @ 3.1.0
+   │  ├─ trivial-deferred @ 1.0.1
+   │  ├─ tsame @ 1.1.2
+   │  ├─ write-file-atomic @ 2.4.3
+   │  │  ├─ graceful-fs @ 4.1.15
+   │  │  ├─ imurmurhash @ 0.1.4
+   │  │  └─ signal-exit @ 3.0.2
+   │  └─ yapool @ 1.0.0
+   └─ typeorm @ 0.2.24
+      ├─ app-root-path @ 3.0.0
+      ├─ buffer @ 5.6.0
+      │  ├─ base64-js @ 1.3.0
+      │  └─ ieee754 @ 1.1.13
+      ├─ chalk @ 2.4.2
+      │  ├─ ansi-styles @ 3.2.1
+      │  │  └─ color-convert @ 1.9.3
+      │  │     └─ color-name @ 1.1.3
+      │  ├─ escape-string-regexp @ 1.0.5
+      │  └─ supports-color @ 5.5.0
+      │     └─ has-flag @ 3.0.0
+      ├─ cli-highlight @ 2.1.4
+      │  ├─ chalk @ 3.0.0
+      │  │  ├─ ansi-styles @ 4.2.1
+      │  │  │  ├─ @types/color-name @ 1.1.1
+      │  │  │  └─ color-convert @ 2.0.1
+      │  │  │     └─ color-name @ 1.1.4
+      │  │  └─ supports-color @ 7.1.0
+      │  │     └─ has-flag @ 4.0.0
+      │  ├─ highlight.js @ 9.18.1
+      │  ├─ mz @ 2.7.0
+      │  │  ├─ any-promise @ 1.3.0
+      │  │  ├─ object-assign @ 4.1.1
+      │  │  └─ thenify-all @ 1.6.0
+      │  │     └─ thenify @ 3.3.1
+      │  │        └─ any-promise @ 1.3.0
+      │  ├─ parse5 @ 5.1.1
+      │  ├─ parse5-htmlparser2-tree-adapter @ 5.1.1
+      │  │  └─ parse5 @ 5.1.1
+      │  └─ yargs @ 15.4.1
+      │     ├─ cliui @ 6.0.0
+      │     │  ├─ string-width @ 4.2.0
+      │     │  │  ├─ emoji-regex @ 8.0.0
+      │     │  │  ├─ is-fullwidth-code-point @ 3.0.0
+      │     │  │  └─ strip-ansi @ 6.0.0
+      │     │  │     └─ ansi-regex @ 5.0.0
+      │     │  ├─ strip-ansi @ 6.0.0
+      │     │  │  └─ ansi-regex @ 5.0.0
+      │     │  └─ wrap-ansi @ 6.2.0
+      │     │     ├─ ansi-styles @ 4.2.1
+      │     │     │  ├─ @types/color-name @ 1.1.1
+      │     │     │  └─ color-convert @ 2.0.1
+      │     │     │     └─ color-name @ 1.1.4
+      │     │     ├─ string-width @ 4.2.0
+      │     │     │  ├─ emoji-regex @ 8.0.0
+      │     │     │  ├─ is-fullwidth-code-point @ 3.0.0
+      │     │     │  └─ strip-ansi @ 6.0.0
+      │     │     │     └─ ansi-regex @ 5.0.0
+      │     │     └─ strip-ansi @ 6.0.0
+      │     │        └─ ansi-regex @ 5.0.0
+      │     ├─ decamelize @ 1.2.0
+      │     ├─ find-up @ 4.1.0
+      │     │  ├─ locate-path @ 5.0.0
+      │     │  │  └─ p-locate @ 4.1.0
+      │     │  │     └─ p-limit @ 2.3.0
+      │     │  │        └─ p-try @ 2.2.0
+      │     │  └─ path-exists @ 4.0.0
+      │     ├─ get-caller-file @ 2.0.5
+      │     ├─ require-directory @ 2.1.1
+      │     ├─ require-main-filename @ 2.0.0
+      │     ├─ set-blocking @ 2.0.0
+      │     ├─ string-width @ 4.2.0
+      │     │  ├─ emoji-regex @ 8.0.0
+      │     │  ├─ is-fullwidth-code-point @ 3.0.0
+      │     │  └─ strip-ansi @ 6.0.0
+      │     │     └─ ansi-regex @ 5.0.0
+      │     ├─ which-module @ 2.0.0
+      │     ├─ y18n @ 4.0.0
+      │     └─ yargs-parser @ 18.1.3
+      │        ├─ camelcase @ 5.3.1
+      │        └─ decamelize @ 1.2.0
+      ├─ debug @ 4.1.1
+      │  └─ ms @ 2.1.1
+      ├─ dotenv @ 6.2.0
+      ├─ glob @ 7.1.3
+      │  ├─ fs.realpath @ 1.0.0
+      │  ├─ inflight @ 1.0.6
+      │  │  ├─ once @ 1.4.0
+      │  │  │  └─ wrappy @ 1.0.2
+      │  │  └─ wrappy @ 1.0.2
+      │  ├─ inherits @ 2.0.3
+      │  ├─ minimatch @ 3.0.4
+      │  │  └─ brace-expansion @ 1.1.11
+      │  │     ├─ balanced-match @ 1.0.0
+      │  │     └─ concat-map @ 0.0.1
+      │  ├─ once @ 1.4.0
+      │  │  └─ wrappy @ 1.0.2
+      │  └─ path-is-absolute @ 1.0.1
+      ├─ js-yaml @ 3.13.1
+      │  ├─ argparse @ 1.0.10
+      │  │  └─ sprintf-js @ 1.0.3
+      │  └─ esprima @ 4.0.1
+      ├─ mkdirp @ 0.5.5
+      │  └─ minimist @ 1.2.5
+      ├─ reflect-metadata @ 0.1.13
+      ├─ sha.js @ 2.4.11
+      │  ├─ inherits @ 2.0.3
+      │  └─ safe-buffer @ 5.1.2
+      ├─ tslib @ 1.10.0
+      ├─ xml2js @ 0.4.23
+      │  ├─ sax @ 1.2.4
+      │  └─ xmlbuilder @ 11.0.1
+      ├─ yargonaut @ 1.1.4
+      │  ├─ chalk @ 1.1.3
+      │  │  ├─ ansi-styles @ 2.2.1
+      │  │  ├─ escape-string-regexp @ 1.0.5
+      │  │  ├─ has-ansi @ 2.0.0
+      │  │  │  └─ ansi-regex @ 2.1.1
+      │  │  ├─ strip-ansi @ 3.0.1
+      │  │  │  └─ ansi-regex @ 2.1.1
+      │  │  └─ supports-color @ 2.0.0
+      │  ├─ figlet @ 1.5.0
+      │  └─ parent-require @ 1.0.0
+      └─ yargs @ 13.3.2
+         ├─ cliui @ 5.0.0
+         │  ├─ string-width @ 3.1.0
+         │  │  ├─ emoji-regex @ 7.0.3
+         │  │  ├─ is-fullwidth-code-point @ 2.0.0
+         │  │  └─ strip-ansi @ 5.2.0
+         │  │     └─ ansi-regex @ 4.1.0
+         │  ├─ strip-ansi @ 5.2.0
+         │  │  └─ ansi-regex @ 4.1.0
+         │  └─ wrap-ansi @ 5.1.0
+         │     ├─ ansi-styles @ 3.2.1
+         │     │  └─ color-convert @ 1.9.3
+         │     │     └─ color-name @ 1.1.3
+         │     ├─ string-width @ 3.1.0
+         │     │  ├─ emoji-regex @ 7.0.3
+         │     │  ├─ is-fullwidth-code-point @ 2.0.0
+         │     │  └─ strip-ansi @ 5.2.0
+         │     │     └─ ansi-regex @ 4.1.0
+         │     └─ strip-ansi @ 5.2.0
+         │        └─ ansi-regex @ 4.1.0
+         ├─ find-up @ 3.0.0
+         │  └─ locate-path @ 3.0.0
+         │     ├─ p-locate @ 3.0.0
+         │     │  └─ p-limit @ 2.3.0
+         │     │     └─ p-try @ 2.2.0
+         │     └─ path-exists @ 3.0.0
+         ├─ get-caller-file @ 2.0.5
+         ├─ require-directory @ 2.1.1
+         ├─ require-main-filename @ 2.0.0
+         ├─ set-blocking @ 2.0.0
+         ├─ string-width @ 3.1.0
+         │  ├─ emoji-regex @ 7.0.3
+         │  ├─ is-fullwidth-code-point @ 2.0.0
+         │  └─ strip-ansi @ 5.2.0
+         │     └─ ansi-regex @ 4.1.0
+         ├─ which-module @ 2.0.0
+         ├─ y18n @ 4.0.0
+         └─ yargs-parser @ 13.1.2
+            ├─ camelcase @ 5.3.1
+            └─ decamelize @ 1.2.0
+
+Testing /Users/swschmidt/Snyk Workspace/goof-github...
+
+Tested 553 dependencies for known issues, found 79 issues, 311 vulnerable paths.
+
+
+Issues to fix by upgrading:
+
+  Upgrade adm-zip@0.4.7 to adm-zip@0.5.2 to fix
+  ✗ Directory Traversal [High Severity][https://snyk.io/vuln/SNYK-JS-ADMZIP-1065796] in adm-zip@0.4.7
+    introduced by adm-zip@0.4.7
+  ✗ Arbitrary File Write via Archive Extraction (Zip Slip) [Critical Severity][https://snyk.io/vuln/npm:adm-zip:20180415] in adm-zip@0.4.7
+    introduced by adm-zip@0.4.7
+
+  Upgrade body-parser@1.9.0 to body-parser@1.17.1 to fix
+  ✗ Prototype Override Protection Bypass [High Severity][https://snyk.io/vuln/npm:qs:20170213] in qs@2.2.4
+    introduced by body-parser@1.9.0 > qs@2.2.4 and 1 other path(s)
+
+  Upgrade cfenv@1.2.2 to cfenv@1.2.4 to fix
+  ✗ Arbitrary Code Injection [Medium Severity][https://snyk.io/vuln/SNYK-JS-UNDERSCORE-1080984] in underscore@1.9.1
+    introduced by cfenv@1.2.2 > underscore@1.9.1
+
+  Upgrade dustjs-linkedin@2.5.0 to dustjs-linkedin@2.6.0 to fix
+  ✗ Code Injection [High Severity][https://snyk.io/vuln/npm:dustjs-linkedin:20160819] in dustjs-linkedin@2.5.0
+    introduced by dustjs-linkedin@2.5.0
+
+  Upgrade ejs@1.0.0 to ejs@3.1.6 to fix
+  ✗ Arbitrary Code Injection [Medium Severity][https://snyk.io/vuln/SNYK-JS-EJS-1049328] in ejs@1.0.0
+    introduced by ejs@1.0.0 and 1 other path(s)
+  ✗ Cross-site Scripting (XSS) [Medium Severity][https://snyk.io/vuln/npm:ejs:20161130] in ejs@1.0.0
+    introduced by ejs@1.0.0 and 1 other path(s)
+  ✗ Denial of Service (DoS) [Medium Severity][https://snyk.io/vuln/npm:ejs:20161130-1] in ejs@1.0.0
+    introduced by ejs@1.0.0 and 1 other path(s)
+  ✗ Arbitrary Code Execution [High Severity][https://snyk.io/vuln/npm:ejs:20161128] in ejs@1.0.0
+    introduced by ejs@1.0.0 and 1 other path(s)
+
+  Upgrade errorhandler@1.2.0 to errorhandler@1.4.3 to fix
+  ✗ Regular Expression Denial of Service (ReDoS) [High Severity][https://snyk.io/vuln/npm:negotiator:20160616] in negotiator@0.4.9
+    introduced by errorhandler@1.2.0 > accepts@1.1.4 > negotiator@0.4.9 and 2 other path(s)
+
+  Upgrade express@4.12.4 to express@4.16.0 to fix
+  ✗ Regular Expression Denial of Service (ReDoS) [Low Severity][https://snyk.io/vuln/npm:mime:20170907] in mime@1.3.4
+    introduced by express@4.12.4 > send@0.12.3 > mime@1.3.4 and 2 other path(s)
+  ✗ Regular Expression Denial of Service (ReDoS) [Low Severity][https://snyk.io/vuln/npm:debug:20170905] in debug@2.2.0
+    introduced by express@4.12.4 > debug@2.2.0 and 4 other path(s)
+  ✗ Regular Expression Denial of Service (ReDoS) [Low Severity][https://snyk.io/vuln/npm:ms:20170412] in ms@0.7.1
+    introduced by mongoose@4.2.4 > ms@0.7.1 and 8 other path(s)
+  ✗ Regular Expression Denial of Service (ReDoS) [High Severity][https://snyk.io/vuln/npm:fresh:20170908] in fresh@0.2.4
+    introduced by express@4.12.4 > fresh@0.2.4 and 2 other path(s)
+  ✗ Prototype Override Protection Bypass [High Severity][https://snyk.io/vuln/npm:qs:20170213] in qs@2.2.4
+    introduced by body-parser@1.9.0 > qs@2.2.4 and 1 other path(s)
+  ✗ Regular Expression Denial of Service (ReDoS) [High Severity][https://snyk.io/vuln/npm:negotiator:20160616] in negotiator@0.4.9
+    introduced by errorhandler@1.2.0 > accepts@1.1.4 > negotiator@0.4.9 and 2 other path(s)
+
+  Upgrade express-fileupload@0.0.5 to express-fileupload@1.1.10 to fix
+  ✗ Prototype Pollution [High Severity][https://snyk.io/vuln/SNYK-JS-EXPRESSFILEUPLOAD-595969] in express-fileupload@0.0.5
+    introduced by express-fileupload@0.0.5
+  ✗ Denial of Service (DoS) [High Severity][https://snyk.io/vuln/SNYK-JS-EXPRESSFILEUPLOAD-473997] in express-fileupload@0.0.5
+    introduced by express-fileupload@0.0.5
+
+  Upgrade jquery@2.2.4 to jquery@3.5.0 to fix
+  ✗ Cross-site Scripting (XSS) [Medium Severity][https://snyk.io/vuln/SNYK-JS-JQUERY-565129] in jquery@2.2.4
+    introduced by jquery@2.2.4
+  ✗ Cross-site Scripting (XSS) [Medium Severity][https://snyk.io/vuln/SNYK-JS-JQUERY-567880] in jquery@2.2.4
+    introduced by jquery@2.2.4
+  ✗ Prototype Pollution [Medium Severity][https://snyk.io/vuln/SNYK-JS-JQUERY-174006] in jquery@2.2.4
+    introduced by jquery@2.2.4
+  ✗ Cross-site Scripting (XSS) [Medium Severity][https://snyk.io/vuln/npm:jquery:20150627] in jquery@2.2.4
+    introduced by jquery@2.2.4
+
+  Upgrade lodash@4.17.4 to lodash@4.17.21 to fix
+  ✗ Regular Expression Denial of Service (ReDoS) [Medium Severity][https://snyk.io/vuln/SNYK-JS-LODASH-1018905] in lodash@4.17.4
+    introduced by lodash@4.17.4 and 9 other path(s)
+  ✗ Prototype Pollution [Medium Severity][https://snyk.io/vuln/SNYK-JS-LODASH-567746] in lodash@4.17.4
+    introduced by lodash@4.17.4 and 9 other path(s)
+  ✗ Regular Expression Denial of Service (ReDoS) [Medium Severity][https://snyk.io/vuln/SNYK-JS-LODASH-73639] in lodash@4.17.4
+    introduced by lodash@4.17.4 and 9 other path(s)
+  ✗ Prototype Pollution [Medium Severity][https://snyk.io/vuln/npm:lodash:20180130] in lodash@4.17.4
+    introduced by lodash@4.17.4
+  ✗ Command Injection [High Severity][https://snyk.io/vuln/SNYK-JS-LODASH-1040724] in lodash@4.17.4
+    introduced by lodash@4.17.4 and 9 other path(s)
+  ✗ Prototype Pollution [High Severity][https://snyk.io/vuln/SNYK-JS-LODASH-608086] in lodash@4.17.4
+    introduced by lodash@4.17.4 and 9 other path(s)
+  ✗ Prototype Pollution [High Severity][https://snyk.io/vuln/SNYK-JS-LODASH-450202] in lodash@4.17.4
+    introduced by lodash@4.17.4 and 9 other path(s)
+  ✗ Prototype Pollution [High Severity][https://snyk.io/vuln/SNYK-JS-LODASH-73638] in lodash@4.17.4
+    introduced by lodash@4.17.4 and 9 other path(s)
+  ✗ Prototype Pollution [Critical Severity][https://snyk.io/vuln/SNYK-JS-LODASH-590103] in lodash@4.17.4
+    introduced by lodash@4.17.4 and 9 other path(s)
+
+  Upgrade marked@0.3.5 to marked@1.1.1 to fix
+  ✗ Regular Expression Denial of Service (ReDoS  ) [Medium Severity][https://snyk.io/vuln/SNYK-JS-MARKED-584281] in marked@0.3.5
+    introduced by marked@0.3.5
+  ✗ Regular Expression Denial of Service (ReDoS) [Medium Severity][https://snyk.io/vuln/SNYK-JS-MARKED-174116] in marked@0.3.5
+    introduced by marked@0.3.5
+  ✗ Regular Expression Denial of Service (ReDoS) [Medium Severity][https://snyk.io/vuln/SNYK-JS-MARKED-451540] in marked@0.3.5
+    introduced by marked@0.3.5
+  ✗ Cross-site Scripting (XSS) [Medium Severity][https://snyk.io/vuln/npm:marked:20170815-1] in marked@0.3.5
+    introduced by marked@0.3.5
+  ✗ Regular Expression Denial of Service (ReDoS) [High Severity][https://snyk.io/vuln/npm:marked:20180225] in marked@0.3.5
+    introduced by marked@0.3.5
+  ✗ Cross-site Scripting (XSS) [High Severity][https://snyk.io/vuln/npm:marked:20170815] in marked@0.3.5
+    introduced by marked@0.3.5
+  ✗ Regular Expression Denial of Service (ReDoS) [High Severity][https://snyk.io/vuln/npm:marked:20170907] in marked@0.3.5
+    introduced by marked@0.3.5
+  ✗ Cross-site Scripting (XSS) [High Severity][https://snyk.io/vuln/npm:marked:20170112] in marked@0.3.5
+    introduced by marked@0.3.5
+  ✗ Cross-site Scripting (XSS) [High Severity][https://snyk.io/vuln/npm:marked:20150520] in marked@0.3.5
+    introduced by marked@0.3.5
+
+  Upgrade moment@2.15.1 to moment@2.19.3 to fix
+  ✗ Regular Expression Denial of Service (ReDoS) [Low Severity][https://snyk.io/vuln/npm:moment:20170905] in moment@2.15.1
+    introduced by moment@2.15.1
+  ✗ Regular Expression Denial of Service (ReDoS) [Medium Severity][https://snyk.io/vuln/npm:moment:20161019] in moment@2.15.1
+    introduced by moment@2.15.1
+
+  Upgrade mongoose@4.2.4 to mongoose@5.12.3 to fix
+  ✗ Regular Expression Denial of Service (ReDoS) [Low Severity][https://snyk.io/vuln/npm:debug:20170905] in debug@2.2.0
+    introduced by express@4.12.4 > debug@2.2.0 and 4 other path(s)
+  ✗ Regular Expression Denial of Service (ReDoS) [Low Severity][https://snyk.io/vuln/npm:ms:20170412] in ms@0.7.1
+    introduced by mongoose@4.2.4 > ms@0.7.1 and 8 other path(s)
+  ✗ Prototype Pollution [Medium Severity][https://snyk.io/vuln/SNYK-JS-MONGOOSE-1086688] in mongoose@4.2.4
+    introduced by mongoose@4.2.4
+  ✗ Information Exposure [Medium Severity][https://snyk.io/vuln/SNYK-JS-MONGOOSE-472486] in mongoose@4.2.4
+    introduced by mongoose@4.2.4
+  ✗ Remote Memory Exposure [Medium Severity][https://snyk.io/vuln/npm:mongoose:20160116] in mongoose@4.2.4
+    introduced by mongoose@4.2.4
+  ✗ Prototype Pollution [High Severity][https://snyk.io/vuln/SNYK-JS-MQUERY-1089718] in mquery@1.6.3
+    introduced by mongoose@4.2.4 > mquery@1.6.3
+  ✗ Prototype Pollution [High Severity][https://snyk.io/vuln/SNYK-JS-MQUERY-1050858] in mquery@1.6.3
+    introduced by mongoose@4.2.4 > mquery@1.6.3
+  ✗ Denial of Service (DoS) [High Severity][https://snyk.io/vuln/SNYK-JS-MONGODB-473855] in mongodb@2.0.46
+    introduced by mongoose@4.2.4 > mongodb@2.0.46
+  ✗ DLL Injection [Critical Severity][https://snyk.io/vuln/SNYK-JS-KERBEROS-568900] in kerberos@0.0.24
+    introduced by mongoose@4.2.4 > mongodb@2.0.46 > mongodb-core@1.2.19 > kerberos@0.0.24
+
+  Upgrade ms@0.7.3 to ms@2.0.0 to fix
+  ✗ Regular Expression Denial of Service (ReDoS) [Low Severity][https://snyk.io/vuln/npm:ms:20170412] in ms@0.7.1
+    introduced by mongoose@4.2.4 > ms@0.7.1 and 8 other path(s)
+
+  Upgrade npmconf@0.0.24 to npmconf@2.1.3 to fix
+  ✗ Regular Expression Denial of Service (ReDoS) [Medium Severity][https://snyk.io/vuln/npm:semver:20150403] in semver@1.1.4
+    introduced by npmconf@0.0.24 > semver@1.1.4
+  ✗ Uninitialized Memory Exposure [High Severity][https://snyk.io/vuln/npm:npmconf:20180512] in npmconf@0.0.24
+    introduced by npmconf@0.0.24
+  ✗ Prototype Pollution [High Severity][https://snyk.io/vuln/SNYK-JS-INI-1048974] in ini@1.3.5
+    introduced by npmconf@0.0.24 > config-chain@1.1.12 > ini@1.3.5 and 1 other path(s)
+
+  Upgrade st@0.2.4 to st@1.2.2 to fix
+  ✗ Regular Expression Denial of Service (ReDoS) [Low Severity][https://snyk.io/vuln/npm:mime:20170907] in mime@1.3.4
+    introduced by express@4.12.4 > send@0.12.3 > mime@1.3.4 and 2 other path(s)
+  ✗ Open Redirect [Medium Severity][https://snyk.io/vuln/npm:st:20171013] in st@0.2.4
+    introduced by st@0.2.4
+  ✗ Directory Traversal [Medium Severity][https://snyk.io/vuln/npm:st:20140206] in st@0.2.4
+    introduced by st@0.2.4
+  ✗ Regular Expression Denial of Service (ReDoS) [High Severity][https://snyk.io/vuln/npm:negotiator:20160616] in negotiator@0.4.9
+    introduced by errorhandler@1.2.0 > accepts@1.1.4 > negotiator@0.4.9 and 2 other path(s)
+
+  Upgrade tap@11.1.5 to tap@12.6.2 to fix
+  ✗ Prototype Pollution [Medium Severity][https://snyk.io/vuln/SNYK-JS-YARGSPARSER-560381] in yargs-parser@9.0.2
+    introduced by tap@11.1.5 > nyc@11.9.0 > yargs@11.1.0 > yargs-parser@9.0.2 and 1 other path(s)
+  ✗ Denial of Service (DoS) [Medium Severity][https://snyk.io/vuln/npm:mem:20180117] in mem@1.1.0
+    introduced by tap@11.1.5 > nyc@11.9.0 > yargs@11.1.0 > os-locale@2.1.0 > mem@1.1.0
+
+  Upgrade typeorm@0.2.24 to typeorm@0.2.25 to fix
+  ✗ Prototype Pollution [High Severity][https://snyk.io/vuln/SNYK-JS-TYPEORM-590152] in typeorm@0.2.24
+    introduced by typeorm@0.2.24
+
+
+Patchable issues:
+
+  Patch available for lodash@4.17.4
+  ✗ Prototype Pollution [Medium Severity][https://snyk.io/vuln/SNYK-JS-LODASH-567746] in lodash@4.17.4
+    introduced by lodash@4.17.4 and 9 other path(s)
+
+  Patch available for ms@0.6.2
+  ✗ Regular Expression Denial of Service (ReDoS) [Medium Severity][https://snyk.io/vuln/npm:ms:20151024] in ms@0.6.2
+    introduced by humanize-ms@1.0.1 > ms@0.6.2
+
+
+Issues with no direct upgrade or patch:
+  ✗ Prototype Pollution [High Severity][https://snyk.io/vuln/SNYK-JS-AJV-584908] in ajv@6.10.2
+    introduced by tap@11.1.5 > coveralls@3.0.9 > request@2.88.0 > har-validator@5.1.3 > ajv@6.10.2
+  This issue was fixed in versions: 6.12.3
+  ✗ Remote Memory Exposure [High Severity][https://snyk.io/vuln/SNYK-JS-BL-608877] in bl@2.2.0
+    introduced by mongodb@3.5.9 > bl@2.2.0
+  This issue was fixed in versions: 2.2.1, 3.0.1, 4.0.3, 1.2.3
+  ✗ Prototype Pollution [High Severity][https://snyk.io/vuln/SNYK-JS-DUSTJSLINKEDIN-1089257] in dustjs-linkedin@2.5.0
+    introduced by dustjs-linkedin@2.5.0
+  No upgrade or patch available
+  ✗ Remote Code Execution (RCE) [Medium Severity][https://snyk.io/vuln/SNYK-JS-HANDLEBARS-1056767] in handlebars@4.0.11
+    introduced by tap@11.1.5 > nyc@11.9.0 > istanbul-reports@1.4.0 > handlebars@4.0.11
+  This issue was fixed in versions: 4.7.7
+  ✗ Prototype Pollution [Medium Severity][https://snyk.io/vuln/SNYK-JS-HANDLEBARS-1279029] in handlebars@4.0.11
+    introduced by tap@11.1.5 > nyc@11.9.0 > istanbul-reports@1.4.0 > handlebars@4.0.11
+  This issue was fixed in versions: 4.7.7
+  ✗ Prototype Pollution [High Severity][https://snyk.io/vuln/SNYK-JS-HANDLEBARS-173692] in handlebars@4.0.11
+    introduced by tap@11.1.5 > nyc@11.9.0 > istanbul-reports@1.4.0 > handlebars@4.0.11
+  This issue was fixed in versions: 4.0.14, 4.1.2
+  ✗ Prototype Pollution [High Severity][https://snyk.io/vuln/SNYK-JS-HANDLEBARS-174183] in handlebars@4.0.11
+    introduced by tap@11.1.5 > nyc@11.9.0 > istanbul-reports@1.4.0 > handlebars@4.0.11
+  This issue was fixed in versions: 3.0.7, 4.1.2, 4.0.14
+  ✗ Prototype Pollution [High Severity][https://snyk.io/vuln/SNYK-JS-HANDLEBARS-469063] in handlebars@4.0.11
+    introduced by tap@11.1.5 > nyc@11.9.0 > istanbul-reports@1.4.0 > handlebars@4.0.11
+  This issue was fixed in versions: 4.3.0, 3.8.0
+  ✗ Denial of Service (DoS) [High Severity][https://snyk.io/vuln/SNYK-JS-HANDLEBARS-480388] in handlebars@4.0.11
+    introduced by tap@11.1.5 > nyc@11.9.0 > istanbul-reports@1.4.0 > handlebars@4.0.11
+  This issue was fixed in versions: 4.4.5
+  ✗ Arbitrary Code Execution [High Severity][https://snyk.io/vuln/SNYK-JS-HANDLEBARS-534478] in handlebars@4.0.11
+    introduced by tap@11.1.5 > nyc@11.9.0 > istanbul-reports@1.4.0 > handlebars@4.0.11
+  This issue was fixed in versions: 4.5.3, 3.0.8
+  ✗ Prototype Pollution [Critical Severity][https://snyk.io/vuln/SNYK-JS-HANDLEBARS-534988] in handlebars@4.0.11
+    introduced by tap@11.1.5 > nyc@11.9.0 > istanbul-reports@1.4.0 > handlebars@4.0.11
+  This issue was fixed in versions: 4.5.3, 3.0.8
+  ✗ Prototype Pollution [Medium Severity][https://snyk.io/vuln/SNYK-JS-HANDLEBARS-567742] in handlebars@4.0.11
+    introduced by tap@11.1.5 > nyc@11.9.0 > istanbul-reports@1.4.0 > handlebars@4.0.11
+  This issue was fixed in versions: 4.6.0
+  ✗ Prototype Pollution [Medium Severity][https://snyk.io/vuln/SNYK-JS-HIGHLIGHTJS-1045326] in highlight.js@9.18.1
+    introduced by typeorm@0.2.24 > cli-highlight@2.1.4 > highlight.js@9.18.1
+  This issue was fixed in versions: 9.18.2, 10.1.2
+  ✗ Regular Expression Denial of Service (ReDoS) [Medium Severity][https://snyk.io/vuln/SNYK-JS-HIGHLIGHTJS-1048676] in highlight.js@9.18.1
+    introduced by typeorm@0.2.24 > cli-highlight@2.1.4 > highlight.js@9.18.1
+  This issue was fixed in versions: 10.4.1
+  ✗ Regular Expression Denial of Service (ReDoS) [Medium Severity][https://snyk.io/vuln/SNYK-JS-HOSTEDGITINFO-1088355] in hosted-git-info@2.6.0
+    introduced by tap@11.1.5 > nyc@11.9.0 > test-exclude@4.2.1 > read-pkg-up@1.0.1 > read-pkg@1.1.0 > normalize-package-data@2.4.0 > hosted-git-info@2.6.0
+  This issue was fixed in versions: 3.0.8, 2.8.9
+  ✗ Validation Bypass [Low Severity][https://snyk.io/vuln/SNYK-JS-KINDOF-537849] in kind-of@6.0.2
+    introduced by tap@11.1.5 > nyc@11.9.0 > micromatch@3.1.10 > kind-of@6.0.2 and 97 other path(s)
+  This issue was fixed in versions: 6.0.3
+  ✗ Prototype Pollution [Medium Severity][https://snyk.io/vuln/SNYK-JS-MINIMIST-559764] in minimist@0.0.8
+    introduced by tap@11.1.5 > coveralls@3.0.9 > minimist@1.2.0 and 8 other path(s)
+  This issue was fixed in versions: 0.2.1, 1.2.3
+  ✗ Prototype Pollution [High Severity][https://snyk.io/vuln/SNYK-JS-MIXINDEEP-450212] in mixin-deep@1.3.1
+    introduced by tap@11.1.5 > nyc@11.9.0 > micromatch@3.1.10 > snapdragon@0.8.2 > base@0.11.2 > mixin-deep@1.3.1 and 9 other path(s)
+  This issue was fixed in versions: 2.0.1, 1.3.2
+  ✗ Regular Expression Denial of Service (ReDoS) [Medium Severity][https://snyk.io/vuln/SNYK-JS-PATHPARSE-1077067] in path-parse@1.0.5
+    introduced by tap@11.1.5 > nyc@11.9.0 > istanbul-lib-report@1.1.3 > path-parse@1.0.5
+  This issue was fixed in versions: 1.0.7
+  ✗ Prototype Pollution [High Severity][https://snyk.io/vuln/SNYK-JS-SETVALUE-450213] in set-value@0.4.3
+    introduced by tap@11.1.5 > nyc@11.9.0 > micromatch@3.1.10 > snapdragon@0.8.2 > base@0.11.2 > cache-base@1.0.1 > set-value@2.0.0 and 19 other path(s)
+  This issue was fixed in versions: 2.0.1, 3.0.1
+  ✗ Prototype Pollution [High Severity][https://snyk.io/vuln/SNYK-JS-Y18N-1021887] in y18n@4.0.0
+    introduced by tap@11.1.5 > nyc@11.9.0 > yargs@11.1.0 > y18n@3.2.1 and 2 other path(s)
+  This issue was fixed in versions: 3.2.2, 4.0.1, 5.0.5
+
+
+License issues:
+
+  ✗ Unknown license [Low Severity][https://snyk.io/vuln/snyk:lic:npm:ejs-locals:Unknown] in ejs-locals@1.0.2
+    introduced by ejs-locals@1.0.2
+    Legal instructions:
+    ○ for Unknown: Unknown license, please review.
+
+  ✗ GPL-2.0 license [High Severity][https://snyk.io/vuln/snyk:lic:npm:goof:GPL-2.0] in goof@1.0.1
+    Legal instructions:
+    ○ for GPL-2.0: Copyleft. Requires any code using this license to be released under the same GPL
+    license.
+
+
+
+Organization:      797-enterprises
+Package manager:   npm
+Target file:       package-lock.json
+Project name:      goof
+Open source:       no
+Project path:      /Users/swschmidt/Snyk Workspace/goof-github
+Local Snyk policy: found
+Licenses:          enabled
+
+Tip: Run `snyk wizard` to address these issues.
+

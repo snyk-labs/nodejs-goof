@@ -1,0 +1,25 @@
+# Example snyk script for gitlab pipelines
+
+dependancy_scanning:
+  image: node:latest
+  stage: test
+  allow_failure: true
+  script:
+    # Install npm, snyk, and snyk-to-html
+    - npm install -g npm@latest
+    - npm install -g snyk
+    - npm install snyk-to-html -g
+    # Run snyk help, snyk auth, snyk monitor, snyk test to break build and out report
+    - snyk --help
+    - snyk auth $SNYK_TOKEN
+    - snyk monitor --project-name=goof-gitlab-pipelines --remote-repo-url=goof-gitlab-pipelines
+    - snyk container monitor snykschmidtty/goof:latest --app-vulns --project-name=snykschmidtty/goof:latest-jenkins --project-environment=frontend --project-lifecycle=production --project-business-criticality=high --project-tags=CI=Jenkins,PCI=yes
+    - snyk test --json | snyk-to-html -o snyk_results.html
+    - snyk iac test .
+    # snyk iac test tfplan.json
+ 
+  # Output report
+  artifacts:
+    when: always
+    paths: 
+      - snyk_results.html

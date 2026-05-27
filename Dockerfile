@@ -1,5 +1,8 @@
-# FROM node:6-stretch
 FROM node:18.13.0
+
+LABEL org.opencontainers.image.source="https://github.com/snyk-schmidtty/goof-github"
+
+RUN apt-get install -y imagemagick
 
 RUN mkdir /usr/src/goof
 RUN mkdir /tmp/extracted_files
