@@ -79,12 +79,7 @@ exports.admin = function (req, res, next) {
   });
 };
 
-exports.get_account_details = function(req, res, next) {
-  // @TODO need to add a database call to get the profile from the database
-  // and provide it to the view to display
-  const profile = {}
- 	return res.render('account.hbs', profile)
-}
+
 
 exports.save_account_details = function(req, res, next) {
   // get the profile details from the JSON
