@@ -19,6 +19,19 @@ var fs = require('fs');
 // prototype-pollution
 var _ = require('lodash');
 
+function onLoginSuccessHook(redirectPage, session, username, res) {
+  session.loggedIn = 1
+
+  // Log the login action for audit
+  console.log(`User logged in: ${username}`)
+
+  if (redirectPage) {
+      return res.redirect(redirectPage)
+  } else {
+      return res.redirect('/admin')
+  }
+}
+
 exports.index = function (req, res, next) {
   Todo.
     find({}).
