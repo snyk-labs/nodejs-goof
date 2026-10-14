@@ -1,0 +1,30 @@
+name: sca-report1
+on:
+  push:
+  workflow_dispatch:
+permissions:
+  contents: read
+  security-events: write
+jobs:
+  sca:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: snyk/actions/setup@master
+      - name: SCA scan (report only)
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        run: snyk test --sarif-file-output=snyk-sca.sarif --json-file-output=snyk-sca.json
+      - name: Monitor in Snyk web app
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        run: snyk monitor
+      - uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: snyk-sca.sarif
+          category: snyk-sca
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sca-report
+          path: snyk-sca.json
