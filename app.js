@@ -18,7 +18,7 @@ var methodOverride = require('method-override');
 var logger = require('morgan');
 var errorHandler = require('errorhandler');
 var optional = require('optional');
-var marked = require('marked');
+// var marked = require('marked'); // AI Refactor Patch: removed CommonJS require; marked v4 is ESM-only and requires dynamic import.
 var fileUpload = require('express-fileupload');
 var dust = require('dustjs-linkedin');
 var dustHelpers = require('dustjs-helpers');
@@ -72,17 +72,54 @@ app.use('/users', routesUsers)
 app.use(st({ path: './public', url: '/public' }));
 
 // Add the option to output (sanitized!) markdown
-marked.setOptions({ sanitize: true });
-app.locals.marked = marked;
+// AI Refactor Patch: marked v4 is ESM-only and removed the insecure `sanitize` option; dynamically import and provide a basic sanitizer wrapper.
+(async () => {
+  const { marked } = await import('marked'); // AI Refactor Patch: Use dynamic import for ESM-only package.
 
-// development only
-if (app.get('env') == 'development') {
-  app.use(errorHandler());
-}
+  function sanitizeHtml(html) {
+    // AI Refactor Patch: Replace removed `sanitize` option with conservative server-side sanitization to mitigate XSS.
+    if (typeof html !== 'string') return '';
+    // Strip script/style/iframe tags and their contents
+    html = html.replace(/<(script|style|iframe)\b[^>]*>[\s\S]*?<\/\1>/gi, '');
+    // Remove inline event handlers like onclick, onerror, etc.
+    html = html.replace(/\son\w+\s*=\s*(['"]).*?\1/gi, '');
+    // Disallow javascript: in href/src
+    html = html.replace(/\s(href|src)\s*=\s*(['"])\s*javascript:[\s\S]*?\2/gi, '');
+    return html;
+  }
 
-var token = 'SECRET_TOKEN_f8ed84e8f41e4146403dd4a6bbcea5e418d23a9';
-console.log('token: ' + token);
+  // Provide a helper compatible with previous templates that called `marked(text)`
+  app.locals.marked = function (src) {
+    const md = src == null ? '' : String(src);
+    const html = marked.parse(md); // AI Refactor Patch: Use marked.parse per v4 API.
+    return sanitizeHtml(html);
+  };
 
-http.createServer(app).listen(app.get('port'), function () {
-  console.log('Express server listening on port ' + app.get('port'));
+  // development only
+  if (app.get('env') == 'development') {
+    app.use(errorHandler());
+  }
+
+  var token = 'SECRET_TOKEN_f8ed84e8f41e4146403dd4a6bbcea5e418d23a9';
+  console.log('token: ' + (token.slice(0, 6) + '...')); // AI Refactor Patch: Avoid leaking full secret token in logs.
+
+  http.createServer(app).listen(app.get('port'), function () {
+    console.log('Express server listening on port ' + app.get('port')); // AI Refactor Patch: Server start moved after async init to ensure marked is ready.
+  });
+})().catch(err => {
+  // If marked fails to load, fail closed by providing a safe no-op renderer and still start the server
+  console.error('Failed to initialize markdown renderer:', err); // AI Refactor Patch: Defensive fallback for ESM import failure.
+  app.locals.marked = function () { return ''; };
+
+  // development only
+  if (app.get('env') == 'development') {
+    app.use(errorHandler());
+  }
+
+  var token = 'SECRET_TOKEN_f8ed84e8f41e4146403dd4a6bbcea5e418d23a9';
+  console.log('token: ' + (token.slice(0, 6) + '...')); // AI Refactor Patch: Avoid leaking full secret token in logs.
+
+  http.createServer(app).listen(app.get('port'), function () {
+    console.log('Express server listening on port ' + app.get('port'));
+  });
 });

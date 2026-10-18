@@ -5,19 +5,29 @@ var User = mongoose.model('User');
 // TODO:
 var hms = require('humanize-ms');
 var ms = require('ms');
-var streamBuffers = require('stream-buffers');
-var readline = require('readline');
 var moment = require('moment');
-var exec = require('child_process').exec;
 var validator = require('validator');
+
+// AI Refactor Patch: Removed unused and insecure requires (stream-buffers, readline, child_process.exec, fs, lodash) to reduce attack surface and address upgraded libs.
 
 // zip-slip
 var fileType = require('file-type');
 var AdmZip = require('adm-zip');
-var fs = require('fs');
 
-// prototype-pollution
-var _ = require('lodash');
+// AI Refactor Patch: helper to coerce inputs to string for validator >=13 which only accepts strings
+function toSafeString(val) {
+  return typeof val === 'string' ? val : '';
+}
+
+// AI Refactor Patch: sanitize redirects to prevent open redirects with untrusted input
+function sanitizeRedirect(target) {
+  var t = toSafeString(target).trim();
+  if (!t) return null;
+  // Only allow relative paths starting with a single slash and no scheme
+  if (!t.startsWith('/') || t.startsWith('//')) return null;
+  if (/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(t)) return null;
+  return t;
+}
 
 function onLoginSuccessHook(redirectPage, session, username, res) {
   session.loggedIn = 1
@@ -25,8 +35,10 @@ function onLoginSuccessHook(redirectPage, session, username, res) {
   // Log the login action for audit
   console.log(`User logged in: ${username}`)
 
-  if (redirectPage) {
-      return res.redirect(redirectPage)
+  // AI Refactor Patch: validate redirect target to avoid open redirect vulnerabilities
+  var safeRedirect = sanitizeRedirect(redirectPage); // AI Refactor Patch: sanitize user-controlled redirect
+  if (safeRedirect) {
+      return res.redirect(safeRedirect)
   } else {
       return res.redirect('/admin')
   }
@@ -48,12 +60,16 @@ exports.index = function (req, res, next) {
 };
 
 exports.loginHandler = function (req, res, next) {
-  if (validator.isEmail(req.body.username)) {
-    User.find({ username: req.body.username, password: req.body.password }, function (err, users) {
-      if (users.length > 0) {
-        const redirectPage = req.body.redirectPage
+  const usernameStr = toSafeString(req.body && req.body.username); // AI Refactor Patch: coerce to string for validator 13+
+  const passwordStr = toSafeString(req.body && req.body.password); // AI Refactor Patch: coerce to string for validator 13+
+
+  if (validator.isEmail(usernameStr)) {
+    User.find({ username: usernameStr, password: passwordStr }, function (err, users) {
+      if (err) return next(err); // AI Refactor Patch: handle possible db errors
+      if (users && users.length > 0) {
+        const redirectPage = toSafeString(req.body && req.body.redirectPage); // AI Refactor Patch: coerce and later sanitize redirect
         const session = req.session
-        const username = req.body.username
+        const username = usernameStr
         return adminLoginSuccess(redirectPage, session, username, res)
       } else {
         return res.status(401).send()
@@ -70,8 +86,10 @@ function adminLoginSuccess(redirectPage, session, username, res) {
   // Log the login action for audit
   console.log(`User logged in: ${username}`)
 
-  if (redirectPage) {
-      return res.redirect(redirectPage)
+  // AI Refactor Patch: validate redirect target to avoid open redirect vulnerabilities
+  var safeRedirect = sanitizeRedirect(redirectPage); // AI Refactor Patch: sanitize user-controlled redirect
+  if (safeRedirect) {
+      return res.redirect(safeRedirect)
   } else {
       return res.redirect('/admin')
   }
@@ -100,24 +118,32 @@ exports.get_account_details = function(req, res, next) {
 }
 
 exports.save_account_details = function(req, res, next) {
-  // get the profile details from the JSON
-	const profile = req.body
+  // AI Refactor Patch: whitelist and coerce fields to prevent prototype pollution and validator type issues
+	const raw = req.body || {}; // AI Refactor Patch: avoid using req.body directly in templates
+  const sanitized = {
+    email: toSafeString(raw.email),
+    phone: toSafeString(raw.phone),
+    firstname: toSafeString(raw.firstname),
+    lastname: toSafeString(raw.lastname),
+    country: toSafeString(raw.country),
+  };
+
   // validate the input
-  if (validator.isEmail(profile.email, { allow_display_name: true })
+  if (validator.isEmail(sanitized.email, { allow_display_name: true })
     // allow_display_name allows us to receive input as:
     // Display Name <email-address>
     // which we consider valid too
-    && validator.isMobilePhone(profile.phone, 'he-IL')
-    && validator.isAscii(profile.firstname)
-    && validator.isAscii(profile.lastname)
-    && validator.isAscii(profile.country)
+    && validator.isMobilePhone(sanitized.phone, 'he-IL')
+    && validator.isAscii(sanitized.firstname)
+    && validator.isAscii(sanitized.lastname)
+    && validator.isAscii(sanitized.country)
   ) {
     // trim any extra spaces on the right of the name
-    profile.firstname = validator.rtrim(profile.firstname)
-    profile.lastname = validator.rtrim(profile.lastname)
+    sanitized.firstname = validator.rtrim(sanitized.firstname) // AI Refactor Patch: operate on sanitized copy
+    sanitized.lastname = validator.rtrim(sanitized.lastname) // AI Refactor Patch: operate on sanitized copy
 
     // render the view
-    return res.render('account.hbs', profile)
+    return res.render('account.hbs', sanitized)
   } else {
     // if input validation fails, we just render the view as is
     console.log('error in form details')
@@ -171,12 +197,8 @@ exports.create = function (req, res, next) {
     var url = item.match(imgRegex)[1];
     console.log('found img: ' + url);
 
-    exec('identify ' + url, function (err, stdout, stderr) {
-      console.log(err);
-      if (err !== null) {
-        console.log('Error (' + err + '):' + stderr);
-      }
-    });
+    // AI Refactor Patch: remove exec of external command with untrusted input to prevent command injection
+    // Previously: exec('identify ' + url, ...) which is unsafe.
 
   } else {
     item = parse(item);
@@ -202,14 +224,15 @@ exports.create = function (req, res, next) {
 
 exports.destroy = function (req, res, next) {
   Todo.findById(req.params.id, function (err, todo) {
-
-    try {
-      todo.remove(function (err, todo) {
-        if (err) return next(err);
-        res.redirect('/');
-      });
-    } catch (e) {
+    if (err) return next(err); // AI Refactor Patch: handle db error
+    if (!todo) { // AI Refactor Patch: handle not found safely
+      return res.redirect('/');
     }
+    // AI Refactor Patch: use deleteOne in Mongoose 6 and handle callback
+    todo.deleteOne(function (err) {
+      if (err) return next(err);
+      res.redirect('/');
+    });
   });
 };
 
@@ -230,6 +253,8 @@ exports.edit = function (req, res, next) {
 
 exports.update = function (req, res, next) {
   Todo.findById(req.params.id, function (err, todo) {
+    if (err) return next(err); // AI Refactor Patch: handle db error
+    if (!todo) return res.redirect('/'); // AI Refactor Patch: handle not found safely
 
     todo.content = req.body.content;
     todo.updated_at = Date.now();
@@ -258,22 +283,30 @@ exports.import = function (req, res, next) {
   }
 
   var importFile = req.files.importFile;
+  // AI Refactor Patch: handle multiple files case safely for express-fileupload >=1.x
+  if (Array.isArray(importFile)) importFile = importFile[0];
+
+  if (!importFile || !importFile.data) {
+    res.send('Invalid file upload.');
+    return;
+  }
+
   var data;
   var importedFileType = fileType(importFile.data);
   var zipFileExt = { ext: "zip", mime: "application/zip" };
-  if (importedFileType === null) {
+  // AI Refactor Patch: handle undefined falsy from file-type
+  if (!importedFileType) {
     importedFileType = { ext: "txt", mime: "text/plain" };
   }
   if (importedFileType["mime"] === zipFileExt["mime"]) {
-    var zip = AdmZip(importFile.data);
-    var extracted_path = "/tmp/extracted_files";
-    zip.extractAllTo(extracted_path, true);
-    data = "No backup.txt file found";
-    fs.readFile('backup.txt', 'ascii', function (err, data) {
-      if (!err) {
-        data = data;
-      }
-    });
+    // AI Refactor Patch: avoid extractAllTo (zip-slip). Read specific entry from buffer safely.
+    var zip = new AdmZip(importFile.data); // AI Refactor Patch: use constructor per new adm-zip API
+    var entry = zip.getEntry('backup.txt'); // AI Refactor Patch: only read expected file
+    if (entry) {
+      data = zip.readAsText(entry); // AI Refactor Patch: read entry content without touching filesystem
+    } else {
+      data = "No backup.txt file found";
+    }
   } else {
     data = importFile.data.toString('ascii');
   }
@@ -357,11 +390,20 @@ exports.chat = {
       icon: '👋',
     };
 
-    _.merge(message, req.body.message, {
+    // AI Refactor Patch: replace _.merge with explicit whitelist to prevent prototype pollution
+    const incoming = (req.body && typeof req.body.message === 'object' && !Array.isArray(req.body.message)) ? req.body.message : {};
+    if (typeof incoming.icon === 'string') {
+      message.icon = incoming.icon;
+    }
+    if (typeof incoming.text === 'string') {
+      message.text = incoming.text;
+    }
+
+    Object.assign(message, {
       id: lastId++,
       timestamp: Date.now(),
       userName: user.name,
-    });
+    }); // AI Refactor Patch: assign trusted fields after merging allowed user fields
 
     messages.push(message);
     res.send({ ok: true });
