@@ -1,4 +1,3 @@
-
 var express = require('express')
 var typeorm = require("typeorm");
 
@@ -13,10 +12,11 @@ router.get('/', async (req, res, next) => {
   // hard-coded getting account id of 1
   // as a rpelacement to getting this from the session and such
   // (just imagine that we implemented auth, etc)
-  const results = await repo.find({ id: 1 })
+  const results = await repo.find({ where: { id: 1 } }) // AI Refactor Patch: TypeORM 0.3+ requires FindOptions with a 'where' clause; find({ id: 1 }) is no longer valid
 
-  // Log Object's where property for debug reasons:
-  console.log('The Object.where property is set to: ', {}.where)
+  // Log a safe debug message instead of accessing Object prototype properties:
+  console.log('Fetching user with id = 1') // AI Refactor Patch: Avoid accessing Object.prototype (e.g., {}.where) to prevent leaking/polluted prototype properties
+
   console.log(results)
 
   return res.json(results)
@@ -39,7 +39,7 @@ router.post('/', async (req, res, next) => {
 
   } catch (err) {
     console.error(err)
-    console.log({}.where)
+    console.log('Failed to create user record') // AI Refactor Patch: Remove access to {}.where to avoid prototype pollution issues in logs
     next();
   }
 })

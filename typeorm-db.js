@@ -1,9 +1,12 @@
 var typeorm = require("typeorm");
 var EntitySchema = typeorm.EntitySchema;
+var DataSource = typeorm.DataSource; // AI Refactor Patch: TypeORM 0.3.x replaces createConnection with DataSource
 
 const Users = require("./entity/Users")
 
-typeorm.createConnection({
+const UserSchema = new EntitySchema(Users); // AI Refactor Patch: Prepare EntitySchema instance for 0.3.x APIs and avoid string-based lookups
+
+const dataSource = new DataSource({ // AI Refactor Patch: Use DataSource to configure connection in TypeORM 0.3.x
   name: "mysql",
   type: "mysql",
   host: "localhost",
@@ -14,13 +17,12 @@ typeorm.createConnection({
   synchronize: true,
   "logging": true,
   entities: [
-    new EntitySchema(Users)
+    UserSchema // AI Refactor Patch: Register schema instance instead of using string entity names
   ]
-}).then(() => {
+});
 
-  const dbConnection = typeorm.getConnection('mysql')
-
-  const repo = dbConnection.getRepository("Users")
+dataSource.initialize().then(() => { // AI Refactor Patch: initialize the DataSource instead of createConnection/getConnection
+  const repo = dataSource.getRepository(UserSchema); // AI Refactor Patch: getRepository by schema target (string names removed in 0.3.x)
   return repo
 }).then((repo) => {
 
