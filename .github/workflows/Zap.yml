@@ -1,0 +1,25 @@
+
+name: Simple OWASP ZAP Scan (Logs Only)
+
+on:
+  push:
+  # workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  zap:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Run ZAP Baseline Scan (logs only)
+        uses: zaproxy/action-baseline@v0.15.0
+        with:
+          target: "https://testfire.net/"
+          allow_issue_writing: false
+          cmd_options: ""
+          fail_action: false
