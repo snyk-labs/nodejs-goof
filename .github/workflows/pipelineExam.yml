@@ -1,0 +1,170 @@
+name: pipeline exam
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  DD_URL: https://demo.defectdojo.org
+  DD_PRODUCT: KLG
+  DD_ENGAGEMENT: exam3-sdlc
+  DAST_TARGET: http://3.95.181.72:3001/
+
+jobs:
+  secret-scan:
+    name: Secret Scan (Gitleaks)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload Gitleaks report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gitleaks-report
+          path: results.sarif
+          if-no-files-found: ignore
+
+  sca:
+    name: SCA (Syft + Grype)
+    needs: secret-scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Syft SBOM
+        continue-on-error: true
+        uses: anchore/sbom-action@v0
+        with:
+          path: .
+          format: cyclonedx-json
+          output-file: sbom.cyclonedx.json
+
+      - name: Grype scan
+        continue-on-error: true
+        uses: anchore/scan-action@v6
+        id: grype
+        with:
+          sbom: sbom.cyclonedx.json
+          fail-build: false
+          output-format: json
+
+      - name: Collect Grype report
+        if: always()
+        continue-on-error: true
+        run: cp "${{ steps.grype.outputs.json }}" grype-report.json || true
+
+      - name: Upload SCA reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sca-reports
+          path: |
+            sbom.cyclonedx.json
+            grype-report.json
+          if-no-files-found: warn
+
+  sast:
+    name: SAST (Snyk Code)
+    needs: secret-scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Snyk Code test
+        continue-on-error: true
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command: code test
+          args: --sarif-file-output=snyk-code.sarif
+
+      - name: Upload Snyk Code report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: snyk-code-report
+          path: snyk-code.sarif
+          if-no-files-found: warn
+
+  dast:
+    name: DAST (OWASP ZAP baseline)
+    needs: secret-scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: OWASP ZAP Baseline Scan
+        continue-on-error: true
+        run: |
+          mkdir -p zap && chmod 777 zap
+          docker run --rm -v "$PWD/zap:/zap/wrk:rw" -t ghcr.io/zaproxy/zaproxy:stable \
+            zap-baseline.py -t "$DAST_TARGET" \
+            -J zap-report.json -x zap-report.xml -r report_html.html || true
+
+      - name: Upload ZAP report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: zap-report
+          path: |
+            zap/zap-report.json
+            zap/zap-report.xml
+            zap/report_html.html
+          if-no-files-found: warn
+
+  upload-defectdojo:
+    name: Import to DefectDojo
+    needs: [sca, sast, dast]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Import scans
+        env:
+          DD_TOKEN: ${{ secrets.DEFECTDOJO_TOKEN }}
+        run: |
+          set -u
+          import() {
+            local scan_type="$1" file="$2" name="$3"
+            if [ ! -f "$file" ]; then
+              echo ">> Skipped ($name): missing $file"
+              return 0
+            fi
+            echo ">> Importing $name ($scan_type) from $file"
+            curl -sS -o /dev/null -w "HTTP %{http_code}\n" \
+              -X POST "$DD_URL/api/v2/import-scan/" \
+              -H "Authorization: Token $DD_TOKEN" \
+              -F "scan_type=$scan_type" \
+              -F "file=@$file" \
+              -F "product_name=$DD_PRODUCT" \
+              -F "engagement_name=$DD_ENGAGEMENT" \
+              -F "product_type_name=Research" \
+              -F "auto_create_context=true" \
+              -F "active=true" \
+              -F "verified=false" \
+              -F "scan_date=$(date +%F)"
+          }
+
+          import "Anchore Grype"  "artifacts/sca-reports/grype-report.json"   "Grype"
+          import "SARIF"          "artifacts/snyk-code-report/snyk-code.sarif" "Snyk Code"
+          import "ZAP Scan"       "artifacts/zap-report/zap-report.xml"        "OWASP ZAP"
+          import "Gitleaks Scan"  "artifacts/gitleaks-report/results.sarif"    "Gitleaks"
