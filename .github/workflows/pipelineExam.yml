@@ -111,7 +111,8 @@ jobs:
       - name: OWASP ZAP Baseline Scan
         continue-on-error: true
         run: |
-          docker run --rm -v "$PWD:/zap/wrk:rw" -t ghcr.io/zaproxy/zaproxy:stable \
+          mkdir -p zap && chmod 777 zap
+          docker run --rm -v "$PWD/zap:/zap/wrk:rw" -t ghcr.io/zaproxy/zaproxy:stable \
             zap-baseline.py -t "$DAST_TARGET" \
             -J zap-report.json -x zap-report.xml -r report_html.html || true
 
@@ -121,9 +122,9 @@ jobs:
         with:
           name: zap-report
           path: |
-            zap-report.json
-            zap-report.xml
-            report_html.html
+            zap/zap-report.json
+            zap/zap-report.xml
+            zap/report_html.html
           if-no-files-found: warn
 
   upload-defectdojo:
