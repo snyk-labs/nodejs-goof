@@ -1,0 +1,305 @@
+name: SSDLC Security Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ssdlc-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  BETTERLEAKS_VERSION: "1.10.0"
+  SYFT_VERSION: "1.56.0"
+  GRYPE_VERSION: "0.121.1"
+
+jobs:
+  secret-scan:
+    name: "1. Secret scan (Betterleaks, blocking)"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Betterleaks
+        run: |
+          curl -sSfL -o /tmp/betterleaks.tar.gz \
+            "https://github.com/betterleaks/betterleaks/releases/download/v${BETTERLEAKS_VERSION}/betterleaks_${BETTERLEAKS_VERSION}_linux_x64.tar.gz"
+          tar -xzf /tmp/betterleaks.tar.gz -C /tmp betterleaks
+          sudo install -m 0755 /tmp/betterleaks /usr/local/bin/betterleaks
+          betterleaks version
+
+      - name: Scan repository for secrets
+        run: |
+          betterleaks --no-banner dir . \
+            --baseline-path .betterleaks-baseline.json \
+            --report-format json \
+            --report-path betterleaks-report.json \
+            --redact \
+            --exit-code 1
+
+      - name: Upload Betterleaks report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: betterleaks-report
+          path: betterleaks-report.json
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Write secret scan summary
+        if: always()
+        run: |
+          if [ -f betterleaks-report.json ]; then
+            count=$(python3 -c "import json; print(len(json.load(open('betterleaks-report.json'))))")
+            {
+              echo "**Betterleaks secret scan**"
+              echo ""
+              echo "New findings: **${count}**"
+              echo ""
+              echo "This job is blocking: any new finding fails the pipeline."
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+  sca-syft:
+    name: "2a. SCA - Syft SBOM"
+    needs: secret-scan
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Syft
+        run: |
+          curl -sSfL -o /tmp/syft.tar.gz \
+            "https://github.com/anchore/syft/releases/download/v${SYFT_VERSION}/syft_${SYFT_VERSION}_linux_amd64.tar.gz"
+          tar -xzf /tmp/syft.tar.gz -C /tmp syft
+          sudo install -m 0755 /tmp/syft /usr/local/bin/syft
+          syft version
+
+      - name: Generate SBOM
+        continue-on-error: true
+        run: |
+          syft dir:. \
+            -o cyclonedx-json=sbom.cdx.json \
+            -o spdx-json=sbom.spdx.json \
+            -o table=sbom.txt
+
+      - name: Upload SBOM artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: syft-sbom
+          path: |
+            sbom.cdx.json
+            sbom.spdx.json
+            sbom.txt
+          if-no-files-found: warn
+          retention-days: 30
+
+  sca-grype:
+    name: "2b. SCA - Grype vulnerabilities"
+    needs: secret-scan
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Grype
+        run: |
+          curl -sSfL -o /tmp/grype.tar.gz \
+            "https://github.com/anchore/grype/releases/download/v${GRYPE_VERSION}/grype_${GRYPE_VERSION}_linux_amd64.tar.gz"
+          tar -xzf /tmp/grype.tar.gz -C /tmp grype
+          sudo install -m 0755 /tmp/grype /usr/local/bin/grype
+          grype version
+
+      - name: Scan dependencies
+        continue-on-error: true
+        run: |
+          grype dir:. -o json --file grype-report.json || true
+          grype dir:. -o table --file grype-report.txt || true
+
+      - name: Upload Grype artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: grype-report
+          path: |
+            grype-report.json
+            grype-report.txt
+          if-no-files-found: warn
+          retention-days: 30
+
+  sast-snyk:
+    name: "3. SAST - Snyk Code"
+    needs: [secret-scan, sca-syft, sca-grype]
+    if: always() && needs.secret-scan.result == 'success'
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Snyk CLI
+        uses: snyk/actions/setup@v1.0.0
+
+      - name: Run Snyk Code
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        run: |
+          if [ -z "${SNYK_TOKEN}" ]; then
+            echo "::warning::SNYK_TOKEN is not configured; skipping Snyk Code."
+            exit 0
+          fi
+          snyk code test --sarif-file-output=snyk-code.sarif
+
+      - name: Upload Snyk Code report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: snyk-code-report
+          path: snyk-code.sarif
+          if-no-files-found: warn
+          retention-days: 30
+
+  dast-zap:
+    name: "4. DAST - OWASP ZAP baseline"
+    needs: [secret-scan, sast-snyk]
+    if: always() && needs.secret-scan.result == 'success'
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run ZAP baseline scan
+        continue-on-error: true
+        uses: zaproxy/action-baseline@v0.15.0
+        with:
+          target: ${{ vars.ZAP_TARGET_URL || 'http://3.95.181.72:3001/' }}
+          cmd_options: '-a -x report_xml.xml'
+          allow_issue_writing: false
+          fail_action: false
+          artifact_name: zap-report
+
+      - name: Upload ZAP reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: zap-report-files
+          path: |
+            report_xml.xml
+            report_json.json
+            report_html.html
+            report_md.md
+          if-no-files-found: warn
+          retention-days: 30
+
+  defectdojo:
+    name: "5. Upload results to DefectDojo"
+    needs: [secret-scan, sca-syft, sca-grype, sast-snyk, dast-zap]
+    if: always() && needs.secret-scan.result == 'success'
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    env:
+      DD_URL: ${{ secrets.DEFECTDOJO_URL || 'https://demo.defectdojo.org' }}
+      DD_TOKEN: ${{ secrets.DEFECTDOJO_API_TOKEN }}
+      DD_PRODUCT_NAME: ${{ vars.DD_PRODUCT_NAME || 'JA' }}
+      DD_PRODUCT_TYPE: ${{ vars.DD_PRODUCT_TYPE || 'SSDLC' }}
+      DD_ENGAGEMENT: ${{ vars.DD_ENGAGEMENT_NAME || 'SSDLC CI' }}
+      GITHUB_RUN_ID: ${{ github.run_id }}
+      GITHUB_SHA: ${{ github.sha }}
+      GITHUB_REF_NAME: ${{ github.ref_name }}
+      GITHUB_SERVER_URL: ${{ github.server_url }}
+      GITHUB_REPOSITORY: ${{ github.repository }}
+    steps:
+      - name: Download scan artifacts
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          pattern: '*'
+          merge-multiple: true
+
+      - name: Import scans into DefectDojo
+        continue-on-error: true
+        run: |
+          set -uo pipefail
+
+          if [ -z "${DD_URL:-}" ] || [ -z "${DD_TOKEN:-}" ] || [ -z "${DD_PRODUCT_NAME:-}" ]; then
+            echo "::error::DEFECTDOJO_URL, DEFECTDOJO_API_TOKEN and DD_PRODUCT_NAME must be configured."
+            exit 1
+          fi
+
+          DD_URL="${DD_URL%/}"
+          failures=0
+
+          upload() {
+            local file="$1"
+            local scan_type="$2"
+            local title="$3"
+
+            if [ ! -f "$file" ]; then
+              echo "::warning::Skipping '${scan_type}': ${file} not found."
+              return 0
+            fi
+
+            echo "::group::Importing ${scan_type} from ${file}"
+            if curl --fail-with-body -sS -X POST "${DD_URL}/api/v2/import-scan/" \
+              -H "Authorization: Token ${DD_TOKEN}" \
+              -H "Accept: application/json" \
+              -F "scan_type=${scan_type}" \
+              -F "file=@${file}" \
+              -F "product_name=${DD_PRODUCT_NAME}" \
+              -F "product_type_name=${DD_PRODUCT_TYPE}" \
+              -F "engagement_name=${DD_ENGAGEMENT}" \
+              -F "auto_create_context=true" \
+              -F "close_old_findings=true" \
+              -F "minimum_severity=Info" \
+              -F "active=true" \
+              -F "verified=false" \
+              -F "test_title=${title}" \
+              -F "build_id=${GITHUB_RUN_ID}" \
+              -F "commit_hash=${GITHUB_SHA}" \
+              -F "branch_tag=${GITHUB_REF_NAME}" \
+              -F "source_code_management_uri=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}"
+            then
+              echo "Imported ${scan_type} successfully."
+            else
+              echo "::error::Failed to import ${scan_type} from ${file}."
+              failures=$((failures + 1))
+            fi
+            echo "::endgroup::"
+          }
+
+          upload "artifacts/betterleaks-report.json" "Gitleaks Scan" "Betterleaks secret scan"
+          upload "artifacts/sbom.cdx.json" "CycloneDX Scan" "Syft SBOM (CycloneDX)"
+          upload "artifacts/grype-report.json" "Anchore Grype" "Grype dependency vulnerabilities"
+          upload "artifacts/snyk-code.sarif" "Snyk Scan" "Snyk Code SAST"
+          upload "artifacts/report_xml.xml" "ZAP Scan" "OWASP ZAP baseline"
+
+          if [ "${failures}" -gt 0 ]; then
+            echo "::error::${failures} DefectDojo import(s) failed."
+            exit 1
+          fi
+
+      - name: Write DefectDojo summary
+        if: always()
+        run: |
+          {
+            echo "**DefectDojo import**"
+            echo ""
+            echo "Product: \`${DD_PRODUCT_NAME:-<not configured>}\`"
+            echo ""
+            echo "Reports are uploaded with \`auto_create_context=true\`, so the"
+            echo "product type, product and engagement are created on first import."
+          } >> "$GITHUB_STEP_SUMMARY"
