@@ -1,0 +1,291 @@
+name: DevSecOps Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      target_url:
+        description: "URL objetivo para el DAST (sobrescribe la variable DAST_TARGET_URL)"
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+env:
+  GITLEAKS_VERSION: "8.30.1"
+  SYFT_VERSION: "v1.56.0"
+  GRYPE_VERSION: "v0.121.1"
+  DEFECTDOJO_URL: "https://demo.defectdojo.org"
+
+jobs:
+
+  secrets-scan:
+    name: "1 - Secret scanning (Gitleaks)"
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 
+
+      - name: Instalar Gitleaks
+        run: |
+          curl -sSfL "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz" \
+            | tar -xz -C "$RUNNER_TEMP" gitleaks
+          "$RUNNER_TEMP/gitleaks" version
+
+      - name: Gitleaks detect (falla el pipeline si encuentra algo)
+        run: |
+          "$RUNNER_TEMP/gitleaks" detect \
+            --source . \
+            --redact \
+            --exit-code 1 \
+            --report-format json \
+            --report-path gitleaks-report.json
+
+      - name: Guardar reporte
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gitleaks-report
+          path: gitleaks-report.json
+          if-no-files-found: warn
+          retention-days: 30
+
+
+  sca-syft-sbom:
+    name: "2a - SCA: SBOM (Syft)"
+    needs: secrets-scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar Syft
+        continue-on-error: true
+        run: |
+          mkdir -p "$RUNNER_TEMP/bin"
+          curl -sSfL "https://raw.githubusercontent.com/anchore/syft/${SYFT_VERSION}/install.sh" \
+            | sh -s -- -b "$RUNNER_TEMP/bin" "${SYFT_VERSION}"
+
+      - name: Generar SBOM
+        continue-on-error: true
+        run: |
+          # CycloneDX 1.5 (lo importa DefectDojo) + SPDX como formato adicional
+          "$RUNNER_TEMP/bin/syft" dir:. \
+            -o cyclonedx-json@1.5=sbom.cdx.json \
+            -o spdx-json=sbom.spdx.json
+
+      - name: Guardar SBOM
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom-syft
+          path: |
+            sbom.cdx.json
+            sbom.spdx.json
+          if-no-files-found: warn
+          retention-days: 30
+
+
+  sca-grype:
+    name: "2b - SCA: vulnerabilities (Grype)"
+    needs: secrets-scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar Grype
+        continue-on-error: true
+        run: |
+          mkdir -p "$RUNNER_TEMP/bin"
+          curl -sSfL "https://raw.githubusercontent.com/anchore/grype/${GRYPE_VERSION}/install.sh" \
+            | sh -s -- -b "$RUNNER_TEMP/bin" "${GRYPE_VERSION}"
+
+      - name: Escanear dependencias
+        continue-on-error: true
+        run: |
+          "$RUNNER_TEMP/bin/grype" dir:. \
+            -o table \
+            -o json=grype-report.json
+
+      - name: Guardar reporte
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: grype-report
+          path: grype-report.json
+          if-no-files-found: warn
+          retention-days: 30
+
+
+  sast-snyk-code:
+    name: "3 - SAST (Snyk Code)"
+    needs: [sca-syft-sbom, sca-grype]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar Snyk CLI
+        continue-on-error: true
+        run: npm install -g snyk
+
+      - name: Snyk Code test
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }} 
+        run: |
+          if [ -z "$SNYK_TOKEN" ]; then
+            echo "::error::El secreto SNYK_TOKEN no está configurado en el repositorio."
+            exit 1
+          fi
+          snyk code test --sarif-file-output=snyk-code.sarif
+
+      - name: Guardar reporte
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: snyk-code-report
+          path: snyk-code.sarif
+          if-no-files-found: warn
+          retention-days: 30
+
+
+  dast-zap-baseline:
+    name: "4 - DAST (OWASP ZAP baseline)"
+    needs: sast-snyk-code
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+     
+      TARGET_URL: ${{ inputs.target_url || vars.DAST_TARGET_URL || 'http://3.95.181.72:3001/' }}
+    steps:
+      - name: Validar URL objetivo
+        id: target
+        continue-on-error: true
+        run: |
+          if [[ ! "$TARGET_URL" =~ ^https?:// ]]; then
+            echo "::error::URL objetivo vacía o inválida. Define la variable DAST_TARGET_URL o el input target_url."
+            exit 1
+          fi
+          echo "Objetivo DAST: $TARGET_URL"
+
+      - name: Preparar directorio de salida
+        run: mkdir -p zap-out && chmod 777 zap-out
+
+      - name: ZAP baseline scan
+        if: steps.target.outcome == 'success'
+        continue-on-error: true
+        run: |
+          # -I: no devolver código de error por simples warnings
+          docker run --rm \
+            -v "$PWD/zap-out:/zap/wrk:rw" \
+            ghcr.io/zaproxy/zaproxy:stable \
+            zap-baseline.py \
+              -t "$TARGET_URL" \
+              -J zap-report.json \
+              -x zap-report.xml \
+              -r zap-report.html \
+              -I
+
+      - name: Guardar reportes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: zap-baseline-report
+          path: zap-out/
+          if-no-files-found: warn
+          retention-days: 30
+
+
+  defectdojo-upload:
+    name: "5 - Upload to DefectDojo"
+    needs: [secrets-scan, sca-syft-sbom, sca-grype, sast-snyk-code, dast-zap-baseline]
+    
+    if: ${{ always() && needs.secrets-scan.result == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Descargar todos los artefactos
+        uses: actions/download-artifact@v4
+        with:
+          path: results
+
+      - name: Importar reportes a DefectDojo
+        continue-on-error: true
+        env:
+          DD_API_KEY: ${{ secrets.DEFECTDOJO_API_KEY }}
+          DD_PRODUCT: ${{ vars.DEFECTDOJO_PRODUCT_NAME }}
+          DD_PRODUCT_TYPE: ${{ vars.DEFECTDOJO_PRODUCT_TYPE || 'Research and Development' }}
+          DD_ENGAGEMENT: "GitHub Actions - run ${{ github.run_number }}"
+          BRANCH: ${{ github.ref_name }}
+          COMMIT: ${{ github.sha }}
+          BUILD_ID: ${{ github.run_id }}
+          REPO_URL: ${{ github.server_url }}/${{ github.repository }}
+        run: |
+          set -u
+          if [ -z "${DD_API_KEY}" ]; then
+            echo "::error::El secreto DEFECTDOJO_API_KEY no está configurado."; exit 1
+          fi
+          if [ -z "${DD_PRODUCT}" ]; then
+            echo "::error::Falta la variable DEFECTDOJO_PRODUCT_NAME (iniciales del estudiante)."; exit 1
+          fi
+
+          failures=0
+          {
+            echo "### Importación a DefectDojo"
+            echo "Producto: \`${DD_PRODUCT}\` · Engagement: \`${DD_ENGAGEMENT}\`"
+            echo
+            echo "| Herramienta | Tipo de escaneo | Resultado |"
+            echo "|---|---|---|"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          import_scan() {
+            local scan_type="$1" file="$2" title="$3"
+            if [ ! -s "$file" ]; then
+              echo "::warning::Sin reporte para '$title' ($file ausente o vacío); se omite."
+              echo "| $title | $scan_type | omitido (sin reporte) |" >> "$GITHUB_STEP_SUMMARY"
+              return 0
+            fi
+            local code
+            code=$(curl -sS -o response.json -w '%{http_code}' \
+              -X POST "${DEFECTDOJO_URL}/api/v2/import-scan/" \
+              -H "Authorization: Token ${DD_API_KEY}" \
+              -F "scan_type=${scan_type}" \
+              -F "file=@${file}" \
+              -F "product_name=${DD_PRODUCT}" \
+              -F "product_type_name=${DD_PRODUCT_TYPE}" \
+              -F "engagement_name=${DD_ENGAGEMENT}" \
+              -F "test_title=${title}" \
+              -F "auto_create_context=true" \
+              -F "active=true" \
+              -F "verified=false" \
+              -F "minimum_severity=Info" \
+              -F "branch_tag=${BRANCH}" \
+              -F "commit_hash=${COMMIT}" \
+              -F "build_id=${BUILD_ID}" \
+              -F "source_code_management_uri=${REPO_URL}") || code="000"
+            if [ "$code" = "201" ]; then
+              echo "OK  $title -> HTTP 201"
+              echo "| $title | $scan_type | importado (HTTP 201) |" >> "$GITHUB_STEP_SUMMARY"
+            else
+              echo "::error::Falló la importación de '$title' (HTTP $code)"
+              head -c 500 response.json 2>/dev/null || true; echo
+              echo "| $title | $scan_type | **error (HTTP $code)** |" >> "$GITHUB_STEP_SUMMARY"
+              failures=$((failures + 1))
+            fi
+          }
+
+          import_scan "Gitleaks Scan"   results/gitleaks-report/gitleaks-report.json        "Gitleaks"
+          import_scan "CycloneDX Scan"  results/sbom-syft/sbom.cdx.json                      "Syft SBOM"
+          import_scan "Anchore Grype"   results/grype-report/grype-report.json               "Grype"
+          import_scan "SARIF"           results/snyk-code-report/snyk-code.sarif             "Snyk Code"
+          import_scan "ZAP Scan"        results/zap-baseline-report/zap-report.xml           "OWASP ZAP Baseline"
+
+          [ "$failures" -eq 0 ]
