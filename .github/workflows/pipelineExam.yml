@@ -111,10 +111,10 @@ jobs:
       - name: OWASP ZAP Baseline Scan
         continue-on-error: true
         uses: zaproxy/action-baseline@v0.12.0
-        with:
-          target: ${{ env.DAST_TARGET }}
-          allow_issue_writing: false
-          cmd_options: "-a -J zap-report.json -x zap-report.xml"
+        run: |
+          docker run --rm -v "$PWD:/zap/wrk:rw" -t ghcr.io/zaproxy/zaproxy:stable \
+            zap-baseline.py -t "$DAST_TARGET" \
+            -J zap-report.json -x zap-report.xml -r report_html.html || true
 
       - name: Upload ZAP report
         if: always()
