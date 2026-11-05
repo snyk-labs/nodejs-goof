@@ -1,0 +1,540 @@
+[
+ {
+  "RuleID": "generic-password",
+  "Description": "Detected a potential hardcoded password literal, which may expose account credentials.",
+  "StartLine": 11,
+  "EndLine": 11,
+  "StartColumn": 12,
+  "EndColumn": 34,
+  "Match": "password = 'REDACTED';",
+  "Secret": "REDACTED",
+  "Attributes": {
+   "confidence": "low",
+   "path": "tests/authentication.component.spec.js",
+   "resource": "fs.content"
+  },
+  "Tags": [],
+  "Fingerprint": "tests/authentication.component.spec.js:generic-password:11",
+  "File": "tests/authentication.component.spec.js",
+  "SymlinkFile": "",
+  "Commit": "",
+  "Entropy": 2.947703,
+  "Author": "",
+  "Email": "",
+  "Date": "",
+  "Message": ""
+ },
+ {
+  "RuleID": "generic-password",
+  "Description": "Detected a potential hardcoded password literal, which may expose account credentials.",
+  "StartLine": 12,
+  "EndLine": 12,
+  "StartColumn": 19,
+  "EndColumn": 41,
+  "Match": "Password = 'REDACTED';",
+  "Secret": "REDACTED",
+  "Attributes": {
+   "confidence": "low",
+   "path": "tests/authentication.component.spec.js",
+   "resource": "fs.content"
+  },
+  "Tags": [],
+  "Fingerprint": "tests/authentication.component.spec.js:generic-password:12",
+  "File": "tests/authentication.component.spec.js",
+  "SymlinkFile": "",
+  "Commit": "",
+  "Entropy": 2.947703,
+  "Author": "",
+  "Email": "",
+  "Date": "",
+  "Message": ""
+ },
+ {
+  "RuleID": "generic-password",
+  "Description": "Detected a potential hardcoded password literal, which may expose account credentials.",
+  "StartLine": 24,
+  "EndLine": 24,
+  "StartColumn": 35,
+  "EndColumn": 58,
+  "Match": "Password = 'REDACTED';",
+  "Secret": "REDACTED",
+  "Attributes": {
+   "confidence": "low",
+   "path": "tests/authentication.component.spec.js",
+   "resource": "fs.content"
+  },
+  "Tags": [],
+  "Fingerprint": "tests/authentication.component.spec.js:generic-password:24",
+  "File": "tests/authentication.component.spec.js",
+  "SymlinkFile": "",
+  "Commit": "",
+  "Entropy": 3.121928,
+  "Author": "",
+  "Email": "",
+  "Date": "",
+  "Message": ""
+ },
+ {
+  "RuleID": "generic-password",
+  "Description": "Detected a potential hardcoded password literal, which may expose account credentials.",
+  "StartLine": 35,
+  "EndLine": 35,
+  "StartColumn": 35,
+  "EndColumn": 58,
+  "Match": "Password = 'REDACTED';",
+  "Secret": "REDACTED",
+  "Attributes": {
+   "confidence": "low",
+   "path": "tests/authentication.component.spec.js",
+   "resource": "fs.content"
+  },
+  "Tags": [],
+  "Fingerprint": "tests/authentication.component.spec.js:generic-password:35",
+  "File": "tests/authentication.component.spec.js",
+  "SymlinkFile": "",
+  "Commit": "",
+  "Entropy": 3.121928,
+  "Author": "",
+  "Email": "",
+  "Date": "",
+  "Message": ""
+ },
+ {
+  "RuleID": "generic-password",
+  "Description": "Detected a potential hardcoded password literal, which may expose account credentials.",
+  "StartLine": 48,
+  "EndLine": 48,
+  "StartColumn": 35,
+  "EndColumn": 58,
+  "Match": "Password = 'REDACTED';",
+  "Secret": "REDACTED",
+  "Attributes": {
+   "confidence": "low",
+   "path": "tests/authentication.component.spec.js",
+   "resource": "fs.content"
+  },
+  "Tags": [],
+  "Fingerprint": "tests/authentication.component.spec.js:generic-password:48",
+  "File": "tests/authentication.component.spec.js",
+  "SymlinkFile": "",
+  "Commit": "",
+  "Entropy": 3.121928,
+  "Author": "",
+  "Email": "",
+  "Date": "",
+  "Message": ""
+ },
+ {
+  "RuleID": "generic-password",
+  "Description": "Detected a potential hardcoded password literal, which may expose account credentials.",
+  "StartLine": 10,
+  "EndLine": 10,
+  "StartColumn": 52,
+  "EndColumn": 83,
+  "Match": "password\":\"REDACTED\"}",
+  "Secret": "REDACTED",
+  "Attributes": {
+   "confidence": "low",
+   "path": "exploits/nosql-exploits.sh",
+   "resource": "fs.content"
+  },
+  "Tags": [],
+  "ComponentSets": [
+   {
+    "components": [
+     {
+      "RuleID": "generic-username",
+      "Optional": true,
+      "StartLine": 10,
+      "EndLine": 10,
+      "StartColumn": 23,
+      "EndColumn": 49,
+      "Match": "\"username\":\"REDACTED\",",
+      "Secret": "REDACTED"
+     }
+    ]
+   },
+   {
+    "components": [
+     {
+      "RuleID": "generic-username",
+      "Optional": true,
+      "StartLine": 13,
+      "EndLine": 13,
+      "StartColumn": 23,
+      "EndColumn": 49,
+      "Match": "\"username\":\"REDACTED\",",
+      "Secret": "REDACTED"
+     }
+    ]
+   },
+   {
+    "components": [
+     {
+      "RuleID": "generic-username",
+      "Optional": true,
+      "StartLine": 16,
+      "EndLine": 16,
+      "StartColumn": 23,
+      "EndColumn": 50,
+      "Match": "\"username\": \"REDACTED\",",
+      "Secret": "REDACTED"
+     }
+    ]
+   }
+  ],
+  "Fingerprint": "exploits/nosql-exploits.sh:generic-password:10",
+  "File": "exploits/nosql-exploits.sh",
+  "SymlinkFile": "",
+  "Commit": "",
+  "Entropy": 3.5368867,
+  "Author": "",
+  "Email": "",
+  "Date": "",
+  "Message": ""
+ },
+ {
+  "RuleID": "generic-password",
+  "Description": "Detected a potential hardcoded password literal, which may expose account credentials.",
+  "StartLine": 13,
+  "EndLine": 13,
+  "StartColumn": 52,
+  "EndColumn": 77,
+  "Match": "password\":\"REDACTED\"}",
+  "Secret": "REDACTED",
+  "Attributes": {
+   "confidence": "low",
+   "path": "exploits/nosql-exploits.sh",
+   "resource": "fs.content"
+  },
+  "Tags": [],
+  "ComponentSets": [
+   {
+    "components": [
+     {
+      "RuleID": "generic-username",
+      "Optional": true,
+      "StartLine": 10,
+      "EndLine": 10,
+      "StartColumn": 23,
+      "EndColumn": 49,
+      "Match": "\"username\":\"REDACTED\",",
+      "Secret": "REDACTED"
+     }
+    ]
+   },
+   {
+    "components": [
+     {
+      "RuleID": "generic-username",
+      "Optional": true,
+      "StartLine": 13,
+      "EndLine": 13,
+      "StartColumn": 23,
+      "EndColumn": 49,
+      "Match": "\"username\":\"REDACTED\",",
+      "Secret": "REDACTED"
+     }
+    ]
+   },
+   {
+    "components": [
+     {
+      "RuleID": "generic-username",
+      "Optional": true,
+      "StartLine": 16,
+      "EndLine": 16,
+      "StartColumn": 23,
+      "EndColumn": 50,
+      "Match": "\"username\": \"REDACTED\",",
+      "Secret": "REDACTED"
+     }
+    ]
+   }
+  ],
+  "Fingerprint": "exploits/nosql-exploits.sh:generic-password:13",
+  "File": "exploits/nosql-exploits.sh",
+  "SymlinkFile": "",
+  "Commit": "",
+  "Entropy": 3.2389011,
+  "Author": "",
+  "Email": "",
+  "Date": "",
+  "Message": ""
+ },
+ {
+  "RuleID": "generic-password",
+  "Description": "Detected a potential hardcoded password literal, which may expose account credentials.",
+  "StartLine": 88,
+  "EndLine": 88,
+  "StartColumn": 132,
+  "EndColumn": 164,
+  "Match": "password\": \"REDACTED\"}",
+  "Secret": "REDACTED",
+  "Attributes": {
+   "confidence": "low",
+   "path": "README.md",
+   "resource": "fs.content"
+  },
+  "Tags": [],
+  "ComponentSets": [
+   {
+    "components": [
+     {
+      "RuleID": "generic-username",
+      "Optional": true,
+      "StartLine": 88,
+      "EndLine": 88,
+      "StartColumn": 102,
+      "EndColumn": 129,
+      "Match": "\"username\": \"REDACTED\",",
+      "Secret": "REDACTED"
+     }
+    ]
+   },
+   {
+    "components": [
+     {
+      "RuleID": "generic-username",
+      "Optional": true,
+      "StartLine": 92,
+      "EndLine": 92,
+      "StartColumn": 102,
+      "EndColumn": 126,
+      "Match": "\"email\": \"REDACTED\",",
+      "Secret": "REDACTED"
+     }
+    ]
+   }
+  ],
+  "Fingerprint": "README.md:generic-password:88",
+  "File": "README.md",
+  "SymlinkFile": "",
+  "Commit": "",
+  "Entropy": 3.5368867,
+  "Author": "",
+  "Email": "",
+  "Date": "",
+  "Message": ""
+ },
+ {
+  "RuleID": "generic-password",
+  "Description": "Detected a potential hardcoded password literal, which may expose account credentials.",
+  "StartLine": 116,
+  "EndLine": 116,
+  "StartColumn": 37,
+  "EndColumn": 62,
+  "Match": "password\":\"REDACTED\"}",
+  "Secret": "REDACTED",
+  "Attributes": {
+   "confidence": "low",
+   "path": "README.md",
+   "resource": "fs.content"
+  },
+  "Tags": [],
+  "ComponentSets": [
+   {
+    "components": [
+     {
+      "RuleID": "generic-username",
+      "Optional": true,
+      "StartLine": 116,
+      "EndLine": 116,
+      "StartColumn": 8,
+      "EndColumn": 34,
+      "Match": "\"username\":\"REDACTED\",",
+      "Secret": "REDACTED"
+     }
+    ]
+   },
+   {
+    "components": [
+     {
+      "RuleID": "generic-username",
+      "Optional": true,
+      "StartLine": 121,
+      "EndLine": 121,
+      "StartColumn": 8,
+      "EndColumn": 34,
+      "Match": "\"username\":\"REDACTED\",",
+      "Secret": "REDACTED"
+     }
+    ]
+   }
+  ],
+  "Fingerprint": "README.md:generic-password:116",
+  "File": "README.md",
+  "SymlinkFile": "",
+  "Commit": "",
+  "Entropy": 3.2389011,
+  "Author": "",
+  "Email": "",
+  "Date": "",
+  "Message": ""
+ },
+ {
+  "RuleID": "generic-password",
+  "Description": "Detected a potential hardcoded password literal, which may expose account credentials.",
+  "StartLine": 121,
+  "EndLine": 121,
+  "StartColumn": 37,
+  "EndColumn": 68,
+  "Match": "password\":\"REDACTED\"}",
+  "Secret": "REDACTED",
+  "Attributes": {
+   "confidence": "low",
+   "path": "README.md",
+   "resource": "fs.content"
+  },
+  "Tags": [],
+  "ComponentSets": [
+   {
+    "components": [
+     {
+      "RuleID": "generic-username",
+      "Optional": true,
+      "StartLine": 116,
+      "EndLine": 116,
+      "StartColumn": 8,
+      "EndColumn": 34,
+      "Match": "\"username\":\"REDACTED\",",
+      "Secret": "REDACTED"
+     }
+    ]
+   },
+   {
+    "components": [
+     {
+      "RuleID": "generic-username",
+      "Optional": true,
+      "StartLine": 121,
+      "EndLine": 121,
+      "StartColumn": 8,
+      "EndColumn": 34,
+      "Match": "\"username\":\"REDACTED\",",
+      "Secret": "REDACTED"
+     }
+    ]
+   },
+   {
+    "components": [
+     {
+      "RuleID": "generic-username",
+      "Optional": true,
+      "StartLine": 127,
+      "EndLine": 127,
+      "StartColumn": 8,
+      "EndColumn": 35,
+      "Match": "\"username\": \"REDACTED\",",
+      "Secret": "REDACTED"
+     }
+    ]
+   }
+  ],
+  "Fingerprint": "README.md:generic-password:121",
+  "File": "README.md",
+  "SymlinkFile": "",
+  "Commit": "",
+  "Entropy": 3.5368867,
+  "Author": "",
+  "Email": "",
+  "Date": "",
+  "Message": ""
+ },
+ {
+  "RuleID": "generic-password",
+  "Description": "Detected a potential hardcoded password literal, which may expose account credentials.",
+  "StartLine": 52,
+  "EndLine": 52,
+  "StartColumn": 43,
+  "EndColumn": 75,
+  "Match": "password: 'REDACTED' }",
+  "Secret": "REDACTED",
+  "Attributes": {
+   "confidence": "low",
+   "path": "mongoose-db.js",
+   "resource": "fs.content"
+  },
+  "Tags": [],
+  "ComponentSets": [
+   {
+    "components": [
+     {
+      "RuleID": "generic-username",
+      "Optional": true,
+      "StartLine": 48,
+      "EndLine": 48,
+      "StartColumn": 12,
+      "EndColumn": 39,
+      "Match": " username: 'REDACTED' }",
+      "Secret": "REDACTED"
+     }
+    ]
+   },
+   {
+    "components": [
+     {
+      "RuleID": "generic-username",
+      "Optional": true,
+      "StartLine": 52,
+      "EndLine": 52,
+      "StartColumn": 15,
+      "EndColumn": 41,
+      "Match": " username: 'REDACTED',",
+      "Secret": "REDACTED"
+     }
+    ]
+   }
+  ],
+  "Fingerprint": "mongoose-db.js:generic-password:52",
+  "File": "mongoose-db.js",
+  "SymlinkFile": "",
+  "Commit": "",
+  "Entropy": 3.5368867,
+  "Author": "",
+  "Email": "",
+  "Date": "",
+  "Message": ""
+ },
+ {
+  "RuleID": "generic-password",
+  "Description": "Detected a potential hardcoded password literal, which may expose account credentials.",
+  "StartLine": 1128,
+  "EndLine": 1128,
+  "StartColumn": 69,
+  "EndColumn": 90,
+  "Match": "REDACTED: 'REDACTED' }",
+  "Secret": "REDACTED",
+  "Attributes": {
+   "confidence": "low",
+   "path": "sarif.json",
+   "resource": "fs.content"
+  },
+  "Tags": [],
+  "ComponentSets": [
+   {
+    "components": [
+     {
+      "RuleID": "generic-username",
+      "Optional": true,
+      "StartLine": 1128,
+      "EndLine": 1128,
+      "StartColumn": 47,
+      "EndColumn": 67,
+      "Match": " username: 'REDACTED',",
+      "Secret": "REDACTED"
+     }
+    ]
+   }
+  ],
+  "Fingerprint": "sarif.json:generic-password:1128",
+  "File": "sarif.json",
+  "SymlinkFile": "",
+  "Commit": "",
+  "Entropy": 2.75,
+  "Author": "",
+  "Email": "",
+  "Date": "",
+  "Message": ""
+ }
+]
